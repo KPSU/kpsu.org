@@ -5,25 +5,8 @@
 <% content_for :meta_fb_description do %>KPSU, Portland State University's campus radio broadcasting locally on campus at 98.1, around the world live from our stream on KPSU.org, or at your leisure through our show podcast archive.<% end %>
 <% content_for :meta_fb_title do %>Portland's College Radio, broadcasting free format radio since 1994<% end %>
 <% content_for :meta_fb_image do %>http://kpsu.org/images/tempbg.jpg<% end %>
-
-<script type="text/javascript">
-
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-44967474-1']);
-  _gaq.push(['_setDomainName', 'kpsu.org']);
-  _gaq.push(['_setAllowLinker', true]);
-  _gaq.push(['_trackPageview']);
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-
-</script>
-
 	<div id="post-wrapper" style="margin-top: 20px;">
-	<% @posts.each do |post| %>
+	<% @post_app.each do |post| %>
 	<div class="post">
 		<div class="header">
 			<% if post.content_type_id == 1 %>
@@ -81,16 +64,5 @@
 	<% end %>
 	</div>
 
-<% content_for :page_js do %>
-var blogPageless = $("#post-wrapper");
-if (blogPageless){
-var pagelessPage = 1
-$('#post-wrapper').pageless({ totalPages: <%= @posts.total_pages %>,
-	currentPage: pagelessPage, 
-	url: '/posts/pageless', 
-	loaderMsg: 'Loading more results',
-	complete: function(){
-		pagelessPage++
-	}
- });}
-<% end %>
+
+
