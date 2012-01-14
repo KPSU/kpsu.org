@@ -1,0 +1,323 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+	"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <%= render :partial => 'layouts/meta' %>
+
+  <title>KPSU | <%= yield(:title) %></title>
+  <%= csrf_meta_tag %>
+  <%= stylesheet_link_tag "production.min.css", :cache => true %>
+  <%= javascript_include_tag 'production.min.js', :cache => true %>
+	
+  <% if RAILS_ENV == "development" %>
+  	<script src="http://localhost:8080/application.js" type="text/javascript" charset="utf-8"></script>
+  <% end %>
+
+  <script type="text/javascript" src="http://api.recaptcha.net/js/recaptcha_ajax.js"></script>
+  <script type="text/javascript">var RecaptchaOptions = {"theme":"clean"};</script>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-20622260-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</head>
+<body>
+	<div id="content-wrapper" class="m1-regular">
+		<div id="top-left-banner">
+			&nbsp;
+		</div>
+		<div id="top-right-navigation-wrapper">
+			<div id="top-banner-filler" class="top">
+			<% if current_user && current_user.listener == false %>
+				<a title="KPSU Dashboard" href="/dashboard"><div id="dashboard"></div></a>
+			<% else %>
+				
+			<% end %>
+			</div>
+			
+			<div id="top-banner-filler" class="bottom">
+				&nbsp;
+			</div>
+			<div id="blue-brush">
+
+			<a title="Donate to KPSU!" href="https://www.foundation.pdx.edu/publicgift/kpsu.jsp">
+			<div id="donate-nav-button" class="tnb pointer">	
+			</div>
+			</a>
+
+			<a title="Contact KPSU" href="<%= url_for(contact_path)%>">
+			<div id="contact-nav-button" class="tnb pointer">
+			</div>
+			</a>
+			
+			<% unless current_user %>
+				<div id="login-nav-button" class="tnb pointer">
+				
+				</div>
+			<% else %>
+				<a title="logout" href="/logout">
+				<div id="logout-nav-button" class="pointer">
+				
+				</div>
+				</a>
+			<% end %>
+			<a title="Learn about KPSU" href="<%= url_for(about_path)%>">			
+			<div id="about-nav-button" class="tnb pointer">
+				
+			</div>
+			</a>
+			</div>
+		</div>
+		
+		<div id="banner-on-air-and-player" style="clear:left;">
+			<div id="on-air-offset">
+			<% cache('application_who_is_playing') do %>
+			<div id="on-air-program" class="m1-light yellow-text">
+				<% unless currently_playing.class == String %>
+					<%= link_to(currently_playing[0], program_path(currently_playing[1]), :class => "m1-light yellow-text", :style => "line-height: 23px;") %>
+				<% else %>
+					<span class="m1-light yellow-text">"We're on Auto Pilot!"</span>
+				<% end %>
+			</div>
+			<div id="on-air-dj" class="m1-light purple-text">
+				<% unless currently_playing.class == String %>
+					<span class="m1-light purple-text"><%= currently_playing[2] %></span>
+				<% else %>
+					<span class="m1-light purple-text">AUTOMIXTRON 3000</span>
+				<% end %>
+			</div>
+			<div id="hidden-player" style="width:0px;height:0px;"></div>
+			<div id="player" class="float-left">
+				<div id="player_interface">
+					<div class="volume-bar">
+						<div class="indicator pointer player-buttons"></div>
+						<div class="volume-bar-value player-buttons"></div>
+					</div>
+					<div class="volume-text">
+						<div class="quiet">quiet</div>
+						<div class="loud">loud</div>
+					</div>
+					<div class="play pointer player-buttons"></div>
+					<div class="stop pointer player-buttons"></div>
+				</div>
+			</div>
+			<div id="on-next">
+				<% unless up_next.class == String %>
+					<%= link_to(up_next[0], program_path(up_next[1]), :class => "m1-light red-text") %>
+				<% else %>
+					<span class="m1-light red-text">"We're on Auto Pilot!"</span>
+				<% end %>
+			</div>
+			<% end %>
+			</div>
+		</div>
+		<div id="banner" style="margin-top:-1px;">
+			<img src="/images/v3/banner.png" usemap="#bannermap" style-="">
+			<map id="bannermap" name="bannermap"><area shape="rect" alt="View KPSU's DJs" title="View KPSU's DJs" coords="276,504,352,540" href="http://www.kpsu.org/djs" target="_self" /><area shape="rect" alt="View KPSU's DJs" title="View KPSU's DJs" coords="344,480,432,524" href="http://www.kpsu.org/djs" target="_self" /><area shape="rect" alt="Listen to KPSU!" title="Listen to KPSU!" coords="472,464,532,500" href="http://www.kpsu.org/listen" target="" /><area shape="rect" alt="Listen to KPSU!" title="Listen to KPSU!" coords="520,440,596,480" href="http://www.kpsu.org/listen" target="" /><area shape="poly" alt="Check out the latest music and event reviews!" title="Check out the latest music and event reviews!" coords="466,520,494,560,688,542,662,482,662,482" href="http://www.kpsu.org/reviews" target="" /><area shape="poly" alt="Download Podcasts from our program archive" title="Download Podcasts from our program archive" coords="144,478,158,510,454,460,426,416" href="http://www.kpsu.org/archives" target="" /><area shape="poly" alt="Our live streaming schedule" title="Our live streaming schedule" coords="460,422,464,450,676,398,654,350,648,352" href="http://www.kpsu.org/schedule" target="" /><area shape="poly" alt="Our Artist Catalog" title="Our Artist Catalog" coords="264,568,432,520,468,580,260,596" href="http://www.kpsu.org/artists" target="" /><area shape="poly" alt="KPSU.org Index" title="KPSU.org Index" coords="48,336,84,484,712,328,680,192,676,184" href="http://www.kpsu.org" target="" /></map>
+		</div>
+		<div id="more-stuff">
+		</div>
+		<div id="featured-artists">
+		</div>
+		<div id="twitter-feed" class="hand-written">
+			<div id="tweets">
+				
+			</div>
+		</div>
+
+		<div id="kpsu-presents">
+			<div class="kpsu-presents-art"></div>
+		</div>
+		<%= yield %>
+		<div id="sidebar" class="float-right">
+			<div class="sidebar events"></div>
+			<ul class="vertical green-text dejavu-condensed">
+				<% @downloads.each do |d| %>
+				<li><a class="green-text dejavu-condensed" href="<%= url_for(download_path(:id => d.id)) %>"><%= d.program.title rescue nil %> (<%= Time.zone.at(d.title.to_i).strftime("%d\.%b\.%Y")%>)</a></li>
+				<% end %>
+			</ul>
+			<div class="sidebar reviews"></div>
+			<ul class="vertical magenta-text chunk-five">
+				<% @rev.each do |review| %>
+				<li><%= link_to "#{truncate review.title, :length => 22}", review, :class => "magenta-text" %></li>
+				<% end %>
+				
+			</ul>
+			
+			<div class="sidebar social">
+				
+			</div>
+			<ul class="vertical orange-text chunk-five">
+				<li><a class='orange-text' href='http://twitter.com/#!/KPSU_PDX'>Twitter</a>&nbsp;&nbsp;&nbsp;<a href='http://www.facebook.com/pages/KPSU/131711936862193' class='orange-text'>Facebook</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='http://www.flickr.com/photos/kpsu' class='orange-text'>Flickr</a></li>
+			</ul>
+			<div class="sidebar support">
+				
+			</div>
+			<ul style="vertical yellow-text st-marie">
+				<li style="margin-left:10px;"><a  class="yellow-text st-marie" href="http://www.wweek.com">Willamette Week</a></li>
+				<li style="margin-left:10px;"><a  class="yellow-text st-marie" href="http://www.abovethepearl.com">Above the Pearl Tattoo</a></li>
+				<li style="margin-left:10px;"><a  class="yellow-text st-marie" href="/underwriting">Support KPSU!</a></li>
+			</ul>
+			<div class="sidebar dj-chat">
+				
+			</div>
+			<ul style="vertical blue-text chunk-five">
+				<li style="margin-left:10px;">in page&nbsp;&nbsp;•&nbsp;&nbsp;new window</li>
+			</ul>
+		</div>
+		<div id="login" title="Login" style="display:none;">
+			<div class="dejavu-condensed" style="margin:10px;">
+				<%= form_for(@user_session) do |f| %>
+  				<% if @user_session.errors.any? %>
+  				  <div id="error_explanation">
+  				    <span><%= pluralize(@user_session.errors.count, "error") %> prohibited this session from being created:</span>
+				
+  				    <ul>
+  				    <% @user_session.errors.full_messages.each do |msg| %>
+  				      <li><%= msg %></li>
+  				    <% end %>
+  				    </ul>
+  				  </div>
+  				<% end %>
+				
+  				<div class="field">
+  				  <%= f.label :email %><br />
+  				  <%= f.text_field :email %>
+  				</div>
+  				<div class="field">
+  				  <%= f.label :password %><br />
+  				  <%= f.password_field :password %>
+  				</div>
+  				<div class="actions">
+  				  <%= f.submit "Login" %>
+  				</div>
+  				<% end %>
+				<div class="dejavu-condensed ten-pt float-left" style="margin-top:5px;">Forgot your password? 
+				<%= link_to("Click here to reset it", new_password_reset_path, :class => "yellow-text " )%>
+				</div>
+				<div class="float-left ten-pt clear-both m1-bold" style="margin-bottom:5px;">*Passwords are case sensitive</div>
+			</div>
+			</div>
+		</div>
+	</div>
+	
+	<script type="text/javascript" charset="utf-8">
+		$(document).ready(function(){
+		
+		$("#login-nav-button").click(function(){
+			$("#login").dialog({
+				position: [849, 74]
+			});
+		});
+
+		$("#hidden-player").jPlayer( {
+		  ready: function () {
+		    $(this).jPlayer("setMedia", {
+		          mp3: "http://stream.kpsu.org:8000/high",
+				  solution: "flash, html",
+		    }).jPlayer("stop");
+		  },
+		  ended: function (event) {			
+			$(this).jPlayer("play");		
+		  },
+		  supplied: "mp3",
+		  swfPath: "/players/v3/",
+		  volume: 0.8
+		});	
+		
+		function showStopBtn()
+		{
+			$(".play").fadeOut(function(){
+				$(".stop").fadeIn();
+			});
+		}
+		
+		function showPlayBtn()
+		{
+			$(".stop").fadeOut(function(){
+				$(".play").fadeIn();
+			});
+		}
+		
+		$(".play").click(function() {
+			$("#hidden-player").jPlayer("play");
+			showStopBtn();
+			return false;
+		});		
+		
+		$(".stop").click(function() {
+			$("#hidden-player").jPlayer("stop");
+			showPlayBtn();
+			return false;
+		});
+		$(".indicator").draggable({
+			axis: "x", 
+			containment: "parent" });
+		$(".indicator").bind("dragstart", function(){
+			var offset = $(this).offset().left;
+			console.log("Initial Offset:")
+			console.log(offset)
+			$(this).attr("data-start-offset", offset)	
+		});
+		$(".indicator").bind("dragstop", function(){
+			var offset = $(this).offset().left;
+			var parOffset = $(".volume-bar").offset().left + $(".volume-bar").outerWidth() - 18;
+			var diff = (parOffset - offset);
+			// 100 is the maximum
+			// 80 is the width
+			// volume increment: 1.25 = 100/80
+			// volume increment = volMax / diff
+			var vol = ((100 - diff*1.25) / 100)
+
+			console.log("ending Offset:")
+			console.log(offset)
+			console.log("Volume:")
+			console.log(vol)
+			$("#hidden-player").jPlayer("volume", vol);
+		});
+		var loadTwitter = function(json){
+			$.each(json.results, function(i, tweet){
+				if ( i <= 3 ) {
+				$("#tweets").append("<div class=\"hand-written\" style=\"clear:both;width:320px;margin:5px auto 10px auto;line-height:1em;\"><div style=\"word-wrap: break-word;padding:3px;height:auto;font-size:14pt;\">"+tweet['text']+"</div><div style=\"text-align:right;margin-top:5px;\">from <em>"+tweet['from_user']+"</em></div></div>");
+				}
+				
+			});
+		}
+		var loading = "<div style='margin:303px auto 0 auto;text-align:center;font-size:14pt;'><span class=''>Loading Tweets...</span><br/></div>"
+
+		$.ajax({
+			url: "/kpsu_twitter",
+			dataType: "text",
+            type: "GET",
+            beforeSend: function (xhr) {
+				$("#tweets").html(loading)
+            },
+            success: function (text) {
+				$("#tweets").html("");
+				json = eval("(" + text + ")");
+   				loadTwitter(json);
+            },
+            complete: function (xhr) {
+
+            },
+            error: function (xhr, status, error) {
+            }
+		});
+
+	});
+
+	$('.post-photos a').lightBox({fixedNavigation:true});
+		
+		<%= yield(:page_js) %>
+		</script>
+</body>
+</html>

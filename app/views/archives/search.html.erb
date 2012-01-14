@@ -1,0 +1,59 @@
+<% content_for :title do %>Our archive of previous shows as downloadable podcasts<% end %>
+<% content_for :meta_description do %>KPSU's archive of previous shows as downloadable podcasts, our archives are purged every 30 days so make sure to check in weekly!<% end %>
+<% content_for :meta_keywords do %>internet radio, KPSU, Portland State University Radio, PSU radio, podcast, podcasts, college radio, podcast download<% end %>
+
+<% content_for :meta_fb_description do %>KPSU's archive of previous shows as downloadable podcasts, our archives are purged every 30 days so make sure to check in weekly!<% end %>
+<% content_for :meta_fb_title do %>Our archive of previous shows as downloadable podcasts<% end %>
+<% content_for :meta_fb_image do %>http://kpsu.org/images/tempbg.jpg<% end %>
+
+<% content_for :page_headline do %>
+	<span class="bebas purple-text">KSPU Archive</span>
+<% end %>
+<%= render :partial => "layouts/sidebar" %>
+<div class="float-left blue rounded-heavy-top titlebar">
+	<div id="" class="chunk-five sixteen">
+		KPSU Archive
+	</div>
+</div>
+
+<div style="height:auto;float:left;" class="rounded-heavy archive div-table">
+	<div style="padding:20px 20px 20px 0px">
+		<%= form_for :download, :url => archive_search_path, :html => {:style => "margin:0 0 0 58px;"}  do |c| %>
+			<span class="bebas sixteen-pt purple-text">Program</span> <%= c.text_field :program %>
+			<span class="bebas sixteen-pt purple-text">DJ</span> <%= c.text_field :dj %>
+			<%= c.submit 'Search' %>
+		<% end %>
+	</div>
+	<% unless flash[:error ] %>
+	<div style="height:30px;text-align:left;padding:0px 0px 0px 5px;width:100%;">
+		<div class="chunk-five blue-text wide-col float-left">Program</div>
+		<div class="chunk-five blue-text wide-col float-left">DJ</div>
+		<div class="chunk-five blue-text narrow-col float-left">Date</div>
+		<div class="chunk-five blue-text narrow-col float-left">Downloads</div>
+	</div>
+	<% if @downloads %>
+	<% @downloads.each do |d| %>
+	<% @i = 0; %>
+	<% if Time.at(d.title.to_i) >= Time.parse("#{Time.zone.now-50.weeks}") %>
+	<% @i += 1%>
+	<% if d.program.user != nil %>
+	<div class="row">
+		<a href="<%= url_for(download_path(:id => d.id)) %>" title="Click to Download <%= d.program.title %>"><div class="download float-left">&nbsp;</div></a>
+		<div style="padding-top:6px;padding-left:3px;" class="float-left dejavu-condensed green-text wide-col"><%= link_to(d.program.title, program_path(d.program), :class => "green-text dejavu-condensed", :title => "Visit #{d.program.title}'s homepage") %></div>
+		<div style="padding-top:6px;" class="float-left dejavu-condensed magenta-text wide-col"><%= link_to(d.program.user.dj_name, user_path(d.program.user), :class => "magenta-text dejavu-condensed", :title => "View #{d.program.user.dj_name}'s profile") %></div>
+		<div style="padding-top:6px;" class="float-left dejavu-condensed yellow-text narrow-col"><%= Time.zone.at(d.title.to_i).strftime("%B %e\, %Y") %></div>
+		<div style="padding-top:6px;" class="float-left dejavu-condensed orange-text narrower-col"><%= d.count %></div>
+	</div>
+	<% end %>
+	<% end %>
+	<% end %>
+	<% end %>
+	<% else %>
+		<div class="m1-bold"><%= flash[:error] %></div>
+	<% end %>
+</div>
+<% unless flash[:error] %>
+	<% if Time.at(@downloads.last.title.to_i) >= Time.parse("#{Time.zone.now-7.weeks}") %>
+	<%= will_paginate(@downloads, :params => {:program => @program, :dj => @dj})%>
+	<% end %>
+<% end %>

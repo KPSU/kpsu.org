@@ -1,0 +1,79 @@
+to do:
+	finish chat
+	finish popup player/kpsu listener playlists
+	
+MYSQL TIPS:
+
+	Clone column without duplicate entries
+		
+		CREATE TABLE tmp_table as
+		SELECT DISTINCT artist FROM catalogs;
+
+APACHE CONFIG:
+
+	DRUPAL
+		
+		<VirtualHost *:80>
+		        ServerAdmin admin@kpsu.org
+		        ServerName www.kpsu.org
+		        ServerAlias kpsu.org
+		        DocumentRoot /var/www/kpsu.org
+		        DirectoryIndex index.php
+
+		</VirtualHost>
+		
+		DirectoryIndex index.php
+
+		AddType application/x-httpd-php php
+		AddType application/x-httpd-php-source phps
+		
+
+RUBY SNIPPETS:		
+
+		@playlist = Playlist.new(params[:playlist])
+
+    respond_to do |format|
+      if @playlist.save
+        format.html { redirect_to(@playlist, :notice => 'Playlist was successfully created.') }
+        format.xml  { render :xml => @playlist, :status => :created, :location => @playlist }
+      else
+        format.html { render :action => "new" }
+        format.xml  { render :xml => @playlist.errors, :status => :unprocessable_entity }
+      end
+    end
+	
+	<%= autocomplete_field_tag 'address', '', address_autocomplete_path, :size => 75 %>
+	
+	
+	Program.all.each do |p|
+	  u = p.user
+	  p.playlists.each do |e|
+	    e.user = u
+	    e.save
+	  end
+	end
+	
+	cat.each do |item|
+	  @album = Album.find_by_name(item.album)
+	  @label = Label.find_by_name(item.label)
+	  @album.label_id = @label.id
+	  @album.save
+	  puts "Album: #{@album.name} Label #{@album.label.name} \n"  
+	end
+	
+	#deleted user ids
+	
+	a = [6, 9, 13, 14, 15, 21, 23, 25, 29, 30, 33, 34, 35, 36, 38, 39, 42, 43, 45, 46, 48, 49, 51, 52, 55, 57, 58, 59, 60, 61, 65, 67, 70, 72, 76, 79, 94]
+
+JQUERY/AJAX:
+	
+	jquery.address - rails.js in callRemote: ... success:
+	Add the following to enable hash URLS:
+	
+	var patUsers = "users"
+	if (url.match(/\d$/) && url.match(patUsers) ){
+		
+	}else{
+		$.address.value(url);
+	}
+	

@@ -1,0 +1,105 @@
+<% unless @inpage %>
+<br/>
+<div id="playlist-container">
+<div class="float-left blue rounded-heavy-top clear-left" style="margin-top: 0px;padding-left: 10px;width: 654px;height: 34px;padding-top: 10px;">
+	<ul class="horizontal">
+		<li class="horizontal pointer bebas manage_playlists"><%= link_to "Manage Playlists", playlists_path(:inpage => true), :remote => true, :class => "black-text", :rel => ":address/#{url_for(playlists_path)}" %></li>
+		<li class="horizontal black-text chunk-five">&#183;</li>
+		<li class="horizontal pointer bebas black-text new_playlist"><%= link_to "New Playlist", new_playlist_path(), :remote => true, :class => "black-text", :rel => ":address/#{url_for(new_playlist_path)}" %></li>
+	</ul>
+</div>
+<div class="playlist-wrapper">
+<% end %>
+	<% @playlists.each do |p| %>
+		<div data-playlist="<%= p.id %>" class="playlist float-left clear-left" style="padding:10px 0px 5px 5px;width:659px;background-color:#343434;">
+			<div class="dejavu-condensed float-left normal red-font playlist-title edit-playlist" style="width:300px;"><%= link_to(p.title, edit_playlist_path(p), :remote => true, :class => "yellow-text", :rel => ":address/#{url_for(edit_playlist_path(p))}") %></div>
+			<div class="float-left dejavu-condensed blue-text"><%= p.created_at.to_s(:simple) %></div>
+			<div class="float-left dejavu-condensed"><%= link_to 'Delete', p, :confirm => "Are you sure?", :method => "delete", :class => "dejavu-condensed invisible yellow-text", :"data-id" => p.id %></div>
+		</div>
+	<% end %>
+	<div class="magenta-text float-left eight-pt bebas">
+	<%= will_paginate(@playlists) %>
+	</div>
+	<% if @inpage %>
+		<script type="text/javascript" charset="utf-8">
+			$('.pagination a').attr('data-remote', 'true');
+		</script>
+	<% end %>
+<% unless @inpage %>
+</div>
+</div>
+<script type="text/javascript" charset="utf-8">
+	function resetPlaylistIndexPagination(){
+		$(".pagination a").die();
+	}
+	$(".playlist-wrapper .playlist").die();
+	var loading = "<div style='margin:200px 0 0 0;text-align:center;'><span class='magenta-text bebas'>Loading</span><br/><img src='/images/ajax-loader.gif'></div>";
+	$('.pagination a').attr('data-remote', 'true');
+	$('.pagination a').each(function(){
+		var href = $(this).attr("href");
+		var newHref = href + "&inpage=true";
+		$(this).attr("href", newHref);
+	});
+	
+	function removePlaylist(){
+		$(".remove-playlist-manager").live("click", function(){
+			var cid = $(this).parent().attr("data-playlist");
+			var murl = "/playlists/"+cid;
+			if ( confirm("Are you sure you want to delete this Playlist?") ){
+			$.ajax({
+				url: murl,
+				type: "POST",
+				dataType: 'script',
+				data: { '_method': 'delete' },
+				success: function(xhr){
+					$("div.playlist[data-playlist=\""+cid+"\"]").remove();
+					
+					
+				}
+			});
+			
+			return false;}
+		});
+	}
+	
+	$(".playlist-wrapper .playlist").live("mouseenter", function(event){
+		event.stopPropagation();
+		$(this).prepend("<div class='remove-playlist-manager red-text twelve' style='position: absolute;margin-left: 580px;' >Remove</div>");
+		removePlaylist();
+	});
+	$(".playlist-wrapper .playlist").live("mouseleave", function(event){
+		event.stopPropagation();
+		$(".remove-playlist-manager").die();
+		$(".remove-playlist-manager").remove();
+	});
+	
+	
+	
+	
+	
+	$('.pagination a').live("ajax:loading", function(){
+		$('.playlist-wrapper').html(_ajax_loader_black);
+	});
+	$('.pagination a').live("ajax:success", function(event, data, status, xhr){
+		$('.playlist-wrapper').html(data);
+	});
+	$(".new_playlist a").live("ajax:success", function(event, data, status, xhr){
+		$(".playlist-wrapper").html(data);
+	});
+	$(".new_playlist a").live("ajax:loading", function(){
+		$(".playlist-wrapper").html(_ajax_loader_black);
+	});
+	$(".manage_playlists a").live("ajax:success", function(event, data, status, xhr){
+		$(".playlist-wrapper").html(data);
+	});
+	$(".manage_playlists a").live("ajax:loading", function(){
+		$(".playlist-wrapper").html(_ajax_loader_black);
+	});
+	$(".edit-playlist a").live("ajax:success", function(event, data, status, xhr){
+		$(".playlist-wrapper").html(data);
+	});
+	$(".edit-playlist a").live("ajax:loading", function(){
+		$(".playlist-wrapper").html(_ajax_loader_black);
+	});
+</script>
+<% end %>

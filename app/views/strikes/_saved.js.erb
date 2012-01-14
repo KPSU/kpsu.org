@@ -1,0 +1,11 @@
+$("#strike-content").append("<div id='saved-strike' class='invisible' style='text-align:center;' title='Strike Issued'><img src='/images/v3/strike-issued.png' style=''><div class='dejavu-condensed twelve-pt white-text float-left' style='text-align:center;width:100%;margin-top:10px;'><img src='<%= @strike.user.avatar.url(:thumb) %>'><div class='striked-issued-user-fullname dejavu-condensed red-text' style='width:100%;'><%= @strike.user.f_name rescue nil %>&nbsp;<%= @strike.user.l_name rescue nil %></div></div>");
+$("#saved-strike").dialog({
+	modal:true,
+	autoOpen: false,
+	position: "center",
+	buttons: { "Dismiss": function() { $(this).dialog("close"); } }
+});
+$("#saved-strike").dialog('open');
+$("#saved-strike").bind( "dialogclose", function(event, ui) {
+	$(this).remove();
+});

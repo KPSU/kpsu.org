@@ -1,0 +1,384 @@
+<% content_for :title do %>
+ <% if @user.dj_name then title = "#{@user.dj_name}" + "\'s profile" end %>
+<% end %>
+<% content_for :meta_description do %><%= @user.dj_name %>'s (<%= if @user.f_name then @user.f_name end %> <%= if @user.l_name then @user.l_name end %>) DJ profile, host of <% @i = @user.programs.size && @ii = 0; @user.programs.each do |p| %><%= p.title %><%= @i += 1; if @i < @ii then ", " end; if @i == @ii && @i != 1 then "and " end %><% end %> on KPSU.
+<% end %>
+<% content_for :meta_keywords do %><%= @user.dj_name %>, <%= @user.f_name %> <%= @user.l_name %>, <% @i = @user.programs.size && @ii = 0; @user.programs.each do |p| %><%= p.title %><%= @i += 1; if @i <= @ii then ", " end %><% end %>, KPSU, dj, college radio
+<% end %>
+<% content_for :meta_fb_description do %><%= truncate(@user.about, :length => 60) %><% end %>
+<% content_for :meta_fb_title do %><% if @user.dj_name then title = "#{@user.dj_name}" + "\'s profile" end %><% end %>
+<% content_for :meta_fb_image do %><%= @user.avatar.url(:big_thumb) %><% end %>
+<% content_for :page_headline do %>
+	<span class="bebas sixteen orange-text" style='text-align:right;'>KPSU DJ</span>
+<% end %>
+<style type="text/css" media="screen">
+	.section {
+		background-color:#343434;
+		font-size:.75em;
+		color:#FFFFFF;
+	}
+	.section.blogs {
+		background-color:transparent;
+	}
+</style>
+<div id="dj-profile">
+	<div class="details-wrapper float-left" style="width:265px;text-align:right;">
+	<div class=""><span class="bebas twenty-pt <%= random_text_color %>" title="<%= @user.dj_name %>'s profile"><%= @user.dj_name %></span><div title="Link to DJ" style="font-size:10px;padding:10px;" class="dejavu-condensed white-text">http://kpsu.org/<%= @user.dj_name.gsub(/\s/, "-").downcase %></div></div>
+	<div class="m1-regular yellow-text" style="word-wrap:break-word;width: 100%;"><% @user.roles.each do |r| %><%= r.title.split(' ').map {|w| w.capitalize }.join(' ') %><br/><% end %></div>
+	
+	<div id="photos" style="width:100%;">
+		<div class="float-right" style="width:150px;height:150px;">
+			<%= image_tag(@user.avatar.url(:big_thumb), :title => "#{@user.dj_name}'s picture", :alt => "#{@user.dj_name}'s picture")%>
+		</div>
+	</div>
+	
+	<div class="float-left" style="width:100%;text-align:right;">
+		<div class="float-right dejavu-condensed white-text clear-both"><span class="sixteen chunk-five blue-text ">Age</span> <br/><%= @user.age %></div>
+		<div title="DJ's shows" class="sixteen chunk-five blue-text float-right clear-both">Shows</div>
+			<% if @user.programs.size == 0 %>
+				<div class="twelve-pt magenta-text dejavu-condensed float-right clear-both">This DJ ain't got no shows!</div><br/><br/>
+			<% else %>
+				<% @user.programs.each do |p| %>
+					<div class="twelve-pt dejavu-condensed float-right clear-both">
+						<%= link_to(p.title, program_path(p), :class => "magenta-text" ) %>
+					</div>
+				<% end %>
+			<% end %>
+		</div>
+	</div>
+	
+	</div>
+	<div class="float-left clear-right" style="width:644px;margin-left:35px;">
+		<ul class="float-left horizontal" style="margin-bottom:10px;">	
+			<li style="margin-left:5px;" title="About Section" data-link="information" class="bio horizontal tab bebas yellow-text twenty-pt pointer selected">Information</li>
+			<li style="margin-left:5px;" title="Recent Playlists" data-link="playlists" class="playlist horizontal tab bebas yellow-text twenty-pt pointer">Playlists</li>
+			<li style="margin-left:5px;" title="<%= @user.dj_name %>'s blogs and recent posts" data-link="blogs" class="blog horizontal tab bebas yellow-text twenty-pt pointer">Blogs</li>
+			<li style="margin-left:5px;" title="<%= @user.dj_name %>'s Podcast Downloads" data-link="podcasts" class="podcasts horizontal tab bebas yellow-text twenty-pt  pointer">Podcasts</li>
+			<li style="margin-left:5px;" title="Comments" data-link="comments" class="comments horizontal tab bebas yellow-text twenty-pt pointer">Comments</li>
+		</ul>
+		
+		<div class="user information section float-left" style="min-height:200px;width:644px;background-color:#343434;">
+			<ul class="float-left dejavu-condensed horizontal clear-right <%= random_color %>" style="width: 634px;height: 25px;padding: 10px 0 0 10px;">	
+				<li style="margin-left:5px;" title="About Section" data-link="about" class="about subtab horizontal fourteen-pt black-text pointer selected">About</li>
+				<li style="margin-left:5px;" title="Influences" data-link="influences" class="influences subtab horizontal fourteen-pt black-text pointer">Influences</li>
+				<li style="margin-left:5px;" title="Misc and Contact" data-link="misc" class="misc horizontal subtab fourteen-pt black-text pointer">Misc.</li>
+			</ul>
+			<div class="user sub-section influences invisible">
+				<div class="chunk-five blue-text float-left clear-left" style="margin:5px;clear:both;">Influences</div>
+				<div class="dejavu-condensed float-left clear-right" style="margin:10px;"><%= @user.influences %></div>
+			</div>
+			<div class="user sub-section misc invisible">
+				<div class="chunk-five blue-text float-left" style="margin:5px;clear:both;">Homepage</div>
+				<div class="dejavu-condensed float-left clear-left" style="padding:5px;"><%= @user.homepage %></div>
+				<div class="chunk-five blue-text float-left clear-left" style="margin:5px;clear:both;">Email</div>
+				<div class="dejavu-condensed float-left clear-left" style="padding:5px;clear:both;"><%= @user.email %></div>
+			</div>
+			<div class="user sub-section about">
+				<div class="chunk-five blue-text float-left" style="margin:5px;clear:both;">About</div>
+				<div class="dejavu-condensed float-left" style="padding:5px;clear:both;"><%= raw @user.about %></div>
+			</div>
+		</div>
+		<div class="user comments section invisible float-left" style="background-color:#343434;min-height:200px;width:639px;margin:0px 0px 0px 0px;">
+			<ul class="float-left horizontal clear-right <%= random_color %>" style="height:30px;width:100%;">	
+				<li style="margin-left: 15px;margin-top: 10px;float: left;" title="Wrie a comment!" data-link="comment" class="new-comment horizontal dejavu-condensed black-text sixteen-pt pointer">New Comment</li>			
+			</ul>
+			<div class="comments-wrapper float-left" style="width:540px;padding:20px 50px 20px 50px;margin:auto;">
+				<div class="comment new float-left invisible">
+					<% if current_user %>
+						<div class="float-left" style="margin-right:45px;">
+							<img src="<%= current_user.avatar.url(:thumb) %>">
+						</div>
+						<div class="float-right" style="width: 410px;margin-bottom:20px;">
+							<form action="/comments/create" class="form" method="get" accept-charset="utf-8">
+								<input type="hidden" name="type" value="profile" id="comment_type">
+								<input type="hidden" name="comment_parent_id" value="<%= @user.id %>" id="comment_parent">
+								<div class="float-left m1-bold" style="clear:both;">Title</div>
+								<input type="text" name="title" value="" class="m1-regular float-right clear-both rounded-light" style="width:410px;" id="title">
+								<div class="float-left m1-bold" style="clear:both;">Comment</div>
+								<textarea name="comment[body]" rows="8" cols="74" class="m1-regular float-left clear-both rounded-light" style="margin:3px 0px 10px 0px;"></textarea>
+								<%= recaptcha_tags :ajax => true, :display => {:theme => "red", :tabindex => 0} %>
+								<div style="margin-top:10px;" class="submit float-left clear-both pointer twenty-pt dejavu-condensed green-text">Create Comment</div>
+						    </form>
+						</div>
+					<% else %>
+						<div style="text-align:center !important;">
+							<div class="m1-bold" style="line-height:12px;">You will need to login before continuing. Listeners can register or login with one of the following services:</div>
+							<div style="width:100%;">
+								<div class="float-left red-font" style="margin:10px 10px 10px 200px;text-align:center;">
+									<div style="margin:auto;">
+										<a title="Click the icon to register for, or login to, KPSU using Twitter" href="/auth/twitter">Twitter</a>
+									</div>
+									<a title="Click the icon to register for, or login to, KPSU using Twitter" href="/auth/twitter">
+										<img src="/images/twitter_32.png">
+									</a>
+								</div>
+								<div class="float-left red-font" style="margin:10px;text-align:center;">
+									<div>
+										<a title="Click the icon to register for, or login to, KPSU using Facebook" href="/auth/facebook">Facebook</a>
+									</div>
+									<a title="Click the icon to register for, or login to, KPSU using Facebook" href="/auth/facebook"><img src="/images/facebook_32.png"></a>
+								</div>
+							</div>
+						</div>
+					<% end %>
+				</div>
+			</div>
+		</div>
+		<div class="user blogs section invisible float-left" style="width:644px;">
+			<% @blogs.each do |post| %>
+				<% @blog_color = random_color %>
+				<div class="post" style="background-color:#343434;">
+					<div class="title-wrapper <%= @blog_color %>" style="padding:6px;width:632px;height:30px;">
+						<div class="float-left" style="margin-left:15px;">
+							<div class="float-left" style="padding-left:3px;padding-top:5px;">
+								<%= link_to(post.title, post_path(post), :class => "bebas twenty-pt black-text" )%>
+							</div>
+						</div>
+						<div class="chunk-five black-text float-right" style="margin-left:140px;text-align:right;"><%= post.content_type.name %></div>
+					</div>
+					<div class="float-left">
+						<div class="post-body dejavu-condensed white-text float-left" style="margin:10px">
+							<div style="margin-bottom:0px;">
+							<%= raw post.body %>
+							</div>
+							<br/>
+							<% if post.images %>
+							<hr/>						
+							<div class="post-photos" style="padding-top:10px;">
+								<% post.images.each do |f|  %>
+									<a href="<%= f.item.url(:thumb) %>" title="<%= f.title %>"><%= image_tag(f.item.url(:thumb), :alt => f.title, :title => f.title ) %></a>
+								<% end %>
+							</div>
+							<% end %>
+						</div>
+					</div>
+				</div>
+					<div class="social-wrapper <%= @blog_color %>" style="width:638px;padding:3px 3px 6px 3px;line-height:12px;height:25px;float:left;margin-bottom:20px;">
+
+					<div class="social-networking" style="float:left;clear:both;text-align:right;width:634px;">
+						<div class="standard red-font m1-regular float-left" style="z-index:3;text-align:left !important;">
+							<% if current_user %>
+							<% if current_user.id == post.user.id || current_user.staff %>
+							<%= link_to 'Edit Post', edit_post_path(post), :class => "black-text" %> <span class="">|</span> <%= link_to 'Delete Post', post, :confirm => "Are you sure?", :method => "delete", :class => "black-text" %>
+							<% end %>
+							<% end %>
+						</div>
+						SHARE&nbsp;&nbsp;
+						<div class="float-right">
+						<!-- REGARDING FACEBOOK %2F stands for / and w -->
+							<iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fkpsu.org<%= url_for(post) %>&amp;layout=button_count&amp;show_faces=true&amp;width=40&amp;action=like&amp;font=segoe+ui&amp;colorscheme=light&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:80px; height:21px;" allowTransparency="true">
+							</iframe>
+
+							<a href="http://twitter.com/share/?url=http://kpsu.org<%= url_for(post) %>" class="twitter-share-button" data-count="horizontal" data-via="KPSU_PDX" data-text="<%= post.title %>: ">
+								Tweet
+							</a>
+							<script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+						</div>
+					</div>
+					</div>
+				<% end %>
+		</div>
+		<div class="user podcasts invisible section float-left" style="min-height:200px;width:644px;margin:0px 0px 0px 0px;">
+		
+		<div style="height:auto;float:left;padding:0px;" class="rounded-heavy">
+			<div class="<%= random_color %>" style="width:634px;height:30px;text-align:left;padding:10px 0px 0px 10px;">
+				<div style="width:32px;" class="chunk-five sixteen-pt black-text float-left">Link</div>
+				<div style="width:298px;" class="chunk-five sixteen-pt black-text float-left">Program</div>
+				<div style="width:230px;" class="chunk-five sixteen-pt black-text float-left">Date</div>
+				<div style="width:74px;" class="chunk-five sixteen-pt black-text float-left">Downloads</div>
+			</div>
+			<% @user.downloads.order("created_at DESC").each do |d| %>
+			<% %>
+			<% if Time.zone.now - Time.at(d.title.to_i) <= 12.weeks %>
+				<div class="micro-row">
+					<a href="<%= url_for(download_path(:id => d.id)) %>" title="Click to Download <%= d.title %>"><div class="download float-left">&nbsp;</div></a>
+					<div style="padding-top:6px;width:288px;margin-left:10px;" class="float-left"><%= link_to(d.program.title, program_path(d.program), :class => "magenta-text", :title => "#{d.program.title}") %></div>
+					<div style="padding-top:6px;width:230px;" class="float-left"><%= link_to(Time.zone.at(d.title.to_i).strftime("%B %e\, %Y"), download_path(:id => d.id), :class => "blue-text", :title => "Original Air Time: #{Time.at(d.title.to_i)}") %></div>
+					<div style="padding-top:6px;width:72px;" class="float-left green-text"><%= d.count %></div>
+				</div>
+			<% end %>
+			<% end %>
+		</div>
+		</div>
+		<div class="user playlists invisible section float-left">
+				<% @user.playlists.sort{|x,y| x.created_at <=> y.created_at}.reverse[0..3].each do |p| %>
+				<div style="padding:0px;margin:0px;" class="playlist-wrapper clear-both">
+						<div class="<%= random_color %>" style="padding:10px;"><%= link_to(p.title.upcase, playlist_path(p.id), :class => "bebas black-text fourteen-pt") %></div>
+						<% @i = 0 %>
+						<table>
+							<tr>
+								<th style="width:230px;" title="Playlist track title column">TRACK TITLE</th>
+								<th style="width:200px;" title="Playlist track artist column">ARTIST</th>
+								<th style="width:231px;" title="Playlist track album column">ALBUM</th>
+							</tr>
+							<% p.tracks.each do |t| %>
+			            	<% @i += 1 %>
+							<% if @i <= 4 %>
+							<tr>
+								<td style="width:230px;" title="Title: <%= t.title %>" class="rounded-light"><%= t.title %></td>
+								<td style="width:200px;" title="Artist: <%= t.artist.name %>" class="rounded-light"><%= link_to(t.artist.name, artist_path(t.artist.id), :class => "green-text") %></td>
+								<td style="width:231px;" title="Album: <%= t.album.name %>" class="rounded-light"><%= t.album.name %></td>
+							</tr>
+							<% else %>
+							<tr class="invisible">
+								<td style="width:230px;" class="rounded-light"><%= t.title %></td>
+								<td style="width:200px;" class="rounded-light"><%= link_to(t.artist.name, artist_path(t.artist.id), :class => "green-text") %></td>
+								<td style="width:231px;" class="rounded-light"><%= t.album.name %></td>
+							</tr>
+							<% end %>
+
+							<% end %>
+						</table>
+						<div class="view-more" class="m1-thin large" style="cursor:pointer;width:626px;text-align:right;padding:5px 15px 0px 0px;">View Playlist</div>
+				</div>
+				<% end %>
+				<% if @user.programs.size <= 1 %>
+					<div class="float-left"><%= link_to("View All Playlists", program_path(@user.programs.first), :class => "red-font")%></div>
+				<% else %>
+					<span class="m1-bold">View Playlists for:</span><br/>
+					<% @user.programs.each do |p| %>
+					<div class="float-left clear-left"><%= link_to(p.title, program_path(p), :class => "red-font")%></div>
+					<% end %>
+				<% end %>
+		</div>
+		
+	</div>
+<style>
+	table {
+		padding:0px !important;
+		margin:auto !important;
+	}
+	.micro-row {
+		float: left;
+		clear: both;
+		margin: 5px 0 5px 0px;
+	}
+	.selected {
+		color:#FFFFFF !important;
+	}
+</style>
+<% content_for :page_js do %>
+	var h = $("#homepage").width();
+	$('li.horizontal.subtab').click(function(){
+		var txt = $(this).attr("data-link");
+		var d = "."+txt
+		var t = $(d);
+		$('.user.sub-section').not(t).hide();
+		$(d).show();
+		$('li.horizontal.subtab.selected').removeClass("selected");
+		$(this).addClass("selected");
+	});
+	$(".new-comment").click(function(){
+		$(".comment.new").show();
+	});
+	$('li.horizontal.tab').click(function(){
+		$(".comment.new").hide();
+		$(".comment.content").remove();
+		var txt = $(this).attr("data-link");
+		var d = "."+txt
+		var t = $(d);
+		$('.user.section').not(t).hide();
+		$(d).show();
+		$('li.horizontal.tab.selected').removeClass("selected");
+		$(this).addClass("selected");
+		if (txt == "comments"){
+				$.ajax({
+					url: "/comments/profile/<%= @user.id %>",
+					dataType: 'json',
+				    type: "GET",
+				    beforeSend: function (xhr) {
+				    },
+				    success: function (xhr) {
+
+					},
+				    complete: function (xhr) {
+						json = eval("(" + xhr['response'] + ")")					
+							$.each(json['comments'], function(i, data){
+								if(data['owner'] == "true"){
+									var del = " <span class=\"delete-comment\" data-id=\""+data['id']+"\"> Delete<span>";
+									var edit = " <span class=\"edit-comment\" data-id=\""+data['id']+"\">Edit <span>";
+									var c_options = edit + "|" + del
+								}else{
+									var c_options = ""
+								}
+								$(".comments-wrapper").append("<div class=\"comment content\" data-comment-id=\""+data['id']+"\" style=\"margin:5px 0px 5px 0px;width:540px;height:auto;clear:both;float:left;\"><img src=\"" + data['user']['pic'] +"\"><div class=\"float-right\"><div class=\"title float-left m1-bold\" style=\"clear:both;\">"+data['title']+"</div><div class=\"time float-right small\"></div><div class=\"body float-left m1-regular rounded-heavy\" style=\"margin-top: 5px;clear: both;width: 410px;min-height: 100px;background-color: #454545;padding: 5px;\">"+data['body']+"</div><div class=\"comment-options float-right pointer clear-both standard red-font\">"+c_options+"</div></div><div class=\"float-left\" style=\"word-wrap:break-word;width:80px;margin-left:1px;\">"+data['user']['name']+"</div></div>");
+								});
+
+				    },
+				    error: function (xhr, status, error) {
+
+				    }
+				});
+		}
+	});
+	<% if current_user %>
+	$(".submit").click(function(){
+		var dataString = $(":input").serializeArray();
+		$.ajax({
+			url: "/comments",
+			data: dataString,
+			dataType: 'json',
+		    type: "POST",
+		    beforeSend: function (xhr) {
+		    },
+		    success: function (xhr) {
+			
+				$.each(xhr, function(i, data){
+						$(".comment.new").after("<div class=\"comment\" style=\"margin:5px 0px 5px 0px;width:540px;height:auto;clear:both;float:left;\"><img src=\"<%= current_user.avatar.url(:thumb)%>\"> <div class=\"float-right\"><div class=\"title float-left m1-bold\" style=\"clear:both;\">"+xhr['comment']['title']+"</div><div class=\"time float-right small\"></div><div class=\"body float-left m1-regular rounded-heavy\" style=\"margin-top: 5px;clear: both;width: 410px;min-height: 100px;background-color: #454545;padding: 5px;\">"+xhr['comment']['body']+"</div><div class=\"comment-options float-right pointer clear-both standard red-font\">Edit | Delete</div></div><div class=\"float-left medium\" style=\"word-wrap:break-word;width:80px;margin-left:1px;\">"+xhr['comment']['user']['f_name']+" "+xhr['comment']['user']['l_name']+"</div></div>");
+					});
+					
+			$(":input").val("");
+			Recaptcha.reload();
+			},
+		    complete: function (xhr) {
+
+		    },
+		    error: function (xhr, status, error) {
+				alert("Please try again!")
+				Recaptcha.reload();
+		    }
+		});
+	});
+	<% end %>
+	$(".view-more").click(function(){
+		var par = $(this).parent();
+		var txt = $(this).text();
+		if (txt == "Hide Playlist"){
+			$('.toggled').fadeToggle(100).removeClass('toggled');
+			$(this).html("View Playlist");
+		}else{
+			$('.toggled').fadeToggle('slow').removeClass('toggled');
+			$(par).find("table tr.invisible").fadeToggle('slow', function(){
+				
+			}).addClass('toggled');
+			$(this).html("Hide Playlist");
+		}
+	});
+	
+	$(".delete-comment").live("click", function(){
+		var cid = $(this).attr("data-id");
+		var murl = "/comments/"+cid;
+		if ( confirm("Are you sure you want to delete this Post?") ){
+		$.ajax({
+			url: murl,
+			type: "POST",
+			dataType: 'script',
+			data: { '_method': 'delete' },
+			success: function(xhr){
+				$(".comment.content[data-comment-id=\""+cid+"\"]").remove();
+			}
+		});
+		return false;}
+	});
+	<% unless params[:page] %>
+		<% unless @blogs.blank? %>
+		var blogPageless = $("user.blogs.section:visible");
+		if (blogPageless){
+		$('.user.blogs.section').pageless({ totalPages: <%= @blogs.total_pages %>,
+			currentPage: 1, 
+			url: '/users/<%= @user.id %>/blogs', 
+			loaderMsg: 'Loading more results'
+		 });}
+		<% end %>
+	<% end %>
+<% end %>

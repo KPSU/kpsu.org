@@ -1,0 +1,86 @@
+function getPostContentType(data){
+	var type = data['content_type_id'];
+	var typeString = "";
+	var titleColor = "";
+	var
+	switch(type){
+		case 1:
+		typeString = "BLOG"
+		titleColor =
+		break;
+		case 2:
+		typeString = "ANNOUNCEMENT"
+		break;
+		case 3:
+		typeString = "NEWS"
+		break;
+		default:
+		typeString = "BLOG"
+	}
+	return typeString;
+}
+
+function buildHtml(args){
+	for(key in args){
+		var something = new Function();
+	}
+}
+
+function InterfaceElement(args){
+	this._type = (args['type']);
+	this.
+}
+
+buildHtml();
+function genericPost(data){
+	
+	var postWrapper = "<div class='post'><div class='header'><div class='gree'></div></div></div>"
+}
+
+<% @posts.each do |post| %>
+	<div class="post">
+		<div class="header">
+			<% if post.content_type_id == 1 %>
+				<div class="green-text post-type">BLOG</div>
+				<div class="green chunk-five yellow-text float-left title-bar"><%= link_to post.title, post, :class => "yellow-text" %></div>
+			<% elsif post.content_type_id == 3 %>
+				<div class="yellow-text post-type">ANNOUNCEMENT</div>
+				<div class="yellow chunk-five magenta-text float-left title-bar"><%= link_to post.title, post, :class => "magenta-text" %></div>
+			<% elsif post.content_type_id == 2 %>
+				<div class="blue-text post-type">NEWS</div>
+				<div class="blue chunk-five white-text float-left title-bar"><%= link_to post.title, post, :class => "white-text" %></div>
+			<% end %>
+		</div>
+		<div class="body">
+			<div class="author deja-condensed float-right">BY <span class="blue-text"><%= link_to post.user.dj_name.upcase, post.user, :class => "blue-text" %></span></div>
+			<div class="content dejavu-book float-lef">
+				<%= raw post.body.bbcode_to_html({}, false) %>
+			</div>
+		</div>
+		<% if post.content_type_id == 1 %>
+			<div class="footer green">
+			
+		<% elsif post.content_type_id == 3 %>
+			<div class="footer yellow">
+			
+		<% elsif post.content_type_id == 2 %>
+			<div class="footer blue">
+			
+		<% end %>			
+		<div id="view-comments" class="float-left dejavu-condensed magenta-text">View Comments</div>
+			<div id="share" class="share float-right">
+				<div class="text dejavu-condensed float-left magenta-text">SHARE</div>
+				<div class="float-right icons">
+				<!-- REGARDING FACEBOOK %2F stands for / and w -->
+					<iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fkpsu.org<%= url_for(post) %>&amp;layout=button_count&amp;show_faces=true&amp;width=40&amp;action=like&amp;font=segoe+ui&amp;colorscheme=light&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:80px; height:21px;" allowTransparency="true">
+					</iframe>
+
+					<a href="http://twitter.com/share/?url=http://kpsu.org<%= url_for(post) %>" class="twitter-share-button" data-count="horizontal" data-via="KPSU_PDX" data-text="<%= post.title %>: ">
+						Tweet
+					</a>
+					<script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+				</div>
+			</div>
+		</div>
+	</div>
+	<% end %>

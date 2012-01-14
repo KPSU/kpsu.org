@@ -1,0 +1,20 @@
+<div class="m1-light huge" style="padding:10px;">
+</div>
+
+<div class="m1-regular" style="padding:15px;">
+</div>
+
+<% if current_user %>
+	<% if current_user.staff %>
+<%= link_to 'Edit', edit_handbook_page_path(@handbook_page) %> |
+	<% end %>
+<% end %>
+<%= link_to 'Back', handbook_pages_path %>
+
+<div class="rounded-heavy handbook-pages">
+	<div class="m1-thin large magenta rounded-heavy-top" style="width: 634px;height: 34px;padding-top: 10px;padding-left: 10px;margin-top:25px;">
+		<div id="new-review-page-title" class="chunk-five sixteen"<%= @handbook_page.title %></div>
+	</div>
+	<%= raw @handbook_page.body %>
+  
+</div>

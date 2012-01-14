@@ -1,0 +1,339 @@
+<% content_for :title do %>
+	DJs
+<% end %>
+
+<% content_for :meta_description do %>
+	KPSU Portland's college radio full list of DJs and hosts. 
+<% end %>
+
+<% content_for :page_headline do %>
+	<span class="bebas sixteen yellow-text">KPSU DJs</span>
+<% end %>
+<% @download_ids = [] %>
+<style type="text/css" media="screen">
+	.dj-index {
+	}
+	#genre-browse {
+		padding:5px;
+		margin-top:10px;
+		margin-bottom:10px;
+		width:140px;
+		background-color:#F7F7F7;
+	}
+	#genre-browse div.box {
+		width:140px;
+		height:85px;
+		border:1px solid #c2c2c2;
+		background-color:#e2e2e2;
+		margin:auto;
+	}
+	#genre-browse div div {
+		float:left;
+		margin-left:18px;
+		width:100px;
+		height:20px;
+	}
+	.user-wrapper #search-results {
+		padding:8px;
+		margin-right:75px;
+		margin-bottom:10px;
+	}
+	.user-wrapper #search-results .header {
+		width:848px;
+	}
+	.user-wrapper #search-results .header div {
+		width:260px;
+		padding:10px;
+		float:left;
+	}
+	.user-wrapper #search-results table {
+		padding:8px;
+		border:1px solid #c2c2c2;
+		background-color:#f9f9f9;
+	}
+	.user-wrapper #search-results table tr th {
+		border-bottom:1px solid #c2c2c2;
+	}
+	.user-wrapper #search-results table tr td {
+		padding:2px;
+		border-bottom:1px solid #c2c2c2;
+		border-right:1px solid #c2c2c2;
+	}
+	.user-wrapper #search-results table tr td:last-child {
+		padding:2px;
+		border-right:none;
+	}
+	.user-wrapper #search-results table td, .user-wrapper #search-results table th {
+		width:260px;
+	}
+	.dj-square {
+		width: 151px;
+		height: 151px;
+		margin:5px 5px 0px 5px;
+		padding:3px;
+	}
+	.dj-container {
+		background-color:#232323;
+		margin: 10px 0px 50px 15px;
+		font-size:.75em;
+		width:644px;
+		border:5px solid #444;
+		border-radius:5px;
+		-webkit-border-radius:5px;
+		-moz-border-radius:5px;
+		height:auto;
+	}
+	.dj-wapper {
+		width:644px;
+		height:auto;
+		margin:10px 0px 0px 20px;
+	}
+	.pagination-links a:link, .pagination-links a:visited, .pagination-links a:active {
+		color:#a31a1a;
+	}
+	.dj-name a:link,.dj-name a:visited,.dj-name a:active {
+		color: #FFFFFF !important;
+	}
+	.dj-name a:hover {
+		font-family:"M1cmedium";
+		color:#F7F7F7;
+	}
+	.category {
+		font-family:"M1cbold";
+		cursor:pointer;
+		padding:5px;
+		width:128px;
+		color:#FFFFFF;
+		background-color: rgb(171, 36, 36) !important;
+		border-bottom:1px solid #E7E7E7;
+	}
+	.user-item {
+		height:20px;
+		border:1px solid #E1E1E1;
+		border-bottom:0px;
+		padding:5px;
+		background-color:#F2F2F2;
+	}
+	.user-item:hover {
+		background-color:#F7F7F7;
+	}
+	/* tooltip styling */
+	.tooltip {
+		display:none;
+		z-index:300;
+		background:url(/images/black-box-arrow.png);
+		height:163px;
+		padding:40px 30px 10px 30px;
+		width:310px;
+		left:670px !important;
+		font-size:11px;
+		color:#696969;
+	}
+
+	/* a .label element inside tooltip */
+	.tooltip .label {
+		width:35px;
+	}
+
+	.tooltip a {
+		color:#ad4;
+		font-size:11px;
+		font-weight:bold;
+	}
+	.playlist-link {
+		width:260px;
+		height:18px;
+	}
+	
+	#special-djs {
+		margin: 10px 0px 50px 15px;
+		width:624px;
+		float:left;
+		background-color:#333;
+		border-radius:10px;
+		padding:10px;
+		border:5px solid #444;
+	}
+	
+	#special-djs div {
+		float:left;
+	}
+	
+	.special-dj-wrapper {
+		width:208px;
+		height:200px;
+	}
+	
+	.special-type {
+		text-align:center;
+		width:100%;
+	}
+	.special-label {
+		margin-left:15px;
+	}
+	.special-dj-avatar {
+		margin-left: 29px;
+		margin-top: -10px;
+	}
+	.special-dj-name {
+		position: relative;
+		top: 150px;
+		width: 150px;
+		background-color: rgba(50, 50, 50, 0.85);
+	}
+</style>	
+		<%= render :partial => "layouts/sidebar"%>
+		<div class="special-label bebas blue-text twenty-four-pt float-left">FEATURED</div>
+		
+		<div id="special-djs" class="float-left">
+			<div id="all-time" class="clear-left special-dj-wrapper">
+				<div class="bebas sixteen-pt yellow-text special-type">DOWNLOAD CHAMP</a></div>
+				
+				<div class="special-dj-avatar">
+					<a href="<%= url_for(download_champ) %>" title="Download Champ: The DJ with the most downloads this week.">
+						<div class="float-left special-dj-name"><span class="white-text"><%= download_champ.dj_name %></span></div>
+						<img src='<%= download_champ.avatar.url(:square_thumb_big) %>'>
+					</a>
+				</div>
+				
+			</div>
+			<div id="month" class="special-dj-wrapper">
+				<div class="bebas sixteen-pt yellow-text special-type"><span class="magenta-text">TOP DJ</span></div>
+				<div class="special-dj-avatar">
+					<a href="<%= url_for(top_dj) %>" title="Top DJ: KPSU's current top DJ, legend has it these DJs can manipulate the airwaves with their minds.">
+						<div class="float-left special-dj-name"><span class="white-text"><%= top_dj.dj_name %></span></div>
+						<img src='<%= top_dj.avatar.url(:square_thumb_big) %>'>
+					</a>
+				</div>
+			</div>
+			<div id="week" class="special-dj-wrapper">
+				<div class="bebas sixteen-pt yellow-text special-type">POPULAR THIS WEEK</div>
+				<div class="special-dj-avatar">
+					<a href="<%= url_for(popular_this_week) %>" title="Popular This Week: Our most popular DJ this week based on traffic to their content.">
+						<div class="float-left special-dj-name"><span class="white-text"><%= popular_this_week.dj_name %></span></div>
+						<img src='<%= popular_this_week.avatar.url(:square_thumb_big) %>'>
+					</a>
+				</div>
+			</div>
+		</div>
+		<div class="dj-container float-left m1-regular medium">
+			<div class="flash-notice"><%= flash[:notice] %></div>
+			<% @users.shuffle!.each do |u| %>
+			<div class="dj-wrapper float-left" data-genre="<% u.programs.each do |p| %><%= p.genre.title rescue nil %> <% end %>">
+			<div class="<%= cycle("blue", "green", "magenta", "yellow", "orange", "red") %>" style="float:left;clear:both;width:634px;font-size:1.5em;padding:5px 0px 5px 10px;">
+				<%= link_to(u.dj_name, user_path(u), :class => "black-text bebas") %>
+			</div>
+			<div class="dj-square clear-left float-left rounded-heavy">
+				<%= image_tag(u.avatar.url(:square_thumb_big), :alt => "#{show_username(u, {:proper_name => true})}", :title => "#{show_username(u, {:proper_name => true})}" )%>				
+			</div>
+			<div class="float-right rounded-light" style="min-height: 160px;width: 472px;margin-left: 5px;margin-top: 7px;">
+				<div class="m1-light float-left" style="padding:0px 0px 0px 5px;min-height:144px;">
+					<div class="float-left">
+					<div class="float-left clear-right chunk-five blue-text" style="width:200px;"><%= if u.programs.size > 1 then "Shows" else "Show" end %></div>
+					<% u.programs.each do |p| %>
+						<div class="float-left clear-left" style="padding:0px 0px 0px 5px;margin:0px;width:195px;"><%= link_to(p.title, program_path(p), :class => "green-text") %></div><div class="clear-both orange-text" style="margin-left:5px;"> <% if p.event %> <%= "#{i_to_day(p.event.day_i)} @ #{p.event.starts_at.to_s(:meridian_time)} " %><% end %></div>
+					<% end %>
+					</div>
+				</div>
+				<div class="float-left">
+					<div class="float-left" style="padding:0px 0px 0px 0px;">
+						<div class="float-left">
+						<div class="float-left clear-right chunk-five blue-text" style="width:210px;">Recent Playlists</div>
+						<% u.playlists.reverse.slice(0..2).each do |p| %>
+							<div class="float-left playlist-link  medium clear-left m1-regular" style="padding:0px 0px 0px 5px;margin:0px;height:18px;"><%= link_to( truncate("#{p.title}", :length => 32), p, :class => "magenta-text") %></div><div class="clear-both" style="margin-left:5px;"></div>
+						<% end %>
+						</div>
+					</div>
+				</div>
+				<div class="dj-index-downloads float-left" style="margin-top:5px;">
+					<div class="float-left chunk-five blue-text">
+						Downloads
+					</div>
+					<% if u.downloads %>
+						<% if u.downloads.size > 3 %>
+							<% @i = 2 %>
+						<% else %>
+							<% @i = u.downloads.size - 1 %>
+						<% end %>
+				   		<% u.downloads.reverse.slice(0..@i).each do |d,i| %>
+						<% @download_ids << d.id %>
+				   		<div class="download-link float-left clear-both m1-regular" style="padding:0px 0px 0px 5px;margin:0px;width:130px;">
+				   			<%= link_to "#{Time.at(d.title.to_i).to_s(:simple)}", download_path(:id => d.id), :class => "yellow-text" %>
+				   		</div>
+						<div class="tooltip m1-regular" style=""> 
+							<div style="float:left;margin:0 15px 20px 0;width:64px;">
+							<img src="/images/v3/download.png" alt="Download Podcast" 
+									style="width:100%;" />
+							</div>
+							<table style="margin:0"> 
+								<tr> 
+									<td class="label blue-text m1-bold">Program</td> 
+									<td class="white-text"><%= d.program.title rescue nil %></td> 
+								</tr> 
+								<tr> 
+									<td class="label m1-bold green-text">Date</td> 
+									<td class="white-text"><%= Time.at(d.title.to_i).to_s(:time_and_date) %></td> 
+								</tr> 
+								<tr> 
+									<td class="label m1-bold purple-text">Downloads</td> 
+									<td class="white-text"><%= d.count%></td> 
+								</tr> 
+								<tr> 
+									<td class="label m1-bold orange-text">File Size</td> 
+									<td class="white-text"><%= number_to_human_size(d.file_size) %></td> 
+								</tr>		
+							</table> 
+							<div style="width:310px;text-align:center;margin-top:5px;font-size:1em !important;">
+							<%= link_to "Download Now", download_path(:id => d.id), :class => "sixteen-pt yellow-text" %> 
+							</div>
+						</div>
+				   		<% end %>
+					<% end %>
+				</div>		
+			</div>
+			
+			</div>
+			<% end %>
+			<div style="float:left;width:644px;padding:5px 0 5px 0;text-align:center;background-color:#343434;">
+				<%= will_paginate(@users) %>
+			</div>
+		</div>
+<ul style="z-index:-30;position:absolute;" class="invisible" id="users-list">
+<% @users.each do |u| %>
+	<li style="z-index:-30;absolute;" class="user-<%= u.id %>"><%= u.f_name %> <%= u.l_name %></li>
+	<li style="z-index:-30;absolute;" class="user-<%= u.id %>"><%= u.dj_name %></li>
+<% end %>
+</ul>
+<!-- tooltip element --> 
+
+
+<% content_for :page_js do %>
+$("li.category.genre").toggle(function(){		
+	$("li.genre:not(.category)").fadeIn("fast").removeClass("invisible");
+},function(){
+	$("li.genre:not(.category)").slideUp("fast");
+});
+$("li.category.general").toggle(function(){		
+	$("li.general:not(.category)").fadeIn("fast");
+},function(){
+	$("li.general:not(.category)").slideUp("fast");
+});
+$("li.feed:not(.db-subclass)").toggle(function(){		
+	$("li.feed.db-subclass").fadeIn("fast");
+	$("li.feed.db-subclass").children().fadeIn(100);
+	
+},function(){
+	$("li.feed.db-subclass").slideUp("fast");
+	$("li.feed.db-subclass").children().fadeOut("fast");
+});
+$("li.shows:not(.db-subclass)").toggle(function(){		
+	$("li.shows.db-subclass").fadeIn("fast");
+	$("li.shows.db-subclass").children().fadeIn(100);
+	
+},function(){
+	$("li.shows.db-subclass").slideUp("fast");
+	$("li.shows.db-subclass").children().fadeOut("fast");
+});
+	$('#q').liveUpdate('#users-list').focus();
+	$(".download-link").tooltip({ effect: 'slide', slideOffset: -3});
+<% end %>

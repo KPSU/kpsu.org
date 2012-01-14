@@ -1,0 +1,8 @@
+$("#status-box").dialog('close');
+$("#dashboard-content").append("<div id='saved' class='invisible' title='Tweet Successful'><p>Your tweet has been successfully published to the KPSU twitter feed. To view it, please click <a href='http://www.twitter.com/#!/kpsu_pdx/'>here</a> <br/><br/><span class='standard'>*click dismiss to continue using your dashboard.</span></p></div>");
+$("#saved").dialog({
+	modal:true,
+	buttons: { "Dismiss": function() { $(this).dialog("close"); } }
+});
+$("input[type='submit']").attr("disabled", true).val("Saved!");
+$("#dashboard-content").dialog('open')

@@ -1,0 +1,10 @@
+<% content_for :title do %>
+	New Event
+<% end %>
+<div class="generic-post">
+	<form action="/happenings" method="post" class="form" id="new_happening" data-remote="true" accept-charset="utf-8">
+		<%= select_datetime Time.now + 1.week, :order => [:day, :month, :year], :prefix => "Starts"%>
+
+		<p><input type="submit" value="Continue &rarr;"></p>
+	</form>
+</div>

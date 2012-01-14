@@ -1,0 +1,42 @@
+ <div class="directory generic-post">
+ 	<% @users.each do |user| %>
+ 		<div class="directory-user float-left" style="width:600px;min-height:160px;">
+ 			<div class="directory-user-thumbnail float-left" >
+ 				<img src="<%= user.avatar.url(:square_thumb_big) %>" 
+ 					 alt="<%= user.f_name %> <%= user.l_name %>" 
+ 					 title="<%= user.f_name %> <%= user.l_name %>"
+ 					 style="margin-top:5px;margin-left:5px;" />
+ 			</div>
+ 			<div class="directory-user-information float-left" style="margin-left:20px;">
+ 				<ul>
+ 					<li class="directory-user-name twenty-pt blue-text">
+ 						<%= user.f_name %> <%= user.l_name %>
+ 					</li>
+ 					<li class="directory-user-name twelve-pt green-text">
+ 						<%= user.dj_name %>
+ 					</li>
+ 					<li class="directory-user-email white-text">
+ 						<%= user.email %>
+ 					</li>
+ 					<li class="directory-user-phone yellow-text">
+ 						<%= number_to_phone(user.phone, :delimiter => ".") %>
+ 					</li>
+ 				</ul>
+ 			</div>
+	
+ 		</div>
+ 	<% end %>
+ </div>
+<style type="text/css">
+	.directory-user-odd {
+		background-color:#444444;
+	}
+</style>
+ <script type="text/javascript">
+ 	var users = $(".directory-user");
+ 	$.each(users, function(i, user){
+ 		if(i % 2){
+ 			$(user).addClass("directory-user-odd");
+ 		}
+ 	});
+ </script>

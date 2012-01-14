@@ -1,0 +1,52 @@
+		<% @blogs.each do |post| %>
+		<% @blog_color = random_color %>
+		<div class="post" style="background-color:#343434;">
+			<div class="title-wrapper <%= @blog_color %>" style="padding:6px;width:632px;height:30px;">
+				<div class="float-left" style="margin-left:15px;">
+					<div class="float-left" style="padding-left:3px;padding-top:5px;">
+						<%= link_to(post.title, post_path(post), :class => "bebas sixteen-pt black-text" )%>
+					</div>
+				</div>
+				<div class="chunk-five black-text float-right" style="margin-left:140px;text-align:right;"><%= post.content_type.name %></div>
+			</div>
+			<div class="float-left">
+				<div class="post-body dejavu-condensed white-text float-left" style="margin:10px">
+					<div style="margin-bottom:0px;">
+					<%= raw post.body %>
+					</div>
+					<br/>
+					<% if post.images %>
+					<hr/>						
+					<div class="post-photos" style="padding-top:10px;">
+						<% post.images.each do |f|  %>
+							<a href="<%= f.item.url(:thumb) %>" title="<%= f.title %>"><%= image_tag(f.item.url(:thumb), :alt => f.title, :title => f.title ) %></a>
+						<% end %>
+					</div>
+					<% end %>
+				</div>
+			</div>
+		</div>
+			<div class="social-wrapper <%= @blog_color %>" style="width:638px;padding:3px 3px 6px 3px;line-height:12px;height:25px;float:left;margin-bottom:20px;">
+
+			<div class="social-networking" style="float:left;clear:both;text-align:right;width:634px;">
+				<div class="standard red-font m1-regular float-left" style="z-index:3;text-align:left !important;">
+					<% if current_user %>
+					<% if current_user.id == post.user.id || current_user.staff %>
+					<%= link_to 'Edit Post', edit_post_path(post), :class => "black-text" %> <span class="">|</span> <%= link_to 'Delete Post', post, :confirm => "Are you sure?", :method => "delete", :class => "black-text" %>
+					<% end %>
+					<% end %>
+				</div>
+				SHARE&nbsp;&nbsp;
+				<div class="float-right">
+				<!-- REGARDING FACEBOOK %2F stands for / and w -->
+					<iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fkpsu.org<%= url_for(post) %>&amp;layout=button_count&amp;show_faces=true&amp;width=40&amp;action=like&amp;font=segoe+ui&amp;colorscheme=light&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:80px; height:21px;" allowTransparency="true">
+					</iframe>
+
+					<a href="http://twitter.com/share/?url=http://kpsu.org<%= url_for(post) %>" class="twitter-share-button" data-count="horizontal" data-via="KPSU_PDX" data-text="<%= post.title %>: ">
+						Tweet
+					</a>
+					<script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+				</div>
+			</div>
+			</div>
+			<% end %>

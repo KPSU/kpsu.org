@@ -1,0 +1,22 @@
+{"shows":[
+	<% @i = 0 %>
+	<% @archive.each do |archive| %>
+		<% if @i < @archive.size %>
+		<% @i = @i + 1%>
+		
+		{"id":"<%= archive.id %>",
+		 "title":"<%= page.title %>",
+		 "name":"<%= page.name %>",
+		 "body":"<%= escape_javascript(page.body) %>",
+		 "post_type":"<%= page.post_type %>"
+		},
+		<% else %>
+		{"id":"<%= page.id %>",
+		 "title":"<%= page.title %>",
+		 "name":"<%= page.name %>",
+		 "body":"<%= escape_javascript(page.body) %>",
+		 "post_type":"<%= page.post_type %>"
+		}
+		<% end %>
+	<% end %>
+]}

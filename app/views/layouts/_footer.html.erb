@@ -1,0 +1,45 @@
+<style type="text/css" media="screen">
+	#footer a:hover {
+		color:#FFFFFF;
+		font-family:"M1cbold";
+		text-shadow: #FC0400 1px 0px 1px;
+	}
+	#footer ul{
+		position:relative;
+		margin:0px 20px 0px 20px;
+		width:120px;
+	}
+	#footer ul li{
+		padding:20px;
+	}
+</style>
+<div id="footer" class="small bg-red float-left" style="margin-left:5px;width:948px;overflow:hidden;height:168px;padding-top:30px;">
+	<ul class="m1-thin white-font float-left" style="margin:15px 20px 0px 0px;">
+		<li  class="m1-bold">PROGRAMMING<br/></li>
+		<li  class="archives"><a href="http://archive.kpsu.org">ARCHIVES</a><br/></li>
+		<li  class="listen-link"><%= link_to("LISTEN", listen_path )%><br/></li>
+		<li  class="djs"><%= link_to("DJS", djs_path)%><br/></li>
+		<li  class="schedule"><%= link_to("SCHEDULE", schedule_path )%><br/></li>
+	</ul>
+	<ul class="float-left m1-thin white-font" style="margin:15px 20px 0px 0px;">
+		<li  class="m1-bold">INFORMATION<br/></li>
+		<li  class="reviews"><%= link_to("REVIEWS", reviews_path)%><br/></li>
+		<li  class="blogs"><%= link_to("BLOGS", posts_path )%><br/></li>
+		<li  class="events">EVENTS<br/></li>
+		<li  class="about"><%= link_to("ABOUT", about_path )%><br/></li>
+	</ul>
+	<ul class="float-left m1-thin white-font" style="margin:15px 20px 0px 0px;">
+		<li  class="m1-bold">SOCIAL<br/></li>
+		<li  class="twitter"><a href="http://twitter.com/KPSU_PDX">TWITTER</a><br/></li>
+		<li  class="facebook"><a href="http://www.facebook.com/pages/KPSU/131711936862193">FACEBOOK</a><br/></li>
+		<li  class="flickr"><a href="www.flickr.com/photos/kpsu/">FLICKR</a><br/></li>
+		<li  class="youtube">YOUTUBE<br/></li>
+	</ul>
+	<ul class="float-left m1-thin white-font" style="margin:15px 20px 0px 0px;">
+		<li  class="m1-bold">STATION<br/></li>
+		<li  class="twitter"><%= link_to("CONTACT", contact_path)%><br/></li>
+		<li  class="blogs"><%= link_to("DJ HANDBOOK", handbook_pages_path)%><br/></li>
+		<li  class="events">SUPPORT<br/></li>
+		<li  class="about">VOLUNTEER<br/></li>
+	</ul>
+</div>

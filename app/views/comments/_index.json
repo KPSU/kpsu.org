@@ -1,0 +1,15 @@
+{"comments":[
+		<% @s = @comments.size; @i = 0 %>
+		<% @comments.each do |j| %>
+		<% @i += 1 %>
+		{"id":"<%= j.id %>",
+		 "title":"<%= j.title %>",
+		 "body":"<%= j.body %>",
+		 "date":"<%= j.created_at %>",
+		 "owner":"<%= if current_user == j.user then true else false end %>",
+		 "user":{
+			"name":"<%= j.user.f_name %> <%= j.user.l_name %>",
+			"pic":"<%= j.user.avatar.url(:thumb) %>"
+		}}<% unless @i >= @s %>,<% end %>
+		<% end %>
+]}

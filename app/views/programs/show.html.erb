@@ -1,0 +1,310 @@
+<% content_for :title do %><%= @program.title %> with <%= @program.user.dj_name %><% end %>
+<% content_for :meta_description do %>Homepage of <%= @program.title %>, hosted by: <%= @program.user.dj_name %> live every week @ <% if @program.event %> <%= i_to_day(@program.event.day_i) %> <%= @program.event.starts_at.to_s(:meridian_time) %> <%= @program.event.ends_at %> <% end %><% end %>
+<% content_for :meta_keywords do %><%= @program.title %>, <%= @program.user.dj_name %>, <%= @program.user.f_name %> <%= @program.user.l_name %>, KPSU, internet radio show<% end %>
+
+<% content_for :meta_fb_description do %><%= truncate(@program.description, :length => 100) %><% end %>
+<% content_for :meta_fb_title do %><%= @program.title %> by <%= @program.user.dj_name %> on KPSU.org<% end %>
+<% content_for :meta_fb_image do %><%= @program.user.avatar.url(:big_thumb) %><% end %>
+<% content_for :page_headline do %>
+	<span class="bebas sixteen green-text" style='text-align:right;'>PROGRAM</span>
+<% end %>
+<script type="text/javascript" src="/javascripts/ZeroClipboard.js"></script>
+<%= render :partial => "sidebar" %>
+<div class="program-wrapper float-left">
+	<% @program_color = random_color %>
+	<div style="width:644px;margin-left:15px;">		
+		<div class="rounded-heavy float-left clear-both" style="margin-bottom:20px;width:644px;">
+			<div style="margin-bottom: -5px;font-size:2.0em;" class="float-left bebas <%= @program_color + "-text" %>"><%= @program.title %></div>
+			<div style="padding: 10px 0px 0px 10px;width: 634px;" class="<%= @program_color %> float-left large m1-regular clear-both">
+				<span class="bebas twenty-pt black-text">DJ</span>&nbsp;<%= link_to(@program.user.dj_name, user_path(@program.user), :class => "bebas twenty-pt white-text") %>
+			</div>
+			<div class="dejavu-condensed clear-both normal float-left white-text" style="width:624px;padding:15px 10px 15px 10px;background-color:#343434;">
+				<%= raw @program.description %>
+			</div>
+		</div>
+		
+		<div style="width:644px;margin-bottom:20px;" class="rounded-heavy float-left clear-left">
+			<div class="float-left m1-light large-sm clear-both" style="width:634px;height:30px;padding:10px 0 0 10px;">
+				<span id="playlist-tab" class="twenty-pt chunk-five pointer yellow-text">Playlists</span> • <span id="comments-tab" class="twenty-pt chunk-five pointer yellow-text">Comments</span> • <span id="podcasts-tab" title="Download <%= @program.user.dj_name %>'s Podcasts" class="twenty-pt chunk-five pointer yellow-text">Podcasts</span>
+			</div>
+			<div class="playlist-wrapper">	
+		   		<% @playlists.each do |p| %>
+					<% @playlist_color = random_color %>
+		   			<div style="background-color:#343434;margin-bottom:20px;" class="float-left clear-both">
+		   				<div class="dejavu-condensed twenty-pt <%= @playlist_color %>" style="width: 634px;height: 30px;padding: 10px 0 0 10px;"><%= link_to(p.title.upcase, p, :class => "bebas black-text") %></div>
+		   				<% @i = 0 %>
+		   				<table style="width:100%;background-color:#434343;">
+		   					<tr>
+		   						<th class="blue-text" style="text-align:center;height: 30px;vertical-align: middle;width:204px">TRACK TITLE</th>
+		   						<th class="blue-text" style="text-align:center;height: 30px;vertical-align: middle;width:200px">ARTIST</th>
+		   						<th class="blue-text" style="text-align:center;height: 30px;vertical-align: middle;width:200px">ALBUM</th>
+		   					</tr>
+		   					<% p.ptracks.each do |t| %>
+		   		        	<% @i += 1 %>
+		   					<% if @i <= 4 %>
+		   					<tr>
+		   						<td style="width:204px" class="rounded-light"><%= t.title %></td>
+		   						<td style="width:200px" class="rounded-light"><%= link_to(t.artist.name, artist_path(t.artist), :class => "magenta-text") %></td>
+		   						<td style="width:200px" class="rounded-light"><%= t.album.name %></td>
+		   					</tr>
+		   					<% else %>
+		   					<tr class="invisible">
+		   						<td style="width:204px" class="rounded-light"><%= t.title %></td>
+		   						<td style="width:200px" class="rounded-light"><%= link_to(t.artist.name, artist_path(t.artist), :class => "magenta-text") %></td>
+		   						<td style="width:200px" class="rounded-light"><%= t.album.name %></td>
+		   					</tr>
+		   					<% end %>
+		   					
+		   					<% end %>
+		   				</table>
+		   				<div class="view-more chunk-five sixteen-pt <%= @playlist_color %> black-text" style="cursor:pointer;width:629px;height:30px;text-align:right;padding:5px 15px 0px 0px;margin-top:5px;">View Playlist</div>
+		   			</div>
+		   		<% end %>
+				<div style="float:left;width:644px;padding:5px 0 5px 0;text-align:center;background-color:#343434;">
+					<%= will_paginate(@playlists) %>
+				</div>
+			</div>	
+			
+			<% if @program.downloads %>
+				<div class="downloads-wrapper" style="display:none;">	
+					<% @download_color = random_color %>
+					<div style="background-color:#343434;margin-bottom:20px;" class="float-left clear-both">
+						<div class="bebas twenty-pt <%= @download_color %> white-text" style="width: 634px;height: 30px;padding: 10px 0 0 10px;">
+							<%= @program.title %> Podcasts
+						</div>
+						<table style="width:100%;background-color:#434343;text-align:center;">
+							<tr>
+								<th class="blue-text" style="text-align:center;height: 30px;vertical-align: middle;width:204px">DATE</th>
+								<th class="blue-text" style="text-align:center;height: 30px;vertical-align: middle;width:200px">DOWNLOADS</th>
+							</tr>
+							<% @time = (Time.zone.now-12.weeks) #set how far back to look for downloads, current max is 90 days and run from a cronjob on the archive server %>
+							<% @program.downloads.where("created_at > ?", @time).order("created_at DESC").each do |d| %>
+							<tr>
+								<td style="width:204px" class="rounded-light"><%= link_to(Time.at(d.title.to_i).to_s(:simple), download_path(:id => d.id), :class => "#{random_text_color}", :title => "Download #{@program.user.dj_name}'s Podcast for the week of #{Time.at(d.title.to_i).to_s(:simple)}") %></td>
+								<td style="width:204px" class="white-text rounded-light"><%= d.count %></td>
+							</tr>
+							<% end %>
+						</table>
+					</div>
+				</div>
+			<% else %>
+				<% @download_color = random_color %>
+				<div class="download-wrapper">	
+					<div style="background-color:#343434;margin-bottom:20px;" class="float-left clear-both">
+						<div class="dejavu-condensed twenty-pt <%= @download_color %>" style="width: 634px;height: 30px;padding: 10px 0 0 10px;">
+							<%= @program.title %> 
+						</div>
+						<div style="width:100%;background-color:#434343;text-align:center;">
+							<span class="sixteen-pt chunk-five <%= @download_color %>">Awww, bummer. Looks like this DJ doesn't have any downloads</span>
+						</div>
+					</div>
+				</div>
+			<% end %>
+			
+			
+			<div class="comments-wrapper float-left invisible" style="background-color:#343434;width:644px">
+				<div class="new-comment dejavu-condensed sixteen-pt <%= @program_color %> black-text float-right pointer invisible" style="display: block;width: 624px;margin-bottom: 20px;padding: 10px;">New Comment</div>
+				<div class="comment new float-left invisible">
+					<% if current_user %>
+						<div class="float-left" style="margin-right:45px;">
+							<img src="<%= current_user.avatar.url(:thumb) %>">
+						</div>
+						<div class="float-right" style="float:right;width:410px;">
+							<form action="/comments/create" class="form" method="get" accept-charset="utf-8">
+								<input type="hidden" name="type" value="program" id="comment_type">
+								<input type="hidden" name="comment_parent_id" value="<%= @program.id %>" id="comment_parent">
+								<div class="float-left blue-text chunk-five" style="clear:both;">Title</div>
+								<input type="text" name="title" value="" class="dejavu-condensed float-right clear-both" style="width:408px;" id="title">
+								<div class="float-left blue-text chunk-five" style="clear:both;">Comment</div>
+								<textarea name="comment[body]" rows="8" cols="74" class="dejavu-condensed float-left clear-both rounded-light" style="margin:3px 0px 10px 0px;"></textarea>
+								<%= recaptcha_tags :ajax => true, :display => {:theme => "red", :tabindex => 0} %>
+								<p class="submit pointer rounded-light green-text dejavu-condensed" style="">Create Comment</p>
+						    </form>
+						</div>
+					<% else %>
+						<div style="text-align:center !important;">
+							<div class="m1-bold" style="line-height:12px;">You will need to login before continuing. Listeners can register or login with one of the following services:</div>
+							<div style="width:100%;">
+								<div class="float-left red-font" style="margin:10px 10px 10px 200px;text-align:center;">
+									<div style="margin:auto;">
+										<a title="Click the icon to register for, or login to, KPSU using Twitter" href="/auth/twitter">Twitter</a>
+									</div>
+									<a title="Click the icon to register for, or login to, KPSU using Twitter" href="/auth/twitter">
+										<img src="/images/twitter_32.png">
+									</a>
+								</div>
+								<div class="float-left red-font" style="margin:10px;text-align:center;">
+									<div>
+										<a title="Click the icon to register for, or login to, KPSU using Facebook" href="/auth/facebook">Facebook</a>
+									</div>
+									<a title="Click the icon to register for, or login to, KPSU using Facebook" href="/auth/facebook"><img src="/images/facebook_32.png"></a>
+								</div>
+							</div>
+						</div>
+					<% end %>
+				</div>
+			</div>
+	</div>
+	
+	</div>
+</div>
+<div id="archive-links" style="display:none;">
+	<div style="background-color:#E8E8E8;border:#E8E8E8 3px solid;height:auto;float:left;padding:10px;" class="rounded-heavy div-table">
+		<div style="width:424px;background-color:#E8E8E8;height:30px;text-align:left;padding:5px 0px 0px 5px;">
+			<div class="m1-bold wide-col float-left">Date</div>
+			<div class="m1-bold narrow-col float-left">Downloads</div>
+		</div>
+		<% @downloads.each do |d| %>
+		<% if Time.zone.now - Time.at(d.title.to_i) <= 7.weeks %>
+			<div class="micro-row">
+				<a href="<%= url_for(download_path(:id => d.id)) %>" title="Click to Download <%= d.title %>"><div class="download float-left">&nbsp;</div></a>
+				<div style="padding-top:6px;padding-left:3px;" class="float-left medium wide-col"><%= link_to(Time.zone.at(d.title.to_i).strftime("%B %e\, %Y"), download_path(:id => d.id), :class => "red-font", :title => "Original Air Time: #{Time.at(d.title.to_i)}") %></div>
+				<div style="padding-top:6px;" class="float-left medium narrower-col"><%= d.count %></div>
+			</div>
+		<% end %>
+		<% end %>
+	</div>
+</div>
+<style type="text/css" media="screen">
+	#program-copy-button.hover { font-size:9px;font-family:"M1clight"; }
+</style>
+<% content_for :page_js do %>
+
+	$(".view-more").click(function(){
+		var par = $(this).parent();
+		var txt = $(this).text();
+		if (txt == "Hide Playlist"){
+			$('.toggled').fadeToggle(100).removeClass('toggled');
+			$(this).html("View Playlist");
+		}else{
+			$('.toggled').fadeToggle('slow').removeClass('toggled');
+			$(par).find("table tr.invisible").fadeToggle('slow', function(){
+				
+			}).addClass('toggled');
+			$(this).html("Hide Playlist");
+		}
+	});
+	$("#playlist-tab").addClass("selected");
+	$("#program-archive").click(function(){
+		$("#archive-links").dialog({
+			title: "<%= @program.title %> Podcast Links",
+			width: 520,
+			height: 400
+		});
+	});
+	<% if current_user %>
+	$(".submit").click(function(){
+		var dataString = $(":input").serializeArray();
+		$.ajax({
+			url: "/comments",
+			data: dataString,
+			dataType: 'json',
+		    type: "POST",
+		    beforeSend: function (xhr) {
+		    },
+		    success: function (xhr) {
+				$(".warning").remove();
+				$(".comment.new").after("<div class=\"comment white-text\" style=\"margin:5px 10px 5px 10px;width:540px;height:auto;clear:both;float:left;\"><img src=\"<%= current_user.avatar.url(:thumb)%>\"> <div class=\"float-right\"><div class=\"title float-left m1-bold\" style=\"clear:both;\">"+xhr['comment']['title']+"</div><div class=\"time float-right small\"></div><div class=\"body float-left m1-regular rounded-heavy\" style=\"margin-top: 5px;clear: both;width: 410px;min-height: 100px;background-color: #454545;padding: 5px;\">"+xhr['comment']['body']+"</div><div class=\"comment-options float-right pointer clear-both standard red-font\">Edit | Delete</div></div><div class=\"float-left medium\" style=\"word-wrap:break-word;width:80px;margin-left:1px;\">"+xhr['comment']['user']['f_name']+" "+xhr['comment']['user']['l_name']+"</div></div>");
+					
+			$(":input").val("");
+			Recaptcha.reload();
+			},
+		    complete: function (xhr) {
+
+		    },
+		    error: function (xhr, status, error) {
+				alert("Please try again!")
+				Recaptcha.reload();
+		    }
+		});
+	});
+	<% end %>
+	$(".new-comment").click(function(){
+		$(".comment.new").show();
+	});
+	$("#playlist-tab").click(function(){
+		$(".comments-wrapper").hide();
+		$(".new-comment").hide();
+		$(".downloads-wrapper").hide();
+		$("#comments-tab").removeClass("selected");
+		$("#podcasts-tab").removeClass("selected");
+		$(this).addClass("selected");
+		$(".playlist-wrapper").show();
+		$(".comment.content").remove();
+	})
+	$("#comments-tab").click(function(){
+		$(".playlist-wrapper").hide();
+		$(".downloads-wrapper").hide();
+		$(".new-comment").show();
+		$("#playlist-tab").removeClass("selected");
+		$("#podcasts-tab").removeClass("selected");
+		$("#comments-tab").addClass("selected");
+		$(".comments-wrapper").show();
+		$.ajax({
+			url: "/comments/program/<%= @program.id %>",
+			dataType: 'json',
+		    type: "GET",
+		    beforeSend: function (xhr) {
+		    },
+		    success: function (xhr) {
+
+			},
+		    complete: function (xhr) {
+				json = eval("(" + xhr['response'] + ")")					
+				$.each(json['comments'], function(i, data){
+					if(data['owner'] == "true"){
+						var del = " <span class=\"delete-comment\" data-id=\""+data['id']+"\"> Delete<span>";
+						var edit = " <span class=\"edit-comment\" data-id=\""+data['id']+"\">Edit <span>";
+						var c_options = edit + "|" + del
+					}else{
+						var c_options = ""
+					}
+					$(".comments-wrapper").append("<div class=\"comment content white-text\" data-comment-id=\""+data['id']+"\" style=\"margin:5px 10px 5px 10px;width:540px;height:auto;clear:both;float:left;\"><img src=\"" + data['user']['pic'] +"\"><div class=\"float-right\"><div class=\"title float-left m1-bold\" style=\"clear:both;\">"+data['title']+"</div><div class=\"time float-right small\"></div><div class=\"body float-left m1-regular rounded-heavy\" style=\"margin-top: 5px;clear: both;width: 410px;min-height: 100px;background-color: #454545;padding: 5px\">"+data['body']+"</div><div class=\"comment-options float-right pointer clear-both standard red-font\">"+c_options+"</div></div><div class=\"float-left\" style=\"word-wrap:break-word;width:80px;margin-left:1px;\">"+data['user']['name']+"</div></div>");
+					});
+				
+		    },
+		    error: function (xhr, status, error) {
+				$(".warning").remove();
+				$(".comments-wrapper").append("<div class=\"warning red-font\" style=\"margin:auto;\">No Comments!</div>");
+		    }
+		});
+	});
+	
+	$("#podcasts-tab").click(function(){
+		$(".playlist-wrapper").hide();
+		$(".comments-wrapper").hide();
+		$(".new-comment").hide();
+		$("#comments-tab").removeClass("selected");
+		$("#playlist-tab").removeClass("selected");
+		$(this).addClass("selected");
+		$(".downloads-wrapper").show();
+		$(".comment.content").remove();
+	});
+	
+	$(".delete-comment").live("click", function(){
+		var cid = $(this).attr("data-id");
+		var murl = "/comments/"+cid;
+		if ( confirm("Are you sure you want to delete this Post?") ){
+		$.ajax({
+			url: murl,
+			type: "POST",
+			dataType: 'script',
+			data: { '_method': 'delete' },
+			success: function(xhr){
+				$(".comment.content[data-comment-id=\""+cid+"\"]").remove();
+			}
+		});
+		return false;}
+	});
+	
+	
+	
+<% end %>
+
+<script type="text/javascript" charset="utf-8">
+	ZeroClipboard.setMoviePath( '/files/ZeroClipboard10.swf' );
+	var clip = new ZeroClipboard.Client();
+	clip.setText( "http://kpsu.org/shows/<%= @program.title.gsub("\s", "-").downcase %>" );
+	clip.setHandCursor( true );
+	clip.glue( 'program-copy-button', 'program-copy' );
+</script>

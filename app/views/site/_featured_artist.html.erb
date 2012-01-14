@@ -1,0 +1,29 @@
+<div class="purple rounded-heavy-top titlebar">
+	<div id="" class="chunk-five sixteen">
+		Featured Artists
+	</div>
+</div>
+<div id="featured-artists-mgmt" class="generic-post">
+	<div class="chunk-five blue-text">Current</div>
+	<% @featured_artists.each do |f| %>
+		<div class="float-left" style="margin:5px 10px 5px 10px;">
+		<div class="magenta-text float-left dejavu-condensed"><%= f.artist.name %></div>
+		<div class="remove red-text float-left clear-both">Remove</div>
+		</div>
+	<% end %>
+	<% if @featured_artists.size <= 3 %>
+		<div class="blue-text chunk-five">
+			Search for Artist
+		</div>
+		<form action="/site/featured_artist/search" class="form float-left" method="get" accept-charset="utf-8">
+			<input type="text" name="" value="" id="some_name">
+
+			<p><input type="submit" value="Continue &rarr;"></p>
+		</form>
+	<% end %>
+</div>
+
+<script type="text/javascript" charset="utf-8">
+
+	
+</script>

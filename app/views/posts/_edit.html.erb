@@ -1,0 +1,102 @@
+<style type="text/css">
+
+#post-wrapper {
+   	width:570px;
+}
+
+#post-wrapper .post {
+	margin-left:10px;
+	width:560px;
+	height:400px;
+}
+
+</style>
+<div class="blue rounded-heavy-top titlebar">
+	<div id="" class="chunk-five sixteen">New Post</div>
+</div>
+<div class="generic-post">
+		<%= form_for(@post, :html => { :multipart => true, :class => "form" }, :remote => true ) do |f| %>
+		  <% if @post.errors.any? %>
+		    <div id="error_explanation">
+		      <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+		      <ul>
+		      <% @post.errors.full_messages.each do |msg| %>
+		        <li><%= msg %></li>
+		      <% end %>
+		      </ul>
+		    </div>
+		  <% end %>
+			<div style="margin:0px 0px 0px 0px;width:180px;" class="float-right">
+			  <div class="form float-right">
+				<label class="chunk-five blue-text" for="Attachment Title">Attachment Title</label><br/>
+			  	<input style="padding:4px" class="m1-regular rounded-heavy" type="text" name="attachment[asset[title]]" value="" id="some_name"><br/>
+				<label class="chunk-five blue-text" for="Attachment Title">Attachment Description</label><br/>
+			  	<textarea class="m1-regular rounded-heavy" type="text" name="attachment[asset[description]]" value="" id="some_name" style="padding:4px;width:176px;height:158px;"></textarea>  
+			  </div>
+			  <div class="form float-right">
+			  	<%= f.file_field :asset, :class => "m1-regular rounded-heavy form", :style => "padding:4px;width:176px;" %>
+			  </div>
+			 <div class="form float-right" style="width:176px;">
+				<div style="margin:10px 0px 20px 0px;">
+				<label class="chunk-five blue-text" for="Attachment Style">In Page Formatting</label><br/>
+				<div class="float-left dejavu-condensed ten-pt orange-text" style="margin:5px 8px 0px 0px;"><input type="radio" name="post[attachment_style]" value="none">None</div>
+				<div class="float-left dejavu-condensed ten-pt orange-text clear-both" style="margin:5px 8px 0px 0px;"><input type="radio" name="post[attachment_style]" value="1"><img src="/images/alignleft.png" align="right">&nbsp;&nbsp;Left </div>
+				<div class="float-left dejavu-condensed ten-pt orange-text" style="margin:5px 8px 0px 0px;"><input type="radio" name="post[attachment_style]" value="2"><img src="/images/alignright.png" align="right">&nbsp;&nbsp;Right</div>	
+				</div>
+				<br/><br/>
+				<span class="eight-pt dejavu-condensed red-text">*Only the first image will be inserted inline</span>
+			 </div>	
+			  <div class="actions float-right" style="margin-top:40px;margin-right:23px;margin-left:auto;">
+			    <%= f.submit "Save", :class => "rounded-heavy m1-bold large" %>
+			  </div>
+			</div>
+
+		  	<div class="post-content float-left">
+		  		<div class="rounded-heavy" style="width:376px;padding:10px 10px 20px 10px;height:310px;">
+		  			<div style="margin:0px" class="form float-left clear-left">
+		  				<div class="form">
+		  				  <%= f.label :title, :class => "chunk-five blue-text" %><br />
+		  				  <%= f.text_field :title, :class => "rounded-heavy", :style => "padding:4px;"   %>
+		  				</div>
+						<div class="form margin-top-sm">
+						  <%= f.label "Content Type", :class => "chunk-five blue-text" %>
+						  <%= select_tag "content_type", options_from_collection_for_select(@content_type, :id, :name), :class => "m1-regular rounded-heavy", :style => "padding:4px;" %>
+						</div>
+						<div class="form">
+		  				  <%= f.label :body, :class => "chunk-five blue-text" %>
+						  <br />
+		  				  <%= f.text_area :body, :class => "m1-regular rounded-heavy", :style => "padding:4px;width:356px;height:194px;"   %>
+		  				</div>
+						<div class="formatting float-right dejavu-condensed yellow-text pointer" style="padding:3px;">Formatting Options</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="post-assets float-left clear-both">
+				<% if @post.assets %>
+				<div class="chunk-five blue-text clear-both">Currently Attached Files</div>
+					<% @post.assets.each do |a| %>
+					<div class="float-left margin-ten">
+						<% if a.thumbnailable? %>
+						<span class="white-text"><%= a.title %></span><br/>
+						<%= link_to(image_tag(a.item.url(:thumb), :alt => a.title, :title => a.title ), a.item.url, :title => a.title, :class => "lightbox" ) %>
+						<div class="m1-light white-text"><%= a.description %></div>
+						<% end %>
+						<div class="m1-bold white-text"><%= link_to 'Delete Attachment', a, :confirm => "Are you sure?", :method => "delete", :class => "white-text" %></div>
+					</div>
+					<% end %>
+				<% end %>
+			</div>
+		<br/>
+		    <%= f.hidden_field :user_id, :class => "m1-regular rounded-heavy", :style => "padding:4px;"   %>
+		<% end %>
+		<%= render :partial => 'layouts/formatting_options' %>
+</div>
+		<script type="text/javascript" charset="utf-8">
+			$('.post-assets a.lightbox').lightBox({fixedNavigation:true});
+			$('.formatting').click(function(){
+				$('.formatting-content').dialog({title: "Formatting Options", width: '600', position: 'center', buttons: { "close": function() { $(this).dialog("close"); } }});
+			});
+		</script>
