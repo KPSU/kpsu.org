@@ -1,0 +1,14 @@
+{"events":[
+		<% @s = @e.size; @i = 0 %>
+		<% @e.each do |j| %>
+		<% @i += 1 %>
+		{"id":"<%= j.id %>",
+		 "name":"<%= j.name %>",
+		 "starts_at":"<%= Time.parse("#{j.starts_at.to_s}").time_of_day! %>",
+		 "ends_at":"<%= escape_javascript(j.ends_at.to_json.split(/\"/)[1]) %>",
+		 "day_i":"<%= j.day_i %>",
+		 "duration":"<%= j.duration %>",
+		 "url" : "<%= url_for(program_path(j.program))%>"
+		}<% unless @i >= @s %>,<% end %>
+		<% end %>
+]}

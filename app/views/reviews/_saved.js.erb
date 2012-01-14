@@ -1,0 +1,7 @@
+$("#dashboard-content").append("<div id='saved' class='invisible' title='Review Saved'><p>Your review has been successfully published. To view it, please click <a href='/reviews/<%= @review.id %>'>here</a> <br/><br/><span class='standard'>*click dismiss to continue using your dashboard.</span></p></div>");
+$("#saved").dialog({
+	modal:true,
+	buttons: { "Dismiss": function() { $(this).dialog("close"); } }
+});
+$("input[type='submit']").attr("disabled", true).val("Saved!");
+$("#dashboard-content").dialog('open')

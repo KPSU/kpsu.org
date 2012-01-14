@@ -1,0 +1,25 @@
+<%= form_for(@user_session, :html => {:class => "form"}) do |f| %>
+  <% if @user_session.errors.any? %>
+    <div id="error_explanation" class="float-left clear-both">
+      <div class="float-left ten-pt red-text bebas"><%= pluralize(@user_session.errors.count, "error") %> prohibited this session from being created:</div>
+
+      <ul class="vertical float-left">
+      <% @user_session.errors.full_messages.each do |msg| %>
+        <li class="vertical orange-text dejavu-condensed ten-pt"><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= f.label :email, :class => "bebas yellow-text" %><br />
+    <%= f.text_field :email %>
+  </div>
+  <div>
+    <%= f.label :password, :class => "bebas yellow-text" %><br />
+    <%= f.password_field :password, :style => "height:21px;" %>
+  </div>
+  <div class="actions" style="margin-top:10px;">
+    <%= f.submit "Login" %>
+  </div>
+<% end %>

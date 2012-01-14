@@ -1,0 +1,37 @@
+<% content_for :title do %>
+	<%= @title %>
+<% end %>
+<%= render :partial => "layouts/sidebar" %>
+<div class="blue float-left rounded-heavy-top titlebar">
+	<div id="" class="chunk-five sixteen">
+		<%= @title %>
+	</div>
+</div>
+<div class="generic-post contents">
+<% # The div below, has a class of "container" that's important for the saved.js.erb partial inside: views/contents/_saved.js.erb %>
+<div class="dejavu-condensed container twelve-pt listen" style="padding-left:10px;clear:both;">
+	<div style="padding:0px 0px 0px 10px;">
+		<%= raw @content.body %>
+	</div>
+	<div class="dejavu-condensed edit-content" style="clear:left;">
+		<% if current_user %>
+		<% if current_user.staff %>
+				<%= link_to("Edit #{@title}", edit_content_path(@content), :remote => true, :class => "edit-content orange-text")%>
+		<% end %>
+	<% end %>
+	</div>
+</div>
+</div>
+<% if current_user && current_user.staff %>
+<script type="text/javascript" charset="utf-8">
+	$("a.edit-content").live("ajax:loading", function(){
+		$(".generic-post div").html(_ajax_loader_black);
+	});
+	$("a.edit-content").live("ajax:success", function(event, data, status, xhr){
+		$(".generic-post div").html(data);
+	});
+	$("#new_content_form").live("ajax:loading", function(){
+		$(".generic-post div").html(_ajax_saving_black);
+	});
+</script>
+<% end %>

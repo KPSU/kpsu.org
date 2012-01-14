@@ -1,0 +1,6 @@
+<div class="submenu float-left white-font padding-sm standard"><%= link_to("UNDERWRITING", underwriting_path) %></a> | </div>
+<div class="submenu float-left white-font padding-sm standard">VOLUNTEERS | </div>
+<div class="submenu float-left white-font padding-sm standard"><%= link_to("DONATE", donate_path )%></a> | </div>
+<div class="submenu float-left white-font padding-sm standard"><%= link_to("CONTACT", contact_path )%></a> |</div>
+<div class="submenu float-left white-font padding-sm standard"><% if current_user %><%= link_to("LOGOUT", logout_path) %><% else %><%= link_to("LOGIN", login_path) %><% end %></a></div>
+

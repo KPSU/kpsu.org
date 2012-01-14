@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  title: MyString
+  description: MyString
+  user_id: 1
+  post_id: 1
+  playlist_id: 1
+  program_id: 1
+
+two:
+  title: MyString
+  description: MyString
+  user_id: 1
+  post_id: 1
+  playlist_id: 1
+  program_id: 1

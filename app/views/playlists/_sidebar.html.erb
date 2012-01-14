@@ -1,0 +1,33 @@
+<style type="text/css" media="screen">
+	.generic-sidebar {
+		float:left;
+		width:264px;
+		min-height:200px;
+		text-align:right;
+		margin-bottom:50px;
+	}
+	.sidebar-happenings {
+		float:left;
+		text-align:right;
+		clear:both;
+	}
+	.generic-sidebar .events {
+		background-image:url('/images/v3/sidebar-sprite.png');
+		height:75px;
+		background-position:0 0;
+		width:100%;
+		margin-top:10px;
+	}
+</style>
+<div class="generic-sidebar">
+	<div class="chunk-five blue-text normal float-right" style="text-align:right;"><span>View Program Page</span><br/> <%= link_to(@playlist.program.title, program_path(@playlist.program), :class => "magenta-text dejavu-condensed", :title => "Program") %></div>
+	<div class="m1-regular normal float-right" style="text-align:right;clear:right;margin-bottom:20px;"><span class="chunk-five blue-text">View DJ Profile</span><br/>  <% if @playlist.program.user %><%= link_to(@playlist.program.user.f_name, user_path(@playlist.program.user), :class => "magenta-text dejavu-sans", :title => "DJ") %><% end %><% if current_user %>
+		<% if current_user == @playlist.program.user || current_user.staff %>
+			<br/><br/><span class="chunk-five blue-text">Playlist Options</span><br/>
+			<%= raw("<a class='dejavu-condensed yellow-text' href='/dashboard/#/playlists/#{@playlist.id}/edit'>Edit</a>") %>
+			<br/>
+		    <%= link_to 'Delete', @playlist, :confirm => "Are you sure?", :method => "delete", :class => "dejavu-condensed yellow-text" %>
+		<% end %>
+	<% end %>
+	</div>
+</div>

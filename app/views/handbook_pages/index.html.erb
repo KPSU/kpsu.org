@@ -1,0 +1,7 @@
+<div style="padding-bottom:10px;" class="huge m1-light">DJ Handbook</div>
+<ul class="vertical">
+<% @handbook_pages.each do |handbook_page| %>
+	<li class="vertical large m1-bold red-font"><%= link_to(handbook_page.title, handbook_page_path(handbook_page), :class => "red-font") %></li>
+	<li class="vertical medium m1-regular" style="padding:5px;"><%= truncate("#{handbook_page.body.gsub(/<\/?.*?>/, "")}", :length => 30, :omission => "...") %></li>
+<% end %>
+</ul>

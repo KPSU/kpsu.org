@@ -1,0 +1,192 @@
+<% content_for :title do %>
+	<%= @playlist.title %> on <%= @playlist.program.title %>
+<% end %>
+<% content_for :meta_description do %><%= @playlist.title %> (playlist) for <%= @playlist.program.title %> hosted by: <%= @playlist.user.dj_name rescue nil %><% end %>
+<% content_for :meta_keywords do %><% if @playlist.user %><%= @playlist.user.dj_name rescue nil %>, <%= @playlist.user.f_name rescue nil %> <%= @playlist.user.l_name rescue nil %>, <% @i = @playlist.user.programs.size && @ii = 0; @playlist.user.programs.each do |p| %><%= p.title %><%= @i += 1; if @i <= @ii then ", " end %><% end %><% end %>, playlist, <%= if @tracks != nil && @tracks.size > 0 && @tracks.first.track.artist != nil then @tracks.first.track.artist.name end %>, <%= if  @tracks != nil && @tracks.size > 0 && @tracks.last.track.artist != nil then @tracks.last.track.artist.name end %>, KPSU, dj, college radio, free format radio
+<% end %>
+<% content_for :page_headline do %>
+	<span class="bebas sixteen green-text" style='text-align:right;width:100%;'>PLAYLIST</span>
+<% end %>
+<script type="text/javascript" src="/javascripts/ZeroClipboard.js"></script>
+<%= render :partial => "sidebar" %>
+<div class="playlist-wrapper float-left">
+	<% @playlist_color = random_color %>
+	<div style="width:644px;margin-left:15px;">		
+		<div class="rounded-heavy float-left clear-both" style="margin-bottom:20px;width:644px;">
+			<div style="margin-bottom: -5px;font-size:2.0em;" class="float-left bebas <%= @playlist_color + "-text" %>"><%= @playlist.title %></div>
+			<div style="padding: 10px 0px 0px 10px;width: 634px;" class="<%= @playlist_color %> float-left large m1-regular clear-both">
+				<span class="bebas twenty-pt black-text">SHOW</span>&nbsp;<%= link_to(@playlist.program.title, @playlist.program, :class => "bebas twenty-pt white-text") %>
+			</div>
+			<div class="dejavu-condensed clear-both normal float-left white-text" style="width:624px;padding:15px 10px 15px 10px;background-color:#343434;">
+				<%= raw @playlist.description %>
+			</div>
+		</div>
+	
+		<div style="width:644px;margin-bottom:20px;" class="rounded-heavy float-left clear-left">
+		
+		<div class="float-left m1-light large-sm clear-both" style="width:634px;height:30px;padding:10px 0 0 10px;">
+			<span id="tracks-tab" class="twenty-pt chunk-five pointer yellow-text">Tracks</span> • <span id="comments-tab" class="twenty-pt chunk-five pointer yellow-text">Comments</span>
+			
+		</div>		
+		<div style="background-color:#343434;margin-bottom:20px;width: 100%;" class="tracks-wrapper float-left clear-both">
+			<% @i = 0 %>
+			<table style="width:100%;background-color:#434343;">
+				<tr>
+					<th class="blue-text" style="text-align:center;height: 30px;vertical-align: middle;width:204px">TRACK TITLE</th>
+					<th class="blue-text" style="text-align:center;height: 30px;vertical-align: middle;width:200px">ARTIST</th>
+					<th class="blue-text" style="text-align:center;height: 30px;vertical-align: middle;width:200px">ALBUM</th>
+				</tr>
+				<% @playlist.ptracks.each do |t| %>
+				<tr>
+					<td style="width:204px" class="rounded-light"><%= t.title %></td>
+					<td style="width:200px"style="width:204px" class="rounded-light"><%= link_to(t.artist.name, artist_path(t.artist), :class => "magenta-text") %></td>
+					<td style="width:200px"style="width:204px" class="rounded-light"><%= t.album.name %></td>
+				</tr>
+				<% end %>
+			</table>
+		</div>
+		
+		<div class="comments-wrapper float-left invisible" style="background-color:#343434;width:644px">
+		
+			<div class="new-comment dejavu-condensed sixteen-pt <%= @playlist_color %> black-text float-right pointer invisible" style="display: block;width: 624px;margin-bottom: 20px;padding: 10px;">New Comment</div>
+			<div class="comment new float-left invisible" style="margin: 10px 0 0 20px;">
+				<% if current_user %>
+					<div class="float-left" style="margin-right:45px;">
+						<img src="<%= current_user.avatar.url(:thumb) %>">
+					</div>
+					<div class="float-right" style="float:right;width:410px;">
+						<form action="/comments/create" class="form" method="get" accept-charset="utf-8">
+							<input type="hidden" name="type" value="playlist" id="comment_type">
+							<input type="hidden" name="comment_parent_id" value="<%= @playlist.id %>" id="comment_parent">
+							<div class="float-left blue-text chunk-five" style="clear:both;">Title</div>
+							<input type="text" name="title" value="" class="dejavu-condensed float-right clear-both" style="width:408px;" id="title">
+							<div class="float-left blue-text chunk-five" style="clear:both;">Comment</div>
+							<textarea name="comment[body]" rows="8" cols="74" class="dejavu-condensed float-left clear-both rounded-light" style="margin:3px 0px 10px 0px;"></textarea>
+							<%= recaptcha_tags :ajax => true, :display => {:theme => "red", :tabindex => 0} %>
+							<p class="submit pointer rounded-light green-text dejavu-condensed" style="">Create Comment</p>
+					    </form>
+					</div>
+				<% else %>
+					<div style="text-align:center !important;">
+						<div class="m1-bold" style="line-height:12px;">You will need to login before continuing. Listeners can register or login with one of the following services:</div>
+						<div style="width:100%;">
+							<div class="float-left red-font" style="margin:10px 10px 10px 200px;text-align:center;">
+								<div style="margin:auto;">
+									<a title="Click the icon to register for, or login to, KPSU using Twitter" href="/auth/twitter">Twitter</a>
+								</div>
+								<a title="Click the icon to register for, or login to, KPSU using Twitter" href="/auth/twitter">
+									<img src="/images/twitter_32.png">
+								</a>
+							</div>
+							<div class="float-left red-font" style="margin:10px;text-align:center;">
+								<div>
+									<a title="Click the icon to register for, or login to, KPSU using Facebook" href="/auth/facebook">Facebook</a>
+								</div>
+								<a title="Click the icon to register for, or login to, KPSU using Facebook" href="/auth/facebook"><img src="/images/facebook_32.png"></a>
+							</div>
+						</div>
+					</div>
+				<% end %>
+			</div>
+		</div>
+		</div>
+	</div>
+</div>
+
+
+<% content_for :page_js do %>
+
+	$("#tracks-tab").addClass("selected");
+	<% if current_user %>
+	$(".submit").click(function(){
+		var dataString = $(":input").serializeArray();
+		$.ajax({
+			url: "/comments",
+			data: dataString,
+			dataType: 'json',
+		    type: "POST",
+		    beforeSend: function (xhr) {
+		    },
+		    success: function (xhr) {
+			
+				$(".comment.new").after("<div class=\"comment white-text\" style=\"margin:5px 10px 5px 10px;width:540px;height:auto;clear:both;float:left;\"><img src=\"<%= current_user.avatar.url(:thumb)%>\"> <div class=\"float-right\"><div class=\"title float-left m1-bold\" style=\"clear:both;\">"+xhr['comment']['title']+"</div><div class=\"time float-right small\"></div><div class=\"body float-left m1-regular rounded-heavy\" style=\"margin-top: 5px;clear: both;width: 410px;min-height: 100px;background-color: #454545;padding: 5px;\">"+xhr['comment']['body']+"</div><div class=\"comment-options float-right pointer clear-both standard red-font\">Edit | Delete</div></div><div class=\"float-left medium\" style=\"word-wrap:break-word;width:80px;margin-left:1px;\">"+xhr['comment']['user']['f_name']+" "+xhr['comment']['user']['l_name']+"</div></div>");
+					
+			$(":input").val("");
+			Recaptcha.reload();
+			},
+		    complete: function (xhr) {
+
+		    },
+		    error: function (xhr, status, error) {
+				alert("Please try again!")
+				Recaptcha.reload();
+		    }
+		});
+	});
+	<% end %>
+	$(".new-comment").click(function(){
+		$(".comment.new").show();
+	});
+	$("#tracks-tab").click(function(){
+		$(".comments-wrapper").hide();
+		$(".new-comment").hide();
+		$("#tracks-tab").removeClass("selected");
+		$(this).addClass("selected");
+		$(".tracks-wrapper").show();
+		$(".comment.content").remove();
+	})
+	$("#comments-tab").click(function(){
+		$(".tracks-wrapper").hide();
+		$(".new-comment").show();
+		$("#tracks-tab").removeClass("selected");
+		$("#comments-tab").addClass("selected");
+		$(".comments-wrapper").show();
+		$.ajax({
+			url: "/comments/playlist/<%= @playlist.id %>",
+			dataType: 'json',
+		    type: "GET",
+		    beforeSend: function (xhr) {
+				var _loader = _ajax_loader_black();
+				$(".comment.new").before(_loader);
+		    },
+		    success: function (xhr) {
+				$("#loader").hide();
+			},
+		    complete: function (xhr) {
+			$(".warning").remove();
+				json = eval("(" + xhr['response'] + ")")					
+					$.each(json['comments'], function(i, data){
+						if(data['owner'] == "true"){
+							var del = " <span class=\"delete-comment\" data-id=\""+data['id']+"\"> Delete<span>";
+							var edit = " <span class=\"edit-comment\" data-id=\""+data['id']+"\">Edit <span>";
+							var c_options = edit + "|" + del
+						}else{
+							var c_options = ""
+						}
+						$(".comments-wrapper").append("<div class=\"comment content white-text\" data-comment-id=\""+data['id']+"\" style=\"margin:5px 10px 5px 10px;width:540px;height:auto;clear:both;float:left;\"><img src=\"" + data['user']['pic'] +"\"><div class=\"float-right\"><div class=\"title float-left m1-bold\" style=\"clear:both;\">"+data['title']+"</div><div class=\"time float-right small\"></div><div class=\"body float-left m1-regular rounded-heavy\" style=\"margin-top: 5px;clear: both;width: 410px;min-height: 100px;background-color: #454545;padding: 5px\">"+data['body']+"</div><div class=\"comment-options float-right pointer clear-both standard red-font\">"+c_options+"</div></div><div class=\"float-left\" style=\"word-wrap:break-word;width:80px;margin-left:1px;\">"+data['user']['name']+"</div></div>");
+						});
+				
+		    },
+		    error: function (xhr, status, error) {
+				$(".warning").remove();
+				$(".comments-wrapper").append("<div class=\"warning red-font\" style=\"margin:auto;\">No Comments!</div>");
+		    }
+		});
+	});
+	$(".delete-comment").live("click", function(){
+		var cid = $(this).attr("data-id");
+		var murl = "/comments/"+cid;
+		if ( confirm("Are you sure you want to delete this Post?") ){
+		$.ajax({
+			url: murl,
+			type: "POST",
+			dataType: 'script',
+			data: { '_method': 'delete' },
+			success: function(xhr){
+				$(".comment.content[data-comment-id=\""+cid+"\"]").remove();
+			}
+		});
+		return false;}
+	});
+	
+<% end %>

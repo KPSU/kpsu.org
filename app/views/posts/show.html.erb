@@ -1,0 +1,359 @@
+<% content_for :title do %>
+	<%= @post.title %>
+<% end %>
+<% content_for :meta_description do %><%= @post.title %> by <%= @post.user.dj_name %>, <%= truncate(@post.body, :length => 100)%> on KPSU.org
+<% end %>
+<% content_for :meta_keywords do %><%= @post.user.dj_name %>, KPSU, <%= @post.title %>, Portland's College Radio, Internet Radio<% end %>
+<% content_for :meta_fb_description do %><%= truncate(@post.body, :length => 100) %><% end %>
+<% content_for :meta_fb_title do %><%= @post.title %> by <%= @post.user.dj_name %> on KPSU.org<% end %>
+<% content_for :meta_fb_image do %><%= @post.user.avatar.url(:big_thumb) %><% end %>
+
+<style type="text/css">	
+
+#post-wrapper {
+   	margin-left:-10px;
+   	width:570px;
+}
+
+#post-wrapper .post {
+	width:510px;
+	height:400px;
+	margin-bottom:50px;
+
+}
+
+#post-wrapper .options {
+	margin-left:500px;
+}
+	
+
+#post-wrapper .post .background-color {
+	margin-top:41px;
+	margin-left:35px;
+	width:510px;
+	height:400px;
+	background-color: #f4f4f4;
+}
+
+#post-wrapper .post .background-color .title {
+	margin-top:-41px;
+	margin-left:-35px;
+	width:572px;
+	height:87px;
+	background-image: url('/images/title-bg.png');
+}
+
+#post-wrapper .post .background-color .title .title-text {
+	margin-top:28px;
+	margin-left:55px;
+	color:#FFF;
+}
+
+#post-wrapper .post .background-color .body {
+	margin-top:-20px;
+	width:460px;
+	height:300px;
+	padding:20px;
+}
+
+#post-wrapper .post .background-color .body .user {
+	width:500px;
+	height:60px;
+	margin-bottom:30px;
+}
+
+#post-wrapper .post .background-color .body .user .thumb {
+	width:60px;
+	height:60px;
+	margin-right:5px;
+}
+
+#post-wrapper .post .background-color .body .user .details {
+	padding-top:25px;
+	width:300px;
+	height:60px;
+}
+
+#post-wrapper .post .background-color .body .body-text {
+	
+}
+
+#post-wrapper .post .comments-wrapper {
+	float: left;
+	width: 636px;
+	background: #343434;
+	padding-top: 10px;
+	padding-left: 25px;
+}
+
+#post-wrapper .post .comment.new {
+	display: block;
+	background-color: #232323;
+	padding: 30px;
+}
+
+#post-wrapper #post-comment {
+	border-radius: 5px;
+	background: #222;
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-bottom: 3px;
+	margin-bottom: 8px;
+}
+
+#saving-comment {
+    float: left;
+    margin-top: 30px;
+    margin-left: 26px;
+    margin-right: 26px;
+}
+
+.edit-post {
+	float: right;
+	margin-right: 17px;
+}
+	
+</style>
+<%= render :partial => 'layouts/sidebar' %>
+<p id="notice" class="float-right"><%= notice %></p>
+
+<div id="post-wrapper" class="float-left" style="padding:50px 0px 0px 50px;">	
+	<div class="post">
+		<div class="header">
+			<% if @post.content_type_id == 1 %>
+				<div class="green-text post-type">BLOG</div>
+				<div class="green chunk-five yellow-text float-left title-bar"><%= link_to @post.title, @post, :class => "yellow-text" %>
+				<% if current_user %>
+				<% if (current_user.id == @post.user.id) || current_user.staff %>
+					<a title="Edit Post" href='/dashboard/#/posts/<%= @post.id -%>/edit'><span class="white-text edit-post">Edit Post<span></a>
+				<% end %>
+				<% end %>
+				</div>
+			<% elsif @post.content_type_id == 3 %>
+				<div class="yellow-text post-type">ANNOUNCEMENT</div>
+				<div class="yellow chunk-five magenta-text float-left title-bar"><%= link_to @post.title, @post, :class => "magenta-text" %>
+				<% if current_user %>
+				<% if (current_user.id == @post.user.id) || current_user.staff %>
+					<%= link_to "Edit Post", dashboard_path(:anchor => "posts/#{@post.id}/edit"), :class => "white-text edit-post" %>
+				<% end %>
+				<% end %>
+				</div>
+			<% elsif @post.content_type_id == 2 %>
+				<div class="blue-text post-type">NEWS</div>
+				<div class="blue chunk-five white-text float-left title-bar"><%= link_to @post.title, @post, :class => "white-text" %>
+				<% if current_user %> 
+				<% if (current_user.id == @post.user.id) || current_user.staff %>
+					<a title="Edit Post" href='/dashboard/posts/<%= @post.id -%>/edit'><span class="white-text edit-post">Edit Post<span></a>
+				<% end %>
+				<% end %>
+				</div>
+			<% end %>
+		</div>
+
+		<div class="body">
+			<div class="author deja-condensed float-right">BY <span class="blue-text"><%= link_to @post.user.dj_name.upcase, @post.user, :class => "blue-text" %></span></div>
+			<div class="content dejavu-book float-lef">
+				<%= raw @post.body.bbcode_to_html({}, false) %>
+			</div>
+		</div>
+
+	<% if @post.content_type_id == 1 %>
+		<div class="footer green">
+	<% elsif @post.content_type_id == 3 %>
+		<div class="footer yellow">
+	<% elsif @post.content_type_id == 2 %>
+		<div class="footer blue">		
+	<% end %>	
+			<div id="view-comments" class="float-left dejavu-condensed white-text">View Comments</div>
+			<div id="share" class="share float-right">
+				<div class="text dejavu-condensed float-left magenta-text">SHARE</div>
+				<div class="float-right icons">
+				<!-- REGARDING FACEBOOK %2F stands for / and w -->
+					<iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fkpsu.org<%= url_for(@post) %>&amp;	layout=button_countamp;show_faces=true&amp;width=40&amp;action=like&amp;font=segoe+ui&amp;colorscheme=light&amp;height=21" 	scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:80px; height:21px;" allowTransparency="true">
+					</iframe>
+					<a href="http://twitter.com/share/?url=http://kpsu.org<%= url_for(@post) %>" class="twitter-share-button" data-count="horizontal" data-via="KPSU_PDX" data-text="<%= @post.title %>: ">
+						Tweet
+					</a>
+					<script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+				</div>
+			</div>
+		</div>
+		<div class="comments-wrapper invisible">
+			<div id="post-comment" class="float-left blue-text">New Comment</div>
+			<div class="comment new invisible twelve-pt float-left">
+					<% if current_user %>
+						<div class="float-left" style="width: 135px;">
+							<img src="<%= current_user.avatar.url(:thumb) %>">
+							<div id="saving-comment"></div>
+						</div>
+						<div class="float-right" style="width: 410px;margin-bottom:20px;">
+							<form action="/comments/create" class="form" method="get" accept-charset="utf-8">
+								<input type="hidden" name="type" value="post" id="comment_type">
+								<input type="hidden" name="comment_parent_id" value="<%= @post.id %>" id="comment_parent">
+								<div class="float-left white-text" style="clear:both;">Title</div>
+								<input type="text" name="title" value="" class="m1-regular float-right clear-both rounded-light" style="width:410px;" id="title">
+								<div class="float-left white-text" style="clear:both;">Comment</div>
+								<textarea name="comment[body]" rows="8" cols="74" class="m1-regular float-left clear-both rounded-light" style="margin:3px 0px 10px 0px;"></textarea>
+								<%= recaptcha_tags :ajax => true, :display => {:theme => "red", :tabindex => 0} %>
+								<div style="margin-top:10px;" class="submit float-left clear-both pointer twenty-pt dejavu-condensed green-text">Create Comment</div>
+						    </form>
+						</div>
+					<% else %>
+						<div style="text-align:center !important;">
+							<div class="dejavu-condensed white-text" style="line-height:12px;">You will need to login before continuing. Listeners can register or login with one of the following services:</div>
+							<div style="width:100%;">
+								<div class="float-left red-font" style="margin:10px 10px 10px 200px;text-align:center;">
+									<div style="margin:auto;">
+										<a title="Click the icon to register for, or login to, KPSU using Twitter" class="dejavu-condensed white-text" href="/auth/twitter">Twitter</a>
+									</div>
+									<a title="Click the icon to register for, or login to, KPSU using Twitter" href="/auth/twitter">
+										<img src="/images/twitter_32.png">
+									</a>
+								</div>
+								<div class="float-left red-font" style="margin:10px;text-align:center;">
+									<div>
+										<a title="Click the icon to register for, or login to, KPSU using Facebook" class="dejavu-condensed white-text" href="/auth/facebook">Facebook</a>
+									</div>
+									<a title="Click the icon to register for, or login to, KPSU using Facebook" href="/auth/facebook"><img src="/images/facebook_32.png"></a>
+								</div>
+							</div>
+						</div>
+					<% end %>
+				</div>
+		</div>
+	</div>
+</div>
+
+<% content_for :page_js do %>
+	$('.post-photos a').lightBox({fixedNavigation:true});
+	<% if @post.audio_files %>
+		<% @post.audio_files.each do |a| %>
+    		$("#jquery_jplayer_<%= a.id %>").jPlayer({
+    		    ready: function() {
+    		        $(this).jPlayer("setMedia", {
+    		            mp3: "<%= a.url %>"
+    		        }).jPlayer("play");
+    		    },
+    		    ended: function(event) {
+    		    },
+    		    supplied: "mp3"
+    		}).bind($.jPlayer.event.play,
+    		function() {
+    		    $(this).jPlayer("pauseOthers");
+    		});
+    		$("#jplayer_inspector_<%= a.id %>").jPlayerInspector({
+    		    jPlayer: $("#jquery_jplayer_<%= a.id %>")
+    		});
+			<% end %>
+	<% end %>
+	<% if current_user %>
+	$(".submit").click(function(){
+		var dataString = $(":input").serializeArray();
+		$.ajax({
+			url: "/comments",
+			data: dataString,
+			dataType: 'json',
+		    type: "POST",
+		    beforeSend: function (xhr) {
+		    	$("#saving-comment").html(_ajax_saving_black);
+		    },
+		    success: function (xhr) {
+			
+				$.each(xhr, function(i, data){
+					
+						$(".comments-wrapper").append("<div id=\"comment-"+xhr['comment']['id']+"\" class=\"comment\" style=\"margin:5px 0px 5px 0px;width:636px;height:auto;clear:both;float:left;\"><img src=\"<%= current_user.avatar.url(:thumb)%>\"> <div style=\"margin-right:50px;\" class=\"float-right\"><div class=\"title float-left white-text\" style=\"clear:both;\">"+xhr['comment']['title']+"</div><div class=\"time float-right small\"></div><div class=\"body float-left m1-regular rounded-heavy\" style=\"margin-top:5px;clear:both;width:431px;min-height:100px;background-color:#232323;padding:5px;\">"+xhr['comment']['body']+"</div><div class=\"comment-options float-right pointer clear-both standard red-font\">Edit | Delete</div></div><div class=\"float-left white-text\" style=\"word-wrap:break-word;width:80px;margin-left:1px;\">"+xhr['comment']['user']['f_name']+" "+xhr['comment']['user']['l_name']+"</div>");
+						$(".comments-wrapper").prepend("<div class=\"invisible\"><a class=\"anchorLink\" href=\"#comment-"+xhr['comment']['id']+"\">scroll to</a></div>");
+						$("a.anchorLink").anchorAnimate()
+						$(".anchorLink").click();
+					});
+					
+			$(":input").val("");
+			Recaptcha.reload();
+
+			},
+		    complete: function (xhr) {
+		    	$("#saving-comment").html("");
+		    },
+		    error: function (xhr, status, error) {
+				alert("Please try again!")
+				Recaptcha.reload();
+		    }
+		});
+	});
+	<% end %>
+	$("#post-comment").click(function(){
+		var text = $(this).text();
+		if(text == "New Comment"){
+			$(this).text("Hide New Comment")
+			$(".comment.new").toggleClass("invisible").show();
+		}else if(text == "Hide New Comment"){
+			$(this).text("New Comment")
+			$(".comment.new").slideUp().toggleClass("invisible");
+		}
+
+	});
+	
+	$("#view-comments").click(function(){
+		var txt = $(this).text();
+		$(".comments-wrapper").toggleClass('invisible');
+		$(".comment.new").hide();
+		if (txt == "View Comments"){
+			$(this).html("Hide Comments");
+
+			$.ajax({
+				url: "/comments/post/<%= @post.id %>",
+				dataType: 'json',
+			    type: "GET",
+			    beforeSend: function (xhr) {
+			    	$(".comments-wrapper").append(_ajax_loader_black);
+			    },
+			    success: function (xhr) {
+
+				},
+			    complete: function (xhr) {
+					json = eval("(" + xhr['response'] + ")")					
+						$.each(json['comments'], function(i, data){
+							$("#loader").remove();
+							if(data['owner'] == "true"){
+								var del = " <span class=\"delete-comment\" data-id=\""+data['id']+"\"> Delete<span>";
+								var edit = " <span class=\"edit-comment\" data-id=\""+data['id']+"\">Edit <span>";
+								var c_options = edit + "|" + del
+							}else{
+								var c_options = "";
+							}
+							$(".comments-wrapper").append("<div class=\"comment content\" data-comment-id=\""+data['id']+"\" style=\"margin:5px 0px 5px 0px;width:636px;height:auto;clear:both;float:left;\"><img src=\"" + data['user']['pic'] +"\"><div style=\"margin-right:50px;\" class=\"float-right\"><div class=\"title float-left white-text\" style=\"clear:both;\">"+data['title']+"</div><div class=\"time float-right small\"></div><div class=\"body float-left m1-regular rounded-heavy\" style=\"margin-top:5px;clear:both;width:431px;min-height:100px;background-color:#232323;padding:5px;\">"+data['body']+"</div><div class=\"comment-options float-right pointer clear-both standard red-font\">"+c_options+"</div></div><div class=\"float-left white-text\" style=\"word-wrap:break-word;width:80px;margin-left:1px;\">"+data['user']['name']+"</div></div>");
+							});
+			},
+				error: function(){
+					console.log("shit")
+				 $("#loader").remove();		
+			}});
+			
+		}else{
+			$(this).html("View Comments");
+			$(".comment.content").remove();
+		}
+	});
+	
+	$(".delete-comment").live("click", function(){
+		var cid = $(this).attr("data-id");
+		var murl = "/comments/"+cid;
+		if ( confirm("Are you sure you want to delete this comment?") ){
+		$.ajax({
+			url: murl,
+			type: "POST",
+			dataType: 'script',
+			data: { '_method': 'delete' },
+			success: function(xhr){
+				$(".comment.content[data-comment-id=\""+cid+"\"]").remove();
+			}
+		});
+		return false;}
+	});
+	if(window.location.hash == "#comments"){
+		$("#view-comments").click();
+	}
+<% end %>
+
+
+

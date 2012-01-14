@@ -1,0 +1,89 @@
+<h1>Editing playlist</h1>
+
+<style type="text/css" media="screen">
+	ul.ui-autocomplete {
+		border-radius:2px !important;
+		-moz-border-radius:2px !important;
+		-webkit-border-radius:2px !important;
+	}
+	a.ui-state-hover {
+		border-radius:0px;
+		-moz-border-radius:0px;
+		-webkit-border-radius:0px;
+	}
+	#ui-active-menuitem {
+		background-image:none;
+	}
+	a.ui-corner-all {
+		font-size:0.75em;
+		font-family:"M1cregular" !important;
+	}
+</style>
+
+<div id="new-playslist">
+<% if @playlist.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@playlist.errors.count, "error") %> prohibited this playlist from being saved:</h2>
+
+      <ul>
+      <% @playlist.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+<% end %>
+<%= form_tag(playlist_path, :method => "put", :class => "form", :name => "playlist") %>
+
+	<p class="m1-regular">Show/Program</p>
+	<input type="text" data-autocomplete="/playlists/autocomplete_program_title" name="playlist[program][title]" value="<%= @playlist.program.title %>" id="playlist-title" style="width:600px;">
+	<p class="m1-regular">Playlist Title</p>
+	<input type="text" name="title" value="<%= @playlist.title %>" id="playlist-title" style="width:600px;">
+	<p class="m1-regular">Description</p>
+	<textarea name="description" class="form" rows="8" cols="83"><%= @playlist.description %></textarea>
+	<table class="playlist-tracks" class="m1-regular !important">
+	<tr class="m1-regular !important">
+		<th style="width:20px;">#</th>
+		<th>Artist</th>
+		<th>Album</th>
+		<th>Track</th>
+		<th>Label</th>
+	</tr>
+	<% @i = 0 %>
+	<% @pi.each do |pi| %>
+	<% @i += 1 %>
+	<% if pi.track %>
+	<tr>
+	<fieldset id="tracks">
+		<input type="hidden" name="catalog[item[<%= @i %>[playlist_item[id]]]]" value="<%= pi.id %>" id="some_name">
+		<input type="hidden" name="catalog[item[<%= @i %>[id]]]" value="<%= pi.track.id %>" id="catalog[item[<%= @i %>[id]]">
+		<td>
+			<input type="text" class="position" name="catalog[item[<%= @i %>[position]]]" value="<%= pi.position %>" style="width:20px;" id="position">
+		</td>
+		<td>
+			<input type="text" data-autocomplete="/playlists/autocomplete_artist_name" name="catalog[item[<%= @i %>[artist]]]" value="<%= if pi.track.artist then pi.track.artist.name end %>">
+		</td>                                  
+		<td>                                   
+			<input type="text" data-autocomplete="/playlists/autocomplete_album_name" name="catalog[item[<%= @i %>[album]]]" value="<%= pi.track.album.name %>">
+		</td>                                  
+		<td>                                   
+			<input type="text" data-autocomplete="/playlists/autocomplete_track_title" name="catalog[item[<%= @i %>[track]]]" value="<%= pi.track.title %>">
+		</td>                                  
+		<td>                                   
+			<input type="text" data-autocomplete="/playlists/autocomplete_label_name" name="catalog[item[<%= @i %>[label]]]" value="<%= show_label(pi.track.album.id) %>">
+		</td>
+	</fieldset>
+	</tr>
+	<% end %>
+	<% end %>
+	</table>
+	<p style="margin-bottom:10px;"><span class="m1-regular add-track" style="cursor:pointer;">Add Track</span></p>
+	<p><input type="submit" value="Save &rarr;"></p>
+</form>
+<% content_for :page_js do %>
+	$('.add-track').click(function(){
+		var n = $('.position').length		
+		var num = n + 1		
+		$('table.playlist-tracks').append("<tr><td><input type=\"text\" class=\"position\" name=\"catalog[item["+num+"][position]]\" value=\""+num+"\" style=\"width:20px;\" id=\"\"></td><td><input type=\"text\" data-autocomplete=\"/playlists/autocomplete_artist_name\" name=\"catalog[item]["+num+"][artist]\" value=\"\"></td><td><input type=\"text\" data-autocomplete=\"/playlists/autocomplete_album_name\" name=\"catalog[item]["+num+"][album]\" value=\"\"></td><td><input type=\"text\" data-autocomplete=\"/playlists/autocomplete_track_title\" name=\"catalog[item]["+num+"][track]\" value=\"\"></td><td><input type=\"text\" data-autocomplete=\"/playlists/autocomplete_label_name\" name=\"catalog[item]["+num+"][label]\" value=\"\"></td></tr>");	
+	});
+<% end %>
+</div>

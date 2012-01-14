@@ -1,0 +1,36 @@
+<% @results.each do |u| %>
+<div class="lookup-result float-left pointer" data-id="<%= u.id %>" data-strike-details="<%= Strike.where(:user_id => u.id).to_json(:include => {:issued_by => { :only => [:f_name, :l_name ]}}) %>" data-total-strikes="<%= u.strikes.all.size %>" style="width:140px;height:140px;padding:5px;margin:10px 5px 0px 0px;text-align:center;">
+<div class="thumb"><%= image_tag u.avatar.url(:thumb) %></div>
+<div class="dj-full-name dejavu-condensed blue-text"><%= u.f_name %> <%= u.l_name %></div>
+</div>
+<% end %>
+
+<script type="text/javascript" charset="utf-8">
+	$(".lookup-result").live("mouseenter", function(){
+		$(this).css('background-color', '#232323');
+	});
+	$(".lookup-result").live("mouseleave", function(){
+		$(this).css('background-color', 'transparent');
+	});
+	$(".lookup-result").click(function(){
+		var uId = $(this).attr("data-id");
+		$("input#issue_to").val(uId);
+		$('.lookup-result').not($(this)).hide();
+		var tmp = $(this).attr("data-strike-details");
+		var data = $.parseJSON(tmp);
+		if (data.length > 0){
+			$("#strike-details").removeClass("invisible");
+		}
+		$("#strike-details").append("<div style='width:120px;float:left;text-align:right;' class='bebas blue-text'>Total Strikes</div><div class='strike-total white-text dejavu-condensed' style='float:left;margin-left:15px;clear:right;'>"+data.length+"</div>")
+		if (data.length > 0){
+			$.each(data, function(i, strike){
+				var date = strike['strike']['created_at'].split("T")[0];
+				var issuer = strike['strike']['issued_by']['f_name']+" "+strike['strike']['issued_by']['l_name'];
+				var description = strike['strike']['description'];
+				$("#strike-details").append("<div style='margin-bottom:10px;clear:both;float:left;'><div style='width:120px;float:left;text-align:right;' class='bebas green-text'>Date</div><div class='strike-date white-text dejavu-condensed' style='float:left;margin-left:15px;clear:right;'>"+date+"</div><div style='width:120px;float:left;text-align:right;clear:left;' class='bebas magenta-text'>Issued By</div><div class='strike-issuer white-text dejavu-condensed' style='float:left;margin-left:15px;'>"+issuer+"</div><div style='width:120px;float:left;text-align:right;clear:left;' class='bebas red-text'>Description</div><div class='strike-description white-text dejavu-condensed' style='float:left;margin-left:15px;'>"+description+"</div></div>");
+			});
+		}else{
+			$("#strike-details").removeClass("invisible");
+		}
+	});
+</script>

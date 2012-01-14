@@ -1,0 +1,12 @@
+<% content_for :title do %>
+ Editing <%= if @user.dj_name then @user.dj_name end %>
+<% end %>
+
+<div class="m1-thin american" style="padding-bottom:10px;">Edit Profile </div>
+<% if notice %>
+<div class="m1-regular error rounded-light" style="width:400px;padding:10px;margin:10px;">
+<%= raw notice %>
+</div>
+<% end %>
+
+<%= render 'form' %>

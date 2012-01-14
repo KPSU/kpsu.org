@@ -1,0 +1,347 @@
+<% content_for :title do %>
+	Dashboard
+<% end %>
+<style type="text/css" media="screen">
+	ul,li {}
+	.drop-shadow {
+	    box-shadow: 0 0 5px rgba(0,255,36, 2);
+	    -webkit-box-shadow: 0 0 5px rgba(0,255,36, 2); 
+	    -moz-box-shadow: 0 0 5px rgba(0,255,36, 2); 
+	}
+	input.drop-shadow {
+		border: 1px solid #CCCCCC !important;
+	}
+	.dashboard-controls {
+		width:199px;
+		margin-left:36px;
+	    outline:none;
+		border-radius:15px !important;
+		-webkit-border-radius:15px;
+		-moz-border-radius:15px;
+		
+	    transition: all 0.25s ease-in-out;
+	    -webkit-transition: all 0.25s ease-in-out;
+	    -moz-transition: all 0.25s ease-in-out;
+	}
+	.dashboard-controls:hover {
+	    box-shadow: 0 0 5px rgba(0,255,36, 2);
+	    -webkit-box-shadow: 0 0 5px rgba(0,255,36, 2); 
+	    -moz-box-shadow: 0 0 5px rgba(0,255,36, 2); 
+	}
+	.dashboard-controls ul {
+		background:#333;
+		border: 10px solid #333;
+		border-radius: 15px;
+		-webkit-border-radius:15px;
+		-moz-border-radius:15px;
+	}
+
+	.dashboard-controls li {
+		padding:10px;
+		width:160px;
+		color:#FFF;
+		font-family:"ChunkFiveRegular"; 
+		background-color: #272727;
+		transition: all 0.25s ease-in-out;
+	    -webkit-transition: all 0.25s ease-in-out;
+	    -moz-transition: all 0.25s ease-in-out;
+	}
+	.dashboard-controls li:last-child {
+		border:none;
+	}
+	.dashboard-controls li:hover {
+		background-color:#3fb2ff;
+	}
+	.dashboard-controls li:first-child, .control_panel {
+		background-color:#00ff24;
+		width:160px;
+		padding:10px;
+		color:#FFFFFF;
+		font-family:"ChunkFiveRegular";
+
+	}
+	.db-subclass {
+		background-color:#343434 !important;
+		font-size:.75em;
+	}
+	.db-subclass a:link,.db-subclass a:active,.db-subclass a:visited {
+		color:#F7FF20 !important;
+		font-family:"DejaVuSansCondensed";
+	}
+	#dashboard-options li span {
+		transition: all 0.25s ease-in-out;
+	    -webkit-transition: all 0.25s ease-in-out;
+	    -moz-transition: all 0.25s ease-in-out;
+	}
+	#dashboard-options li span:hover {
+		color:#FFFFFF;
+		cursor:pointer;
+		text-shadow: 0 0 5px rgba(255, 255, 255, 2);
+	    -webkit-text-shadow: 0 0 5px rgba(255, 255, 255, 2); 
+	    -moz-text-shadow: 0 0 5px rgba(255, 255, 255, 2);
+	}
+	.db-subclass:hover {
+		background-color:#393939 !important;
+	}
+	textarea#status-box-msg {
+		float:left;
+		font-size: .875em;
+		margin-left: 10px;
+		width: 301px;
+		}
+	.user-notice {
+		background-color: #343434;
+		padding: 10px;
+		position: absolute;
+		width: 200px;
+		word-break: break-word;
+		z-index: 200;
+		left: 170px;
+		top: 144px;
+		color: #F7F7F7;
+		font-size: .75em;
+		border: 1px solid #232323;
+	}
+</style>
+<div id="dashboard">
+	<% content_for :page_headline do %>
+	<span class="blue-text">
+		Dashboard
+	</span>
+	<% end %>
+	<% if notice %>
+	<div class="user-notice dejavu-condensed normal float-right rounded-heavy margin-med"><div class="float-left clear-both bebas yellow-text">NOTICE</div><div class="dejavu-condensed float-left clear-both"><%= raw notice %></div></div>
+	<% end %>	
+	
+	<div class="dejavu-condensed float-left clear-left" style="margin-top:25px;margin-left:10px;margin-bottom:50px;">
+		<div class="dashboard-controls">
+			<ul>
+				<li class="vertical rounded-heavy-top control_panel">Control Panel</li>
+				<li class="vertical pointer blue feed">Feed</li>
+				<li class="invisible pointer feed all db-subclass"><%= link_to("All", feed_path, :remote => true, :rel => ":address/#{url_for(feed_path)}")%></li>
+				<li class="invisible pointer feed announcements db-subclass"><%= link_to("Announcements", feed_path(:announcement => true), :remote => true, :rel => ":address/#{url_for(feed_path(:announcement => true))}")%></li>
+				<li class="invisible pointer feed comments db-subclass"><%= link_to("Comments", feed_path(:comments => true), :remote => true, :rel => ":address/#{url_for(feed_path(:comments => true))}")%></li>
+				<li class="vertical pointer blue station">Station</li>
+				<li class="invisible pointer station directory db-subclass"><%= link_to("Directory", station_directory_path, :remote => true, :rel => ":address/#{url_for(station_directory_path)}")%></li>
+				<li class="invisible pointer station handbook db-subclass"><%= link_to("DJ Handbook", handbook_pages_path, :remote => true, :rel => ":address/#{url_for(handbook_pages_path)}")%></li>
+				<li class="invisible pointer station db-subclass"><%= link_to("Browse Catalog", catalogs_path)%></li>
+				<li class="invisible pointer station db-subclass"><%= link_to("Write Review", new_review_path, :remote => true, :rel => ":address/#{url_for(new_review_path)}")%></li>
+				<li class="invisible pointer station db-subclass"><%= link_to("Volunteer Hours", vh_path, :remote => true, :rel => ":address/#{url_for(vh_path)}" )%></li>
+				<% if current_user.staff %>
+				<li class="invisible pointer station db-subclass"><%= link_to("New Catalog Item", new_catalog_path, :remote => true, :rel => ":address/#{url_for(new_catalog_path)}" )%></li>
+				<% end %>
+				<li class="vertical pointer blue dj">DJ</li>
+				<li class="invisible pointer dj new-blog db-subclass"><%= link_to("Create a New Blog", new_post_path, :remote => true, :rel => ":address/#{url_for(new_post_path)}" ) %></li>
+				<li class="invisible pointer dj db-subclass"><%= link_to("My Posts", users_posts_path(current_user)) %></li>
+				<li class="invisible pointer dj db-subclass"><%= link_to("Downloads Manager", user_downloads_path(current_user), :remote => true, :rel => ":address/#{url_for(user_downloads_path(current_user))}") %></li>
+				<li class="invisible pointer dj db-subclass"><%= link_to("Playlist Manager", playlists_path, :remote => true, :rel => ":address/#{url_for(playlists_path)}" ) %></li>
+				<li class="invisible pointer dj edit-profile db-subclass"><%= link_to("Edit Profile", edit_user_path(current_user), :remote => true, :rel => ":address/#{url_for(edit_user_path(current_user))}" ) %></li>
+				<li class="vertical pointer blue shows">Shows</li>
+				<% current_user.programs.each do |p| %>
+				<li class="invisible pointer shows db-subclass"><%= link_to p.title, edit_program_path(p), :remote => true, :rel => ":address/#{url_for(edit_program_path(p))}" %></li>
+				<% end %>
+				<li class="vertical pointer blue stats">Stats</li>
+				<li class="invisible pointer stats db-subclass"><%= link_to "Stats", stats_path, :remote => true, :rel => ":address/#{url_for(stats_path)}" %></li>
+				<% if current_user.staff %>
+					<% current_user.roles.each do |role| %> 
+						<li class="vertical pointer blue <%= role.title.gsub(/\s/, "-").downcase %>" ><%= role.title.capitalize %></li>
+						<% role.abilities.each do |a| %>
+							<li class="invisible pointer <%= role.title.gsub(/\s/, "-").downcase %> db-subclass" ><%= link_to(a.title, "/#{a.url}", :remote => a.ajax, :rel => a.hashtag_address )%></li>
+						<% end %>
+					<% end %>
+				<% end %>
+			</ul>
+		</div>
+	</div>	
+
+	<div id="dashboard-content" class="float-right" style="width:700px;margin-bottom:50px;">
+	</div>
+
+
+
+</div>
+
+<% content_for :page_js do %>
+	function addressURL(param){
+		if (param == "/users/feed"){
+			$("#dashboard-options-wrapper").show();
+		}else{
+			$("#dashboard-options-wrapper").hide();
+		}
+		$("a[href='"+param+"']").click();
+	}
+	$.address.state('/dashboard/#/');
+	$.address.internalChange(function(event){
+		var paramPrep = event.value.toString();
+		if (paramPrep.match(/dashboard/)){
+			var param = paramPrep.split("/dashboard/#")[1]
+		}else{
+			var param = paramPrep
+		}
+		
+		if (param == "/users/feed"){
+			$("#dashboard-options-wrapper").show();
+			$("#dashboard-options-wrapper").children().show();
+			
+		}else if (param.split("?")[1] == "announcement=true"){
+		 	$("#dashboard-options-wrapper").show();
+		 	$("#dashboard-options-wrapper").children().show();
+		 }else if (param.split("?")[1] == "comments=true"){
+		  	$("#dashboard-options-wrapper").show();
+		  	$("#dashboard-options-wrapper").children().show();
+		 }else{
+			$("#dashboard-options-wrapper").hide();
+			$("#dashboard-options-wrapper").children().hide();
+		}
+	});
+	$.address.init(function(event){
+		var paramPrep = event.value.toString();
+		if (paramPrep.match(/dashboard/)){
+			var param = paramPrep.split("/dashboard/#")[1]
+		}else{
+			var param = paramPrep
+		}
+		var patUsers = "users"
+		var patPrograms = "programs"
+		var patHandbook = "handbook_pages"
+		var patEdit = "edit"
+		
+		
+		if (param == "/users/feed"){
+			$("#dashboard-options-wrapper").show();
+			$("#dashboard-options-wrapper").children().show();
+			
+		}else if (param.split("?")[1] == "announcement=true"){
+		 	$("#dashboard-options-wrapper").show();
+		 	$("#dashboard-options-wrapper").children().show();
+		 }else if (param.split("?")[1] == "comments=true"){
+		  	$("#dashboard-options-wrapper").show();
+		  	$("#dashboard-options-wrapper").children().show();
+		 }else{
+			$("#dashboard-options-wrapper").hide();
+			$("#dashboard-options-wrapper").children().hide();
+		}
+		
+		if(param.match(patUsers) && param.match(patEdit)){
+			$(".edit-profile>a").click();
+		}else if(param.match(patHandbook) && param.match(/\d$/)){
+			$("#dashboard-content").append("<a href='" + param + "' class='invisible handbook db-content' data-remote='true' rel=':address/"+ param +"'>DJ Handbook</a>");
+			$("a[href='"+param+"']").click();
+		}else if(param == "/handbook_pages"){
+			$(".handbook>a").click();
+		}else if(param.match(patPrograms) && param.match(patEdit)){
+			addressURL(param)
+		}else if(param == "/station/directory"){
+			addressURL(param)
+		}else if(param == "/catalogs/new"){
+			addressURL(param)
+		}else if(param == "/reviews/new"){
+		 	addressURL(param)
+		}else if(param == "/users/volunteer_hours"){
+			addressURL(param)
+		}else if(param == "/volunteer_hours"){
+		 	addressURL(param)
+		}else if(param == "/posts/new"){
+		 	addressURL(param)
+		}else if(param == "/playlists"){
+		  	addressURL(param)
+		}else if(param == "/playlists/new"){
+		   	addressURL(param)
+		}else if(param == "/users/feed?announcement=true"){
+		   	addressURL(param)
+		}else if(param == "/users/feed?comments=true"){
+		  	addressURL(param)
+		}else if(param.match(/posts\/\d+\/edit/)){
+			$("#dashboard-content").append("<a href='" + param + "' class='invisible station edit-review db-content' data-remote='true' rel=':address/"+ param +"'>Edit Post</a>");
+			$("a[href='"+param+"']").click();
+		}else if(param.match(/reviews\/\d+\/edit/)){
+			$("#dashboard-content").append("<a href='" + param + "' class='invisible station edit-review db-content' data-remote='true' rel=':address/"+ param +"'>Edit Review</a>");
+			$("a[href='"+param+"']").click();
+		}else if(param.match(/playlists\/\d+\/edit/)){
+				$("#dashboard-content").append("<a href='" + param + "' class='invisible station edit-review db-content' data-remote='true' rel=':address/"+ param +"'>Edit Playlist</a>");
+				$("a[href='"+param+"']").click();
+		}else{
+		 	addressURL("/users/feed");
+		}
+		
+	});
+	var loading = "<div style='margin:200px 0 0 0;text-align:center;'><span class='magenta-text bebas sixteen-pt'>Loading</span><br/><img src='/images/ajax-loader.gif'></div>"
+
+	$("li.dj:not(.db-subclass)").toggle(function(){		
+		$("li.dj.db-subclass").fadeIn("fast").removeClass("invisible");
+		$("li.dj.db-subclass").children().fadeIn(100);
+	},function(){
+		$("li.dj.db-subclass").slideUp("fast");
+		$("li.dj.db-subclass").children().fadeOut("fast");
+	});
+
+	$("li.stats:not(.db-subclass)").toggle(function(){		
+		$("li.stats.db-subclass").fadeIn("fast").removeClass("invisible");
+		$("li.stats.db-subclass").children().fadeIn(100);
+	},function(){
+		$("li.stats.db-subclass").slideUp("fast");
+		$("li.stats.db-subclass").children().fadeOut("fast");
+	});
+
+	$("li.station:not(.db-subclass)").toggle(function(){		
+		$("li.station.db-subclass").fadeIn("fast");
+		$("li.station.db-subclass").children().fadeIn(100);
+		
+	},function(){
+		$("li.station.db-subclass").slideUp("fast");
+		$("li.station.db-subclass").children().fadeOut("fast");
+	});
+
+	$("li.feed:not(.db-subclass)").toggle(function(){		
+		$("li.feed.db-subclass").fadeIn("fast");
+		$("li.feed.db-subclass").children().fadeIn(100);
+
+	},function(){
+		$("li.feed.db-subclass").slideUp("fast");
+		$("li.feed.db-subclass").children().fadeOut("fast");
+	});
+
+	$("li.shows:not(.db-subclass)").toggle(function(){		
+		$("li.shows.db-subclass").fadeIn("fast");
+		$("li.shows.db-subclass").children().fadeIn(100);
+		
+	},function(){
+		$("li.shows.db-subclass").slideUp("fast");
+		$("li.shows.db-subclass").children().fadeOut("fast");
+	});
+
+
+	<% if current_user.staff %>
+	<% current_user.roles.each do |role| %> 
+	$("li.<%= role.title.gsub(/\s/, "-").downcase %>:not(.db-subclass)").toggle(function(){		
+		$("li.<%= role.title.gsub(/\s/, "-").downcase %>.db-subclass").fadeIn("fast");
+		$("li.<%= role.title.gsub(/\s/, "-").downcase %>.db-subclass").children().fadeIn(100);
+        
+	},function(){
+		$("li.<%= role.title.gsub(/\s/, "-").downcase %>.db-subclass").slideUp("fast");
+		$("li.<%= role.title.gsub(/\s/, "-").downcase %>.db-subclass").children().fadeOut("fast");
+	});
+	<% end %>
+	<% end %>
+	$(".db-subclass>a").live("ajax:success", function(event, data, status, xhr){
+		$("#dashboard-content").html(data);
+	});
+	$(".db-subclass>a").live("ajax:loading", function(){
+		$("#dashboard-content").html(loading);
+	});
+	$("a.db-content").live("ajax:success", function(event, data, status, xhr){
+		$("#dashboard-content").html(data);
+	});
+	$("a.db-content").live("ajax:loading", function(){
+		$("#dashboard-content").html(loading);
+	});
+	function hideNotice(){
+		var u = $(".user-notice");
+		if (u){
+			$(u).delay(8000).fadeOut("slow");
+		}
+	}
+
+	hideNotice();
+		
+<% end %>

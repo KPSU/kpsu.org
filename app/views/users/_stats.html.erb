@@ -1,0 +1,43 @@
+<style type="text/css" media="screen">
+	.stat-type {
+		float:left;
+		text-align:right;
+		width:150px;
+	}
+	.stat-value {
+		width:100px;
+		margin-left:5px;
+		float:left;
+		text-align:left;
+	}
+	#stats-breakdown {
+		
+	}
+	#stats-overall {
+		
+	}
+</style>
+<div class="m1-thin large purple rounded-heavy-top" style="width: 634px;height: 34px;padding-top: 10px;padding-left: 10px;margin-top:25px;margin-left:35px;">
+	<div id="" class="chunk-five sixteen">DJ Statistics</div>
+</div>
+<div class="generic-post">
+ 	<div class="float-left">
+		<div id="stats-overall" class="magenta-text dejavu-condensed">
+			<div class="magenta-text dejavu-condensed float-left clear both">OVERALL POINTS</div>
+			<div class="kpsu-stats">
+				<div class="profile"><div class="stat-type twenty-pt bebas blue-text"><%= current_user.dj_score %></div></div>
+			</div>
+		</div>
+		<div id="stats-breakdown" class="magenta-text dejavu-condensed float-left clear-both">TOTAL VIEWS</div>
+		<div class="kpsu-stats float-left clear-both">
+			<div class="profile"><div class="stat-type sixteen-pt bebas blue-text">PROFILE</div><div class="stat-value sixteen-pt bebas green-text"><%= current_user.profile_views %></div></div>
+			<div class="programs"><div class="stat-type sixteen-pt bebas orange-text">PROGRAMS</div><div class="stat-value sixteen-pt bebas green-text"><%= current_user.program_views %></div></div>
+			<div class="programs"><div class="stat-type sixteen-pt bebas yellow-text">PLAYLISTS</div><div class="stat-value sixteen-pt bebas green-text"><%= current_user.playlist_views %></div></div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+
+
+
+</script>

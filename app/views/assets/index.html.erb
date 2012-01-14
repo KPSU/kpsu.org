@@ -1,0 +1,87 @@
+<% content_for :title do %>
+	Media
+<% end %>
+
+<style type="text/css" media="screen">
+	.media-square {
+		border:1px solid #ECECEC;
+		padding:3px;
+	}
+	.details {
+		background-color:#DCDCDC;
+		height:45px;
+		width:150px;
+		margin:-5px 0px 0px 0px;
+		padding:4px;
+	}
+</style>
+
+<div class="m1-thin extra-large">Media</div>
+<div id="album-wrapper" >
+<div id="album-container" style="margin-left:103px;">
+	<% @i = 0 %>
+	<% @flickr.sets.each do |set| %>
+		<% @i += 1 %>
+		<% if @page <= 1 : nil %>
+			<% if @i <= 12 %>
+				<div class="" style="float:left;margin-right:30px;margin-top:30px;width:150px;height:200px;">
+					<div class="media-square rounded-heavy float-left" style="width:150px;height:150px;">
+						<br/><br/>
+						<div style="margin-left:auto;margin-right:auto;padding:0px;text-align:center;clear-right;">
+							<%= link_to(image_tag(set.primary_photo.thumbnail.url), asset_path(set.id), :alt => set.title, :title => set.title ) %>
+						</div>
+					</div>
+					<div class="float-left clear-left rounded-light details">
+						<div class="m1-light medium" style="padding:0px 0px 0px 5px;">
+							<div class="m1-bold medium float-left clear-right" style="width:150px;text-align:left;">
+								<%= link_to(set.title, asset_path(set.id), :class => "red-font") %>
+							</div>
+							<div class="float-left clear-right m1-bold normal">
+								<span><%= set.photos.size %> Photos</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			<% end %>
+		<% else %>		
+			<% if @i >= ((@page-1)*12) && @i < @page*12 %>
+			<div class="" style="float:left;margin-right:30px;margin-top:30px;width:150px;height:200px;">
+				<div class="media-square rounded-heavy float-left" style="width:150px;height:150px;">
+					<br/><br/>
+					<div style="margin-left:auto;margin-right:auto;padding:0px;text-align:center;clear-right;">
+						<%= link_to(image_tag(set.primary_photo.thumbnail.url), asset_path(set.id), :alt => set.title, :title => set.title ) %>
+					</div>
+				</div>
+				<div class="float-left clear-left rounded-light details">
+					<div class="m1-light medium" style="padding:0px 0px 0px 5px;">
+						<div class="m1-bold medium float-left clear-right" style="width:150px;text-align:left;">
+							<%= link_to(set.title, asset_path(set.id), :class => "red-font") %>
+						</div>
+						<div class="float-left clear-right m1-bold normal">
+							<span><%= set.photos.size %> Photos</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<% end %>
+		<% end %>
+	<% end %>
+	<div class="pagination float-left clear-both margin-ten">
+		<% unless @page <= 1 %>
+			<%= link_to("Previous", {:controller => "assets", :action => "index", :page => (@page-1) }, :class => "red-font") %>
+		<% end %>
+		<% @e = 0 %>
+		<% (@flickr.sets.size/12).times do %>
+			<% @e += 1 %>
+			<% unless @e == @page %>
+				<%= link_to(@e, {:controller => "assets", :action => "index", :page => @e }, :class => "red-font") %>
+			<% else %>
+				<span class="m1-bold"><%= @e %></span>
+			<% end %>
+		<% end %>
+		<% unless @e >= (@flickr.sets.size/12) %>
+			<%= link_to("Next", {:controller => "assets", :action => "index", :page => (@page+1) }, :class => "red-font") %>
+		<% end %>
+	</div>
+</div>
+</div>

@@ -1,0 +1,111 @@
+<style type="text/css" media="screen">
+	#volunteer-tabs li, #volunteer-tabs li span {
+		transition: all 0.25s ease-in-out;
+	    -webkit-transition: all 0.25s ease-in-out;
+	    -moz-transition: all 0.25s ease-in-out;
+	}
+	#volunteer-tabs li {
+		margin-right:5px;
+	}
+	#volunteer-tabs li span:hover{
+		color:rgb(230,101,101);
+		text-shadow: 0 0 2px rgba(222, 0, 30, 2);
+	    -webkit-text-shadow: 0 0 2px rgba(222, 0, 30, 2); 
+	    -moz-text-shadow: 0 0 2px rgba(222, 0, 30, 2);
+	}
+</style>
+<div class="blue rounded-heavy-top titlebar">
+	<div class="chunk-five sixteen">Volunteer Management</div>
+</div>
+<div class="generic-post">
+<ul id="volunteer-tabs">
+	<li class="summary bebas yellow-text pointer horizontal">Summary</li>
+	<li class="pending bebas yellow-text pointer horizontal"><span>Pending</span></li>
+</ul>
+<div class="tab summary">
+	<p class="m1-regular curvy">
+		<span class="m1-bold">Total hours for <%= Time.zone.now.strftime("%B") %>: <%= total_monthly_volunteer_hours %></span>
+	</p>
+</li>
+</div>
+<div class="tab pending invisible">
+<% @vh.reverse.each do |vh| %>
+	<div class="volunteer-hour float-left clear-right rounded-heavy" id="vhid-<%= vh.id %>" style="padding:4px;width:600px;">
+		<div style="">
+			<div class="float-left" style="width:110px;padding:10px;">
+				<div class="float-left" style="margin:auto;width:110px;text-align:center;"><%= image_tag vh.user.avatar.url(:thumb) %></div>
+				<div class="float-left clear-left dejavu-condensed orange-text" style="width:110px;text-align:center;"><%= "#{vh.user.f_name} #{vh.user.l_name} "%></div>
+			</div>
+			<div class="float-left" style="width:450px;">
+				<div class="float-right bebas red-text pointer deny" style="margin-right:0px;" data-vh-id="<%= vh.id %>">Deny</div>
+				<div class="float-right bebas green-text pointer m1-bold approve" style="margin-right:10px;" data-vh-id="<%= vh.id %>">Approve</div>
+				<div class="vh-subheader float-left bebas blue-text clear-left"><div style="float:left;width:127px;text-align:right;">Date</div> <div class="vh-subheader-text dejavu-condensed white-text"><%= vh.v_date.to_s(:simple) %></div></div>
+				<div class="vh-subheader float-left bebas yellow-text clear-both"><div style="float:left;width:127px;text-align:right;">Hours logged</div> <div class="vh-subheader-text dejavu-condensed white-text"><%= vh.hours %></div></div>
+				<div class="vh-subheader float-left bebas red-text clear-both"><div style="float:left;width:127px;text-align:right;">Hours this month</div> <div class="vh-subheader-text dejavu-condensed white-text"><%= vh.user.monthly_hours(Time.zone.now.month, days_in_month(Time.zone.now.month)) %></div></div>
+				<div class="vh-subheader float-left bebas green-text clear-both"><div style="float:left;width:127px;text-align:right;">Description</div><br/> <div class="dejavu-condensed white-text" style="padding:5px;"><%= vh.description %></div></div>
+			</div>
+		</div>
+	</div>
+	<% if vh.comments %>
+	<% vh.comments.each do |vhc| %>
+	<div class="vh-<%= vh.id %>"style="width:600px;float:left;<% if vhc.user != current_user %>background-color:#FFB6C1;<% end %>">
+		<div class="float-left" style="width:110px;padding:10px;">
+			<div class="float-left" style="margin:auto;width:110px;text-align:center;"><%= image_tag vhc.user.avatar.url(:thumb) %></div>
+			<div class="float-left clear-left" style="width:110px;text-align:center;"><%= "#{vhc.user.f_name} #{vh.user.l_name} "%></div>
+		</div>
+		<div class="float-left" style="width:450px;">
+			;<% if vhc.user != current_user %><div class="float-right pointer respond" style="margin-right:0px;" data-vh-id="<%= vh.id %>" data-vhc-id="<%= vhc.id %>">Respond</div><% end %>
+			<div class="float-left clear-left">Date <span class="m1-bold"><%= vhc.created_at.to_s(:simple) %></span></div>
+			<div class="float-left clear-both" >Reason <span class="m1-bold"><%= vhc.body %></span></div>
+		</div>
+	</div>
+	<% end %>	
+	<% end %>
+<% end %>
+</div>
+</div>
+<script type="text/javascript" charset="utf-8">
+	$("#volunteer-tabs li").click(function(){
+		if ($(this).hasClass("pending")){
+			$(".tab.summary").hide();
+			$(".tab.pending").show();
+		}else if ($(this).hasClass("summary")){
+			$(".tab.pending").hide();
+			$(".tab.summary").show();
+		}
+	});
+	$(".approve").click(function(){
+		var el = this;
+		var vhid = $(this).attr("data-vh-id");
+        $.ajax({
+            url: '/volunteer_hours/'+vhid+"/approve",
+            beforeSend: function (xhr) {
+            },
+            success: function (data, status, xhr) {
+				var h = $("#vhid-"+vhid).height();
+				$("#vhid-"+vhid).prepend("<div style='text-align:center;opacity:.5;padding-top:0px;position:absolute;width:600px;height:"+h+"px;background-color:#F1F1F1;z-index:300 !important;'><div class='m1-bold' style='margin-top:"+(h/2)+"px;'>APPROVED</div></div>").delay(1000).hide("drop", { direction: "down" }, 1000);
+				$(".vh-"+vhid).hide();
+            },
+            complete: function (xhr) {
+            },
+            error: function (xhr, status, error) {
+            }
+        });
+	});
+	$(".deny").click(function(){
+		
+		var el = this;
+		var vhid = $(this).attr("data-vh-id");
+		$(".tab.pending").append("<div id='deny-popup' title='Deny Hours' style='width:auto;' class='invisible'><form data-remote='true' id='deny-form' action='/volunteer_hours/"+vhid+"/deny' class='form' method='get' accept-charset='utf-8'><p><span class='m1-bold'>Reason</span><br/><textarea id='body' name='body' rows='5' cols='40' class='form rounded-heavy'></textarea><br/><br/><input class='form float-right rounded-heavy' type='submit' value='Submit &rarr;'></p></form></div>");
+		$("#deny-popup").dialog({
+		 	modal:true,
+			width:360,
+			buttons: { "Cancel": function() { $(this).dialog("close"); }} 
+		});        
+	});
+
+	$("#deny-form").live("ajax:success", function(event, data, status, xhr){
+		$("#deny-popup").html("Denied!").delay(1000).dialog("close").remove();
+	});
+
+</script>

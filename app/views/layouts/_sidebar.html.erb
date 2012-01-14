@@ -1,0 +1,41 @@
+<style type="text/css" media="screen">
+	.generic-sidebar {
+		float:left;
+		width:264px;
+		min-height:200px;
+		text-align:right;
+		margin-bottom:50px;
+	}
+	.sidebar-happenings {
+		float:left;
+		text-align:right;
+		clear:both;
+	}
+	.generic-sidebar .events {
+		background-image:url('/images/v3/sidebar-sprite.png');
+		height:75px;
+		background-position:0 0;
+		width:100%;
+		margin-top:10px;
+	}
+</style>
+<div class="generic-sidebar">
+	<div class="float-left sidebar-happenings-wrapper">
+	<img src="/images/v3/events.png">
+	<% Happening.where("ends_at > ?", Time.zone.now).limit(4).reverse.each do |event| %>
+	<div class="sidebar-happenings" style="width:100%;">
+		<div class="float-left bebas magenta-text" style="width:100%;"><%= event.title %></div>
+		<div class="float-left dejavu-condensed ten-pt blue-text" style="width:100%;"><%= event.starts_at.to_s(:time_and_date) %></div>
+		<div class="float-left ten-pt white-text clear-both dejavu-condensed" style="width:100%;" ><%= event.description %></div>
+	</div>
+	<% end %>
+	</div>
+	<div class="events float-left"></div>
+	<ul class="vertical green-text dejavu-condensed">
+		<% Download.where("user_id != ?", "nil").includes(:program).order("created_at DESC").limit(10).each do |d| %>
+		<% if d.program %>
+		<li><a class="ten-pt yellow-text dejavu-condensed" href="<%= url_for(download_path(:id => d.id)) %>"><%= d.program.title %> (<%= Time.zone.at(d.title.to_i).strftime("%d\.%b\.%Y")%>)</a></li>
+		<% end %>
+		<% end %>
+	</ul>
+</div>

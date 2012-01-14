@@ -1,0 +1,43 @@
+#player_container {
+	position:relative;
+	border: 1px solid #B22222;
+	padding:0px;
+}
+div.left-column #player_container {
+	margin-top:10px;
+	border: 1px solid #a31a1a;
+	width:928px;
+	padding-top:4px;
+	padding-bottom:4px;
+}
+ul#icons {margin: 0; padding: 0;}
+div.left-column ul#icons {margin: 0; padding-top: 2px;padding-left:3px;}
+
+ul#icons li {margin: 2px; position: relative; padding: 4px 0; cursor: pointer; float: left; display:inline; list-style: none;}
+ul#icons span.ui-icon {float: left; margin: 0 4px;}
+#search-button {
+	left:410px;
+}
+ul#icons #volume-min {
+	margin:2px 140px 2px 3px;
+}
+
+#sliderVolume {
+	position:absolute;
+	top:13px;
+	left:130px;
+	width:120px;
+	height:.4em;
+}
+
+#player_container form{
+	float:left;
+}
+#player_container form input[type="text"]{
+	font-family:"M1cregular";
+	font-size:.75em;
+	color:#fff;
+	height:18px;
+	background:transparent;
+	border:none;
+}

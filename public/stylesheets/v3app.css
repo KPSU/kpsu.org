@@ -1,0 +1,112 @@
+#dashboard {
+	float: right;
+	width: 183px;
+	height: 34px;
+	background-image: url('/images/v3/dashboard.png');
+	margin-right: 41px;	
+}
+
+#on-air-offset {
+	margin-right:2px;
+}
+
+#on-air-program {
+	float: right;
+	width: 234px;
+	height: auto;
+	margin-top: 180px;
+	padding: 20px;
+	text-align: right;
+	font-size: 1.2em;
+}
+
+#on-air-dj {
+	float: right;
+	width: 200px;
+	height: auto;
+	margin-top: -25px;
+	text-align: right;
+	margin-right: 19px;
+}
+
+#on-next {
+	float: right;
+	margin-top: 56px;
+	font-size: .75em;
+	width: 262px;
+	text-align: right;
+	margin-right: 15px;
+}
+/*  KPSU Player CSS */
+
+#player_interface {
+	width: 202px;
+}
+
+.player-buttons {
+	background-image:url("/images/v3/player-button-sprite.png");
+}
+
+.play {
+	margin-top: 15px;
+	margin-right: auto;
+	margin-bottom: 15px;
+	margin-left: auto;
+	width: 48px;
+	height: 74px;
+	background-position: 0px -15px;
+	
+}
+
+.stop {
+	display:none;
+	margin-top: 15px;
+	margin-right: auto;
+	margin-bottom: 15px;
+	margin-left: auto;
+	width: 48px;
+	height: 74px;
+	background-position: -50px -15px;
+}
+
+.indicator {
+	width: 18px;
+	height: 18px;
+	background-position: -3px 20px;
+	float: right;
+	z-index: 30;
+	margin-bottom: -14px;
+}
+
+.volume-bar {
+	margin-top: 16px;
+	float: right;
+	width: 98px;
+	height: 6px;
+	background-position: 0px -7px;
+	margin-right: -40px;
+}
+
+.volume-bar-value {
+	float: right;
+	width: 98px;
+	height: 7px;
+}
+
+.volume-text {
+	color: #323232;
+	float: right;
+	width: 98px;
+	height: 12px;
+	font-size: .625em;
+	margin-top: 38px;
+	margin-right: -100px;
+}
+
+.volume-text .quiet {
+	float:left;
+}
+
+.volume-text .loud {
+	float:right;
+}

@@ -1,0 +1,10 @@
+{"comment":[
+		{"id":"<%= @comment.id %>",
+		 "title":"<%= @comment.title %>",
+		 "body":"<%= @comment.body %>",
+		 "date":"<%= @comment.created_at %>",
+		 "user":{
+			"name":"<%= @comment.user.f_name %> <%= @comment.user.l_name %>",
+			"pic":"<%= @comment.user.avatar.url(:thumb) %>"
+		}}
+]}
