@@ -1,0 +1,17 @@
+<% unless @artists.empty? %>
+	<% @artists.each do |a| %>
+		$(".artist-results-wrapper").html("<div class='float-left pointer m1-bold artist-result' style='padding:2px;width:190px;'><%= a.name %></div>")
+	<% end %>
+<% end %>
+
+<% unless @albums.empty? %>
+	<% @albums.each do |a| %>
+		$(".albums-results-wrapper").html("<div class='float-left pointer m1-bold artist-result' style='padding:2px;width:190px;'><%= a.name %></div>")
+	<% end %>
+<% end %>
+
+<% unless @tracks.empty? %>
+	<% @tracks.each do |a| %>
+		$(".track-title-results-wrapper").html("<div class='float-left pointer m1-bold artist-result' style='padding:2px;width:190px;'><%= a.title %></div>")
+	<% end %>
+<% end %>

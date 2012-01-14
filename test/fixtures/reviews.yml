@@ -1,0 +1,25 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  title: MyString
+  type: MyString
+  genre_id: 1
+  artist: MyString
+  album: MyString
+  venue: MyString
+  record_label: MyString
+  review: MyText
+  artist_homepage: MyString
+  user_id: 1
+
+two:
+  title: MyString
+  type: MyString
+  genre_id: 1
+  artist: MyString
+  album: MyString
+  venue: MyString
+  record_label: MyString
+  review: MyText
+  artist_homepage: MyString
+  user_id: 1

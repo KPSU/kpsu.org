@@ -1,0 +1,99 @@
+<style type="text/css" media="screen">
+	.details input, .listener-profile-info input{
+		height:30px;
+		width:174px;
+	}
+</style>
+<div class="m1-thin large magenta rounded-heavy-top" style="width: 634px;height: 34px;padding-top: 10px;padding-left: 10px;margin-top:25px;margin-left:35px;">
+	<div id="" class="chunk-five sixteen"><%= @title %></div>
+</div>
+<div class="generic-post">
+<%= form_for(@user, :url => listener_update_path(@user), :remote => true, :html => { :multipart => true, :class => "form" } ) do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+	<div style="margin:0px 0px 10px 0px;width:200px;" class="form float-right">
+		<div class="chunk-five blue-text clear-both">Current Profile Photo</div>
+		<%= image_tag(@user.avatar.url(:thumb), :style => "margin:10px;") %><br/>
+		<%= f.label :avatar, "Replace Profile Photo", :class => "chunk-five blue-text" %><br/><br/>
+		<%= f.file_field :avatar %>
+	  </div>
+  <div class="details float-left">
+  	<div class="rounded-heavy" style="width:390px;height:260px;">
+  		<div style="margin:0px 5px 10px 5px;" class="form float-left clear-left">
+  	    <div style="margin:10px 0px 10px 0px;" class="chunk-five blue-text float-left">E-Mail</div><br />
+  	      <%= f.text_field :email, :class => "float-left m1-regular rounded-heavy", :style => "padding:4px;"  %>
+  		</div>
+  		<div style="margin:0px 5px 10px 5px;" class="form float-left clear-left">
+  		<div style="margin:10px 0px 10px 0px;" class="chunk-five blue-text float-left">First Name</div><br />
+  		  <%= f.text_field :f_name, :class => "float-left m1-regular rounded-heavy", :style => "padding:4px;" %>
+  		</div>
+  		<div style="margin:0px 5px 10px 5px;" class="form float-left clear-right">
+  		<div style="margin:10px 0px 10px 0px;" class="chunk-five blue-text float-left">Last Name</div><br />
+  		  <%= f.text_field :l_name, :class => "float-left m1-regular rounded-heavy", :style => "padding:4px;"  %>
+  		</div>
+  		<div style="margin:0px 5px 0px 5px;" class="form float-left clear-left">
+  		<div style="margin:10px 0px 10px 0px;" class="chunk-five blue-text float-left">Password</div><br />
+  		  <%= f.password_field :password, :class => "float-left m1-regular rounded-heavy", :style => "padding:4px;"  %>
+  		</div>
+  		<div style="margin:0px 5px 0px 5px;" class="form float-left clear-right">
+  		<div style="margin:10px 0px 10px 0px;" class="chunk-five blue-text float-left">Password Confirmation</div><br />
+  		  <%= f.password_field :password_confirmation, :class => "float-left m1-regular rounded-heavy", :style => "padding:4px;"  %>
+  		</div>
+	</div>
+  </div>
+  <div class="actions float-right" style="margin-top:40px;margin-right:40px;margin-left:auto;">
+    <%= f.submit "Save", :class => "rounded-heavy chunk-five sixteen-pt" %>
+  </div>
+<div class="listener-profile-biography float-left">
+	<div class="rounded-heavy" style="width:390px;padding:10px 10px 20px 10px;height:220px;">
+		<div style="" class="form float-left clear-left">
+			<div class="form">
+			  <%= f.label :about, :class => "chunk-five blue-text" %>
+			  <br />
+			  <%= f.text_area :about, :class => "dejavu-condensed rounded-heavy", :style => "padding:4px;width:370px;height:194px;"   %>
+			</div>
+			<div class="formatting float-right dejavu-condensed yellow-text pointer">Formatting Options</div>
+			<br/>
+		</div>
+	</div>
+</div>
+
+<div class="listener-profile-info float-left clear-left">
+	<div class="rounded-heavy" style="width:390px;padding:10px;height:180px;">
+  		<div style="margin:0px 5px 10px 5px;" class="form float-left clear-left">
+  			<div style="margin:10px 0px 10px 0px;" class="chunk-five blue-text float-left">Influences</div><br />
+    		<%= f.text_field :influences, :class => "m1-regular rounded-heavy", :style => "padding:4px;"  %>
+  		</div>
+		<div style="margin:0px 5px 10px 5px;" class="form float-left clear-left">
+  			<div style="margin:10px 0px 10px 0px;" class="chunk-five blue-text float-left">Homepage</div><br />
+    		<%= f.text_field :homepage, :class => "m1-regular rounded-heavy", :style => "padding:4px;"  %>
+  		</div>
+  		<div style="margin:0px 5px 10px 5px;" class="form float-left">
+  		<div style="margin:10px 0px 10px 0px;" class="chunk-five blue-text float-left">Age</div><br />
+    <%= f.text_field :age, :class => "m1-regular rounded-heavy", :style => "padding:4px;"  %>
+  </div>
+	</div>
+
+<% end %>
+<%= render :partial => 'layouts/formatting_options' %>
+</div>
+<script type="text/javascript">
+$('.formatting').click(function(){
+	$('.formatting-content').dialog({title: "Formatting Options", width: '400', position: 'top', buttons: { "close": function() { $(this).dialog("close"); } }});
+});
+$("#edit_listener_user_<%= @user.id %>").bind("ajax:loading", function(){
+});
+$("#edit_listener_user_<%= @user.id%>").bind("ajax:success", function(){
+	
+});
+</script>
+

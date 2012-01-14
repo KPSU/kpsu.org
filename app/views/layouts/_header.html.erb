@@ -1,0 +1,15 @@
+<div class="wrapper-topblock-menu float-left padding-ex margin-left-med margin-right-med margin-top-exexsm medium">
+		<a class="m1-bold" id="popup-link" title="Click to listen to KPSU's live stream" style="" href="/popup_player" target="page" onClick="window.open('','page','toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=0,resizable=0,width=350,height=210,left=50,top=50,titlebar=yes')">Popup Player</a>
+
+</div>
+<div class="wrapper-topblock-menu medium white float-left margin-left-med margin-top-exexsm">
+	<span class="m1-regular white-font"><span class="m1-bold">On Air:</span> 
+	<% unless currently_playing.class == String %>
+		<%= link_to(currently_playing[0], program_path(currently_playing[1]), :class => "white-font") %>
+	<% else %>
+		"We're on Auto Pilot!"
+	<% end %>
+	</span>
+</div>
+<div class="m1-thin float-right white-font" style="margin-right:45px;"><% if current_user && current_user.listener == false %><%= link_to("KPSU DASHBOARD", dashboard_path) %><% end %>
+</div>

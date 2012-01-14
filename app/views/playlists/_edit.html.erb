@@ -1,0 +1,334 @@
+<% unless @inpage %>
+<br/>
+<div id="playlist-container">
+<div class="float-left blue rounded-heavy-top clear-left" style="margin-top: 0px;padding-left: 10px;width: 654px;height: 34px;padding-top: 10px;">
+	<ul class="horizontal">
+		<li class="horizontal pointer bebas manage_playlists"><%= link_to "Manage Playlists", playlists_path(:inpage => true), :remote => true, :class => "black-text", :rel => ":address/#{url_for(playlists_path)}" %></li>
+		<li class="horizontal black-text chunk-five">&#183;</li>
+		<li class="horizontal pointer bebas black-text new_playlist"><%= link_to "New Playlist", new_playlist_path(), :remote => true, :class => "black-text", :rel => ":address/#{url_for(new_playlist_path)}" %></li>
+	</ul>
+</div>
+<div class="playlist-wrapper">
+<% end %>
+	
+	<style type="text/css" media="screen">
+		.search-button:hover {
+			text-shadow: 0 0 5px rgba(255, 109, 100, 2);
+		    -webkit-text-shadow: 0 0 5px rgba(255, 109, 100, 2); 
+		    -moz-text-shadow: 0 0 5px rgba(255, 109, 100, 2);
+		}
+		.playlist-items-wrapper  .header {
+			background-color:#343434 ;
+			padding:2px;
+		}
+		.playlist-items .position, .playlist-items-wrapper .position {
+			text-align:center;
+			padding:2px;
+			width:30px;
+		}
+		.playlist-items .album, .playlist-items-wrapper .album {
+			padding:2px;
+			width:158px;
+		}
+		.playlist-items .title, .playlist-items-wrapper .title {
+			padding:2px;
+			width:290px;
+		}
+		.playlist-items .artist, .playlist-items-wrapper .artist {
+			padding:2px;
+			width:170px;
+		}
+		.track:hover {
+			text-shadow: 0 0 5px #EE3B3B;
+		    -webkit-text-shadow: 0 0 5px #EE3B3B; 
+		    -moz-text-shadow: 0 0 5px rgba(0, 0, 255, 1);
+		}
+		.track-wrapper {
+			float:left;
+			clear:both;
+		}
+	</style>
+
+	<div class="float-left clear-both" style="width: 664px;">
+		<div id="new-playlist-wrapper" style="margin-bottom:30px;">
+			<form accept-charset="UTF-8" action="/playlists/<%= @playlist.id %>" class="new_playlist" data-remote="true" id="new_playlist" method="put"> 
+				<div style='width: 624px;height: auto;float: left;background-color: #343434;padding: 20px;'>
+				<div class="float-left blue-text chunk-five clear-both">
+				Program	<%= select_tag "programs", options_from_collection_for_select(@programs, "id", "title", :selected => "#{ current_user.programs.first.id rescue nil }") %>
+				</div>
+				<div class="float-left clear-both blue-text chunk-five" style="margin-top:5px;">
+				Title <input class="rounded-heavy form" id="playlist_title" name="playlist[title]" size="30" type="text" value="<%= @playlist.title %>">
+				</div>
+				<div class="float-left clear-both blue-text chunk-five" style="">
+				Description <br/><textarea name="playlist[description]" style="" class="dejavu-condensed twelve form"rows="3" cols="70"><%= @playlist.description %></textarea>
+				</div>
+				</div>
+				<div class="float-left clear-both blue rounded-heavy-top black-text bebas" style="margin-top:10px;width: 649px;height: 30px;padding: 15px 0 0 15px;">
+								Current Tracks
+				</div>
+				<div class="playlist-items-wrapper float-left clear-both medium" style="background-color:#343434;">
+					<div class="float-left dejavu-condensed yellow-text header position">#</div>
+					<div class="float-left dejavu-condensed yellow-text header artist" style="width:170px;">Artist</div>
+					<div class="float-left dejavu-condensed yellow-text header title" style="width:290px;">Track Title</div>
+					<div class="float-left dejavu-condensed yellow-text header album" style="width:158px;">Album</div>
+					<div class="playlist-items">
+						<% @i = 0; %>
+						<% @playlist.playlist_items.sort!{|x,y| x.position <=> y.position} && @playlist.playlist_items.each do |t| %>
+						<div class='track-draggable float-left' style='width:664px;height:auto;'><div class='remove-track pointer red-font invisible' style='position:absolute;z-index:300;width:75px;border:0px solid #343434;text-align:center;height:22px;'><div class='track-delete float-right rounded-heavy' style='width: 75px; background-color: #343434; height:auto;'><img src='/images/delete.png' style='float: left; height: 100%; '><div style='float: left; margin-top: 1px; font-size:.75em;color:#FFF;'>Remove</div></div></div><div class='track-wrapper'><div class='track-position float-left pointer yellow-text dejavu-condensed position' style=''><%= @i += 1 %></div><div data-artist='<%= t.track.artist.id rescue nil %>' class='float-left pointer yellow-text dejavu-condensed' style='font-size:.75em;padding-top:4px;width:170px;'><%= t.track.artist.name rescue nil %></div><div data-track='<%= t.track.id rescue nil %>' class='float-left title yellow-text dejavu-condensed'  style='font-size:.75em;padding-top:4px;'><%= t.track.title rescue nil %></div><div data-album='<%= t.track.album.id rescue nil %>' class='float-left pointer yellow-text dejavu-condensed album' style='font-size:.75em;padding-top:4px;'><%= t.track.album.name rescue nil %></div>
+						</div></div>
+						<% end %>
+					</div>
+				</div>
+				<input type="hidden" name="tracks" value="" id="track-array">
+				<div class="save-playlist float-right green-text pointer bebas" style="margin-right:13px;">SAVE&nbsp;&nbsp;&nbsp;PLAYLIST</div>
+			</form>
+		</div>
+		<div id="create-track" class="invisible float-left clear-both">
+		<div class="float-left clear-both magenta rounded-heavy-top black-text bebas" style="margin-top:10px;width: 649px;height: 30px;padding: 15px 0 0 15px;margin:10px 0 0 0;">
+			Create New Track
+		<div class="hide-new-track red-text dejavu-condensed black-text float-right pointer" style="margin:0 21px 0 0;">Hide New Track</div>
+		</div>
+		<div class="new-playlist-search-wrapper rounded-heavy" style="background-color: #343434;float: left;width: 649px;padding: 15px 0 15px 15px;">
+			<form action="/tracks" id="new-track-form" data-remote="true" method="post" accept-charset="utf-8">
+				<div class="float-left" style="padding:2px 0px 0px 5px;">
+					<span class="transition-0-25 pointer search-button dejavu-condensed blue-text">Artist</span>
+				</div>
+				<input type="text" name="artist" value="" id="artist" class="form rounded-heavy curvy float-left">
+				<div class="float-left" style="margin-left:50px;padding:2px 0px 0px 5px;">
+					<span class="transition-0-25 pointer search-button dejavu-condensed blue-text">Title</span>
+				</div>
+				<input type="text" name="track" value="" id="track_title" class="form rounded-heavy curvy float-left">
+				<div class="float-left clear-left" style="padding:2px 0px 0px 5px;">
+					<span class="transition-0-25 pointer search-button dejavu-condensed blue-text">Album</span>
+				</div>
+				<input type="text" name="album" value="" id="album" class="form rounded-heavy curvy float-left">
+				<div class="float-left" style="margin-left:50px;padding:2px 0px 0px 5px;">
+					<span class="transition-0-25 pointer search-button dejavu-condensed blue-text">Label</span>
+				</div>
+				<input type="text" name="label" value="" id="album" class="form rounded-heavy curvy float-left">
+				<div class="float-right" style="margin-right:15px;">
+					<span class="dejavu-condensed green-text save-track pointer">Save Track</div>
+				</div>
+				<div class="track-error-wrapper">
+				</div>
+				<input type="submit" disabled="true" id="create-track-submit" style="display:none;" value="Continue &rarr;">
+			</form>
+		</div>
+		</div>
+		<div class="float-left clear-both yellow rounded-heavy-top black-text bebas" style="margin-top:10px;width: 649px;height: 30px;padding: 15px 0 0 15px;margin:10px 0 0 0;">
+			Find/Add Tracks
+			<div class="new-playlist-content black-text dejavu-condensed blue-text medium float-right pointer" style="margin:0 21px 0 0;">+ Add Missing Track</div>
+
+		</div>
+		<div class="new-playlist-search-wrapper rounded-heavy" style="background-color: #343434;float: left;width: 649px;padding: 15px 0 15px 15px;">
+			<form action="/playlists/new/search" id="search-form" data-remote="true" method="get" accept-charset="utf-8">
+				<input type="text" name="search" value="" id="search" style="margin-top: 6px;float: left;" class="form rounded-heavy curvy float-left">
+				<div class="float-left" style="padding:2px 0px 0px 5px;">
+					<span class="transition-0-25 pointer search-button blue-text chunk-five">Search</span>
+				</div>
+				<div class="float-right" style="margin-right:15px;">
+					<input type="radio" name="search_type" class="dejavu-condensed" value="artist" checked="true"> Artists&nbsp;
+					<input type="radio" name="search_type" class="dejavu-condensed" value="tracks"> Tracks&nbsp;
+					<input type="radio" name="search_type" class="dejavu-condensed" value="albums"> Albums
+				</div>
+				<input type="submit" id="playlist-search" style="display:none;" value="Continue &rarr;">
+			</form>
+		</div>
+	</div>
+
+	<div class="float-left clear-left rounded-heavy" style="background-color:#343434;margin-top:30px;">
+		<div class="float-left clear-both bebas black-text green rounded-heavy-top" style="width:649px;height:30px;padding:15px 0 0 15px;">
+			Search Results
+		</div>
+		<div class="results-wrapper" style="">
+			<div class="float-left white-text rounded-heavy-top-left dejavu-condensed artist" style="height:30px;padding:15px 0 0 15px;width:135px;">Artist</div>
+			<div class="float-left white-text dejavu-condensed title"  style="height:30px;padding:15px 0 0 15px;width:305px;">Track Title</div>
+			<div class="float-left white-text rounded-heavy-top-right dejavu-condensed album"  style="height:30px;padding:15px 0 0 15px;width:167px;">Album</div>
+			<div class="results">
+			<div class="float-left pointer dejavu-condensed artist" style="padding:2px;width:160px;"></div>
+			<div class="float-left dejavu-condensed title"  style="color:#FFF;padding:2px;width:340px;">Search for something to get going...</div>
+			<div class="float-left pointer dejavu-condensed album"  style="padding:2px;width:180px;"></div>
+			</div>
+		</div>
+	</div>
+	<% if @inpage %>
+		<script type="text/javascript" charset="utf-8">
+		$('.pagination a').attr('data-remote', 'true');
+
+		</script>
+	<% end %>
+<% unless @inpage %>
+</div>
+</div>
+<script type="text/javascript" charset="utf-8">
+	function resetPlaylistIndexPagination(){
+		$(".pagination a").die();
+	}
+	var loading = "<div style='margin:200px 0 0 0;text-align:center;'><span class='magenta-text bebas'>Loading</span><br/><img src='/images/ajax-loader.gif'></div>";
+	$('.pagination a').attr('data-remote', 'true');
+	$('.pagination a').each(function(){
+		var href = $(this).attr("href");
+		var newHref = href + "&inpage=true"
+		$(this).attr("href", newHref);
+	});
+	$('.pagination a').live("ajax:loading", function(){
+		$('.playlist-wrapper').html(_ajax_loader_black);
+	});
+	$('.pagination a').live("ajax:success", function(event, data, status, xhr){
+		$('.playlist-wrapper').html(data);
+	});
+	$(".new_playlist a").live("ajax:success", function(event, data, status, xhr){
+		$(".playlist-wrapper").html(data);
+	});
+	$(".new_playlist a").live("ajax:loading", function(){
+		$(".playlist-wrapper").html(_ajax_loader_black);
+	});
+	$(".manage_playlists a").live("ajax:success", function(event, data, status, xhr){
+		$(".playlist-wrapper").html(data);
+	});
+	$(".manage_playlist a").live("ajax:loading", function(){
+		$(".playlist-wrapper").html(_ajax_loader_black);
+	});
+	$(".edit-playlist a").live("ajax:success", function(event, data, status, xhr){
+		$(".playlist-wrapper").html(data);
+	});
+	$(".edit-playlist a").live("ajax:loading", function(){
+		$(".playlist-wrapper").html(_ajax_loader_black);
+	});
+	
+		function resetPlaylistLive(){
+			$(".track").die();
+		}
+		resetPlaylistLive();
+
+		function updatePlaylistPositions (){
+			var trackCount = $(".playlist-items .track-draggable").find(".track-wrapper");
+			$.each(trackCount, function(i, t){
+				var position = $(t).find(".track-position");
+				$(position).html(i+1);
+			});
+
+		}
+
+		// setup track counter
+		var tracks = 0;
+
+		$(".search-button").click(function(){
+			$("#search-form").submit();
+		});
+		$("#search-form").live("ajax:loading", function(){
+			var loader = _ajax_loader_black();
+			$(".results").html(loader);
+		});
+
+		// New Track JS
+
+		$(".hide-track-error").live("click", function(){
+			$(".track-error-wrapper").hide();
+		});
+		$(".save-track").click(function(){
+			$("#new-track-form").submit();
+		});
+
+		$(".new-playlist-content").click(function(){
+			$("#create-track").slideDown();
+		});
+		$(".hide-new-track").click(function(){
+			$("#create-track").slideUp();
+		});
+		// add track from search
+
+		$(".track").live("click", function(){
+			// increment track counter by one
+			tracks++;
+
+			var track = $(this);
+			var artistId = $(track).find(".artist").data("artist");
+			var albumId = $(track).find(".album").data("album");
+			var trackId = $(track).find(".title").data("track");
+			var artistName = $(track).find(".artist").text();
+			var albumName = $(track).find(".album").text();
+			var trackName = $(track).find(".title").text();
+
+			var playlistItems = $(".playlist-items");
+			if ($(playlistItems).hasClass("empty") == true){
+				$(playlistItems).html("").removeClass("empty");
+			}
+			var id = get_unique_id();		
+			$(playlistItems).append("<div class='track-draggable float-left' style='width:664px;height:auto;'><div class='remove-track pointer red-font invisible' style='position:absolute;z-index:300;width:75px;border:0px solid #343434;text-align:center;height:22px;'><div class='track-delete float-right rounded-heavy' style='width: 75px; background-color: #343434; height:auto;'><img src='/images/delete.png' style='float: left; height: 100%; '><div style='float: left; margin-top: 1px; font-size:.75em;color:#FFF;'>Remove</div></div></div><div id='playlist-track-id"+id+"' class='track-wrapper invisible'><div class='track-position float-left pointer yellow-text dejavu-condensed position' style=''>"+tracks+"</div><div data-artist='"+artistId+"' class='float-left pointer yellow-text dejavu-condensed' style='font-size:.75em;padding-top:4px;width:170px;'>"+artistName+"</div><div data-track='"+trackId+"' class='float-left title yellow-text dejavu-condensed'  style='font-size:.75em;padding-top:4px;'>"+trackName+"</div><div data-album='"+albumId+"' class='float-left pointer yellow-text dejavu-condensed album' style='font-size:.75em;padding-top:4px;'>"+albumName+"</div></div></div>");
+			$(".playlist-items").sortable("refresh");
+			updatePlaylistPositions ()
+			$(".track-wrapper:last").slideDown();
+		});
+
+		// remove track hover
+		// jQuery Tip: children hover
+		// to stop children from disappearing when hovered over
+		// use mouseenter and mouseleave events
+		// mouseover/mouseout will fire when hovering over
+		// children elements
+		$(".playlist-wrapper .playlist").live("mouseenter", function(){
+			$(this).prepend("<div class='remove-playlist-manager red-text twelve' style='position: absolute;margin-left: 580px;' >Remove</div>")
+		});
+		$(".playlist-wrapper .playlist").live("mouseleave", function(){
+			$(".remove-playlist-manager").remove();
+		});
+		$(".track-wrapper").live("mouseenter", function(){
+			var leftOff = $(this).offset().left
+			var topOff = $(this).offset().top
+			var removeTrack = $(this).prev();
+			var tTrackWidth = $(this).width()
+			var rTrackWidth = $(removeTrack).width()
+
+
+			$(removeTrack).css({position: 'absolute', left: leftOff + tTrackWidth - rTrackWidth, top: topOff});
+			$(removeTrack).removeClass("invisible").show();
+		});
+		$(".track-wrapper").live("mouseleave", function(){
+
+			var elem = $(this);
+			var removeTrack = $(this).prev();
+
+			if ($(removeTrack).is(":hover")){
+			}else{
+				$(removeTrack).hide();
+			}
+
+			$(this).prev().hover("mouseleave", function(){
+				$(this).hide();
+			});
+
+			return false;
+		});
+
+		$(".remove-track").live("click", function(){
+			var parentWrapper = $(this).parent();
+			$(parentWrapper).remove();
+			updatePlaylistPositions();
+		});
+		// sort the playlist items
+
+		$(".playlist-items").sortable({
+			placeHolder: true,
+			cursor: 'crosshair'
+		});
+
+		$(".playlist-items").live("sortupdate", function(){
+			$(this).click();
+			updatePlaylistPositions();
+		});
+		$(".save-playlist").click(function(){
+			var tracksArray = []
+			var playlistTracks = $(".playlist-items-wrapper").find(".track-wrapper");
+			for (var i = 0; i < playlistTracks.length; i++){
+				tId = $(playlistTracks[i]).find(".title").data("track")
+				tracksArray.push(tId)
+			}
+			tmp = tracksArray.toString();
+			$("input[name='tracks']").val(tracksArray);
+			$("#new_playlist").submit();
+
+		});
+	
+</script>
+<% end %>

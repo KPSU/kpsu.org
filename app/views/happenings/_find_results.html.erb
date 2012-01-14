@@ -1,0 +1,50 @@
+<% @happenings.each do |h| %>
+	<div class="happening-wrapper" data-id="<%= h.id %>" data-happening="<%= h.to_json %>" style="width:574px;float:left;clear:both;">
+<div class="bebas delete-happening pointer float-right red-text"><%= link_to 'Destroy', h, :confirm => 'Are you sure?', :method => :delete, :remote => true, :class => "red-text" %>&nbsp;&nbsp;&nbsp;</div>
+		<div class="bebas edit-happening float-right pointer blue-text"><span>Edit</span></div>
+				
+		<div class="bebas happening-summary-details-labels float-left title green-text">title</div><div class="happening-summary-details float-left"><%= h.title rescue nil %></div>
+		<div class="bebas happening-summary-details-labels float-left clear-left starts_at purple-text">starts&nbsp;&nbsp;at</div><div class="happening-summary-details float-left clear-right"><%= h.starts_at.to_s(:date_and_time) rescue nil %></div>
+		<div class="bebas happening-summary-details-labels float-left clear-left starts_at purple-text">ends&nbsp;&nbsp;at</div><div class="happening-summary-details float-left clear-right"><%= h.ends_at.to_s(:date_and_time) rescue nil %></div>
+		<div class="bebas happening-summary-details-labels float-left clear-left url yellow-text">URL</div><div class="happening-summary-details float-left clear-right"><%= h.url rescue nil %></div>
+		<div class="bebas happening-summary-details-labels float-left clear-left contact-email purple-text">contact&nbsp;&nbsp;email</div><div class="happening-summary-details float-left clear-right"><%= h.contact_email rescue nil %></div>
+		<div class="bebas happening-summary-details-labels float-left clear-left description magenta-text">description</div><div class="happening-summary-details float-left clear-left"><%= h.description rescue nil %></div>
+	</div>
+<% end %>
+
+<script type="text/javascript" charset="utf-8">
+	$("div.delete-happening a").live("ajax:success", function(){
+		$(this).parent().parent().remove();
+	});
+
+	$("div.edit-happening span").live("click", function(){
+		function trimNumber(s) { 
+			return s.replace(/^0+/, ''); 
+		}
+		var tmp = $(this).parent().parent().attr("data-happening");
+		var hId = $(this).parent().parent().attr("data-id");
+		var data = $.parseJSON(tmp);
+		$("#happening-find").hide();
+		var editAction = "/happenings/"+hId;
+		var editForm = $("#happening-edit").find("form");
+		$(editForm).attr("action", editAction);
+		$(editForm).find("#edit-event-title").val(data['happening']['title']);
+		$(editForm).find("#edit-event-description").val(data['happening']['description']);
+		$(editForm).find("#edit-event-contact-email").val(data['happening']['contact_email']);
+		$(editForm).find("#edit-event-url").val(data['happening']['url']);
+		// start_time
+		$(editForm).find("#edit_starts_at_day").val(trimNumber(data['happening']['starts_at'].split("T")[0].split("-")[2]));
+		$(editForm).find("#edit_starts_at_month").val(trimNumber(data['happening']['starts_at'].split("T")[0].split("-")[1]));
+		$(editForm).find("#edit_starts_at_year").val(trimNumber(data['happening']['starts_at'].split("T")[0].split("-")[0]));
+		$(editForm).find("#edit_starts_at_minute").val(trimNumber(data['happening']['starts_at'].split("T")[1].split(":")[1]));
+		$(editForm).find("#edit_starts_at_hour").val(trimNumber(data['happening']['starts_at'].split("T")[1].split(":")[0]));
+		// end_time
+		$(editForm).find("#edit_ends_at_day").val(trimNumber(data['happening']['ends_at'].split("T")[0].split("-")[2]));
+		$(editForm).find("#edit_ends_at_month").val(trimNumber(data['happening']['ends_at'].split("T")[0].split("-")[1]));
+		$(editForm).find("#edit_ends_at_year").val(trimNumber(data['happening']['ends_at'].split("T")[0].split("-")[0]));
+		$(editForm).find("#edit_ends_at_minute").val(trimNumber(data['happening']['ends_at'].split("T")[1].split(":")[1]));
+		$(editForm).find("#edit_ends_at_hour").val(trimNumber(data['happening']['ends_at'].split("T")[1].split(":")[0]));
+		
+		$("#happening-edit").show();
+	});
+</script>

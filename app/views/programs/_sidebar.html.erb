@@ -1,0 +1,54 @@
+<style type="text/css" media="screen">
+	.generic-sidebar {
+		float:left;
+		width:264px;
+		min-height:200px;
+		text-align:right;
+		margin-bottom:50px;
+	}
+	.sidebar-happenings {
+		float:left;
+		text-align:right;
+		clear:both;
+	}
+	.generic-sidebar .events {
+		background-image:url('/images/v3/sidebar-sprite.png');
+		height:75px;
+		background-position:0 0;
+		width:100%;
+		margin-top:10px;
+	}
+</style>
+<div class="generic-sidebar">
+	<div style="padding-bottom:10px;width:260px;" class="float-left">
+		<div id="program-url" class="program url white-text" style="font-size:10px;padding-left:10px;margin-top:10px;">http://kpsu.org/shows/<%= @program.title.gsub("\s", "-").downcase %></div>
+		<div id="program-copy" style="position:relative;font-size:8px;"><div id="program-copy-button" class="white-text">Copy URL to Clipboard</div></div>
+	</div>
+	<% if @program.event %>
+		<div class="m1-light float-right white-text clear-left">
+			<span class="chunk-five blue-text">On Air</span>
+			<br/>&nbsp;<%= i_to_day(@program.event.day_i) %> @ <%= @program.event.starts_at.to_s(:meridian_time) %>
+		</div>
+	<% end %>
+	<div class="float-left rounded-heavy-bottom clear-left" style="width:260px;line-height:12px;height:50px;float:left;margin:10px 0px 20px 0px;">
+		<div class="chunk-five blue-text clear-both float-right">Share</div>
+
+		<div title="Share <%= @program.title %>" class="social-networking" style="float:right;clear:both;width:260px;text-align:left;">
+			<div class="float-right clear-left" style="margin:10px 0px 0px 10px;">
+				<!-- REGARDING FACEBOOK %2F stands for / and w -->
+				<iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fkpsu.org<%= url_for(@program) %>&amp;layout=button_count&amp;show_faces=true&amp;width=40&amp;action=like&amp;font=segoe+ui&amp;colorscheme=light&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:80px; height:21px;" allowTransparency="true"></iframe>
+
+				<a href="http://twitter.com/share/?url=http://kpsu.org<%= url_for(@program) %>" class="twitter-share-button" data-count="horizontal" data-via="KPSU_PDX" data-text="<%= @program.title %>: #kpsu">Tweet</a>
+				<script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+			</div>
+		</div>
+	</div>
+	<div class="events float-left"></div>
+	<ul class="vertical green-text float-right dejavu-condensed">
+		<% Download.where("user_id = ? AND title IS NOT ? OR program_id > ?", @program.user, nil, 0).includes(:program, :user).order("created_at DESC").limit(10).each do |d| %>
+		<% unless d.program.title == nil%>
+		<li><a class="ten-pt yellow-text dejavu-condensed" href="<%= url_for(download_path(:id => d.id)) %>"><%= d.program.title %> (<%= Time.zone.at(d.title.to_i).strftime("%d\.%b\.%Y")%>)</a></li>
+		<% end %>
+		<% end %>
+	</ul>
+</div>

@@ -1,0 +1,87 @@
+<%= form_for(@review, :html => { :multipart => true, :class => "form" } ) do |f| %>
+  <% if @review.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@review.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% @review.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+	<div style="margin:0px 125px 0px 0px;width:260px;" class="float-right">
+	  <div class="form float-right">
+		<label for="Attachment Title">Attachment Title</label><br/>
+	  	<input style="padding:4px" class="m1-regular rounded-heavy" type="text" name="attachment[asset[title]]" value="" id="some_name"><br/>
+		<label for="Attachment Title">Attachment Description</label><br/>
+	  	<textarea style="padding:4px" class="m1-regular rounded-heavy" type="text" name="attachment[asset[description]]" value="" id="some_name" rows="8" cols="40"></textarea>
+	  </div>
+	  <div class="form float-right">
+	  	<%= f.file_field :asset, :class => "m1-regular rounded-heavy", :style => "padding:4px;"   %>
+	  </div>
+	  <div class="actions float-right" style="margin-top:40px;margin-right:23px;margin-left:auto;">
+	    <%= f.submit "Save", :class => "rounded-heavy m1-bold large" %>
+	  </div>
+	</div>
+  <div class="details float-left">
+  	<div class="rounded-heavy" style="background:#EFEFEF !important;width:450px;padding:10px;height:200px;margin:10px;">
+		<div style="margin:0px 5px 10px 5px;" class="form float-left clear-both">
+  	    <div style="margin:10px 0px 10px 0px;" class="m1-bold medium float-left">Title</div><br />
+  	      <%= f.text_field :title, :class => "m1-regular rounded-heavy", :style => "padding:4px;width:420px;" %>
+  		</div>
+  		<div style="margin:0px 5px 10px 5px;" class="form float-left clear-left">
+  	    <div style="margin:10px 0px 10px 0px;" class="m1-bold medium float-left">Artist</div><br />
+		<% unless @review.errors.any? %>
+  	      <%= text_field_tag :artist,"", :class => "m1-regular rounded-heavy", :style => "padding:4px;", :"data-autocomplete" => '/reviews/autocomplete_artist_name'  %>
+		<% else %>
+		  <%= text_field_tag :artist, "#{@review.artist.name}", :class => "m1-regular rounded-heavy", :style => "padding:4px;", :"data-autocomplete" => '/reviews/autocomplete_album_name' %>
+		<% end %>
+  		</div>
+  		<div style="margin:0px 5px 10px 5px;" class="form float-right clear-right">
+  		<div style="margin:10px 0px 10px 0px;" class="m1-bold medium float-left">Album</div><br />
+		<% unless @review.errors.any? %>
+  		  <%= text_field_tag :album, "", :class => "m1-regular rounded-heavy", :style => "padding:4px;", :"data-autocomplete" => '/reviews/autocomplete_album_name' %>
+		<% else %>
+		  <%= text_field_tag :album, "#{@review.album.name}", :class => "m1-regular rounded-heavy", :style => "padding:4px;", :"data-autocomplete" => '/reviews/autocomplete_album_name' %>
+		<% end %>
+  		</div>
+	</div>
+  </div>
+
+<div class="dj-profile-biography float-left">
+	<div class="rounded-heavy" style="background:#EFEFEF !important;width:450px;padding:10px 10px 20px 10px;height:220px;margin:10px;">
+		<div style="margin:0px 5px 10px 5px;" class="form float-left clear-left">
+			<div class="form">
+			  <%= f.label :body %>
+			  <br />
+			  <%= f.text_area :body, :class => "m1-regular rounded-heavy", :rows => 10, :cols => 80, :style => "padding:4px;"   %>
+			</div>
+			<div class="formatting float-right medium m1-light red-font pointer">Formatting Options</div>
+			<br/>
+		</div>
+	</div>
+</div>
+
+<div class="dj-profile-info float-left clear-left">
+	<div class="rounded-heavy" style="background:#EFEFEF !important;width:450px;padding:10px;height:100px;margin:10px;">
+		<div style="margin:0px 5px 10px 5px;" class="form float-left clear-left">
+  			<div style="margin:10px 0px 10px 0px;" class="m1-bold medium float-left">Link</div><br />
+    		<%= f.text_field :link, :class => "m1-regular rounded-heavy", :style => "padding:4px;"  %>
+  		</div>
+  		<div style="margin:0px 5px 10px 5px;" class="form float-left clear-right">
+  		<div style="margin:10px 0px 10px 0px;" class="m1-bold medium float-left">Genre</div><br />
+  	  <%= select_tag "genres", options_for_select(genres, :selected => "#{ @review.genre == nil ? "0" : @review.genre.id }", :multiple => false, :size => 1 )%>
+  		</div>
+	</div>
+</div>
+<% end %>
+<%= render :partial => 'layouts/formatting_options' %>
+
+<% content_for :page_js do %>
+$('.formatting').click(function(){
+	$('.formatting-content').dialog({title: "Formatting Options", width: '400', position: 'top', buttons: { "close": function() { $(this).dialog("close"); } }});
+});
+<% end %>
+
+

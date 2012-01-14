@@ -1,0 +1,4 @@
+$(".track-error-wrapper").html("<div class='track-error rounded-heavy invisible float-left' style='display:block;background-color:#222;color:#FFFFFF;width:660px;padding:4px; opacity:.75;margin-top:4px;'>This track cannot be saved for the following reasons:<ul><% @track.errors.full_messages.each do |msg| %><li><%= msg %></li><% end %></div><div class='float-right red-font hide-track-error'>Hide Error Message</div>
+");
+$(".track-error-wrapper").slideDown();
+$(".hide-track-error").fadeIn("fast");

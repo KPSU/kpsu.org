@@ -1,0 +1,31 @@
+<h1>Listing messages</h1>
+
+<table>
+  <tr>
+    <th>User</th>
+    <th>Nickname</th>
+    <th>Ip address</th>
+    <th>Message</th>
+    <th>Chatroom</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @messages.each do |message| %>
+  <tr>
+    <td><%= message.user_id %></td>
+    <td><%= message.nickname %></td>
+    <td><%= message.ip_address %></td>
+    <td><%= message.message %></td>
+    <td><%= message.chatroom_id %></td>
+    <td><%= link_to 'Show', message %></td>
+    <td><%= link_to 'Edit', edit_message_path(message) %></td>
+    <td><%= link_to 'Destroy', message, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Message', new_message_path %>

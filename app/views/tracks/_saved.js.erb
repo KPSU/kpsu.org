@@ -1,0 +1,8 @@
+tracks++;
+var playlistItemsPartial = $(".playlist-items");
+if ($(playlistItemsPartial).hasClass("empty") == true){$(playlistItemsPartial).html("").removeClass("empty");}
+
+$(playlistItemsPartial).append("<div class='track-draggable float-left' style='width:664px;height:auto;'><div class='remove-track pointer red-font invisible' style='position:absolute;z-index:300;width:75px;border:0px solid #343434;text-align:center;height:22px;'><div class='track-delete float-right rounded-heavy' style='width: 75px; background-color: #343434; height:auto;'><img src='/images/delete.png' style='float: left; height: 100%; '><div style='float: left; margin-top: 1px; font-size:.75em;color:#FFF;'>Remove</div></div></div><div class='track-wrapper'><div class='track-position float-left pointer yellow-text dejavu-condensed position' style=''>"+tracks+"</div><div data-artist='<%= @track.artist.id rescue nil %>' class='float-left pointer yellow-text dejavu-condensed' style='font-size:.75em;padding-top:4px;width:170px;'><%= @track.artist.name rescue nil %></div><div data-track='<%= @track.id rescue nil %>' class='float-left title yellow-text dejavu-condensed'  style='font-size:.75em;padding-top:4px;'><%= @track.title rescue nil %></div><div data-album='<%= @track.album.id rescue nil %>' class='float-left pointer yellow-text dejavu-condensed album' style='font-size:.75em;padding-top:4px;'><%= @track.album.name rescue nil %></div>");
+
+$(".track-wrapper:last").slideDown();
+

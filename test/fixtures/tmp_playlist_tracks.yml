@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  title: MyString
+  nid: 1
+  weight: 1
+  artist: MyString
+  album: MyString
+  label: MyString
+
+two:
+  title: MyString
+  nid: 1
+  weight: 1
+  artist: MyString
+  album: MyString
+  label: MyString

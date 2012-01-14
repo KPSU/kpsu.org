@@ -1,0 +1,19 @@
+<% content_for :title do %>
+	Password Reset
+<% end %>
+<style type="text/css" media="screen">
+	label,input {
+		font-family:"M1cregular";
+	}
+</style>
+<div class="auxiliary" style="margin-top:50px;">
+<div class="m1-regular medium float-right" style="width:300px;">An email will be sent to this address with a link to reset your password. The link can only be used once, if accidentally click it and close the page, you need to generate a new link by using this form again.</div>
+<% form_for(:reset, :url => {:controller => "password_resets", :action => "create"}) do |f| %>
+<br/><br/><br/>
+	<%= f.label :email %>
+	<%= f.text_field :email %>
+	
+	<br/><br/>
+	<%= submit_tag "Reset" %>
+<% end %>
+</div>

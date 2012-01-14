@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  nid: 1
+  vid: 1
+  uid: 1
+  title: MyString
+  body: MyText
+
+two:
+  nid: 1
+  vid: 1
+  uid: 1
+  title: MyString
+  body: MyText

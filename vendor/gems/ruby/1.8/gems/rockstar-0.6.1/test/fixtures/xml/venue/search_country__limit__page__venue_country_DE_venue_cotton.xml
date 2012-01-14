@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<lfm status="ok">
+<results for="cotton" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#">
+<opensearch:Query role="request" searchTerms="cotton" startPage="1" />
+<opensearch:totalResults>3</opensearch:totalResults>
+<opensearch:startIndex>0</opensearch:startIndex>
+<opensearch:itemsPerPage>50</opensearch:itemsPerPage><venuematches>
+    <venue>
+    <id>8891678</id>
+    <name>Cotton Club</name>
+    <location>
+      <city>Hamburg</city>
+      <country>Germany</country>
+      <street>Alter Steinweg 10</street>
+      <postalcode>20459</postalcode>
+      <geo:point>
+         <geo:lat>53.550374</geo:lat>
+         <geo:long>9.98205</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8891678+Cotton+Club</url>
+    <website>http://www.cotton-club.de/</website>
+    <phonenumber>+49 (0)40  343878</phonenumber>
+    <image size="small"></image>
+	<image size="medium"></image>
+	<image size="large"></image>
+	<image size="extralarge"></image>
+	<image size="mega"></image>
+  </venue>    <venue>
+    <id>9036090</id>
+    <name>Cotton Club</name>
+    <location>
+      <city>Künzelsau</city>
+      <country>Germany</country>
+      <street></street>
+      <postalcode></postalcode>
+      <geo:point>
+         <geo:lat>49.280909</geo:lat>
+         <geo:long>9.690339</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/9036090+Cotton+Club</url>
+    <website></website>
+    <phonenumber></phonenumber>
+    <image size="small"></image>
+	<image size="medium"></image>
+	<image size="large"></image>
+	<image size="extralarge"></image>
+	<image size="mega"></image>
+  </venue>    <venue>
+    <id>9087817</id>
+    <name>CottonClub</name>
+    <location>
+      <city>Kaiserslautern</city>
+      <country>Germany</country>
+      <street></street>
+      <postalcode></postalcode>
+      <geo:point>
+         <geo:lat>49.44702</geo:lat>
+         <geo:long>7.756832</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/9087817+CottonClub</url>
+    <website></website>
+    <phonenumber></phonenumber>
+    <image size="small"></image>
+	<image size="medium"></image>
+	<image size="large"></image>
+	<image size="extralarge"></image>
+	<image size="mega"></image>
+  </venue></venuematches>
+</results></lfm>

@@ -1,0 +1,23 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  uid: 1
+  vid: 1
+  content_type: MyString
+  title: MyString
+  nid: 1
+  status: 1
+  f_created: 1
+  f_changed: 1
+  nid: 1
+
+two:
+  uid: 1
+  vid: 1
+  content_type: MyString
+  title: MyString
+  nid: 1
+  status: 1
+  f_created: 1
+  f_changed: 1
+  nid: 1

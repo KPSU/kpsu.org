@@ -1,0 +1,11 @@
+$("#happenings-content").append("<div id='saved-happening' class='invisible twelve-pt' style='text-align:center;' title='Event Saved'><img src='/images/v3/event-saved.png' style=''><div class='dejavu-condensed sixteen-pt blue-text float-left' style='text-align:center;width:100%;margin-top:10px;'>Title</div><%= @happening.title %><div class='happening-starts-at dejavu-condensed green-text' style='width:100%;'>Starts At</div><%= @happening.starts_at.to_s(:date_and_time) %><div class='happening-ends-at dejavu-condensed orange-text' style='width:100%;'>Ends At</div><%= @happening.ends_at.to_s(:date_and_time) %><div class='happening-url dejavu-condensed blue-text' style='width:100%;'>URL</div><%= @happening.url %><div class='happening-contact-email dejavu-condensed yellow-text' style='width:100%;'>Contact Email</div><%= @happening.contact_email %><div class='happening-description dejavu-condensed magenta-text' styleF='width:100%;'>Description</div><%= @happening.description %></div>");
+$("#saved-happening").dialog({
+	modal:true,
+	autoOpen: false,
+	position: "center",
+	buttons: { "Dismiss": function() { $(this).dialog("close"); } }
+});
+$("#saved-happening").dialog('open');
+$("#saved-happening").bind( "dialogclose", function(event, ui) {
+	$(this).remove();
+});

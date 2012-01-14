@@ -1,0 +1,5 @@
+<p id="notice"><%= notice %></p>
+
+<% if current_user && current_user.staff %>
+<%= link_to 'Edit', edit_content_path(@content) %> |
+<% end %>

@@ -1,0 +1,224 @@
+<% unless params[:page] %>
+<div class="feed-wrapper">
+	<div id="status-box" style='display:none;' class='float-left'>
+	<% form_for(@status, :remote => true, :class => "form" ) do |f| %>
+	<textarea name="status_update" id='status-box-msg' placeholder="Post to KPSUs Twitter feed!" class='dejavu-condensed float-right rounded-heavy'></textarea>
+	<div id="status-buttons">
+		<% if current_user.staff %>
+			<label for="announcement" id="status-announcement-label" class="dejavu-condensed float-left" style="background: #222;padding: 4px 8px 4px 8px;border-radius: 13px;">Announcement</label>
+			<input type="checkbox" name="announcement" value="1" id="announcement" style="float: left;margin-top: 8px;margin-left: 12px;">
+		<% end %>
+		<span class="dejavu-condensed blue-text post-status pointer" id="status-post-button">Post</span>&nbsp;&nbsp;&nbsp;
+
+		<%= submit_tag "save", :class => "invisible" %>
+	</div>
+		<% end %>
+
+	</div>
+	<div id="feed-label" class="bebas twenty-pt blue-text">
+		KPSU FEED
+	</div>
+	<div id="dashboard-options-wrapper" class="float-right dejavu-condensed twleve-pt rounded-heavy">
+		<ul id="dashboard-options" style="height:32px;">
+			<li class="horizontal standard yellow-text" style="width:50px;"><span style="" class="post-message dashboard-option">New Message</span><img src='/images/chat2.png' style="height:100%;vertical-align:middle;margin:0 5px 0 5px;"></li>
+			<li class="horizontal standard blue-text"><span style="" class="tweet dashboard-option">Tweet</span><img src='/images/Twitter.png' style="height:100%;vertical-align:middle;margin:0 5px 0 5px;"></li>
+			<li class="horizontal standard green-text"><span style="" class="refresh dashboard-option">Refresh</span><img src='/images/refresh.png' style="height:100%;vertical-align:middle;margin:0 5px 0 5px;"></li>
+		</ul>
+	</div>
+<% end %>
+<% if current_user.feed %>		
+	<% @feed.each do |f| %>
+	<% if f.comment_id %> 
+	<div class="feed-comment feed-item float-left clear-right  rounded-heavy" id="comment-<%= f.comment.id %>">
+		<div class="feed-item-header blue rounded-light float-left" style="width:100%;">
+		<div class="float-left clear-both" style="padding: 5px 10px;"><span class="white-text bebas sixteen-pt"><%= f.comment.rendered_title %></span></div>
+		<div class="icon comment" style="width: 32px; float:right; "><img src="/images/chat.png" style="width:100%;"></div>
+		</div>
+		<div style="width:600px;float:left;">
+			<div class="float-left" style="width:110px;padding:10px;">
+				<div class="float-left" style="margin:auto;width:110px;text-align:center;"><%= image_tag(f.comment.user.avatar.url(:thumb)) %></div>
+				<div class="float-left clear-left" style="width:110px;text-align:center;"><%= link_to(f.comment.user.f_name, user_path(f.comment.user), :class => "white-text") %></div>
+			</div>
+			<div class="float-left" style="width:450px;">
+				<div class="float-left yellow-text clear-left"> <span class="m1-bold"><%= f.comment.created_at.to_s(:time_and_date) %></span></div>
+				<div class="status-text float-left clear-both"> 
+					<div class="dejavu-condensed "><%= f.comment.body %></div>
+				</div>
+			</div>	
+		</div>
+	</div>
+	<% elsif f.status_id %>	
+	<div class="feed-status feed-item float-left clear-right  rounded-heavy" id="status-<%= f.status.id %>">
+		<div class="feed-item-header <% unless f.status.announcement %> green <% else %> red <% end %> rounded-light float-left" style="width:100%;">
+		<div class="float-left clear-both" style="padding: 5px 10px;"><% unless f.status.announcement %><span class="white-text bebas sixteen-pt">Status Update</span><% else %><span class="white-text bebas sixteen-pt">Announcement</span><% end %></div>
+		<div class="icon status" style="width: 32px; float:right; "><% unless f.status.announcement %><img src="/images/mail.png" style="width:100%;"><% else %><img src="/images/help.png" style="width:100%;"><% end %></div>
+		</div>		
+		<% if f.status.user_id == current_user.id %>
+			<div class="float-right "><span class="m1-bold"> <%= link_to "Delete", f.status, :confirm => "Are you sure?", :remote => true, :method => :delete %> </span></div>
+		<% end %>
+		<div style="width:600px;float:left;">
+			<div class="float-left" style="width:110px;padding:10px;">
+				<div class="float-left" style="margin:auto;width:110px;text-align:center;"><%= image_tag(f.status.user.avatar.url(:thumb)) %></div>
+				<div class="float-left clear-left" style="width:110px;text-align:center;"><%= link_to(f.status.user.f_name, user_path(f.status.user), :class => "green-text") %></div>
+			</div>
+			<div class="float-left" style="width:450px;">
+				<div class="float-left yellow-text clear-left"> <span class="m1-bold"><%= f.status.created_at.to_s(:time_and_date) %></span></div>
+				<div class="status-text float-left clear-both"><div class="dejavu-condensed "><%= f.status.body %></div></div>
+			</div>	
+		</div>
+	</div>
+	<% elsif f.post_id %>
+		<div class="feed-status feed-item float-left clear-right  rounded-heavy" id="post-<%= f.post.id %>">
+			<div class="feed-item-header magenta rounded-light float-left" style="width:100%;">
+			<div class="float-left clear-both" style="padding: 5px 10px;"><span class="white-text bebas sixteen-pt">New Post</span></div>
+			<div class="icon post" style="width: 32px; float:right; "><img src="/images/document.png" style="width:100%;"></div>
+			</div>
+			<div style="width:600px;float:left;">
+				<div class="float-left" style="width:110px;padding:10px;">
+					<div class="float-left" style="margin:auto;width:110px;text-align:center;"><%= image_tag(f.post.user.avatar.url(:thumb)) %></div>
+					<div class="float-left clear-left" style="width:110px;text-align:center;"><%= link_to(f.post.user.f_name, user_path(f.post.user), :class => "magenta-text") %></div>
+				</div>
+				<div class="float-left" style="width:450px;">
+					<div class="float-left clear-both"><span class="m1-bold"><%= link_to f.post.title, f.post, :class => "red-font" %></span></div>
+					<div class="float-left yellow-text clear-left"> <span class="m1-bold"><%= f.post.created_at.to_s(:time_and_date) %></span></div>
+					<div class="status-text float-left clear-both"><div class="dejavu-condensed "><%= truncate("#{f.post.body.gsub(/<\/?.*?>/, "")}", :length => 250, :omission => "...")%></div></div>
+				</div>	
+			</div>
+		</div>
+	<% elsif f.program_id %>
+		<% if f.program.event %>
+		<div class="feed-status feed-item float-left clear-right  rounded-heavy" id="program-<%= f.program.id %>">
+			<div class="feed-item-header orange rounded-light float-left" style="width:100%;">
+			<div class="float-left clear-both" style="padding: 5px 10px;"><span class="white-text bebas sixteen-pt">New Show!</span></div>
+			<div class="icon program" style="width: 32px; float:right; "><img src="/images/program.png" style="width:100%;"></div>
+			</div>
+			<div style="width:600px;float:left;">
+				<div class="float-left" style="width:110px;padding:10px;">
+					<div class="float-left" style="margin:auto;width:110px;text-align:center;"><%= image_tag(f.program.user.avatar.url(:thumb)) %></div>
+					<div class="float-left clear-left" style="width:110px;text-align:center;"><%= link_to(f.program.user.f_name, user_path(f.program.user), :class => "orange-text") %></div>
+				</div>
+				<div class="float-left" style="width:450px;">
+					<div class="float-left clear-both"><span class="m1-bold"><%= link_to f.program.title, f.program, :class => "magenta-text" %></span></div>
+					<div class="status-text float-left clear-left">Time Slot <span class="m1-bold"><%= i_to_day(f.program.event.day_i) %> <%= f.program.event.starts_at.to_s(:time_and_date) %> - <%= f.program.event.starts_at.to_s(:time_and_date) %></span></div>
+					<div class="status-text float-left clear-both"><div class="dejavu-condensed"><%= f.program.description %></div></div>
+				</div>	
+			</div>
+		</div>
+		<% end %>
+	<% elsif f.review_id %>
+		<div class="feed-status feed-item float-left clear-right  rounded-heavy" id="status-<%= f.review.id %>">
+			<div class="feed-item-header purple rounded-light float-left" style="width:100%;">
+			<div class="float-left clear-both" style="padding: 5px 10px;"><span class="white-text bebas sixteen-pt">Review</span></div>
+			<div class="icon review" style="width: 32px; float:right; "><img src="/images/review.png" style="width:100%;"></div>
+			</div>
+			<div style="width:600px;float:left;">
+				<div class="float-left" style="width:110px;padding:10px;">
+					<div class="float-left" style="margin:auto;width:110px;text-align:center;"><%= if f.review.album_cover_fetch then image_tag(f.review.album_cover_fetch, :style => "width:100%;margin:auto;" ) end %>
+					</div>
+					<div class="float-left clear-left" style="width:110px;text-align:center;"><%= link_to(f.review.user.f_name, user_path(f.review.user), :class => "purple-text") %></div>
+				</div>
+				<div class="float-left" style="width:450px;">
+					<div class="float-left clear-both">New Review <span class="m1-bold"><%= link_to f.review.title, f.review, :class => "red-font" %></span></div>
+					<div class="float-left clear-left">Album/Artist <span class="m1-bold"> <%= f.review.album.name  %> - <%= f.review.artist.name %></span></div>
+					<div class="status-text float-left clear-both"><div class="dejavu-condensed "><%= truncate("#{f.review.body.gsub(/<\/?.*?>/, "")}", :length => 250, :omission => "...")%></div></div>
+				</div>	
+			</div>
+		</div>
+	<% elsif f.tweet_id %>
+		<div class="feed-tweet feed-item float-left clear-right  rounded-heavy" id="tweet-<%= f.tweet.id %>">
+			<div class="feed-item-header green rounded-light float-left" style="width:100%;">
+			<div class="float-left clear-both" style="padding: 5px 10px;"><span class="white-text bebas sixteen-pt">Tweet</span></div>
+			<div class="icon tweet" style="width: 32px; float:right; "><img src="/images/Twitter.png" style="width:100%;"></div>
+			</div>
+			<div style="width:600px;float:left;">
+				<div class="float-left" style="width:110px;padding:10px;">
+					<div class="float-left" style="margin:auto;width:110px;text-align:center;"><%= image_tag(f.tweet.user.avatar.url(:thumb)) %></div>
+					<div class="float-left clear-left" style="width:110px;text-align:center;"><%= link_to(f.tweet.user.f_name, user_path(f.tweet.user), :class => "blue-text") %></div>
+				</div>
+				<div class="float-left" style="width:450px;">
+					<div class="status-text float-left clear-both"><span class="m1-bold">Tweet!</span> <%= link_to "View on Twitter", "http://twitter.com/#!/KPSU_PDX/status/#{f.tweet.tid}", :class => "red-font" %> </div>
+					<div class="float-left yellow-text clear-left"> <span class="m1-bold"><%= f.tweet.created_at.to_s(:time_and_date) %></span></div>
+					<div class="status-text float-left clear-both"><div class="dejavu-condensed  white-text"><%= f.tweet.body %></div></div>
+				</div>	
+			</div>
+		</div>
+	<% elsif f.strike_id %>
+	<div class="feed-status feed-item float-left clear-right  rounded-heavy" id="strike-<%= f.strike.id %>">
+		<div class="feed-item-header red rounded-light float-left" style="width:100%;">
+		<div class="float-left clear-both" style="padding: 5px 10px;"><span class="black-text bebas sixteen-pt">Strike!</span></div>
+		<div class="icon post" style="width: 32px; float:right; "><img src="/images/document.png" style="width:100%;"></div>
+		</div>
+		<div style="width:600px;float:left;">
+			<div class="float-left" style="width:110px;padding:10px;">
+				<img src="/images/v3/strike-issued.png" width="100%">
+			</div>
+			<div class="float-left" style="width:450px;">
+				<div class="float-left yellow-text clear-left"> <span class="m1-bold"><%= f.strike.created_at.to_s(:time_and_date) %></span></div>
+				<div class="status-text float-left clear-both"><div class="dejavu-condensed "><%= f.strike.description %></div></div>
+			</div>	
+		</div>
+	</div>
+	<% end %>
+	<% end %>
+<% else %>
+	<div class="feed-status feed-item float-left clear-right  rounded-heavy" id="welcome-feed-item">
+		<div class="feed-item-header blue rounded-light float-left" style="width:100%;">
+		<div class="float-left clear-both" style="padding: 5px 10px;"><span class="white-text bebas sixteen-pt">Welcome to KPSU!</span></div>
+		<div class="icon post" style="width: 32px; float:right; "><img src="/images/document.png" style="width:100%;"></div>
+		</div>
+		<div style="width:600px;float:left;">
+			<div class="float-left" style="width:110px;padding:10px;">
+			</div>
+			<div class="float-left" style="width:450px;">
+				<div class="status-text float-left clear-both"><div class="dejavu-condensed">This is your KPSU feed. You can communicate with other DJs, Tweet, and find out what's going on around the site and station. Feel free to post to Twitter (it post's as @KPSU_PDX) and if you want it show up on the main page use the <i>hashtag</i> #kpsu</div></div>
+			</div>	
+		</div>
+	</div>
+<% end %>
+<% unless params[:page] %>
+
+</div>
+
+<script type="text/javascript" charset="utf-8">
+	
+	$(".tweet.dashboard-option").click(function(){
+		$("#status-box").attr("title", "Post a Tweet from @kpsu_pdx").dialog({
+			width: 367,
+			height: 217
+		});
+		$("#status-box-msg").attr("placeholder","Post to KPSUs Twitter feed!");
+		$("#new_status").attr("action","/tweet");
+		$('#status-box-msg').textLimit(160);
+		$("#status-box, #status-buttons").fadeIn("slow");
+	});
+	$("#status-box-msg").focus(function(){
+	});
+	$(".post-message.dashboard-option").click(function(){
+		$("#status-box").attr("title", "New KPSU Status Update").dialog({
+			width: 367,
+			height: 217
+		});
+		$("#status-box-msg").attr("Placeholder", "Write something...");
+		$("#new_status").attr("action", "/statuses");
+		$('#status-box-msg').textLimit(500);
+		$("#status-box,#status-buttons").fadeIn("slow");
+	});
+	$(".hide-status").click(function(){
+		$("#status-box,#status-buttons").hide();
+	});
+	$(".post-status").click(function(){
+		$("#new_status").submit();
+	});
+	$(".refresh").click(function(){
+		$(".feed.all a").click();
+	});
+	
+	<% unless @feed.blank? %>
+	$('.feed-wrapper').pageless({ totalPages: <%= @feed.total_pages %>,
+		currentPage: 1, 
+		url: '/users/feed<%= @url_param %>', 
+		loaderMsg: 'Loading more results'
+	 });
+	<% end %>
+</script>
+<% end %>

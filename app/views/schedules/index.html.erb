@@ -1,0 +1,163 @@
+<% content_for :title do %>
+	Live Broadcast/Stream Schedule
+<% end %>
+<style type="text/css" media="screen">
+	.header-padding {
+		padding:0px 0px 10px 10px
+	}
+	table, tr, th, td {
+		text-decoration:none;
+		font-weight:normal;
+		text-align:center !important;
+		
+	}
+	th {
+		color:#FFFFFF;
+		background-color:#232323;
+		font-family:"ChunkFive";
+		padding:6px;
+	}
+	td {
+		padding:6px;
+		cursor:pointer;
+	}
+	table tr:first-child {
+		font-size:1em;
+	}
+	table tr{
+		font-size:.75em;
+	}
+	.day-column {
+		width:110px;
+		text-align:center;
+		padding:0px;
+		border:none;
+	}
+	.sun:hover, .tues:hover, .thurs:hover, .sat:hover {
+		background-color:#ff00a8;
+	}
+	.sun a:hover, .tues a:hover, .thurs a:hover, .sat a:hover {
+		color:#000000 !important;
+	}
+	.mon:hover, .wed:hover, .fri:hover {
+		background-color:#ff00a8;
+		color:#FFFFFF !important;
+	}
+	.mon a:hover, .wed a:hover, .fri a:hover {
+		color:#FFFFFF !important;
+	}
+	.time {
+		background-color:#343434;
+	}
+	.clock-time {
+		color:#f7ff20 !important;
+	}
+	.monday, .wednesday, .friday {
+		background-color:#93d4ff;
+	}
+	.sunday, .tuesday, .thursday, .saturday {
+		background-color:#0096ff;
+	}
+	.sun a, .tues a, .thurs a, .sat a{
+		font-family:"BebasRegular";
+		color:#FFFFFF !important;		
+	}
+	.mon a, .wed a, .fri a{
+		font-family:"BebasRegular";
+		color:#000000 !important;		
+	}
+	.table-r:hover {
+		border:1px solid #A30000;
+	}
+	
+</style>
+
+<% content_for :page_headline do %>
+	<span class="bebas sixteen yellow-text" style='text-align:right;'>Live Stream<br/> Schedule</span>
+<% end %>
+<%= render :partial => "layouts/sidebar" %>
+<div style="width:662px;border:2px solid #232323;margin:40px 0 50px 15px;float:left;" class="rounded-heavy">
+	<table id="schedule-table" cellspacing="0" width="644px" border="0" cellspacing="5" cellpadding="5">
+		<col class="day-column time"></colgroup>
+		<col class="day-column sunday"></colgroup>
+		<col class="day-column monday"></colgroup>
+		<col class="day-column tuesday"></colgroup>
+		<col class="day-column wednesday"></colgroup>
+		<col class="day-column thursday"></colgroup>
+		<col class="day-column friday"></colgroup>
+		<col class="day-column saturday"></colgroup>
+		<tr>
+			<th class="normal">Time</th>
+			<th class="normal">Sunday</th>
+			<th class="normal">Monday</th>
+			<th class="normal">Tuesday</th>
+			<th class="normal">Wednesday</th>
+			<th class="normal">Thursday</th>
+			<th class="normal">Friday</th>
+			<th class="normal">Saturday</th>
+		</tr>
+		<% (24).times do |i| %>
+		<% unless i < @start %>
+		<tr class="table-r" data-hour="<%= (i).to_s %>">
+			<td class="dejavu-sans">
+				<span class="dejavu-sans white-font clock-time"><%= (i).to_s %>:00</span>
+			</td>
+			<td data-cat="day" data-date="7" data-hour="<%= sprintf '%02d', (i) %>" class="normal sun" >
+			</td>                                                                                      
+			<td data-cat="day" data-date="1" data-hour="<%= sprintf '%02d', (i) %>" class="normal mon" >
+			</td>                                                                                      
+			<td data-cat="day" data-date="2" data-hour="<%= sprintf '%02d', (i) %>" class="normal tues">
+			</td>                                                                                      
+			<td data-cat="day" data-date="3" data-hour="<%= sprintf '%02d', (i) %>" class="normal wed" >
+			</td>              
+			<td data-cat="day" data-date="4" data-hour="<%= sprintf '%02d', (i) %>" class="normal thurs">
+			</td>                                                                                        
+			<td data-cat="day" data-date="5" data-hour="<%= sprintf '%02d', (i) %>" class="normal fri">
+			</td>                                                                                        
+			<td data-cat="day" data-date="6" data-hour="<%= sprintf '%02d', (i) %>" class="normal sat">
+			</td>
+
+			
+		</tr>
+		<% end %>
+		<% end %>
+	</table>
+</div>
+
+<% content_for :page_js do %>
+
+	$('td[data-cat=\"day\"]').hover(function(){
+		var tdClass = $(this).attr("class");
+		tdClass = "." + tdClass
+		$(tdClass).css({'border-right' : '2px solid #a31a1a','border-left':'2px solid #a31a1a'});
+	},function(){
+		var tdClass = $(this).attr("class");
+		tdClass = "." + tdClass
+		$(tdClass).css({'border' : 'none'});
+	});
+	
+	
+	$.getJSON('/schedules/', function(data) {
+	  $.each(data['events'], function(i, data){
+			console.log(data)
+			var hour = data['starts_at'].split("\:")[0]
+			var day = data['day_i']
+			var duration = data['duration']
+			var cellSelector = "td[data-date=\""+day+"\"][data-hour=\""+hour+"\"]"
+			var txt = "<a href=\"" + data['url'] +"\">" + data['name'] + "</a>"			
+			$(cellSelector).html(txt);
+			if(duration > 1){
+				if((hour.split("0")[0] == 0)) {
+					var h = hour.split("0").pop();
+					var nHour = parseInt(h) + 1
+					nHour = "0" + nHour
+				}else{
+					var nHour = parseInt(hour) + 1 
+				}
+				var addCellSelector = "td[data-date=\""+day+"\"][data-hour=\""+nHour+"\"]"			
+				$(addCellSelector).html(txt);
+			}
+		});
+	});
+	
+<% end %>

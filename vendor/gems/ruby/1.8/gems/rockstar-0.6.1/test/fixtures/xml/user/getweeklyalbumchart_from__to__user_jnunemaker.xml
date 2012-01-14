@@ -1,0 +1,31 @@
+<lfm status="ok"> 
+<weeklyalbumchart user="jnunemaker" from="1274011200" to="1274616000"> 
+<album rank="1"> 
+    <artist mbid="b7723b3f-9a35-438d-bc42-8ad8b5e027ae">Brad Mehldau</artist> 
+    <name>Highway Rider</name> 
+    <mbid></mbid> 
+    <playcount>15</playcount> 
+    <url>http://www.last.fm/music/Brad+Mehldau/Highway+Rider</url> 
+</album> 
+<album rank="2"> 
+    <artist mbid="">Benedict Arnold</artist> 
+    <name>the night cafe</name> 
+    <mbid></mbid> 
+    <playcount>9</playcount> 
+    <url>http://www.last.fm/music/Benedict+Arnold/the+night+cafe</url> 
+</album> 
+<album rank="3"> 
+    <artist mbid="">The City of Prague Philharmonic Orchestra</artist> 
+    <name>Film Music By Bernard Herrmann</name> 
+    <mbid></mbid> 
+    <playcount>2</playcount> 
+    <url>http://www.last.fm/music/The+City+of+Prague+Philharmonic+Orchestra/Film+Music+By+Bernard+Herrmann</url> 
+</album> 
+<album rank="4"> 
+    <artist mbid="bc641be9-ca36-4c61-9394-5230433f6646">Liquid Tension Experiment</artist> 
+    <name>Liquid Tension Experiment 2</name> 
+    <mbid>6c20d297-121e-47d0-aa3a-8f27c7a06553</mbid> 
+    <playcount>2</playcount> 
+    <url>http://www.last.fm/music/Liquid+Tension+Experiment/Liquid+Tension+Experiment+2</url> 
+</album> 
+</weeklyalbumchart></lfm>

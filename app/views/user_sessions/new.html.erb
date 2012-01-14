@@ -1,0 +1,64 @@
+<% content_for :title do %>
+	Login
+<% end %>
+
+<style type="text/css" media="screen">
+	#login-wrapper{
+		width: 590px;
+		margin: 50px auto 0 auto;
+		height: 30px;
+		padding-left: 10px;
+		padding-top: 10px;
+		font-size: 1.5em;
+	}
+	#login-methods {
+		margin-top: 18px;
+		float: left;
+	}
+	.login-method {
+		width:64px;
+		color: white;
+		font-size: .75em;
+		text-align: center;
+	}
+	.login-method.facebook {
+		width: 64px;
+		margin-right: 61px;
+		margin-left: 61px;
+	}
+	.login-type-text {
+		float:left;
+		width:64px;
+		margin-top:4px;
+	}
+</style>
+<div id="login-wrapper" class="blue chunk-five white-text title-bar">LOGIN</div>
+<div style="margin: 0px auto 50px auto;width: 560px;background-color: #343434;padding:20px 20px 20px 20px;height:255px;">
+	<div class="float-left" style="width:280px;">
+		<div class="chunk-five float-left clear-both sixteen-pt magenta-text" style="font-size: 2.0em;">DJs</div>
+		<div class="float-left clear-both" style="margin-top: 12px;">
+			<%= render 'form' %>
+		</div>
+		<div style="margin-top:10px;" class="dejavu-condensed blue-text float-left ten-pt">Forgot your password? <a href="/password_resets/new" class="orange-text">Click here to reset it</a></div>
+	</div>
+	<div class="float-left" style="width:280px;">
+		<div class="chunk-five float-left clear-both sixteen-pt green-text" style="font-size: 2.0em;">LISTENERS</div>
+		<div class="dejavu-condensed white-text ten-pt float-left clear-both">Listeners can login using Facebook or Twitter.</div>
+		<div id="login-methods">
+			<div class="float-left login-method facebook">
+				<a href="/auth/facebook" class="white-text">
+					<img style="width:100%;" src='/images/v3/facebook-big.png'>
+					<div class="login-type-text dejavu-condensed">Facebook</div>
+				</a>
+			</div>
+			<div class="float-left login-method">
+				<a href="/auth/twitter" class="white-text">
+					<img style="width:100%;" src='/images/v3/twitter-big.png'>
+					<div class="login-type-text dejavu-condensed">Twitter</div>
+				</a>
+			</div>
+		</div>
+	</div>
+
+<div class="float-right clear-both dejavu-condensed white-text ten-pt">*Passwords are case sensitive</div>
+</div>

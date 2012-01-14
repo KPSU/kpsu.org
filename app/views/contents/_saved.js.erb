@@ -1,0 +1,9 @@
+var content = ("<%= escape_javascript( raw(@content.body) )%>")
+$(".generic-post div").html(content);
+$(".generic-post").append("<div id='saved' class='invisible' title='Content Saved'><p><%= @content.title %> has been successfully updated.</span></p></div>");
+$("#saved").dialog({
+	modal:true,
+	buttons: { "Dismiss": function() { $(this).dialog("close"); } }
+});
+var edit_link = "<div class=\"dejavu-condensed edit-content\" style=\"clear:left;\"><%= escape_javascript(link_to("Edit #{@content.title}", edit_content_path(@content), :remote => true, :class => "edit-content orange-text")) %></div>";
+$(".generic-post div.container").append(edit_link);
