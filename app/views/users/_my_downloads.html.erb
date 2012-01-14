@@ -1,0 +1,21 @@
+<div id="my-downloads">	
+<div class="float-left rounded-light">
+	<div style="download-wrapper" class="rounded-heavy div-table">
+		<div style="width:560px;background-color:#343434;height:30px;text-align:left;padding:5px 0px 0px 5px;">
+			<div class="chunk-five magenta-text wide-col float-left" style="margin-left:44px;float:left;">Date</div>
+			<div class="chunk-five blue-text narrower-col float-left">Downloads</div>
+			<div class="chunk-five red-text narrow-col float-right">Options</div>
+		</div>
+		<% @user.downloads.order("created_at DESC").each do |d| %>
+		<% if Time.zone.now - Time.at(d.title.to_i) <= 10.weeks %>
+			<div class="micro-row" style="" id="">
+				<a href="<%= url_for(download_path(:id => d.id)) %>" title="Click to Download <%= d.title %>"><div class="download float-left">&nbsp;</div></a>
+				<div style="padding-top:6px;padding-left:3px;" class="float-left wide-col"><%= link_to("#{Time.at(d.title.to_i).to_s(:simple)} ( #{Time.at(d.title.to_i).to_s(:meridian_time)} )", download_path(:id => d.id), :class => "twelve-pt magenta-text", :title => "Original Air Time: #{Time.at(d.title.to_i)}") %></div>
+				<div style="padding-top:6px;" class="float-left twelve-pt blue-text narrower-col"><%= d.count %></div>
+				<div data-id="<%= d.id %>" class="delete-link float-right twelve-pt narrow-col red-text pointer">Delete</div>
+			</div>
+		<% end %>
+		<% end %>
+	</div>
+</div>
+</div>

@@ -1,0 +1,9 @@
+$("#dashboard-content").append("<div id='saved' class='invisible' title='Playlist Saved'><p>Your playlist has been successfully published. To view it, please click <a href='/playlists/<%= @playlist.id %>'>here</a> <br/><br/><span class='standard'>*click dismiss to continue using your dashboard.</span></p></div>");
+$("#saved").dialog({
+        modal:true,
+        buttons: { "Dismiss": function() { $(this).dialog("close"); } }
+});
+$("#new_playlist").attr("action", '/playlists/<%= @playlist.id %>')
+$("#new_playlist").attr("method", 'put')
+$(".save-playlist").html("<i>Saved!</i>").removeClass(".save-playlist").removeClass(".pointer").addClass("black-font");
+$("#dashboard-content").dialog('open');

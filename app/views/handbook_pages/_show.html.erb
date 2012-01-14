@@ -1,0 +1,14 @@
+<div class="rounded-heavy handbook-pages">
+	<div class="m1-thin large magenta rounded-heavy-top" style="width: 634px;height: 34px;padding-top: 10px;padding-left: 10px;margin-top:25px;">
+		<div id="" class="chunk-five sixteen"><%= @handbook_page.title %></div>
+	</div>
+	<div class="handbook-body float-left white-text dejavu-condensed">
+	<%= raw @handbook_page.body %>
+	<br/>
+	<% if current_user %>
+		<% if current_user.staff %>
+	<%= link_to 'Edit', edit_handbook_page_path(@handbook_page) %> |
+		<% end %>
+	<% end %>
+	</div>
+</div>

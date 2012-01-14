@@ -1,0 +1,21 @@
+<lfm status="ok"> 
+<weeklyartistchart user="jnunemaker" from="1275825600" to="1276430400"> 
+<artist rank="1"> 
+    <name>Glee Cast</name> 
+    <mbid>6e0ae159-8449-4262-bba5-18ec87fa529f</mbid> 
+    <playcount>45</playcount> 
+    <url>http://www.last.fm/music/Glee+Cast</url> 
+</artist> 
+<artist rank="2"> 
+    <name>Missy Higgins</name> 
+    <mbid>3ac2a4a2-52b3-498b-bbc8-31443c68dfe0</mbid> 
+    <playcount>38</playcount> 
+    <url>http://www.last.fm/music/Missy+Higgins</url> 
+</artist> 
+<artist rank="3"> 
+    <name>Ray LaMontagne</name> 
+    <mbid>b5c4ffa2-82e1-4b72-b7f3-c60afb74b860</mbid> 
+    <playcount>11</playcount> 
+    <url>http://www.last.fm/music/Ray+LaMontagne</url> 
+</artist> 
+</weeklyartistchart></lfm>

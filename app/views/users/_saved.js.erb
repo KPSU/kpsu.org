@@ -1,0 +1,7 @@
+$("#dashboard-content").append("<div id='saved' class='invisible' title='Profile Saved'><p>Your profile has been successfully updated. To view the changes, please click <a href='/users/<%= @user.id %>'>here</a><br/><br/><span class='standard'>*click dismiss to continue using your dashboard.</span></p></div>");
+$("#saved").dialog({
+	modal:true,
+	buttons: { "Dismiss": function() { $(this).dialog("close"); } }
+});
+$("input[type='submit']").attr("disabled", true).val("Saved!");
+$("#dashboard-content").dialog('open')

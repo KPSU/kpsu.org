@@ -1,0 +1,23 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  uid: 1
+  name: MyString
+  email: MyString
+  nid: 1
+  field_rating_value: 1
+  field_review_value: MyText
+  field_artist_value: MyString
+  field_album_value: MyString
+  field_record_label: MyString
+
+two:
+  uid: 1
+  name: MyString
+  email: MyString
+  nid: 1
+  field_rating_value: 1
+  field_review_value: MyText
+  field_artist_value: MyString
+  field_album_value: MyString
+  field_record_label: MyString

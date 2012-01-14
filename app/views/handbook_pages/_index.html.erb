@@ -1,0 +1,13 @@
+<div class="rounded-heavy handbook-pages">
+	<div class="m1-thin large magenta rounded-heavy-top" style="width: 634px;height: 34px;padding-top: 10px;padding-left: 10px;margin-top:25px;">
+		<div id="" class="chunk-five sixteen">Handbook Pages</div>
+	</div><ul class="vertical" style="padding:10px;">
+<% @handbook_pages.each do |handbook_page| %>
+	<li class="vertical dejavu-condensed"><%= link_to(handbook_page.title, handbook_page_path(handbook_page), :class => "yellow-text handbook db-content", :remote => true, :rel => ":address/#{url_for(handbook_page_path(handbook_page))}" ) %></li>
+	<li class="vertical twelve-pt dejavu-condensed white-text" style="padding:5px;"><%= truncate("#{handbook_page.body.gsub(/<\/?.*?>/, "")}", :length => 100, :omission => "...") %></li>
+<% end %>
+</ul>
+</div>
+<script type="text/javascript">
+
+</script>

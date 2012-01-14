@@ -1,0 +1,20 @@
+<% @results.each do |u| %>
+<div class="result float-left pointer" data-id="<%= u.id %>" style="width:140px;height:140px;padding:5px;margin:10px 5px 0px 0px;text-align:center;">
+<div class="thumb"><%= image_tag u.avatar.url(:thumb) %></div>
+<div class="dj-full-name dejavu-condensed blue-text"><%= u.f_name %> <%= u.l_name %></div>
+</div>
+<% end %>
+
+<script type="text/javascript" charset="utf-8">
+	$(".result").live("mouseenter", function(){
+		$(this).css('background-color', '#232323');
+	});
+	$(".result").live("mouseleave", function(){
+		$(this).css('background-color', 'transparent');
+	});
+	$(".result").click(function(){
+		var uId = $(this).attr("data-id");
+		$("input#issue_to").val(uId);
+		$('.result').not($(this)).hide();
+	});
+</script>

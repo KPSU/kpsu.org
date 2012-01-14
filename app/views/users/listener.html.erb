@@ -1,0 +1,283 @@
+<% content_for :title do %>
+	home
+<% end %>
+<style type="text/css" media="screen">
+	ul,li {}
+	.drop-shadow {
+	    box-shadow: 0 0 5px rgba(0,255,36, 2);
+	    -webkit-box-shadow: 0 0 5px rgba(0,255,36, 2); 
+	    -moz-box-shadow: 0 0 5px rgba(0,255,36, 2); 
+	}
+	input.drop-shadow {
+		border: 1px solid #CCCCCC !important;
+	}
+	.home-controls {
+		width:180px;
+		margin-left:56px;
+	    outline:none;
+	    transition: all 0.25s ease-in-out;
+	    -webkit-transition: all 0.25s ease-in-out;
+	    -moz-transition: all 0.25s ease-in-out;
+	}
+	.home-controls:hover {
+	    box-shadow: 0 0 5px rgba(0,255,36, 2);
+	    -webkit-box-shadow: 0 0 5px rgba(0,255,36, 2); 
+	    -moz-box-shadow: 0 0 5px rgba(0,255,36, 2); 
+	}
+	.home-controls ul {
+		background-color:#171717;
+	}
+
+	.home-controls li {
+		padding:10px;
+		width:160px;
+		color:#FFF;
+		font-family:"ChunkFiveRegular"; 
+		background-color: #272727;
+		transition: all 0.25s ease-in-out;
+	    -webkit-transition: all 0.25s ease-in-out;
+	    -moz-transition: all 0.25s ease-in-out;
+	}
+	.home-controls li:last-child {
+		border:none;
+	}
+	.home-controls li:hover {
+		background-color:#3fb2ff;
+	}
+	.home-controls li:first-child, .control_panel {
+		background-color:#00ff24;
+		width:160px;
+		padding:10px;
+		color:#FFFFFF;
+		font-family:"ChunkFiveRegular";
+
+	}
+	.db-subclass {
+		background-color:#343434 !important;
+		font-size:.75em;
+	}
+	.db-subclass a:link,.db-subclass a:active,.db-subclass a:visited {
+		color:#F7FF20 !important;
+		font-family:"DejaVuSansCondensed";
+	}
+	#home-options li span {
+		transition: all 0.25s ease-in-out;
+	    -webkit-transition: all 0.25s ease-in-out;
+	    -moz-transition: all 0.25s ease-in-out;
+	}
+	#home-options li span:hover {
+		color:#666666;
+		cursor:pointer;
+		text-shadow: 0 0 5px rgba(255, 109, 100, 2);
+	    -webkit-text-shadow: 0 0 5px rgba(255, 109, 100, 2); 
+	    -moz-text-shadow: 0 0 5px rgba(255, 109, 100, 2);
+	}
+	.db-subclass:hover {
+		background-color:#393939 !important;
+	}
+	textarea#status-box-msg {
+		float:left;
+		font-size: .875em;
+		margin-left: 10px;
+		width: 301px;
+		}
+	.user-notice {
+		background-color: #F1F1F1;
+		padding: 10px;
+		position: absolute;
+		right: 142px;
+		width: 200px;
+		word-break: break-word;
+		z-index: 200;
+	}
+	
+	#home-content {
+		float:left;
+		width: 664px;
+		height: auto;
+		margin-left: 12px;
+	}
+	#home-content .titlebar {
+		margin-top: 25px;
+		padding-left: 10px;
+		width: 585px;
+		height: 34px;
+		padding-top: 15px;
+		padding-left: 15px;		
+		margin-left: 26px;
+	}
+	#home-content .body {
+		background-color:#343434;
+		padding-left: 10px;
+		width: 570px;
+		padding-top: 15px;
+		padding-left: 15px;
+		padding-bottom:15px;
+		padding-right:15px;		
+		margin-left: 26px;
+	}
+</style>
+<div id="home">
+	<% content_for :page_headline do %>
+	<span class="blue-text">
+		home
+	</span>
+	<% end %>
+	<% if notice %>
+	<div class="user-notice m1-regular normal float-right rounded-heavy margin-med"><span class="m1-bold"><%= notice %></span></div>
+	<% end %>	
+	
+	<div class="float-left clear-left" style="margin-top:25px;margin-left:10px;margin-bottom:50px;">
+		<div class="home-controls rounded-heavy">
+			<ul class="rounded-heavy">
+				<li class="vertical rounded-heavy-top control_panel">Control Panel</li>
+				<li class="pointer feed all db-subclass"><%= link_to("Edit Profile", listener_edit_path(current_user), :remote => true, :rel => ":address/#{url_for(listener_edit_path(current_user))}")%></li>
+			</ul>
+		</div>
+	</div>	
+
+	<div id="home-content" class="float-right" style="width:680px;margin-bottom:50px;">
+		<div class="titlebar chunk-five white-text twenty-pt float-left blue rounded-heavy-top clear-left">
+			Welcome!
+		</div>
+		<div class="body twelve-pt dejavu-condensed white-text float-left">
+			This is your KPSU.org home, for now you can edit your listener profile or adjust notification settings. Stay tuned for more features!
+		</div>
+	</div>
+
+
+
+</div>
+
+<% content_for :page_js do %>
+	function addressURL(param){
+		if (param == "/users/feed"){
+			$("#home-options-wrapper").show();
+		}else{
+			$("#home-options-wrapper").hide();
+		}
+		$("a[href='"+param+"']").click();
+	}
+	$.address.state('/listener/home/#/');
+	$.address.internalChange(function(event){
+		var paramPrep = event.value.toString();
+		if (paramPrep.match(/home/)){
+			var param = paramPrep.split("/home/#")[1]
+		}else{
+			var param = paramPrep
+		}
+		
+		
+	});
+	$.address.init(function(event){
+		var paramPrep = event.value.toString();
+		
+		if (paramPrep.match(/home/)){
+			var param = paramPrep.split("/home/#")[1]
+		}else{
+			var param = paramPrep
+		}
+		console.log(param);
+		if (param.match(/(listener\/)(\d+)(\/edit)/)){
+			$("a[href='"+param+"']").click();
+		}
+		
+	});
+	var loading = "<div style='margin:200px 0 0 0;text-align:center;'><span class='magenta-text bebas sixteen-pt'>Loading</span><br/><img src='/images/ajax-loader.gif'></div>"
+
+	$("li.dj:not(.db-subclass)").toggle(function(){		
+		$("li.dj.db-subclass").fadeIn("fast").removeClass("invisible");
+		$("li.dj.db-subclass").children().fadeIn(100);
+	},function(){
+		$("li.dj.db-subclass").slideUp("fast");
+		$("li.dj.db-subclass").children().fadeOut("fast");
+	});
+	$("li.station:not(.db-subclass)").toggle(function(){		
+		$("li.station.db-subclass").fadeIn("fast");
+		$("li.station.db-subclass").children().fadeIn(100);
+		
+	},function(){
+		$("li.station.db-subclass").slideUp("fast");
+		$("li.station.db-subclass").children().fadeOut("fast");
+	});
+	$("li.feed:not(.db-subclass)").toggle(function(){		
+		$("li.feed.db-subclass").fadeIn("fast");
+		$("li.feed.db-subclass").children().fadeIn(100);
+		
+	},function(){
+		$("li.feed.db-subclass").slideUp("fast");
+		$("li.feed.db-subclass").children().fadeOut("fast");
+	});
+	$("li.shows:not(.db-subclass)").toggle(function(){		
+		$("li.shows.db-subclass").fadeIn("fast");
+		$("li.shows.db-subclass").children().fadeIn(100);
+		
+	},function(){
+		$("li.shows.db-subclass").slideUp("fast");
+		$("li.shows.db-subclass").children().fadeOut("fast");
+	});
+	<% if current_user.staff %>
+	<% current_user.roles.each do |role| %> 
+	$("li.<%= role.title.gsub(/\s/, "-").downcase %>:not(.db-subclass)").toggle(function(){		
+		$("li.<%= role.title.gsub(/\s/, "-").downcase %>.db-subclass").fadeIn("fast");
+		$("li.<%= role.title.gsub(/\s/, "-").downcase %>.db-subclass").children().fadeIn(100);
+        
+	},function(){
+		$("li.<%= role.title.gsub(/\s/, "-").downcase %>.db-subclass").slideUp("fast");
+		$("li.<%= role.title.gsub(/\s/, "-").downcase %>.db-subclass").children().fadeOut("fast");
+	});
+	<% end %>
+	<% end %>
+	$(".db-subclass>a").live("ajax:success", function(event, data, status, xhr){
+		$("#home-content").html(data);
+	});
+	$(".db-subclass>a").live("ajax:loading", function(){
+		$("#home-content").html(loading);
+	});
+	$("a.db-content").live("ajax:success", function(event, data, status, xhr){
+		$("#home-content").html(data);
+	});
+	$("a.db-content").live("ajax:loading", function(){
+		$("#home-content").html(loading);
+	});
+	function hideNotice(){
+		var u = $(".user-notice");
+		if (u){
+			$(u).delay(3000).fadeOut("slow");
+		}
+	}
+	$(".tweet.home-option").click(function(){
+		$("#status-box").attr("title", "Post a Tweet from @kpsu_pdx").dialog({
+			width: 394,
+			height: 166
+		});
+		$("#status-box-msg").val("Post to KPSUs Twitter feed!");
+		$("#new_status").attr("action","/tweet");
+		$('#status-box-msg').textLimit(160);
+		$("#status-box,#status-buttons").fadeIn("slow");
+	});
+	$("#status-box-msg").focus(function(){
+		$(this).val("");
+	});
+	$(".post-message.home-option").click(function(){
+		$("#status-box").attr("title", "New KPSU Status Update").dialog({
+			width: 394,
+			height: 166
+		});
+		$("#status-box-msg").val("Write something...");
+		$("#new_status").attr("action", "/statuses");
+		$('#status-box-msg').textLimit(500);
+		$("#status-box,#status-buttons").fadeIn("slow");
+	});
+	$(".hide-status").click(function(){
+		$("#status-box,#status-buttons").hide();
+	});
+	$(".post-status").click(function(){
+		$("#new_status").submit();
+	});
+	$(".refresh").click(function(){
+		$(".feed.all a").click();
+	});
+	hideNotice();
+		
+<% end %>

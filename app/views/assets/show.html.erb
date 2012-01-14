@@ -1,0 +1,20 @@
+<div class="m1-thin extra-large"><%= @album.title %></div>
+<div class="album-container" style="margin:20px auto 10px auto;">
+<% @album.photos.each do |photo| %>
+	<% if photo.thumbnail && photo.medium %>
+	<div class="float-left m1-regular" style="width:200px;height:150px;">
+		<div class="m1-bold medium float-left" style="width:200px;text-align:center;">
+			<%= link_to("#{truncate(photo.title, :length => 17)}", photo.medium.url, :class => "red-font") %>
+		</div>
+		<div style="margin-left:auto;margin-right:auto;padding:0px;text-align:center;">
+			<%= link_to(image_tag(photo.thumbnail.url), photo.medium.url, :class => "image", :alt => photo.title, :title => photo.title ) %>
+		</div>
+	</div>
+	<% end %>
+<% end %>
+</div>
+
+<% content_for :page_js do %>
+	$('.album-container a.red-font').lightBox({fixedNavigation:true});
+	$('.album-container a.image').lightBox({fixedNavigation:true});
+<% end %>

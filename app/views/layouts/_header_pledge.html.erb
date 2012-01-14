@@ -1,0 +1,29 @@
+
+<div class="wrapper-topblock-menu medium white float-left margin-left-med margin-top-exexsm">
+
+
+	<% unless currently_playing.class == String %>
+
+		<div class="float-left"><%= image_tag(current_dj.avatar.url(:tiny), :align => "left" )%>	<div style="position:absolute;left:70px;" class="m1-thin large white-font"><span>ON AIR</span> 
+		</div></div>
+		<div style="position:absolute;top:23px;left:70px;">
+		<div class="float-left m1-regular white-font" style="clear:right;"><%= link_to(current_program.title, program_path(current_program), :class => "white-font" )%></div>
+		<div class="float-left m1-regular white-font" style="clear:left;">w/ <%= link_to(current_dj.dj_name, user_path(current_dj), :class => "white-font") %></div>
+		</div>
+	<% else %>
+	<div class="float-left"><span class="m1-thin large white-font"><span>ON AIR</span> 
+	</span></div>
+	<div style="position:absolute;top:23px;">
+	<div class="float-left m1-regular white-font" style="clear:right;">We're on autopilot </div>
+	</div>
+	<% end %>
+
+</div>
+
+<div style="position:absolute;top:30px;;right:0px;text-align:right;" class="m1-regular white-font huge">SHOW SOME LOVE, SUPPORT KPSU<br/><br/><a href="https://www.foundation.pdx.edu/publicgift/kpsu.jsp" style="color:yellow;" title="Show you love KPSU and help keep us broadcasting donate today!">DONATE</a><br/></div>
+<div style="position:absolute;left:70px;top:80px;" class="m1-bold american">
+		<a class="m1-bold" id="popup-link" title="Click to listen to KPSU's live stream" style="" href="/popup_player" target="page" onClick="window.open('','page','toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=0,resizable=0,width=350,height=210,left=50,top=50,titlebar=yes')">LISTEN</a>
+
+</div>
+<div class="m1-thin float-right white-font" style="margin-right:45px;"><% if current_user %><%= link_to("KPSU DASHBOARD", dashboard_path) %><% end %>
+</div>

@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= @chatroom.user_id %>
+</p>
+
+<p>
+  <b>Tite:</b>
+  <%= @chatroom.tite %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @chatroom.description %>
+</p>
+
+
+<%= link_to 'Edit', edit_chatroom_path(@chatroom) %> |
+<%= link_to 'Back', chatrooms_path %>

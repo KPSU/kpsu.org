@@ -1,0 +1,106 @@
+<% content_for :title do %>
+<%= @review.title %>
+<% end %>
+<% content_for :page_headline do %>
+	<span class="bebas sixteen green-text" style='text-align:right;'>Reviews</span>
+<% end %>
+<style type="text/css" media="screen">
+	.review-container {
+		float: left;
+		margin-left: 35px;
+		width: 604px;
+	}
+	.review-wrapper {
+		background-color: #343434;
+	}
+	.review {
+		width:604px;
+	}
+	.review-content {
+		padding: 0px;
+		margin: 15px;
+		float: left;
+	}
+</style>
+<%= render :partial => "layouts/sidebar" %>
+<div class="review-container">
+<div class="clear-both float-left review-wrapper" style="margin:10px 0 10px 0;">
+<div class="review">
+	
+	<div class="title-wrapper <%= @color %>" style="width:604px;float:left;">
+		<div class="float-left" style="margin-left:15px;">
+			<div class="float-left" style="float: left;margin-top: 5px;padding-left:3px;">
+				<%= link_to(@review.title, @review, :class => "bebas sixteen-pt black-text") %>
+			</div>
+			
+			<div class="m1-regular" style="clear:left;padding-left:3px;">
+				<span class="m1-bold"><%= @review.artist.name %></span><span class="m1-light"> <%= @review.album.name %></span>
+			</div>
+		</div>
+		<div class="dejavu-condensed float-right" style="text-align:right;float:right;margin: 10px;"><div class="m1-regular float-left normal">
+		  <%= if @review.genre then @review.genre.title else "No Genre" end %>
+		</div></div>
+	</div>
+	<div class="review-content">
+	<div class="float-left" style="width:160px;text-align:center;">
+		<%= if @review.album_cover_fetch then image_tag(@review.album_cover_fetch, :style => "margin:auto;" ) end %>
+		<div class="m1-regular float-left clear-both normal">
+			  <% if @review.user && @review.user.l_name %> 
+				<span class="chunk-five blue-text">By</span>
+				<%= link_to("#{@review.user.dj_name}", @review.user, :class => "yellow-text twelve-pt")  %> <%= link_to("(#{@review.user.f_name} #{@review.user.l_name})", @review.user, :class => "blue-text ten-pt")  %>
+			<% end %>
+		</div>
+	</div>
+	<div class="white-text twelve-pt float-left" style="width:414px;background-color:#343434;">
+		<div class="post-body m1-regular">
+			<div style="margin: 10px;float: left;">
+			  <%= raw @review.body %>
+			</div>
+			<div class="post-photos" style="float: left;clear:both;margin: 10px 0 0 10px;">
+				<div class="m1-regular float-left clear-both normal">
+				  <span class="m1-bold">Artist homepage</span>
+				  <%= @review.link %>
+				</div>
+				<div class="m1-regular float-left clear-both normal">
+				  <span class="m1-bold">Record label</span>
+					<% if @review.label %>
+				  <%= @review.label.name %>
+					<% else %>
+					<span>No Label Provided</span>
+				  <% end %>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+</div>
+<div class="social-wrapper <%= @color %>" style="width:604px;height:35px;float:left;">
+
+<div class="social-networking" style="	float: left;clear: both;margin: 5px 5px 0px 24px;width: 570px;text-align: right;">
+	<div class="float-left" style="mtext-align:left !important;margin: 7px 0px 0px 0px;">
+		<% if current_user %>
+			<% if @review.user == current_user %>
+				<a class="red-text dejavu-condensed twelve-pt" href='/dashboard/#/reviews/<%= @review.id %>/edit'>Edit</a>
+			<% elsif current_user.staff %>
+				<a class="red-text dejavu-condensed twelve-pt" href='/dashboard/#/reviews/<%= @review.id %>/edit'>Edit</a>
+			<% else %>
+			<% end %>
+		<% end %>
+	</div>
+	SHARE&nbsp;&nbsp;
+	<div class="float-right">
+	<!-- REGARDING FACEBOOK %2F stands for / and w -->
+		<iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fkpsu.org<%= url_for(@review) %>&amp;layout=button_count&amp;show_faces=true&amp;width=40&amp;action=like&amp;font=segoe+ui&amp;colorscheme=light&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:80px; height:21px;" allowTransparency="true">
+		</iframe>
+	
+		<a href="http://twitter.com/share/?url=http://kpsu.org<%= url_for(@review) %>" class="twitter-share-button" data-count="horizontal" data-via="KPSU_PDX" data-text="<%= @review.title %>: ">
+			Tweet
+		</a>
+		<script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+	</div>
+</div>
+</div>
+
+
+</div>
+</div>

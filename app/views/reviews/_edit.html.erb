@@ -1,0 +1,114 @@
+<style type="text/css" media="screen">
+	 option {
+		text-transform:capitalize !important;
+	}
+	#review_submit {
+		height:43px;
+		width:165px;
+		margin-right:5px;
+	}
+	label {
+		font-family:"M1cbold";
+	}
+	#new-review-page-title {
+		margin-left:8px;
+		margin-top:4px;
+	}
+	#details-inner {
+		width: 400px;
+	padding: 5px 10px 10px 10px;
+	height: 140px;
+	margin-bottom: 37px;
+	}
+	#review-body-inner {
+	width: 396px;
+	padding: 10px 10px 20px 10px;
+	height: 220px;
+	}
+</style>
+<div class="m1-thin large yellow rounded-heavy-top" style="width: 634px;height: 34px;margin-left: 35px;padding-top: 10px;padding-left: 10px;margin-top:25px;">
+	<div id="new-review-page-title" class="chunk-five sixteen">Edit Review</div>
+</div>
+<div style="background-color:#171717;width:644px;padding-bottom:20px;height:auto;margin-left:35px;" class="float-left rounded-heavy-bottom">
+<%= form_for(@review, :html => { :multipart => true, :class => "form" }, :remote => true ) do |f| %>
+  <% if @review.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@review.errors.count, "error") %> prohibited this review from being saved:</h2>
+
+      <ul>
+      <% @review.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+	<div style="margin:30px 20px 0px 0px;width:200px;" class="float-right">
+	  <div class="form float-right">
+		<label class="chunk-five blue-text" for="Attachment Title">Attachment Title</label><br/>
+	  	<input style="padding:4px" class="dejavu-condensed rounded-heavy" type="text" name="attachment[asset[title]]" value="" id="some_name"><br/>
+		<label class="chunk-five blue-text" for="Attachment Title">Attachment Description</label><br/>
+	  	<textarea style="padding:4px" class="dejavu-condensed rounded-heavy" type="text" name="attachment[asset[description]]" value="" id="some_name" rows="8" cols="35"></textarea>
+	  </div>
+	  <div class="form float-right">
+	  	<%= f.file_field :asset, :class => "dejavu-condensed rounded-heavy", :style => "padding:4px;width:175px;"   %>
+	  </div>
+	  <div class="actions float-right" style="margin-top:40px;margin-right:23px;margin-left:auto;">
+	    <%= f.submit "Save", :class => "rounded-heavy chunk-five large" %>
+	  </div>
+	</div>
+  <div class="details float-left" style="">
+  	<div id="details-inner" class="rounded-heavy">
+		<div style="margin:0px 5px 10px 0px;" class="form float-left clear-both">
+  	    <div style="margin:10px 0px 10px 0px;" class="chunk-five blue-text large-sm float-left clear-both">Title</div><br />
+  	      <%= f.text_field :title, :class => "dejavu-condensed rounded-heavy float-left ", :style => "float-left padding:4px;width:386px;height:27px;" %>
+  		</div>
+  		<div style="margin:0px 5px 10px 0px;" class="form float-left clear-left">
+  	    <div style="margin:10px 0px 10px 0px;" class="chunk-five blue-text large-sm float-left">Artist</div><br />
+  	      <%= text_field_tag :artist,"#{@review.artist.name}", :class => "dejavu-condensed rounded-heavy float-left ", :style => "padding:4px;width:384px;height:27px;", :"data-autocomplete" => '/reviews/autocomplete_artist_name'  %>
+  		</div>
+  		<div style="margin:0px 5px 10px 0px;" class="form float-right clear-right">
+  		<div style="margin:10px 0px 10px 0px;" class="chunk-five blue-text large-sm float-left clear-both">Album</div><br />
+  		  <%= text_field_tag :album, "#{@review.album.name}", :class => "dejavu-condensed  float-left rounded-heavy", :style => "padding: 4px;width: 385px;", :"data-autocomplete" => '/reviews/autocomplete_album_name' %>
+  		</div>
+	</div>
+  </div>
+
+<div class="review-body float-left">
+	<div id="review-body-inner" class="rounded-heavy">
+		<div style="margin:0px 5px 10px 0px;" class="form float-left clear-left">
+			<div class="form">
+			<div style="margin:10px 0px 10px 0px;float:left;">
+			  <%= f.label :body, :class => "chunk-five blue-text" %>
+			</div>
+			  <br />
+			  <%= f.text_area :body, :class => "dejavu-condensed rounded-heavy  ", :rows => 10, :cols => 73, :style => "padding:4px;"   %>
+			</div>
+			<div class="formatting float-right dejavu-condensed yellow-text pointer">Formatting Options</div>
+			<br/>
+		</div>
+	</div>
+</div>
+
+<div class="dj-profile-info float-left clear-left">
+	<div class="rounded-heavy" style="width:450px;padding:10px;height:100px;margin:10px;">
+		<div style="margin:0px 5px 10px 5px;" class="form float-left clear-left">
+  			<div style="margin:10px 0px 10px 0px;" class="chunk-five blue-text float-left">Link</div><br />
+    		<%= f.text_field :link, :class => "dejavu-condensed   rounded-heavy", :style => "padding:4px;"  %>
+  		</div>
+  		<div style="margin:0px 5px 10px 5px;" class="form float-left clear-right">
+  		<div style="margin:10px 0px 10px 0px;" class="chunk-five blue-text float-left">Genre</div><br />
+  	  <%= select_tag "genres", options_for_select(genres, :selected => "#{ @review.genre == nil ? "0" : @review.genre.id }", :multiple => false, :size => 1 )%>
+  		</div>
+	</div>
+</div>
+</div>
+
+<% end %>
+<%= render :partial => 'layouts/formatting_options' %>
+<script type="text/javascript" charset="utf-8">
+$('.formatting').click(function(){
+	$('.formatting-content').dialog({title: "Formatting Options", width: '600', position: 'top', buttons: { "close": function() { $(this).dialog("close"); } }});
+});
+</script>
+
+

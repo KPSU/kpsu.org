@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<lfm status="ok">
+<metros>
+    <metro>
+        <name>Bremen</name>
+                <country>Germany</country>
+    </metro>
+    <metro>
+        <name>Rostock</name>
+                <country>Germany</country>
+    </metro>
+    <metro>
+        <name>Dresden</name>
+                <country>Germany</country>
+    </metro>
+    <metro>
+        <name>Frankfurt</name>
+                <country>Germany</country>
+    </metro>
+    <metro>
+        <name>Cologne</name>
+                <country>Germany</country>
+    </metro>
+    <metro>
+        <name>Munich</name>
+                <country>Germany</country>
+    </metro>
+    <metro>
+        <name>Hamburg</name>
+                <country>Germany</country>
+    </metro>
+    <metro>
+        <name>Stuttgart</name>
+                <country>Germany</country>
+    </metro>
+    <metro>
+        <name>Berlin</name>
+                <country>Germany</country>
+    </metro>
+    <metro>
+        <name>Magdeburg</name>
+                <country>Germany</country>
+    </metro>
+</metros></lfm>

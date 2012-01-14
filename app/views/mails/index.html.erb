@@ -1,0 +1,46 @@
+<table width="100%" border="0">
+	<tr>
+		<th>
+			Login
+		</th>
+		<th>
+			Subject
+		</th>
+		<th>
+			Sent
+		</th>
+	</tr><% @messages.each do |message| %><% user = (@folder != 'sent')? User.find(message.user_id) : User.find(message.user_id_target) %><% if @folder == 'inbox' || @folder.blank? %><% if message.recipient_deleted == false %>
+	<tr>
+		<td>
+			<%= link_to user.login, user_path(user) %>
+		</td>
+		<td>
+			<%= link_to message.subject, message_path(message) %>
+		</td>
+		<td>
+			<%= distance_of_time_in_words(message.created_at, Time.now) %>ago
+		</td>
+	</tr><% end %><% elsif @folder == 'sent' %><% if message.author_deleted == false %>
+	<tr>
+		<td>
+			<%= link_to user.login, user_path(user) %>
+		</td>
+		<td>
+			<%= link_to message.subject, message_path(message) %>
+		</td>
+		<td>
+			<%= distance_of_time_in_words(message.created_at, Time.now) %>ago
+		</td>
+	</tr><% end %><% elsif @folder == 'trash' %><% if message.recipient_deleted == true %>
+	<tr>
+		<td>
+			<%= link_to user.login, user_path(user) %>
+		</td>
+		<td>
+			<%= link_to message.subject, message_path(message) %>
+		</td>
+		<td>
+			<%= distance_of_time_in_words(message.created_at, Time.now) %>ago
+		</td>
+	</tr><% end %><% end %><% end %>
+</table>

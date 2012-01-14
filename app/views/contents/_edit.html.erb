@@ -1,0 +1,30 @@
+<style>
+	#content_body {
+		width:598px;
+	}
+</style>
+<div>
+<%= form_for(@content, :html => {:class => "form", :id => "new_content_form"}, :remote => true) do |f| %>
+  <% if @content.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@content.errors.count, "error") %> prohibited this content from being saved:</h2>
+
+      <ul>
+      <% @content.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+	<%= f.label :title, :class => "chunk-five blue-text" %><br/>
+	<%= f.text_field :title %>
+	<br/>
+	<%= f.label :body, :class => "chunk-five blue-text" %><br/>
+	<%= f.text_area :body %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+</div>

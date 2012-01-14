@@ -1,0 +1,14 @@
+
+==========================================
+Salut from KPSU.org, <%= @user.dj_name %>!
+==========================================
+
+  You have received a new comment!
+  From: <% if @comment.user.dj_name %> <%= @comment.user.dj_name %> <% else %> <%= @comment.user.f_name rescue nil %> <%= @comment.user.l_name rescue nil %> <% end %>
+  Commented On: <%= @type %>
+  <%= @comment.title %>
+
+  <%= @comment.body %>
+
+  Cheers,
+  KPSU

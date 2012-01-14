@@ -1,0 +1,54 @@
+<style type="text/css" media="screen">
+	 option {
+		text-transform:capitalize !important;
+	}
+	#catalog_submit {
+		height:43px;
+		width:165px;
+		margin-right:45px;
+	}
+	input[type="text"] {
+		padding:4px;
+	}
+</style>
+<div class="m1-thin large green rounded-heavy-top" style="width: 634px;height: 34px;padding-top: 10px;padding-left: 10px;margin-top:25px;margin-left:35px;">
+	<div id="" class="chunk-five sixteen">New Catalog Item</div>
+</div>
+<div style="background-color:#323232;padding:20px;width:604px;margin-left:35px;" class="rounded-heavy-bottom">
+<%= form_for(@catalog, :remote => true, :class => "form") do |f| %>
+  <% if @catalog.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@catalog.errors.count, "error") %> prohibited this catalog from being saved:</h2>
+
+      <ul>
+      <% @catalog.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form">
+    <%= f.label :number %><br />
+    <span class="m1-bold"><%= @n %></span>
+  </div>
+  <div class="form">
+    <%= f.label :artist %><br />
+    <%= f.text_field :artist, :class => "rounded-heavy" %>
+  </div>
+  <div class="form">
+    <%= f.label :album %><br />
+    <%= f.text_field :album, :class => "rounded-heavy" %>
+  </div>
+  <div class="form">
+    <%= f.label :year %><br />
+    <%= f.text_field :year, :class => "rounded-heavy" %>
+  </div>
+  <div class="form">
+    <%= f.label :label %><br />
+    <%= f.text_field :label, :class => "rounded-heavy" %>
+  </div>
+  <div class="form" style="margin-top:40px;margin-right:23px;margin-left:auto;">
+    <%= f.submit "Save", :class => "m1-bold large rounded-heavy", :disable_with => "Saving..." %>
+  </div>
+<% end %>

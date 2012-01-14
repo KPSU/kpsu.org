@@ -1,0 +1,139 @@
+<br />
+<br />
+<br />
+<style type="text/css" media="screen">
+	#online-users {
+		width: 248px;
+		height: 300px;
+		background-color: #343434;
+		border: 1px solid #222;
+		-webkit-box-shadow: 1px 1px 6px #232323;
+		position: absolute;
+		bottom: 350px;
+	}
+	.chat {
+		width: 248px;
+		height: 300px;
+		background-color: #343434;
+		border: 1px solid #222;
+		-webkit-box-shadow: 1px 1px 6px #232323;
+		position: relative;
+		bottom: 35px;
+	}
+	.chat input[name="body"]{
+		margin: 5px 0px 3px 7px;
+		width: 170px;
+	}
+	.chat input[type="submit"]{
+		background-color: #222;
+		width: 54px;
+		height: 31px;
+		border: 1px solid #454545;
+	}
+	.user {
+		cursor: pointer;
+		border-radius:2px;
+		-webkit-border-radius:2px;
+		-moz-border-radius:2px;
+		transition: all 0.50 ease-in-out;
+	    -webkit-transition: all 0.50s ease-in-out;
+	    -moz-transition: all 0.50s ease-in-out;
+	}
+	.chat .message, #online-users .user {
+		width: 205px !important;
+		padding: 5px 5px 5px 5px;
+		background-color: #2F2F2F;
+		margin: 5px 5px 5px 8px;
+		float: left;
+		border: 1px solid #292929;
+	}
+	.user:hover {
+		background-color:#454545 !important;
+		-moz-box-shadow: 2px 2px rgba(0,0,0,0.3);
+		-webkit-box-shadow: 2px 2px rgba(0,0,0,0.3);
+		box-shadow: 2px 2px rgba(0,0,0,0.3);
+	}
+	.messages-wrapper {
+		height: 219px;
+		width:248px;
+		bottom: 0px;
+	}
+	.chat-username {
+	font-size: .75em;
+	margin-top: 19px;
+	margin-left: 20px;
+	}
+	.online-users-container {
+		height:245px;
+	}
+</style>
+
+<% @users.each do |u| %>
+	<%= u.persistence_token %><br/>
+	<%= u.f_name rescue nil %><br/>
+
+	<%= u.chatroom_id rescue nil %><br/>
+<% end %>
+<div id="online-users" class="rounded-heavy">
+	<div class="rounded-top-heavy chunk-five yellow-text m1-medium" style="width: 236px; background-color: #232323; padding: 10px 2px 10px 10px;">Available
+	</div>
+	<div class="online-users-container" style="position: relative;">
+		<div class="online-users-wrapper">
+			<% @group.each do |u| %>
+				<div class="user" data-recipient-chat-id="<%= u.chatroom_id rescue nil %>">
+					<div class="chat-thumb float-left">
+						<img src="<%= u.avatar.url(:square_thumb_tiny) %>"/ >
+					</div>
+					<div class="chat-username yellow-text float-left">
+						<% if u.dj_name == "tehprofessor" then @highlight = true else @highlight = false end  %></span>
+						<% if @highlight %>
+							<div class="float-left clear-both"><%= u.dj_name rescue nil%></div><div class="eight-pt float-left clear-both dejavu-condensed blue-text">(ON AIR)<br/></div>
+						<% else %>
+							<%= u.dj_name rescue nil%><br/>
+						<% end %>
+					</div>
+				</div>
+			<% end %>
+		</div>
+	</div>
+</div>
+<div id="chat-wrapper">
+
+</div>
+<script type="text/javascript" charset="utf-8">
+$(document).ready(function(){
+	$("form#message").live("ajax:beforeSend", function(){
+		$(".chat-loader").show();
+		$(this).find("input[type='text']").attr("disabled", true);
+		$(this).find("input[type='submit']").attr("disabled", true);
+		$(this).find("input[type='submit']").val("Sending");
+	});
+	$("form#message").live("ajax:complete", function(){
+		
+		
+		
+		$(".chat-loader").hide();
+		$(this).find("input[type='submit']").attr("disabled", false);
+		$(this).find("input[type='text']").attr("disabled", false);
+		$(this).find("input[type='submit']").val("Send");
+		
+	});
+	$('.online-users-container').scrollbar({containerHeight: 'auto'});
+	$(".user").click(function(){ 
+		var recipientChatroomId = $(this).attr("data-recipient-chat-id");
+		var senderChatroomId = "<%= current_user.chatroom_id %>";
+
+		var chatParams = {
+			userChatId : "<%= current_user.chatroom_id %>",
+			nameColor : chatNameColor,
+			recipient_chat_id : recipientChatroomId,
+			sender_chat_id : senderChatroomId			
+		}
+		$("#chat-wrapper").append(newChat(chatParams));
+		
+		var div = $("#chat-recipient-"+chatParams.recipient_chat_id+" .messages-container");
+		$(div).scrollbar({containerHeight: 219});
+	});
+	$('.online-users-container').scrollbar('repaint');
+});
+</script>

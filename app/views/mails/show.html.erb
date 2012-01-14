@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= @mail.user_id %>
+</p>
+
+<p>
+  <b>User id target:</b>
+  <%= @mail.user_id_target %>
+</p>
+
+<p>
+  <b>Subject:</b>
+  <%= @mail.subject %>
+</p>
+
+<p>
+  <b>Body:</b>
+  <%= @mail.body %>
+</p>
+
+<p>
+  <b>Recipient deleted:</b>
+  <%= @mail.recipient_deleted %>
+</p>
+
+<p>
+  <b>Author deleted:</b>
+  <%= @mail.author_deleted %>
+</p>
+
+
+<%= link_to 'Edit', edit_mail_path(@mail) %> |
+<%= link_to 'Back', mails_path %>

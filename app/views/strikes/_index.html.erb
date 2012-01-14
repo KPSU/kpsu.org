@@ -1,0 +1,87 @@
+<div class="blue rounded-heavy-top titlebar">
+	<div id="" class="chunk-five sixteen">
+		Strike Management
+	</div>
+</div>
+<div id="strike-content" class="generic-post">
+	<ul id="strike-navigation">
+		<li class="summary bebas yellow-text pointer horizontal">Summary</li>
+		<li class="issue bebas yellow-text pointer horizontal"><span>Issue</span></li>
+		<li class="lookup bebas yellow-text pointer horizontal"><span>Lookup DJ</span></li>
+	</ul>
+	<div id="strike-summary" class="float-left">
+		<div class="dejavu-condensed orange-text" style="margin-top:10px;margin-bottom:10px;float:left;clear:both;">Recently Issued</div>		
+		<% @strikes.each do |strike| %>
+		<div style="margin-bottom:10px;clear:both;float:left;">
+			<div style="width:120px;float:left;text-align:right;" class="bebas green-text">Issued To</div><div class="white-text dejavu-condensed" style="float:left;margin-left:15px;clear:right;"><%= strike.user.f_name %></div>
+			<div style="width:120px;float:left;text-align:right;clear:left;" class="bebas magenta-text">Issued By</div><div class="white-text dejavu-condensed" style="float:left;margin-left:15px;"><%= strike.issued_by.f_name %></div>
+			<div style="width:120px;float:left;text-align:right;clear:left;" class="bebas red-text">Description</div><div class="white-text dejavu-condensed" style="float:left;margin-left:15px;"><%= strike.description %></div>		
+		</div>
+	<% end %>
+	</div>
+	<div id="strike-new" class="float-left invisible">
+		<form action="/strikes/user_search" id="strike-user-search" method="get" data-remote="true" accept-charset="utf-8">
+			<div class="blue-text chunk-five" style="float:left;margin:10px 0px 10px 0px;">Search for DJ</div>
+			<input type="text" name="user_search" value="Search for DJ" class="float-left clear-both" id="user_search">
+		</form>
+		<div class="results float-left clear-left">
+			
+		</div>
+		<form action="/strikes/" name="description" data-remote="true" class="form float-left" method="post" accept-charset="utf-8">
+			<div class="description chunk-five blue-text float-left clear-both">Description</div>
+			<textarea name="description" class="float-left clear-left" rows="8" cols="40"></textarea>
+			<input type="hidden" name="issue_to" value="" id="issue_to">
+			<input type="submit" value="Save" class="float-left clear-both chunk-five sixteen-pt">
+		</form>
+	</div>
+	<div id="strike-lookup" class="invisible">
+		<form action="/strikes/user_lookup" id="strike-user-lookup" method="get" data-remote="true" accept-charset="utf-8">
+			<div class="blue-text chunk-five" style="float:left;margin:10px 0px 10px 0px;">Search for DJ</div>
+			<input type="text" name="user_lookup" value="Search for DJ" class="float-left clear-both" id="user_lookup">
+		</form>
+		<div class="lookup-results float-left clear-left">
+			
+		</div>
+		<div id="strike-details" style="width:365px;" class="invisible float-left">
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript" charset="utf-8">
+	$(".search-button").click(function(){
+		$("#search-form").submit();
+	});
+	$("input#user_search").click(function(){
+		$(this).val("");
+	});
+	$("#strike-user-search").live("ajax:loading", function(){
+		$(".results").html("<div style='width:100%;text-align:center;padding:0 0 10px 0;'><img src='/images/loading.gif' style='margin: 10px;'><br><span class='m1-regular'>Searching</span></div>");
+	});
+	$("input#user_lookup").click(function(){
+		$(this).val("");
+	});
+	$("#strike-user-lookup").live("ajax:beforeSend", function(){
+		$("#strike-details").html("").addClass("invisible");
+	});
+	$("#strike-user-lookup").live("ajax:loading", function(){
+		$(".lookup-results").html("<div style='width:100%;text-align:center;padding:0 0 10px 0;'><img src='/images/loading.gif' style='margin: 10px;'><br><span class='m1-regular'>Searching</span></div>");
+	});
+	$("#strike-navigation li.summary").live("click", function(){
+		$("#strike-summary").show();
+		$("#strike-new").hide();
+		$("#strike-lookup").hide();
+	});
+	
+	$("#strike-navigation li.issue").live("click", function(){
+		$("#strike-summary").hide();
+		$("#strike-lookup").hide();
+		$("#strike-new").show();
+	});
+	
+	$("#strike-navigation li.lookup").live("click", function(){
+		$("#strike-summary").hide();
+		$("#strike-lookup").show();
+		$("#strike-new").hide();
+	});
+	
+</script>

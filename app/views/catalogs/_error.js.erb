@@ -1,0 +1,6 @@
+$("#dashboard-content").append("<div id='saved' class='invisible' title='There was a problem'><p>This review cannot be saved for the following reasons:<ul><% @catalog.errors.full_messages.each do |msg| %><li><%= msg %></li><% end %></ul></p></div>");
+$("#saved").dialog({
+	modal:true,
+	buttons: { "Make Changes": function() { $(this).dialog("close"); } }
+});
+$("#dashboard-content").dialog('open')

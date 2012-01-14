@@ -1,0 +1,40 @@
+<% content_for :page_headline do %>
+<span class='bebas'>ARTISTS</span>
+<% end %>
+
+<style type="text/css" media="screen">
+	#recent-artists {
+		line-height: 18px;
+		margin-top: 5px;
+		float: left;
+		border: 1px solid #232323;
+	}
+	.artist-cell {
+		width: 228px;
+		padding: 10px;
+		text-align: center;
+	}
+	.artist-cell.odd {
+		background: #454545;
+	}
+</style>
+<div class="artists-about float-left rounded-heavy light-black" style="line-height:18px;width:300px;padding:10px;margin:10px;">
+	<div class="bebas float-left <%= random_text_color %> sixteen-pt">Our Artist Profiles</div>
+	<div class="dejavu-condensed white-text twelve-pt float-left clear-both">
+		Over the years KPSU has built up a large, and extensive, catalog of artists who have been played over the years. This is our database of artists, and which of their tracks have been played. Overtime we've beefed up the catalog to provide us with additional information, like members, albums, cover art, and useful links. We hope these are helpful for discovering new music, and learning about old.
+	</div>
+</div>
+
+<div class="light-black float-left rounded-top-heavy" style="width:250px;margin:10px;">
+	<div class="chunk-five black-content blue-text sixteen-pt rounded-top-heavy float-left rounded-top-heavy" style="text-align:center;padding: 10px 0px 10px 0px;width:250px;">
+		<span style="float:left;margin-left:10px;">Recently Viewed</span>
+	</div>
+	<div id="recent-artists" style="line-height:18px;">
+<% @colors = [] %>
+<% @artists.each do |a| %>
+	<span class="artist-cell <%= cycle("even", "odd") %> bebas white-text twenty-four-pt clear-both float-left">
+		<%= link_to a.name.upcase, a, :class => "#{cycle("magenta-text", "blue-text", "white-text", "yellow-text", "orange-text", "red-text", "green-text", :name => "artist-colors" )}" %>
+	</span>
+<% end %>
+	</div>
+</div>

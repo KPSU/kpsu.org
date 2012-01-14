@@ -1,0 +1,244 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+	"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	
+  <%= render :partial => 'layouts/meta' %>
+
+  <title>KPSU | <%= yield(:title) %></title>
+  <%= csrf_meta_tag %>
+  <% if RAILS_ENV == "development" %>
+  	<script src="http://localhost:8080/application.js" type="text/javascript" charset="utf-8"></script>
+  <% else %>
+	<script src="http://kpsu.org:8080/application.js" type="text/javascript" charset="utf-8"></script>
+  <% end %>
+  <%= stylesheet_link_tag "production.alt.css", :cache => "v3_alt_css" %>
+  <%= javascript_include_tag 'production.alt.js', :cache => "v3_alt_js" %>
+  <% if current_user %>
+  	<script type="text/javascript" charset="utf-8">
+
+	var juggernaut = new Juggernaut();
+	
+	juggernaut.subscribe("<%= current_user.chatroom_id %>", function(data){
+		
+		data = $.parseJSON(data);
+		
+		var recipientChatroomId = data['recipient-chat-id'];
+		var senderChatroomId = data['sender-chat-id']
+		var chatParams = {
+			userChatId: "<%= current_user.chatroom_id %>",
+			nameColor : chatNameColor,
+			recipient_chat_id : recipientChatroomId,
+			sender_chat_id : senderChatroomId			
+		}
+		
+		/* 	
+			var chatExists:
+			this looks weird, but makes sense...
+			
+			When the current_user loads the page, and propagates 
+			the 'who-is-online' list, those users are the 
+			recipients of the current_user's messages so 
+			this is check to see if the person sending the message 
+			is a recipient of messages from the current_user
+			
+		*/
+
+		var chatExists = $("#recipient-chat-"+chatParams.sender_chat_id);
+		if(chatExists.length > 0){
+			
+		}else{
+			$("#chat-wrapper").append(newChat(chatParams));
+		}
+		
+		displayChatMessage(data);
+		
+		
+		if(chatParams.sender_chat_id == chatParams.userChatId){
+			var chat = $("#recipient-chat-"+chatParams.recipient_chat_id);
+			var chatStr = "#recipient-chat-"+chatParams.recipient_chat_id;
+		}else if(chatParams.recipient_chat_id == chatParams.userChatId){
+			var chat = $("#recipient-chat-"+chatParams.sender_chat_id);
+			var chatStr = "#recipient-chat-"+chatParams.sender_chat_id;
+		}
+		
+		var msgContainer = $(chatStr+" .messages-container")
+		var msgPaneVis = $(chatStr+" .messages-container .scrollbar-pane:visible");
+		if(msgPaneVis.length > 0){
+			console.log(msgPaneVis.length);
+			$(msgContainer).attr('data-chat-loaded', true);
+			$(msgContainer).scrollbar('repaint');
+			$(msgContainer).scrollbar("scrollto", "bottom");
+			$(msgContainer).delay(1000).scrollbar('repaint');
+			$(msgContainer).scrollbar("scrollto", "bottom");
+			
+		}
+
+		var msgWrapperData = $(msgContainer).attr("data-chat-loaded");
+		if(msgWrapperData == "true"){
+			
+		}else{
+			$(msgContainer).scrollbar({containerHeight: 219});
+		}
+		
+	});
+	</script>
+  <% end %>
+	
+</head>
+<body id="alternative">
+	<div id="content-wrapper" class="m1-regular" style="border:1px solid #000;">
+		<div id="alt-nav" class="chunk-five yellow-text sixteen-pt">
+			<ul class="vertical yellow-text chunk-five">
+			<% if current_user && current_user.listener == false %>
+			<li class="vertical chunk-five"><%= link_to("dashboard", dashboard_path, :class => "yellow-text") %></li>
+			<% elsif current_user && current_user.listener == true %>
+			<li class="vertical chunk-five"><%= link_to("home", listener_path, :class => "yellow-text") %></li>
+			<% end %>
+			<li class="vertical yellow-text chunk-five"><a class="yellow-text" href="https://www.foundation.pdx.edu/publicgift/kpsu.jsp">donate</a></li>
+			<li class="vertical chunk-five"><a class="yellow-text" href="/programs/all">programs</a></li>
+			<li class="vertical chunk-five"><a class="yellow-text" href="/underwriting">underwriting</a></li>
+			<li class="vertical chunk-five"><a class="yellow-text" href="/contact">contact</a></li>
+			<li class="vertical chunk-five"><a class="yellow-text" href="/media">media</a></li>
+			<li class="vertical chunk-five"><a class="yellow-text" href="/events">events</a></li>
+			<li class="vertical chunk-five"><a class="yellow-text" href="/about">about</a></li>
+			<% unless current_user %>
+			<li class="vertical chunk-five"><a class="yellow-text" href="/login">login</a></li>
+			<% else %>
+			<li class="vertical chunk-five"><a class="yellow-text" href="/logout">logout</a></li>
+			<% end %>
+			</ul>
+		</div>
+		<div id="mini-banner"> 
+			<img src="/images/v3/mini-banner.png" usemap="#mini-bannermap" style="position: absolute;clip: rect(0px 619px 301px 196px);">
+			<map id="mini-bannermap" name="mini-bannermap"><area shape="poly" alt="Download Podcasts from our program archive" title="" coords="362,237,365,253,488,222,471,206,423,220" href="/archives" target="" /><area shape="poly" alt="Our live streaming schedule" title="" coords="494,213,492,223,582,194,575,179" href="/schedule" target="" /><area shape="poly" alt="View KPSU's DJs" title="" coords="418,270,488,252,485,235,406,247" href="/djs" target="" /><area shape="poly" alt="Our Artist Database" title="" coords="409,279,499,261,493,282,409,294,408,286" href="/artists" target="" /><area shape="poly" alt="Listen to KPSU!" title="" coords="499,237,587,209,587,231,497,249" href="/listen" target="" /><area shape="poly" alt="Check out the latest music and event reviews!" title="" coords="502,260,511,271,591,262,586,239" href="/reviews" target="" /><area shape="poly" alt="KPSU Home Page" title="" coords="323,185,333,235,613,167,592,114" href="/" target="" /><!-- Created by Online Image Map Editor (http://www.maschek.hu/imagemap/index) --></map>
+			<div id="on-air-offset">
+			<% cache('alternative_who_is_playing') do %>
+			<div id="on-air-program" class="m1-light yellow-text">
+				<% unless currently_playing.class == String %>
+					<%= link_to(currently_playing[0], program_path(currently_playing[1]), :class => "m1-light yellow-text", :style => "line-height: 15px;") %>
+				<% else %>
+					<span class="m1-light yellow-text">"We're on Auto Pilot!"</span>
+				<% end %>
+			</div>
+			<div id="on-air-dj" class="m1-light purple-text">
+				<% unless currently_playing.class == String %>
+					<span class="m1-light purple-text"><%= currently_playing[2] %></span>
+				<% else %>
+					<span class="m1-light purple-text">AUTOMIXTRON 3000</span>
+				<% end %>
+			</div>
+			<div id="hidden-player" style="width:0px;height:0px;"></div>
+			<div id="player" class="float-left">
+				<div id="player_interface">
+					<div class="volume-bar">
+						<div class="indicator pointer player-buttons"></div>
+						<div class="volume-bar-value player-buttons"></div>
+					</div>
+					<div class="volume-text">
+						<div class="quiet">quiet</div>
+						<div class="loud">loud</div>
+					</div>
+					<div class="play pointer player-buttons"></div>
+					<div class="stop pointer player-buttons"></div>
+				</div>
+			</div>
+			<div id="on-next">
+				<% unless up_next.class == String %>
+					<%= link_to(up_next[0], program_path(up_next[1]), :class => "m1-light red-text") %>
+				<% else %>
+					<span class="m1-light red-text">"We're on Auto Pilot!"</span>
+				<% end %>
+			</div>	
+			<% end %>		
+			</div>
+		</div>
+		<div id="page-headline">
+			<%= yield(:page_headline) %>
+		</div>
+		<div id="content" class="float-left" style="width:946px;height:100%;">
+		<%= yield %>
+		</div>
+	</div>
+
+	<script type="text/javascript" charset="utf-8">
+		$(document).ready(function(){
+				$("#hidden-player").jPlayer( {
+				  ready: function () {
+				    $(this).jPlayer("setMedia", {
+				          mp3: "http://stream.kpsu.org:8000/high"
+				    }).jPlayer("stop");
+				  },
+				  ended: function (event) {			
+					$(this).jPlayer("play");		
+				  },
+				  supplied: "mp3",
+				  swfPath: "/players/v3/",
+				  volume: 0.8
+				});	
+				function showStopBtn()
+				{
+					$(".play").fadeOut(function(){
+						$(".stop").fadeIn();
+					});
+				}
+
+				function showPlayBtn()
+				{
+					$(".stop").fadeOut(function(){
+						$(".play").fadeIn();
+					});
+				}
+
+				$(".play").click(function() {
+					$("#hidden-player").jPlayer("play");
+					showStopBtn();
+					return false;
+				});		
+
+				$(".stop").click(function() {
+					$("#hidden-player").jPlayer("stop");
+					showPlayBtn();
+					return false;
+				});
+				$(".indicator").draggable({
+					axis: "x", 
+					containment: "parent" });
+				$(".indicator").bind("dragstart", function(){
+					var offset = $(this).offset().left;
+					console.log("Initial Offset:")
+					console.log(offset)
+					$(this).attr("data-start-offset", offset)	
+				});
+				$(".indicator").bind("dragstop", function(){
+					var offset = $(this).offset().left;
+					var parOffset = $(".volume-bar").offset().left + $(".volume-bar").outerWidth() - 18;
+					var diff = (parOffset - offset);
+					var vol = ((86 - diff*1.25) / 100)
+
+					console.log("ending Offset:")
+					console.log(offset)
+					console.log("Volume:")
+					console.log(vol)
+					$("#hidden-player").jPlayer("volume", vol);
+				});
+			
+				<%= yield(:page_js) %>
+				
+		});
+	</script>
+	<script type="text/javascript">
+
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-20622260-1']);
+	  _gaq.push(['_trackPageview']);
+
+	  (function() {
+	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+
+	</script>
+</body>
+</html>

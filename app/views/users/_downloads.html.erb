@@ -1,0 +1,185 @@
+<div class="downloads-manager-wrapper rounded-heavy">
+	<div id="show-number" style="display:none;"><%= current_user.programs.size %></div>
+	<div title="My Downloads" class="twenty-pt chunk-five yellow-text purple rounded-heavy" style="margin:0px;width:580px;padding:10px;">Downloads Manager</div>
+	<div id="dlm-nav"><span id="my-downloads-link" class="dlm-options dejavu-condensed yellow-text pointer">My Downloads</span> | <span id="latest-downloads-link" class="dlm-options pointer dejavu-condensed white-text pointer">Latest Downloads</span> | <span id="orphan-downloads-link" class="dlm-options dejavu-condensed white-text pointer">Orphan Downloads</span></div>
+	
+	<%= render :partial => "my_downloads" %>
+	
+	<div id="orphan-downloads" style="display:none;">
+	<div class="float-left rounded-light">
+		<div style="download-wrapper" class="rounded-heavy div-table">
+			<div style="width:560px;background-color:#343434;height:30px;text-align:left;padding:5px 0px 0px 5px;">
+				<div class="chunk-five magenta-text wide-col float-left" style="margin-left:44px;float:left;">Date</div>
+				<div class="chunk-five blue-text narrower-col float-left">Downloads</div>
+				<div class="chunk-five red-text narrow-col float-right">Options</div>
+			</div>
+			<% @orphans.each do |d| %>
+				<div class="micro-row" style="" id="">
+					<a href="<%= url_for(download_path(:id => d.id)) %>" title="Click to Download <%= d.title %>"><div class="download float-left">&nbsp;</div></a>
+					<div style="padding-top:6px;padding-left:3px;" class="float-left twelve-pt wide-col"><%= link_to("#{Time.at(d.title.to_i).to_s(:simple)} ( #{Time.at(d.title.to_i).to_s(:meridian_time)} )", download_path(:id => d.id), :class => "magenta-text", :title => "Original Air Time: #{Time.at(d.title.to_i)}") %></div>
+					<div style="padding-top:6px;" class="float-left blue-text twelve-pt narrower-col"><%= d.count %></div>
+					<div data-id="<%= d.id %>" class="adopt-link float-right twelve-pt narrow-col red-text pointer">Adopt</div>
+				</div>
+			<% end %>
+		</div>
+	</div>
+	</div>
+	
+	
+	<div id="latest-downloads" style="display:none;">
+	<div class="float-left rounded-light">
+		<div style="download-wrapper" class="rounded-heavy div-table">
+			<div style="width:560px;background-color:#343434;height:30px;text-align:left;padding:5px 0px 0px 5px;">
+				<div class="chunk-five magenta-text wide-col float-left" style="margin-left:44px;float:left;">Date</div>
+				<div class="chunk-five blue-text narrower-col float-left">Downloads</div>
+				<div class="chunk-five red-text narrow-col float-right">Options</div>
+			</div>
+		<% @latest.each do |d| %>
+			<% if Time.zone.now - Time.at(d.title.to_i) <= 10.weeks %>
+				<div class="micro-row" style="" id="">
+					<a href="<%= url_for(download_path(:id => d.id)) %>" title="Click to Download <%= d.title %>"><div class="download float-left">&nbsp;</div></a>
+					<div style="padding-top:6px;padding-left:3px;" class="float-left twelve-pt wide-col"><%= link_to("#{Time.at(d.title.to_i).to_s(:simple)} ( #{Time.at(d.title.to_i).to_s(:meridian_time)} )", download_path(:id => d.id), :class => "magenta-text", :title => "Original Air Time: #{Time.at(d.title.to_i)}") %></div>
+					<div style="padding-top:6px;" class="float-left blue-text twelve-pt narrower-col"><%= d.count %></div>
+					<div data-id="<%= d.id %>" class="adopt-link float-right twelve-pt narrow-col red-text pointer">Take Ownership</div>
+				</div>
+			<% end %>
+			<% end %>
+		</div>
+	</div>
+	</div>
+</div>
+<div id="choose-show" style="display:none;">
+	<div class="choose-show-wrapper">
+	<input type="hidden" name="download-id" id="d-number" value="" />
+	<span class="normal m1-regular">Which show would you like to add this download to?</span>
+	<br/><br/>
+	<% @user.programs.each do |p| %>
+		<%= link_to(p.title, url_for(own_download_path(:program_id => p.id)), :remote => true, :method => "put", :class => "magneta-text orphans transition-0-25")%><br/>
+	<% end %>
+	</div>
+	<div class="success" style="display:none;">
+		You have successfully owned the download!
+	</div>
+</div>
+
+<div id="confirm" style="display:none;">
+	<span class="normal m1-regular">Are you sure you want to remove this download?</span>
+	<br/><br/>
+	<%= link_to("Yes", url_for(remove_download_path), :remote => true, :method => "put", :class => "magenta-text delete-downloads")%> | <span class="cancel">Cancel</span>
+</div>
+<script type="text/javascript" charset="utf-8">
+$("span.cancel").click(function(){
+	$(this).parent().dialog("close");
+});
+$(".my-downloads").bind('ajax:beforeSend', function(e){
+	$(e).preventDefault();
+});
+$(".my-downloads").bind('ajax:success', function(){
+	$(this).parent().parent().remove();
+});
+$(".orphans").live('ajax:success', function(e, xhr){
+	$(".choose-show-wrapper").hide();
+	$("#choose-show .success").show();
+	var downloadId = $("#d-number").val();
+	$("div[data-id=\""+downloadId+"\"]").parent().remove();
+	$("#my-downloads").replaceWith(xhr);
+	$("#choose-show").delay(1000).dialog("close");
+	$("#latest-downloads,#orphan-downloads").hide();
+	toggleDLMOptionsSelected("#my-downloads-link");
+});
+$(".delete-downloads").live('ajax:success', function(e, xhr){
+	$("#confirm").dialog("close");
+	var downloadId = $("#d-number").val();
+	$("div[data-id=\""+downloadId+"\"]").parent().remove();
+	$("#my-downloads").replaceWith(xhr);
+	$("#choose-show").delay(1000).dialog("close");
+	toggleDLMOptionsSelected("#my-downloads-link");
+});
+function toggleDLMOptionsSelected(selected){
+	var hasYellowText = $(selected).hasClass("yellow-text");
+	console.log(hasYellowText);
+	var hasWhiteText = $(selected).hasClass("white-text");
+	if(!hasYellowText){
+		if(!hasWhiteText){
+			$(selected).addClass("yellow-text");
+		}else{
+			$(selected).removeClass("white-text");
+			$(selected).addClass("yellow-text");
+		}
+	}
+	var notThis = $(".dlm-options").not(selected);
+	
+	$.each(notThis, function(i, dlm){
+		console.log(dlm)
+		var dlmHasYellowText = $(dlm).hasClass("yellow-text");
+		console.log(dlmHasYellowText);
+		if(dlmHasYellowText){
+			console.log("IS YELLOW!");
+			console.log(dlm);
+			$(dlm).removeClass("yellow-text").addClass("white-text");
+		}
+	});
+}
+
+$("#my-downloads-link").click(function(){
+	$("#my-downloads").show();
+	$("#orphan-downloads").hide();
+	$("#latest-downloads").hide();
+	toggleDLMOptionsSelected(this);
+});
+$("#latest-downloads-link").click(function(){
+	$("#latest-downloads").show();
+	$("#orphan-downloads").hide();
+	$("#my-downloads").hide();
+	toggleDLMOptionsSelected(this);
+});
+$("#orphan-downloads-link").click(function(){
+	$("#orphan-downloads").show();
+	$("#my-downloads").hide();
+	$("#latest-downloads").hide();
+	toggleDLMOptionsSelected(this);
+});
+$(".adopt-link").click(function(){
+	var download = $(this).attr("data-id");
+	$("#d-number").val(download);
+	$("#choose-show a").each(function(){
+		var e = $(this).attr("href");
+		e = e.replace(/\d+/, download);
+		$(this).attr("href", e);
+	});
+	var showsSize = $("#show-number").text();
+	showsSize = parseInt(showsSize);
+	if (showsSize >= 1){
+		
+		$("#choose-show").dialog({
+			width: 350,
+			height: 250
+		});
+		$(".choose-show-wrapper").show();
+		$("#choose-show .success").hide();
+	}else{
+		
+	}
+	
+});
+$(".delete-link").click(function(){
+	var download = $(this).attr("data-id");
+	$("#d-number").val(download);
+	$("#confirm a").each(function(){
+		var e = $(this).attr("href");
+		e = e.replace(/\d+/, download);
+		$(this).attr("href", e);
+	});
+	var showsSize = $("#show-number").text();
+	showsSize = parseInt(showsSize);
+	if (showsSize >= 1){
+		$("#confirm").dialog({
+			width: 350,
+			height: 250
+		});
+	}else{
+		
+	}
+	
+});
+</script>

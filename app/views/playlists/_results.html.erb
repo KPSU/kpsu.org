@@ -1,0 +1,7 @@
+<% @tracks.each do |t| %>
+<div class="track rounded-heavy transition-0-25 pointer float-left clear-left">
+	<div data-artist="<%= t.artist.id %>" class="artist yellow-text float-left pointer dejavu-condensed artist" style="padding:2px;width:160px;"><%= t.artist.name rescue nil %></div>
+	<div data-track="<%= t.id %>" class="title yellow-text float-left dejavu-condensed" style="padding:2px;width:320px;"><%= t.title rescue nil %></div>
+	<div data-album="<%= t.album.id %>" class="float-left yellow-text album pointer dejavu-condensed album"  style="padding:2px;width:172px;"><%= t.album.name rescue nil %></div>
+</div>
+<% end %>
