@@ -1,0 +1,143 @@
+<div class="m1-thin large magenta rounded-heavy-top" style="width: 634px;height: 34px;padding-top: 10px;padding-left: 10px;margin-top:25px;margin-left:35px;">
+	<div id="new-review-page-title" class="chunk-five sixteen">Volunteer Hours</div>
+</div>
+<div class="float-left dejavu-condensed white-text" style="background-color:#343434;background-color: #343434;margin-left: 35px;width: 604px;padding:20px;">
+<ul id="volunteer-tabs" style="padding:10px;">
+	<li class="summary yellow-text pointer horizontal">Summary/New</li>
+	<li class="denied pointer yellow-text horizontal"><span>Pending</span></li>
+</ul>
+
+<style type="text/css" media="screen">
+	input, textarea {
+		border:1px solid #232323;
+		outline:none;
+	    transition: all 0.25s ease-in-out;
+	    -webkit-transition: all 0.25s ease-in-out;
+	    -moz-transition: all 0.25s ease-in-out;
+	}
+	textarea {
+		margin-left:5px;
+	}
+	textarea:focus, input:focus {
+		border:1px solid #C6C6C6;
+		background-color:#F5F5F5;
+		box-shadow: 0 0 5px rgba(139, 137, 137, 2);
+	    -webkit-box-shadow: 0 0 5px rgba(139, 137, 137, 2); 
+	    -moz-box-shadow: 0 0 5px rgba(139, 137, 137, 2);
+	}
+	input[type="text"] {
+		padding:4px;
+	}
+	input[type="submit"]{
+		background-color:#F9F9F9 !important;
+	}
+	#volunteer_hour_submit {
+		margin-left:5px;
+		height:43px;
+		width:120px;
+	}
+	#volunteer_hour_hours {
+		margin:10px 0 10px 0px;
+	}
+</style>
+
+<style type="text/css" media="screen">
+	#volunteer-tabs li, #volunteer-tabs li span {
+		transition: all 0.25s ease-in-out;
+	    -webkit-transition: all 0.25s ease-in-out;
+	    -moz-transition: all 0.25s ease-in-out;
+	}
+	#volunteer-tabs li {
+		margin-right:5px;
+	}
+	#volunteer-tabs li:hover {
+		color:rgb(230,101,101);
+		text-shadow: 0 0 2px rgba(222, 0, 30, 2);
+	    -webkit-text-shadow: 0 0 2px rgba(222, 0, 30, 2); 
+	    -moz-text-shadow: 0 0 2px rgba(222, 0, 30, 2);
+	}
+</style>
+
+<div class="tab summary">
+	<p>Hours logged for <%= Time.zone.now.strftime("%B") %>: <%= @user_hours %><br/>
+		Total hours: <%= @user.total_hours %>
+	</p>
+	<br/>
+	<span class="m1-bold">Enter Hours</span><br/>
+	<% form_for @vh, :as => :volunteer_hour, :url => { :controller => "users", :action => "volunteer_hours" }, :remote => true, :class => "form" do |f| -%>
+	  Number of Hours <%= f.text_field :hours, :size => 2, :maxlength => 2, :class => "rounded-heavy positive-integer" %><br/>
+		<span class="m1-bold">Month</span>
+			<%= select_hour Date.today.month, :field_name => 'month' %>
+		<span class="m1-bold">Day</span>
+			<%= select_day Date.today.day, :field_name => 'day' %>
+	   	 <span class="m1-bold">Year</span>
+	   		<%= select_year Date.today.year, :field_name => 'year' %><br/>
+	Description: <br/><%= f.text_area :description, :class => "rounded-heavy form", :size => "40x5" %>
+       
+	 <br/>
+	<%= f.submit "Save", :class => "form rounded-heavy large-sm", :disable_with => 'Saving...' %>
+	<% end -%>
+</div>
+<div class="tab denied invisible" style="width:600px;">
+<% @vh2.each do |vh| %>
+	<div class="volunteer-hour float-left clear-right margin-sm rounded-heavy" id="vhid-<%= vh.id %>" style="padding:4px;width:600px;border:1px solid #121212;background-color:#232323;">
+		<div style="width:600px;float:left;">
+			<div class="float-left" style="width:110px;padding:10px;">
+				<div class="float-left" style="margin:auto;width:110px;text-align:center;"><%= image_tag vh.user.avatar.url(:thumb) %></div>
+				<div class="float-left clear-left" style="width:110px;text-align:center;"><%= "#{vh.user.f_name} #{vh.user.l_name} "%></div>
+			</div>
+			<div class="float-left" style="width:450px;">
+				<div class="float-left clear-left">Date <span class="m1-bold"><%= vh.v_date.to_s(:simple) %></span></div>
+				<div class="float-left clear-both">Hours logged <span class="m1-bold"><%= vh.hours %></span></div>
+				<div class="float-left clear-both">Hours this month <span class="m1-bold"><%= vh.user.monthly_hours(Time.zone.now.month, days_in_month(Time.zone.now.month)) %></span></div>
+				<div class="float-left clear-both">Description<br/> <div class="m1-light padding-sm"><%= vh.description %></div></div>
+			</div>	
+		</div>
+		<% if vh.comments %>
+		<% vh.comments.each do |vhc| %>
+		<div id="vhc-comment-<%= vhc.id %>"style="width:600px;float:left;<% if vhc.user != current_user %>background-color:#FFB6C1;<% end %>">
+			<div class="float-left" style="width:110px;padding:10px;">
+				<div class="float-left" style="margin:auto;width:110px;text-align:center;"><%= image_tag vhc.user.avatar.url(:thumb) %></div>
+				<div class="float-left clear-left" style="width:110px;text-align:center;"><%= "#{vhc.user.f_name} #{vh.user.l_name} "%></div>
+			</div>
+			<div class="float-left" style="width:450px;">
+				;<% if vhc.user != current_user %><div class="float-right pointer respond" style="margin-right:0px;" data-vh-id="<%= vh.id %>" data-vhc-id="<%= vhc.id %>">Respond</div><% end %>
+				<div class="float-left clear-left">Date <span class="m1-bold"><%= vhc.created_at.to_s(:simple) %></span></div>
+				<div class="float-left clear-both" >Reason <span class="m1-bold"><%= vhc.body %></span></div>
+			</div>
+		</div>
+		<% end %>	
+		<% end %>
+	</div>
+<% end %>
+</div>
+</div>
+<script type="text/javascript" charset="utf-8">
+
+	$(".positive-integer").numeric({ negative : false });
+	$("#volunteer-tabs li").click(function(){
+		if ($(this).hasClass("denied")){
+			$('li.denied').css("fontFamily","M1cregular").css("color", "#000000");
+			$(".tab.summary").hide();
+			$(".tab.denied").show();
+		}else if ($(this).hasClass("summary")){
+			$(".tab.denied").hide();
+			$(".tab.summary").show();
+		}
+	});
+	$(".respond").click(function(){
+		
+		var el = this;
+		var vhid = $(this).attr("data-vh-id");
+		var vhcid = $(this).attr("data-vhc-id");
+		$(".tab.denied").append("<div id='respond-popup' title='Respond' style='width:auto;' class='invisible'><form data-remote='true' id='respond-form' action='/volunteer_hours/"+vhid+"/respond?vhcid="+vhcid+"' class='form' method='get' accept-charset='utf-8'><p><span class='m1-bold'>Reason</span><br/><textarea id='body' name='body' rows='5' cols='40' class='form rounded-heavy'></textarea><br/><br/><input class='form float-right rounded-heavy' type='submit' value='Submit &rarr;'></p></form></div>");
+		$("#respond-popup").dialog({
+		 	modal:true,
+			width:360,
+			buttons: { "Cancel": function() { $(this).dialog("close"); }} 
+		});        
+	});
+
+	$("#respond-form").live("ajax:success", function(event, data, status, xhr){
+	});
+</script>

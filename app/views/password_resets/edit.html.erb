@@ -1,0 +1,10 @@
+<br/><br/><br/>
+<% form_for(@user, :url => {:controller => "password_resets", :action => "update", :id => @user.perishable_token }, :class => "form", :method => :put) do |f| %>
+	<%= f.label :password %>
+	<%= f.password_field :password %>
+	<br/>
+	<%= f.label :password_confirmation %>
+	<%= f.password_field :password_confirmation %>
+	<br/><br/>
+	<%= submit_tag "Save" %>
+<% end %>

@@ -1,0 +1,531 @@
+<?xml version="1.0" encoding="utf-8"?>
+<lfm status="ok">
+<events xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" location="London, United Kingdom" page="1" totalpages="149" total="1486">
+    <event xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" >
+  <id>1595673</id>
+  <title>Basement Scam</title>
+  <artists>
+    <artist>George Washington's Penis</artist>
+    <artist>The Blanche Hudson Weekend</artist>
+    <artist>Electrophonvintage</artist>
+    <headliner>George Washington's Penis</headliner>
+  </artists>
+  <venue>
+    <id>8780149</id>
+    <name>Buffalo Bar</name>
+    <location>
+      <city>London</city>
+      <country>United Kingdom</country>
+      <street>259 Upper Street, Highbury Corner</street>
+      <postalcode>N1 1RU</postalcode>
+      <geo:point>
+         <geo:lat>51.546074</geo:lat>
+         <geo:long>-0.103393</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8780149+Buffalo+Bar</url>
+    <website>http://www.buffalobar.co.uk/</website>
+    <phonenumber></phonenumber>
+    <image size="small">http://userserve-ak.last.fm/serve/34/12225457.jpg</image>
+	<image size="medium">http://userserve-ak.last.fm/serve/64/12225457.jpg</image>
+	<image size="large">http://userserve-ak.last.fm/serve/126/12225457.jpg</image>
+	<image size="extralarge">http://userserve-ak.last.fm/serve/252/12225457.jpg</image>
+	<image size="mega">http://userserve-ak.last.fm/serve/_/12225457/Buffalo+Bar+bar3th.jpg</image>
+  </venue>  <startDate>Fri, 30 Jul 2010 01:12:01</startDate>
+  <description></description>
+  <image size="small"></image>
+  <image size="medium"></image>
+  <image size="large"></image>
+  <image size="extralarge"></image>
+  <attendance>13</attendance>
+  <reviews>0</reviews>
+  <tag>lastfm:event=1595673</tag>    
+  <url>http://www.last.fm/event/1595673+Basement+Scam</url>
+  <website></website>
+    <tickets>
+  </tickets>
+    <cancelled>0</cancelled>
+    <tags>
+      <tag>under 2000 listeners</tag>
+    </tags>
+  </event>    <event xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" >
+  <id>1618751</id>
+  <title>Reggie Watts</title>
+  <artists>
+    <artist>Reggie Watts</artist>
+    <headliner>Reggie Watts</headliner>
+  </artists>
+  <venue>
+    <id>8777870</id>
+    <name>Bloomsbury Theatre</name>
+    <location>
+      <city>London</city>
+      <country>United Kingdom</country>
+      <street>15 Gordon Street</street>
+      <postalcode>WC1H 0AH</postalcode>
+      <geo:point>
+         <geo:lat>51.525323</geo:lat>
+         <geo:long>-0.133001</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8777870+Bloomsbury+Theatre</url>
+    <website>http://www.thebloomsbury.com</website>
+    <phonenumber></phonenumber>
+    <image size="small"></image>
+	<image size="medium"></image>
+	<image size="large"></image>
+	<image size="extralarge"></image>
+	<image size="mega"></image>
+  </venue>  <startDate>Fri, 30 Jul 2010 08:01:01</startDate>
+  <description></description>
+  <image size="small">http://userserve-ak.last.fm/serve/34/16286901.jpg</image>
+  <image size="medium">http://userserve-ak.last.fm/serve/64/16286901.jpg</image>
+  <image size="large">http://userserve-ak.last.fm/serve/126/16286901.jpg</image>
+  <image size="extralarge">http://userserve-ak.last.fm/serve/252/16286901.jpg</image>
+  <attendance>1</attendance>
+  <reviews>0</reviews>
+  <tag>lastfm:event=1618751</tag>    
+  <url>http://www.last.fm/event/1618751+Reggie+Watts+at+Bloomsbury+Theatre+on+30+July+2010</url>
+  <website></website>
+    <tickets>
+  </tickets>
+    <cancelled>0</cancelled>
+    <tags>
+      <tag>funk</tag>
+      <tag>soul</tag>
+      <tag>electronic</tag>
+      <tag>beatbox</tag>
+    </tags>
+  </event>    <event xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" >
+  <id>1490925</id>
+  <title>Ssh All Day Festival Of Quiet Music</title>
+  <artists>
+    <artist>Alex Highton</artist>
+    <headliner>Alex Highton</headliner>
+  </artists>
+  <venue>
+    <id>8792865</id>
+    <name>Cecil Sharp House</name>
+    <location>
+      <city>London</city>
+      <country>United Kingdom</country>
+      <street>2 Regents Park Road</street>
+      <postalcode>NW1 7AY</postalcode>
+      <geo:point>
+         <geo:lat>51.5381</geo:lat>
+         <geo:long>-0.149363</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8792865+Cecil+Sharp+House</url>
+    <website>http://www.efdss.org/contact.htm</website>
+    <phonenumber></phonenumber>
+    <image size="small">http://userserve-ak.last.fm/serve/34/88471.jpg</image>
+	<image size="medium">http://userserve-ak.last.fm/serve/64/88471.jpg</image>
+	<image size="large">http://userserve-ak.last.fm/serve/126/88471.jpg</image>
+	<image size="extralarge">http://userserve-ak.last.fm/serve/252/88471.jpg</image>
+	<image size="mega">http://userserve-ak.last.fm/serve/_/88471/Cecil+Sharp+House.jpg</image>
+  </venue>  <startDate>Fri, 30 Jul 2010 09:18:01</startDate>
+  <description><![CDATA[<div class="bbcode">Shh the mini festival of quiet music. Cecil Sharp House is the headquarters of the English Folk Dance and Song Society, and houses the Vaughan Williams Memorial Library. It also contains a number of halls which are used for folk events of various sorts. There is a licensed bar serving Greene King re</div>]]></description>
+  <image size="small">http://userserve-ak.last.fm/serve/34/41195423.jpg</image>
+  <image size="medium">http://userserve-ak.last.fm/serve/64/41195423.jpg</image>
+  <image size="large">http://userserve-ak.last.fm/serve/126/41195423.jpg</image>
+  <image size="extralarge">http://userserve-ak.last.fm/serve/252/41195423.jpg</image>
+  <attendance>2</attendance>
+  <reviews>0</reviews>
+  <tag>lastfm:event=1490925</tag>    
+  <url>http://www.last.fm/event/1490925+Ssh+All+Day+Festival+Of+Quiet+Music</url>
+  <website>http://www.localism.org.uk</website>
+    <tickets>
+  </tickets>
+    <cancelled>0</cancelled>
+    <tags>
+      <tag>folk</tag>
+      <tag>mellow</tag>
+      <tag>singer-songwriter</tag>
+      <tag>indie</tag>
+    </tags>
+  </event>    <event xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" >
+  <id>1539290</id>
+  <title>Camera &amp; Tremor  - Album Launch Party</title>
+  <artists>
+    <artist>the Tamborines</artist>
+    <artist>Advert</artist>
+    <headliner>the Tamborines</headliner>
+  </artists>
+  <venue>
+    <id>8968610</id>
+    <name>The Victoria</name>
+    <location>
+      <city>London</city>
+      <country>United Kingdom</country>
+      <street>110 Grove Road, Bow</street>
+      <postalcode>E3 5TH</postalcode>
+      <geo:point>
+         <geo:lat>51.538376</geo:lat>
+         <geo:long>-0.040078</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8968610+The+Victoria</url>
+    <website></website>
+    <phonenumber></phonenumber>
+    <image size="small">http://userserve-ak.last.fm/serve/34/17962599.jpg</image>
+	<image size="medium">http://userserve-ak.last.fm/serve/64/17962599.jpg</image>
+	<image size="large">http://userserve-ak.last.fm/serve/126/17962599.jpg</image>
+	<image size="extralarge">http://userserve-ak.last.fm/serve/252/17962599.jpg</image>
+	<image size="mega">http://userserve-ak.last.fm/serve/_/17962599/The+Victoria+pic96.jpg</image>
+  </venue>  <startDate>Fri, 30 Jul 2010 09:39:01</startDate>
+  <description><![CDATA[<div class="bbcode">Launch party for our debut album<br />
+[ [ Camera &amp; Tremor] ]<br />
+<br />
+Come and celebrate with us!<br />
+<br />
+Special Guests<br />
+Advert ( live)<br />
+<br />
+DJ sets from<br />
+Jonathan &amp; Panda [The Ruling Class]<br />
+Vanessa &amp; Issie (The She Set)<br />
+<br />
+More to be announced shortly!<br />
+<a href="http://www.myspace.com/thetamborines" rel="nofollow">http://www.myspace.com/thetamborines</a><br />
+<a href="http://www.myspace.com/therulingclassuk" rel="nofollow">http://www.myspace.com/therulingclassuk</a><br />
+<a href="http://www.myspace.com/thesheset" rel="nofollow">http://www.myspace.com/thesheset</a><br />
+<a href="http://www.myspace.com/advert" rel="nofollow">http://www.myspace.com/advert</a></div>]]></description>
+  <image size="small">http://userserve-ak.last.fm/serve/34/36700663.jpg</image>
+  <image size="medium">http://userserve-ak.last.fm/serve/64/36700663.jpg</image>
+  <image size="large">http://userserve-ak.last.fm/serve/126/36700663.jpg</image>
+  <image size="extralarge">http://userserve-ak.last.fm/serve/252/36700663.jpg</image>
+  <attendance>8</attendance>
+  <reviews>0</reviews>
+  <tag>lastfm:event=1539290</tag>    
+  <url>http://www.last.fm/event/1539290+Camera+-+Tremor++-+Album+Launch+Party</url>
+  <website></website>
+    <tickets>
+  </tickets>
+    <cancelled>0</cancelled>
+    <tags>
+      <tag>shoegaze</tag>
+      <tag>under 2000 listeners</tag>
+      <tag>indie</tag>
+      <tag>post-punk</tag>
+      <tag>lo-fi</tag>
+      <tag>indiepop</tag>
+      <tag>experimental</tag>
+    </tags>
+  </event>    <event xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" >
+  <id>1552481</id>
+  <title>Guided By Lights</title>
+  <artists>
+    <artist>Guided By Lights</artist>
+    <artist>The Cut Outs</artist>
+    <headliner>Guided By Lights</headliner>
+  </artists>
+  <venue>
+    <id>8816722</id>
+    <name>The Spice Of Life</name>
+    <location>
+      <city>London</city>
+      <country>United Kingdom</country>
+      <street>6 Moor St</street>
+      <postalcode>W1D 5NA</postalcode>
+      <geo:point>
+         <geo:lat>51.513419</geo:lat>
+         <geo:long>-0.129783</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8816722+The+Spice+Of+Life</url>
+    <website>http://www.spiceoflifesoho.com/</website>
+    <phonenumber></phonenumber>
+    <image size="small">http://userserve-ak.last.fm/serve/34/6264221.gif</image>
+	<image size="medium">http://userserve-ak.last.fm/serve/64/6264221.gif</image>
+	<image size="large">http://userserve-ak.last.fm/serve/126/6264221.gif</image>
+	<image size="extralarge">http://userserve-ak.last.fm/serve/252/6264221.gif</image>
+	<image size="mega">http://userserve-ak.last.fm/serve/_/6264221/The+Spice+Of+Life+spice_home.gif</image>
+  </venue>  <startDate>Fri, 30 Jul 2010 11:21:01</startDate>
+  <description></description>
+  <image size="small">http://userserve-ak.last.fm/serve/34/34685611.jpg</image>
+  <image size="medium">http://userserve-ak.last.fm/serve/64/34685611.jpg</image>
+  <image size="large">http://userserve-ak.last.fm/serve/126/34685611.jpg</image>
+  <image size="extralarge">http://userserve-ak.last.fm/serve/252/34685611.jpg</image>
+  <attendance>1</attendance>
+  <reviews>0</reviews>
+  <tag>lastfm:event=1552481</tag>    
+  <url>http://www.last.fm/event/1552481+Guided+By+Lights+at+The+Spice+Of+Life+on+30+July+2010</url>
+  <website>http://www.facebook.com/event.php?eid=130602816952770&amp;ref=mf</website>
+    <tickets>
+  </tickets>
+    <cancelled>0</cancelled>
+    <tags>
+      <tag>folk</tag>
+      <tag>brighton</tag>
+      <tag>alternative</tag>
+      <tag>indie pop</tag>
+      <tag>indie</tag>
+    </tags>
+  </event>    <event xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" >
+  <id>1604617</id>
+  <title>Djevara LIVE : Moved to THE WATER RATS</title>
+  <artists>
+    <artist>Djevara</artist>
+    <headliner>Djevara</headliner>
+  </artists>
+  <venue>
+    <id>8790875</id>
+    <name>229 Great Portland Street</name>
+    <location>
+      <city>London</city>
+      <country>United Kingdom</country>
+      <street>229 Great Portland Street</street>
+      <postalcode>W1W 5PN</postalcode>
+      <geo:point>
+         <geo:lat>51.523568</geo:lat>
+         <geo:long>-0.144821</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8790875+229+Great+Portland+Street</url>
+    <website>http://www.229thevenue.co.uk/</website>
+    <phonenumber></phonenumber>
+    <image size="small">http://userserve-ak.last.fm/serve/34/8601565.jpg</image>
+	<image size="medium">http://userserve-ak.last.fm/serve/64/8601565.jpg</image>
+	<image size="large">http://userserve-ak.last.fm/serve/126/8601565.jpg</image>
+	<image size="extralarge">http://userserve-ak.last.fm/serve/252/8601565.jpg</image>
+	<image size="mega">http://userserve-ak.last.fm/serve/_/8601565/229+Great+Portland+Street+229front.jpg</image>
+  </venue>  <startDate>Fri, 30 Jul 2010 13:37:01</startDate>
+  <description><![CDATA[<div class="bbcode">Djevara will be perfoming as part of a live showcase at THE WATER RATS on FRIDAY 30th JULY, one of London's premier small venues renowned for its sound and vibe. As a final last performance before heading into the studio to record &quot;The Rising Tide (Part 2)&quot;, the band will be using this as part of their &quot;Voice of The Voiceless&quot; campaign of shows, following on from the successful festival, aimed at promoting awareness and raising funds for people across the world affected by injustice, discrimination and oppression. Djevara will be showcasing all-new material here- playing through the new record in its entirety; this will be the first opportunity to hear the new material in its final form! :)<br />
+<br />
+FUNDRAISING<br />
+Djevara will donate £1 from every ticket sold to Welfare Association (Palestine) for their vital work in Palestine. Here is a link: <a href="http://www.welfareassociation.org.uk" rel="nofollow">www.welfareassociation.org.uk</a> <br />
+<br />
+This is a part of the world where suffering results from one of the greatest injustices of our time made even more poignant by the fact that its one of the most conspicuous. <br />
+<br />
+Please come out and help us to make a difference.<br />
+<br />
+TICKETS AVAILABLE DIRECT FROM THE BAND HERE:<br />
+<a href="http://www.wegottickets.com/event/87716" rel="nofollow">http://www.wegottickets.com/event/87716</a><br />
+<br />
+Alternatively please print off our flyer and bring it with you to the venue. Highly recommend ordering the advance ticket for cheaper entry.<br />
+<br />
+IMPORTANT NOTE! : we are not the promoters of this show. All donations to World Vision are from tickets we sell only.</div>]]></description>
+  <image size="small">http://userserve-ak.last.fm/serve/34/48883089.jpg</image>
+  <image size="medium">http://userserve-ak.last.fm/serve/64/48883089.jpg</image>
+  <image size="large">http://userserve-ak.last.fm/serve/126/48883089.jpg</image>
+  <image size="extralarge">http://userserve-ak.last.fm/serve/252/48883089.jpg</image>
+  <attendance>1</attendance>
+  <reviews>0</reviews>
+  <tag>lastfm:event=1604617</tag>    
+  <url>http://www.last.fm/event/1604617+Djevara+LIVE+%3A+Moved+to+THE+WATER+RATS</url>
+  <website>http://www.wegottickets.com/event/87716</website>
+    <tickets>
+  </tickets>
+    <cancelled>0</cancelled>
+    <tags>
+      <tag>the low fidelity disconnect</tag>
+      <tag>punk</tag>
+      <tag>miocene</tag>
+      <tag>genin records</tag>
+    </tags>
+  </event>    <event xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" >
+  <id>1500159</id>
+  <title>Tiësto</title>
+  <artists>
+    <artist>Tiësto</artist>
+    <artist>Pendulum</artist>
+    <artist>The Japanese Popstars</artist>
+    <artist>South Central</artist>
+    <artist>Avicii</artist>
+    <artist>Blamma! Blamma!</artist>
+    <artist>Eddie Halliwell</artist>
+    <artist>Gareth Wyn</artist>
+    <artist>Tom Staar</artist>
+    <artist>Stereo:Type</artist>
+    <artist>Sean Brosnan</artist>
+    <artist>I Am One</artist>
+    <artist>Union DJs</artist>
+    <artist>David Griffiths</artist>
+    <artist>Dom Chung</artist>
+    <artist>Jason Marx</artist>
+    <artist>Haran De Lucas</artist>
+    <headliner>Tiësto</headliner>
+  </artists>
+  <venue>
+    <id>8789850</id>
+    <name>Victoria Park</name>
+    <location>
+      <city>London</city>
+      <country>United Kingdom</country>
+      <street>Victoria Park</street>
+      <postalcode>E9</postalcode>
+      <geo:point>
+         <geo:lat>51.538271</geo:lat>
+         <geo:long>-0.043527</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8789850+Victoria+Park</url>
+    <website></website>
+    <phonenumber></phonenumber>
+    <image size="small">http://userserve-ak.last.fm/serve/34/2612238.jpg</image>
+	<image size="medium">http://userserve-ak.last.fm/serve/64/2612238.jpg</image>
+	<image size="large">http://userserve-ak.last.fm/serve/126/2612238.jpg</image>
+	<image size="extralarge">http://userserve-ak.last.fm/serve/252/2612238.jpg</image>
+	<image size="mega">http://userserve-ak.last.fm/serve/_/2612238/Victoria+Park+250pxVictoria_park_bathing_pon.jpg</image>
+  </venue>  <startDate>Fri, 30 Jul 2010 14:00:00</startDate>
+  <description></description>
+  <image size="small">http://userserve-ak.last.fm/serve/34/30889989.jpg</image>
+  <image size="medium">http://userserve-ak.last.fm/serve/64/30889989.jpg</image>
+  <image size="large">http://userserve-ak.last.fm/serve/126/30889989.jpg</image>
+  <image size="extralarge">http://userserve-ak.last.fm/serve/252/30889989.jpg</image>
+  <attendance>52</attendance>
+  <reviews>0</reviews>
+  <tag>lastfm:event=1500159</tag>    
+  <url>http://www.last.fm/event/1500159+Ti%C3%ABsto+at+Victoria+Park+on+30+July+2010</url>
+  <website></website>
+    <tickets>
+  </tickets>
+    <cancelled>0</cancelled>
+    <tags>
+      <tag>electronic</tag>
+    </tags>
+  </event>    <event xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" >
+  <id>1587931</id>
+  <title>My First Failure</title>
+  <artists>
+    <artist>My First Failure</artist>
+    <artist>Staring At The Sun</artist>
+    <artist>Almost Home</artist>
+    <artist>The Cold Harbour</artist>
+    <artist>No Second Chance</artist>
+    <artist>Lives At Sea</artist>
+    <headliner>My First Failure</headliner>
+  </artists>
+  <venue>
+    <id>8780039</id>
+    <name>The Fighting Cocks</name>
+    <location>
+      <city>Kingston upon Thames</city>
+      <country>United Kingdom</country>
+      <street>56 Old London Road</street>
+      <postalcode>KT2 6QA</postalcode>
+      <geo:point>
+         <geo:lat>51.410603</geo:lat>
+         <geo:long>-0.298777</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8780039+The+Fighting+Cocks</url>
+    <website>http://www.the-fighting-cocks.co.uk/</website>
+    <phonenumber></phonenumber>
+    <image size="small">http://userserve-ak.last.fm/serve/34/14432601.jpg</image>
+	<image size="medium">http://userserve-ak.last.fm/serve/64/14432601.jpg</image>
+	<image size="large">http://userserve-ak.last.fm/serve/126/14432601.jpg</image>
+	<image size="extralarge">http://userserve-ak.last.fm/serve/252/14432601.jpg</image>
+	<image size="mega">http://userserve-ak.last.fm/serve/_/14432601/The+Fighting+Cocks+fighting.jpg</image>
+  </venue>  <startDate>Fri, 30 Jul 2010 15:09:01</startDate>
+  <description><![CDATA[<div class="bbcode">£5<br />
+<br />
+18+</div>]]></description>
+  <image size="small">http://userserve-ak.last.fm/serve/34/29434395.jpg</image>
+  <image size="medium">http://userserve-ak.last.fm/serve/64/29434395.jpg</image>
+  <image size="large">http://userserve-ak.last.fm/serve/126/29434395.jpg</image>
+  <image size="extralarge">http://userserve-ak.last.fm/serve/252/29434395.jpg</image>
+  <attendance>6</attendance>
+  <reviews>0</reviews>
+  <tag>lastfm:event=1587931</tag>    
+  <url>http://www.last.fm/event/1587931+My+First+Failure+at+The+Fighting+Cocks+on+30+July+2010</url>
+  <website></website>
+    <tickets>
+  </tickets>
+    <cancelled>0</cancelled>
+    <tags>
+      <tag>hardcore</tag>
+      <tag>melodic hardcore</tag>
+      <tag>ukhc</tag>
+    </tags>
+  </event>    <event xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" >
+  <id>1559929</id>
+  <title>Ghamailo presents Virtuoso</title>
+  <artists>
+    <artist>Sweet Leaf</artist>
+    <artist>The Frayed Laces</artist>
+    <artist>Tora!</artist>
+    <artist>justice nowhere</artist>
+    <artist>Lemon Curse</artist>
+    <artist>Rubinger</artist>
+    <headliner>Sweet Leaf</headliner>
+  </artists>
+  <venue>
+    <id>8783683</id>
+    <name>The Grosvenor</name>
+    <location>
+      <city>London</city>
+      <country>United Kingdom</country>
+      <street>17 Sidney Road</street>
+      <postalcode>SW9 0TP</postalcode>
+      <geo:point>
+         <geo:lat>51.469971</geo:lat>
+         <geo:long>-0.117076</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8783683+The+Grosvenor</url>
+    <website>http://www.thegrosvenorsw9.co.uk/</website>
+    <phonenumber></phonenumber>
+    <image size="small">http://userserve-ak.last.fm/serve/34/12447293.jpg</image>
+	<image size="medium">http://userserve-ak.last.fm/serve/64/12447293.jpg</image>
+	<image size="large">http://userserve-ak.last.fm/serve/126/12447293.jpg</image>
+	<image size="extralarge">http://userserve-ak.last.fm/serve/252/12447293.jpg</image>
+	<image size="mega">http://userserve-ak.last.fm/serve/500/12447293/The+Grosvenor+DSC01246.jpg</image>
+  </venue>  <startDate>Fri, 30 Jul 2010 18:00:00</startDate>
+  <description><![CDATA[<div class="bbcode">£5 / £3 for musicians</div>]]></description>
+  <image size="small">http://userserve-ak.last.fm/serve/34/26517541.jpg</image>
+  <image size="medium">http://userserve-ak.last.fm/serve/64/26517541.jpg</image>
+  <image size="large">http://userserve-ak.last.fm/serve/126/26517541.jpg</image>
+  <image size="extralarge">http://userserve-ak.last.fm/serve/252/26517541.jpg</image>
+  <attendance>4</attendance>
+  <reviews>0</reviews>
+  <tag>lastfm:event=1559929</tag>    
+  <url>http://www.last.fm/event/1559929+Ghamailo+presents+Virtuoso</url>
+  <website></website>
+    <tickets>
+  </tickets>
+    <cancelled>0</cancelled>
+  </event>    <event xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" >
+  <id>1589514</id>
+  <title>Chris Salmon and Social residents</title>
+  <artists>
+    <artist>Chris Salmon and Social residents</artist>
+    <headliner>Chris Salmon and Social residents</headliner>
+  </artists>
+  <venue>
+    <id>8839034</id>
+    <name>The Social</name>
+    <location>
+      <city>London</city>
+      <country>United Kingdom</country>
+      <street>5 Little Portland Street</street>
+      <postalcode>W1W 7JD</postalcode>
+      <geo:point>
+         <geo:lat>51.51739</geo:lat>
+         <geo:long>-0.140834</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8839034+The+Social</url>
+    <website>http://www.thesocial.com/</website>
+    <phonenumber></phonenumber>
+    <image size="small">http://userserve-ak.last.fm/serve/34/30588575.jpg</image>
+	<image size="medium">http://userserve-ak.last.fm/serve/64/30588575.jpg</image>
+	<image size="large">http://userserve-ak.last.fm/serve/126/30588575.jpg</image>
+	<image size="extralarge">http://userserve-ak.last.fm/serve/252/30588575.jpg</image>
+	<image size="mega">http://userserve-ak.last.fm/serve/_/30588575/The+Social+story.jpg</image>
+  </venue>  <startDate>Fri, 30 Jul 2010 18:00:00</startDate>
+  <description><![CDATA[<div class="bbcode">BAGGY MONDAYS are fresh from another triumphant set at Glastonbury, the Social's legendary night returns for another night of Madchester mayhem.</div>]]></description>
+  <image size="small"></image>
+  <image size="medium"></image>
+  <image size="large"></image>
+  <image size="extralarge"></image>
+  <attendance>0</attendance>
+  <reviews>0</reviews>
+  <tag>lastfm:event=1589514</tag>    
+  <url>http://www.last.fm/event/1589514+Chris+Salmon+and+Social+residents+at+The+Social+on+30+July+2010</url>
+  <website>http://Friday Social - Baggy Mondays Special</website>
+    <tickets>
+  </tickets>
+    <cancelled>0</cancelled>
+  </event></events></lfm>

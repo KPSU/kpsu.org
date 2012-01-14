@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+	"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	
+  <%= render :partial => 'layouts/meta' %>
+
+  <title>KPSU | <%= yield(:title) %></title>
+  <%= csrf_meta_tag %>
+  <%= stylesheet_link_tag 'application' %>
+  <%= stylesheet_link_tag 'kpsu' %>
+  <%= stylesheet_link_tag 'font' %>
+  <%= javascript_include_tag 'jquery.js' %>
+  <%= stylesheet_link_tag 'scaffold' %>
+  <%= stylesheet_link_tag 'jquery.lightbox-0.5' %>
+  <%= stylesheet_link_tag 'jquery.jscrollpane' %>
+  <% if RAILS_ENV == "development" %>
+  	<script src="http://localhost:8080/application.js" type="text/javascript" charset="utf-8"></script>
+  <% else %>
+	<script src="http://kpsu.org:8080/application.js" type="text/javascript" charset="utf-8"></script>
+  <% end %>  
+  <%= javascript_include_tag 'jquery-ui' %>
+  <%= javascript_include_tag 'jquery.address-1.4.js' %>
+  <%= javascript_include_tag 'jquery.jplayer.min.js' %>
+  <%= javascript_include_tag 'jquery.pageless.js' %>
+  <%= javascript_include_tag 'jquery.maxlength.js' %>
+  <%= javascript_include_tag 'jquery.numeric.js' %>
+  <%= javascript_include_tag 'jquery.jscrollpane.min.js' %>
+  <%= javascript_include_tag 'jquery.mousewheel.js' %>
+  <%= javascript_include_tag 'mwheelIntent.js' %>
+  <%= javascript_include_tag 'rails' %>
+  <%= javascript_include_tag 'application' %>
+  <%= javascript_include_tag 'jquery.liveupdate.js' %>
+  <%= javascript_include_tag 'kpsu' %>
+  <%= javascript_include_tag "autocomplete-rails.js" %>
+  <%= javascript_include_tag "jquery.lightbox-0.5.js" %>
+  <%= javascript_include_tag "jquery.dynamicFontSize.js" %>
+  <%= stylesheet_link_tag "jquery-ui" %>
+  <%= javascript_include_tag "jquery.tools.js" %>
+  <%= javascript_include_tag "jquery.threedots.js" %>
+	<style type="text/css" media="screen">
+		#user_submit,#post_submit {
+			padding:4px;
+			color:#222;
+			width:150px;
+		}
+		#footer ul {display:inline;}
+		#footer li {display:inline !important;}
+	</style>
+	<script type="text/javascript">
+
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-20622260-1']);
+	  _gaq.push(['_trackPageview']);
+
+	  (function() {
+	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+
+	</script>
+
+</head>
+<body id="">
+	<div id="content-wrapper" class="m1-regular">
+		<div id="header" class="float-left">
+			<%= render :partial => 'layouts/header'%>
+		</div>
+		
+		<div id="banner-bg-small" class="float-left" style="position:absolute;">
+			<div id="banner-topblock" class="float-left">
+				<div id="banner-topblock-topblock" class="float-left"></div>
+				<div id="banner-topblock-leftblock" class="float-left"></div>
+				<%= render :partial => "layouts/banner_links"%>
+			</div>
+			<div id="banner-footer" class="float-left">
+				<div class="left-spacing float-left"></div>
+				<%= render :partial => "layouts/banner_submenu" %>
+			</div>
+		</div>
+		<div id="content" class="float-left" style="margin-top:157px;margin-left:5px;background:#FFF;border:1px solid #c2c2c2;width:946px;height:100%;z-index:-30;padding-bottom:50px;">
+			<div class="left-column" style="padding:20px;">
+				 <%= RAILS_ENV %>
+				<%= yield %>
+			</div>
+		</div>
+		<div id="footer">
+			<%= render :partial => 'layouts/footer'%>
+		</div>
+	</div>
+	<script type="text/javascript" charset="utf-8">
+		$(document).ready(function(){
+				<%= yield(:page_js) %>
+				
+		});
+	</script>
+</body>
+</html>

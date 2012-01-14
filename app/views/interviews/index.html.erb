@@ -1,0 +1,31 @@
+<h1>Listing interviews</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Preface</th>
+    <th>Body</th>
+    <th>Interviewee</th>
+    <th>User</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @interviews.each do |interview| %>
+  <tr>
+    <td><%= interview.title %></td>
+    <td><%= interview.preface %></td>
+    <td><%= interview.body %></td>
+    <td><%= interview.interviewee %></td>
+    <td><%= interview.user_id %></td>
+    <td><%= link_to 'Show', interview %></td>
+    <td><%= link_to 'Edit', edit_interview_path(interview) %></td>
+    <td><%= link_to 'Destroy', interview, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Interview', new_interview_path %>

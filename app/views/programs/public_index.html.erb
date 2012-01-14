@@ -1,0 +1,234 @@
+<% content_for :title do %>
+	Programs
+<% end %>
+
+<% content_for :meta_description do %>
+	KPSU Portland's college radio full list of programs! 
+<% end %>
+
+<% content_for :page_headline do %>
+	<span class="bebas sixteen yellow-text">Programs</span>
+<% end %>
+<% @download_ids = [] %>
+<style type="text/css" media="screen">
+	.dj-index {
+	}
+	#genre-browse {
+		padding:5px;
+		margin-top:10px;
+		margin-bottom:10px;
+		width:140px;
+		background-color:#F7F7F7;
+	}
+	#single-column-padding {
+		margin-top:0px;
+	}
+	#genre-browse div.box {
+		width:140px;
+		height:85px;
+		border:1px solid #c2c2c2;
+		background-color:#e2e2e2;
+		margin:auto;
+	}
+	#genre-browse div div {
+		float:left;
+		margin-left:18px;
+		width:100px;
+		height:20px;
+	}
+	.program-wrapper #search-results {
+		padding:8px;
+		margin-right:75px;
+		margin-bottom:10px;
+	}
+	.program-wrapper #search-results .header {
+		width:848px;
+	}
+	.program-wrapper #search-results .header div {
+		width:260px;
+		padding:10px;
+		float:left;
+	}
+	.program-wrapper #search-results table {
+		padding:8px;
+		border:1px solid #c2c2c2;
+		background-color:#f9f9f9;
+	}
+	.program-wrapper #search-results table tr th {
+		border-bottom:1px solid #c2c2c2;
+	}
+	.program-wrapper #search-results table tr td {
+		padding:2px;
+		border-bottom:1px solid #c2c2c2;
+		border-right:1px solid #c2c2c2;
+	}
+	.program-wrapper #search-results table tr td:last-child {
+		padding:2px;
+		border-right:none;
+	}
+	.program-wrapper #search-results table td, .program-wrapper #search-results table th {
+		width:260px;
+	}
+	.dj-square {
+		width: 151px;
+		height: 151px;
+		margin:5px 5px 0px 5px;
+		padding:3px;
+	}
+	.program-container {
+		background-color:#232323;
+		margin: 10px 0px 50px 15px;
+		font-size:.75em;
+		width:644px;
+		height:auto;
+	}
+	.dj-wapper {
+		width:644px;
+		height:auto;
+		margin:10px 0px 0px 20px;
+	}
+	.pagination-links a:link, .pagination-links a:visited, .pagination-links a:active {
+		color:#a31a1a;
+	}
+	.dj-name a:link,.dj-name a:visited,.dj-name a:active {
+		color: #FFFFFF !important;
+	}
+	.dj-name a:hover {
+		font-family:"M1cmedium";
+		color:#F7F7F7;
+	}
+	.category {
+		font-family:"M1cbold";
+		cursor:pointer;
+		padding:5px;
+		width:128px;
+		color:#FFFFFF;
+		background-color: rgb(171, 36, 36) !important;
+		border-bottom:1px solid #E7E7E7;
+	}
+	.program-item {
+		height:20px;
+		border:1px solid #E1E1E1;
+		border-bottom:0px;
+		padding:5px;
+		background-color:#F2F2F2;
+	}
+	.program-item:hover {
+		background-color:#F7F7F7;
+	}
+	/* tooltip styling */
+	.tooltip {
+		display:none;
+		z-index:300;
+		background:url(/images/black-box-arrow.png);
+		height:163px;
+		padding:40px 30px 10px 30px;
+		width:310px;
+		left:670px !important;
+		font-size:11px;
+		color:#696969;
+	}
+
+	/* a .label element inside tooltip */
+	.tooltip .label {
+		width:35px;
+	}
+
+	.tooltip a {
+		color:#ad4;
+		font-size:11px;
+		font-weight:bold;
+	}
+	.playlist-link {
+		width:260px;
+		height:18px;
+	}
+</style>	
+		<%= render :partial => "layouts/sidebar"%>
+		<div class="program-container rounded-heavy float-left m1-regular medium">
+			<div class="flash-notice"><%= flash[:notice] %></div>
+			<% @programs.shuffle!.each do |u| %>
+			<div class="dj-wrapper float-left" data-genre="<%= u.genre.title rescue nil %>">
+			<div class="<%= cycle("blue", "green", "magenta", "yellow", "orange", "red") %>" style="float:left;clear:both;width:634px;font-size:1.5em;padding:5px 0px 5px 10px;">
+				<%= link_to(u.title, program_path(u), :class => "black-text bebas") %>
+			</div>
+			<div class="dj-square clear-left float-left rounded-heavy" style="overflow:hidden">
+				<% if u.thumb.exists? %>
+					<%= image_tag(u.thumb.url(:square_thumb) )%>				
+				<% else %>
+					<%= image_tag(u.user.avatar.url(:square_thumb_big) )%>
+				<% end %>				
+			</div>
+			<div class="float-right rounded-light" style="min-height: 160px;width: 472px;margin-left: 5px;margin-top: 7px;">
+				<div class="m1-light float-left" style="padding:0px 0px 0px 5px;min-height:144px;">
+					<div class="float-left">
+					<div class="float-left clear-right chunk-five blue-text" style="width:210px;">DJ</div>
+					<div class="orange-text float-left clear-both"><%= link_to u.user.dj_name, u.user, :class => "orange-text" %></div>
+					<div class="purple-text float-left clear-left"><%= "#{i_to_day(u.event.day_i)} @ #{u.event.starts_at.to_s(:meridian_time)} " %></div>
+					<div class="float-left clear-both chunk-five blue-text" style="margin:5px 0 5px 0;">Genre</div>
+					<div class="float-left clear-both magenta-text"><%= u.genre.title rescue nil %></div>
+					</div>
+				</div>
+				<div class="float-left">
+					<div class="float-left" style="padding:0px 0px 0px 0px;">
+						<div class="float-left">
+						<div class="float-left clear-right chunk-five blue-text" style="width:200px;">Recent Playlists</div>
+						<% u.playlists.reverse.slice(0..2).each do |p| %>
+							<div class="float-left playlist-link  medium clear-left m1-regular" style="padding:0px 0px 0px 5px;margin:0px;height:18px;"><%= link_to( truncate("#{p.title}", :length => 32), playlist_path(p), :class => "magenta-text") %></div><div class="clear-both" style="margin-left:5px;"></div>
+						<% end %>
+						</div>
+					</div>
+				</div>
+				<div class="dj-index-downloads float-left" style="margin-top:5px;">
+					<div class="float-left chunk-five blue-text">
+						Downloads
+					</div>
+					<% if u.downloads %>
+						<% if u.downloads.size > 3 %>
+							<% @i = 2 %>
+						<% else %>
+							<% @i = u.downloads.size - 1 %>
+						<% end %>
+				   		<% u.downloads.reverse.slice(0..@i).each do |d,i| %>
+						<% @download_ids << d.id %>
+				   		<div class="download-link float-left clear-both m1-regular" style="padding:0px 0px 0px 5px;margin:0px;width:130px;">
+				   			<%= link_to "#{Time.at(d.title.to_i).to_s(:simple)}", download_path(:id => d.id), :class => "yellow-text" %>
+				   		</div>
+						<div class="tooltip m1-regular" style=""> 
+							<div style="float:left;margin:0 15px 20px 0;width:64px;">
+							<img src="/images/v3/download.png" alt="Download Podcast" 
+									style="width:100%;" />
+							</div>
+							<table style="margin:0"> 
+								<tr> 
+									<td class="label blue-text m1-bold">Program</td> 
+									<td class="white-text"><%= d.program.title %></td> 
+								</tr> 
+								<tr> 
+									<td class="label m1-bold green-text">Date</td> 
+									<td class="white-text"><%= Time.at(d.title.to_i).to_s(:time_and_date) %></td> 
+								</tr> 
+								<tr> 
+									<td class="label m1-bold purple-text">Downloads</td> 
+									<td class="white-text"><%= d.count%></td> 
+								</tr> 
+								<tr> 
+									<td class="label m1-bold orange-text">File Size</td> 
+									<td class="white-text"><%= number_to_human_size(d.file_size) %></td> 
+								</tr>		
+							</table> 
+							<div style="width:310px;text-align:center;margin-top:5px;font-size:1em !important;">
+							<%= link_to "Download Now", download_path(:id => d.id), :class => "sixteen-pt yellow-text" %> 
+							</div>
+						</div>
+				   		<% end %>
+					<% end %>
+				</div>		
+			</div>
+			
+			</div>
+			<% end %>
+				<div style="float:left;width:644px;padding:5px 0 5px 0;text-align:center;background-color:#343434;">
+					<%= will_paginate(@programs) %>
+				</div>
+		</div>

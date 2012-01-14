@@ -1,0 +1,94 @@
+<style type="text/css" media="screen">
+	#post-wrapper {
+	}
+	#new_post {
+		width:900px;
+	}
+	#new_post textarea {
+	}
+</style>
+
+<%= form_for(@post, :html => { :multipart => true, :class => "form" } ) do |f| %>
+  <% if @post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+      <% @post.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+	<div style="margin:0px 125px 0px 0px;width:260px;" class="float-right">
+	  <div class="form float-right">
+		<label for="Attachment Title">Add Image</label><br/>
+	  	<input style="padding:4px" class="m1-regular rounded-heavy" type="text" name="attachment[asset[title]]" value="" id="some_name"><br/>
+		<label for="Attachment Title">Image Description</label><br/>
+	  	<textarea class="m1-regular rounded-heavy" type="text" name="attachment[asset[description]]" value="" id="some_name" style="padding:4px;width:236px;height:158px;"></textarea>  
+	  </div>
+	  <div class="form float-right">
+	  	<%= f.file_field :asset, :class => "m1-regular rounded-heavy form", :style => "padding:4px;" %>
+	  </div>
+	 <div class="form float-right" style="width:246px;">
+		<div style="margin:10px 0px 20px 0px;">
+		<label for="Attachment Style">In Page Formatting</label><br/>
+		<div class="float-left" style="margin:5px 8px 0px 0px;"><input type="radio" name="post[attachment_style]" value="none">None</div>
+		<div class="float-left" style="margin:5px 8px 0px 0px;"><input type="radio" name="post[attachment_style]" value="1"><img src="/images/alignleft.png" align="right">Left </div>
+		<div class="float-left" style="margin:5px 8px 0px 0px;"><input type="radio" name="post[attachment_style]" value="2"><img src="/images/alignright.png" align="right">Right</div>	
+		</div>
+		<br/><br/>
+		<span class="small m1-bold">Only the first image will be inserted inline</span>
+	 </div>	
+	  <div class="actions float-right" style="margin-top:40px;margin-right:23px;margin-left:auto;">
+	    <%= f.submit "Save", :class => "rounded-heavy m1-bold large" %>
+	  </div>
+	</div>
+	
+  	<div class="post-content float-left">
+  		<div class="rounded-heavy" style="background:#EFEFEF !important;width:450px;padding:10px 10px 20px 10px;height:310px;margin:10px;">
+  			<div style="margin:0px 5px 10px 5px;" class="form float-left clear-left">
+  				<div class="form">
+  				  <%= f.label :title %><br />
+  				  <%= f.text_field :title, :class => "m1-regular rounded-heavy", :style => "padding:4px;"   %>
+  				</div>
+				<div class="form margin-top-sm">
+				  <%= f.label "Content Type" %>
+				  <%= select_tag "content_type", options_from_collection_for_select(@content_type, :id, :name), :class => "m1-regular rounded-heavy", :style => "padding:4px;" %>
+				</div>
+				<div class="form">
+  				  <%= f.label :body %>
+				  <br />
+  				  <%= f.text_area :body, :class => "m1-regular rounded-heavy", :style => "padding:4px;width:429px;height:194px;"   %>
+  				</div>
+				<div class="formatting float-right medium m1-light red-font pointer" style="padding:3px;">Formatting Options</div>
+			</div>
+		</div>
+	</div>
+
+	
+	<div class="post-assets float-left clear-both">
+		<% if @post.assets %>
+		<div class="m1-bold medium clear-both">Currently Attached Files</div>
+			<% @post.assets.each do |a| %>
+			<div class="float-left margin-ten">
+				<% if a.thumbnailable? %>
+				<%= a.title %><br/>
+				<%= link_to(image_tag(a.item.url(:thumb), :alt => a.title, :title => a.title ), a.item.url, :title => a.title, :class => "lightbox" ) %>
+				<div class="m1-light"><%= a.description %></div>
+				<% end %>
+				<div class="m1-bold red-font"><%= link_to 'Delete Attachment', a, :confirm => "Are you sure?", :method => "delete", :class => "red-font" %></div>
+			</div>
+			<% end %>
+		<% end %>
+	</div>
+<br/>
+    <%= f.hidden_field :user_id, :class => "m1-regular rounded-heavy", :style => "padding:4px;"   %>
+<% end %>
+<%= render :partial => 'layouts/formatting_options' %>
+<% content_for :page_js do %>
+	$('.post-assets a.lightbox').lightBox({fixedNavigation:true});
+	$('.formatting').click(function(){
+		$('.formatting-content').dialog({title: "Formatting Options", width: '400', position: 'top', buttons: { "close": function() { $(this).dialog("close"); } }});
+	});
+<% end %>

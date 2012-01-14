@@ -1,0 +1,36 @@
+<%= form_for(@comment) do |f| %>
+  <% if @comment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+
+      <ul>
+      <% @comment.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="form m1-light">
+	<div class="m1-bold">E-MAIL</div>
+  	<input type="text" class="rounded-light" style="width:301px;" name="email" value="" id="email">
+  </div>
+  <div class="form m1-light">
+	<div class="m1-bold">NAME</div>
+  	<input type="text" class="rounded-light" style="width:301px;" name="email" value="" id="email">
+  </div>
+  <div class="form m1-light">
+	<div class="m1-bold">TITLE</div>
+	<input type="text" class="rounded-light" style="width:301px;" name="title" value="" id="title">
+  </div>
+  <div class="form m1-light">
+	<div class="m1-bold">COMMENT</div>
+	<textarea name="comment" class="rounded-light" style="width:301px;" rows="8" cols="40"></textarea>
+  </div>
+  <div class="float-right">
+	<div id="dynamic_recaptcha"></div><script type="text/javascript" src="http://www.google.com/recaptcha/api/js/recaptcha_ajax.js"></script> 
+	<script type="text/javascript"> 
+	  Recaptcha.create('6LdmgcESAAAAAIVXxxP3UNtetRzs9n8oDJROaWxr', document.getElementById('dynamic_recaptcha'));</script>  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

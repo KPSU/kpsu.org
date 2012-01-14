@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @interview.title %>
+</p>
+
+<p>
+  <b>Preface:</b>
+  <%= @interview.preface %>
+</p>
+
+<p>
+  <b>Body:</b>
+  <%= @interview.body %>
+</p>
+
+<p>
+  <b>Interviewee:</b>
+  <%= @interview.interviewee %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @interview.user_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_interview_path(@interview) %> |
+<%= link_to 'Back', interviews_path %>

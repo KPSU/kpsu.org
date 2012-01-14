@@ -1,0 +1,6 @@
+$("#dashboard-content").append("<div id='problem' class='invisible' title='Error!'><p><span>An unknown problem occurred please try again.</span></p></div>");
+$("#saved").dialog({
+	modal:true,
+	buttons: { "Dismiss": function() { $(this).dialog("close"); } }
+});
+$("#dashboard-content").dialog('open')

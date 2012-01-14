@@ -1,0 +1,130 @@
+<% content_for :title do %>
+	Events
+<% end %>
+<div class="purple rounded-heavy-top titlebar">
+	<div id="" class="chunk-five sixteen">
+		Events
+	</div>
+</div>
+<div id="happenings-content" class="generic-post">
+	<ul id="happenings-navigation">
+		<li class="summary bebas yellow-text pointer horizontal">Summary</li>
+		<li class="new bebas yellow-text pointer horizontal"><span>New</span></li>
+		<li class="find bebas yellow-text pointer horizontal"><span>Find</span></li>
+	</ul>
+	<div id="happening-new" class="invisible">
+	<form action="/happenings" method="post" class="form" name="happening" id="new_happening" data-remote="true" accept-charset="utf-8">
+		<div style="margin:5px 0 5px 0;" class="chunk-five blue-text float-left clear-both">Title</div>
+		<div class="float-left clear-both"><input type="text" name="title" value="" id="event-title" style="width: 250px;"></div>
+		<div style="margin:5px 0 5px 0;" class="chunk-five blue-text float-left clear-both">Starts At</div>
+		<div class="float-left clear-both"><%= select_datetime Time.now + 1.week, :order => [:day, :month, :year], :prefix => "starts_at"%></div>
+		<div style="margin:5px 0 5px 0;" class="chunk-five blue-text float-left clear-both">Ends At</div>
+		<div class="float-left clear-both"><%= select_datetime Time.now + 1.week, :order => [:day, :month, :year], :prefix => "ends_at"%></div>
+		<div style="margin:5px 0 5px 0;" class="chunk-five blue-text float-left clear-both">Event URL</div>
+		<div class="float-left clear-both"><input type="text" name="url" value="" id="event-url" style="width: 250px;"></div>
+		<div style="margin:5px 0 5px 0;" class="chunk-five blue-text float-left clear-both">Contact E-Mail</div>
+		<div class="float-left clear-both"><input type="text" name="contact_email" value="" id="event-contact-email" style="width: 250px;"></div>
+		<div style="margin:5px 0 5px 0;" class="chunk-five blue-text float-left clear-both">Description</div>
+		<textarea name="description" class="float-left clear-both" rows="8" cols="40"></textarea>
+		<input type="submit" value="Save &rarr;" style="float: left;clear: both;margin: 10px 0;">
+		<div id="reset-happening" class="float-left bebas orange-text pointer" style="margin: 8px 0px 0px 20px;">Reset</div>
+	</form>
+	</div>
+	<div id="happening-edit" class="invisible">
+	<form action="/happenings/edit" method="put" class="form" name="edit_happening" id="edit_happening" data-remote="true" accept-charset="utf-8">
+		<div style="margin:5px 0 5px 0;" class="chunk-five blue-text float-left clear-both">Title</div>
+		<div class="float-left clear-both"><input type="text" name="edit_title" value="" id="edit-event-title" style="width: 250px;"></div>
+		<div style="margin:5px 0 5px 0;" class="chunk-five blue-text float-left clear-both">Starts At</div>
+		<div class="float-left clear-both"><%= select_datetime Time.now + 1.week, :order => [:day, :month, :year], :prefix => "edit_starts_at"%></div>
+		<div style="margin:5px 0 5px 0;" class="chunk-five blue-text float-left clear-both">Ends At</div>
+		<div class="float-left clear-both"><%= select_datetime Time.now + 1.week, :order => [:day, :month, :year], :prefix => "edit_ends_at"%></div>
+		<div style="margin:5px 0 5px 0;" class="chunk-five blue-text float-left clear-both">Event URL</div>
+		<div class="float-left clear-both"><input type="text" name="edit_url" value="" id="edit-event-url" style="width: 250px;"></div>
+		<div style="margin:5px 0 5px 0;" class="chunk-five blue-text float-left clear-both">Contact E-Mail</div>
+		<div class="float-left clear-both"><input type="text" name="edit_contact_email" value="" id="edit-event-contact-email" style="width: 250px;"></div>
+		<div style="margin:5px 0 5px 0;" class="chunk-five blue-text float-left clear-both">Description</div>
+		<textarea id="edit-event-description" name="edit_description" class="float-left clear-both" rows="8" cols="40"></textarea>
+		<input type="submit" value="Save &rarr;" style="float: left;clear: both;margin: 10px 0;">
+		<div id="reset-happening" class="float-left bebas orange-text pointer" style="margin: 8px 0px 0px 20px;">Reset</div>
+	</form>
+	</div>
+	<div id="happening-summary">
+		<div class="chunk-five float-left clear-both blue-text">Upcoming</div>
+		<% @happenings.each do |h| %>
+			<div class="happening-wrapper" style="width:574px;float:left;clear:both;">
+				<div class="bebas happening-summary-details-labels float-left title green-text">title</div><div class="happening-summary-details float-left"><%= h.title rescue nil %></div>
+				<div class="bebas happening-summary-details-labels float-left clear-left starts_at blue-text">starts&nbsp;&nbsp;at</div><div class="happening-summary-details float-left clear-right"><%= h.starts_at rescue nil %></div>
+				<div class="bebas happening-summary-details-labels float-left clear-left url yellow-text">URL</div><div class="happening-summary-details float-left clear-right"><%= h.url rescue nil %></div>
+				<div class="bebas happening-summary-details-labels float-left clear-left contact-email purple-text">contact&nbsp;&nbsp;email</div><div class="happening-summary-details float-left clear-right"><%= h.contact_email rescue nil %></div>
+				<div class="bebas happening-summary-details-labels float-left clear-left description magenta-text">description</div><div class="happening-summary-details float-left clear-left"><%= h.description rescue nil %></div>
+			</div>
+		<% end %>
+	</div>
+	<div id="happening-find" class="invisible">
+		<form action="/happenings/find" id="happening-find-form" name="find_happening" method="get" data-remote="true" accept-charset="utf-8">
+			<div class="blue-text chunk-five" style="float:left;margin:10px 0px 10px 0px;">Search by title</div>
+			<input type="text" name="find_title" value="Search for Event" class="float-left clear-both" id="happening-title">
+		</form>
+		<div class="lookup-results float-left clear-left">
+			
+		</div>
+	</div>
+</div>
+
+
+<script type="text/javascript" charset="utf-8">
+	// reset form
+	$("#reset-happening").click(function(){
+		$(this).parent().find("input[type='text'],textarea").val("");
+	});
+	// clear input of initial value
+	// should probably use focus instead of click for the trigger
+	$("input#happening-title").click(function(){
+		$(this).val("");
+	});
+	// stop resubmission before the server can process the results
+	// find event
+	$("#happening-find-form").live("ajax:beforeSend", function(){
+		var search = $(this).find("#happening-title");
+		var searchTerm = $(search).val();
+		$(search).attr("data-search", searchTerm);
+		$(this).find("input").attr("disabled", true).val("Searching...");
+	});
+	$("#happening-find-form").live("ajax:success", function(){
+		var search = $(this).find("#happening-title");
+		var searchTerm = $(search).attr("data-search");
+		$(this).find("input").attr("disabled", false).val(searchTerm);
+	});
+	// create new event
+	$("#new_happening").live("ajax:beforeSend", function(){
+		$(this).find("input[type='submit']").attr("disabled", true).val("Saving...");
+	});
+	$("#new_happening").live("ajax:success", function(){
+		$(this).find("input[type='submit']").attr("disabled", false).val("Save");
+	});
+	
+	$("#happening-find-form").live("ajax:loading", function(){
+		$(".find-results").html("<div style='width:100%;text-align:center;padding:0 0 10px 0;'><img src='/images/loading.gif' style='margin: 10px;'><br><span class='m1-regular'>Searching</span></div>");
+	});
+	$("#happenings-navigation li.summary").live("click", function(){
+		$("#happening-summary").show();
+		$("#happening-new").hide();
+		$("#happening-find").hide();
+		$("#happening-edit").hide();
+	});
+	
+	$("#happenings-navigation li.new").live("click", function(){
+		$("#happening-summary").hide();
+		$("#happening-find").hide();
+		$("#happening-edit").hide();
+		$("#happening-new").show();
+	});
+	
+	$("#happenings-navigation li.find").live("click", function(){
+		$("#happening-summary").hide();
+		$("#happening-find").show();
+		$("#happening-new").hide();
+		$("#happening-edit").hide();
+	});
+	
+</script>

@@ -1,0 +1,142 @@
+<style type="text/css" media="screen">
+	 option {
+		text-transform:capitalize !important;
+	}
+	input {
+		margin:10px;
+		padding:4px;
+	}
+</style>
+<%= form_for(@program, :html => {:multipart => true}) do |f| %>
+  	<% if @program.errors.any? %>
+  	  <div id="error_explanation">
+  	    <h2><%= pluralize(@program.errors.count, "error") %> prohibited this program from being saved:</h2>
+  	
+  	    <ul>
+  	    <% @program.errors.full_messages.each do |msg| %>
+  	      <li><%= msg %></li>
+  	    <% end %>
+  	    </ul>
+  	  </div>
+  	<% end %>
+	<% if @event != nil then @event.errors.any? %>
+  	  <div id="error_explanation">
+  	    <h2><%= pluralize(@program.errors.count, "error") %> prohibited this program from being saved:</h2>
+  	
+  	    <ul>
+  	    <% @event.errors.full_messages.each do |msg| %>
+  	      <li><%= msg %></li>
+  	    <% end %>
+  	    </ul>
+  	  </div>
+  	<% end %>
+  	
+  	<div class="form float-left ">
+  	  <div class="m1-regular large margin-sm">Title</div>
+  	  <%= f.text_field :title, :class => "rounded-heavy" %>
+  	</div>
+	<div class="form float-right padding-med bg-lightest-gray rounded-heavy" style="width:245px;margin-right:50px;margin-bottom:20px;">
+	  <div class="m1-regular large margin-sm">Genre</div>
+  	  <%= select_tag "genre", options_for_select(genres, :selected => "#{ @program.genre == nil ? "0" : @program.genre.id }", :multiple => false, :size => 1 )%>
+  	</div>
+
+  	<div class="form bg-lightest-gray rounded-heavy float-right clear-right" style="margin-right:50px;margin-bottom:20px;">
+	<div class="m1-regular large margin-sm">Graphic</div>
+		<%= f.file_field :thumb %>
+  	</div>
+	<div class="form float-left">
+		<div class="m1-regular large margin-sm">DJ</div>
+		<%= select_tag "user", options_from_collection_for_select(@users, "id", "dj_name", :selected => "#{ @program.user == nil ? "0" : @program.user.id }") %>
+	</div>
+	<div class="float-right clear-right bg-lightest-gray padding-med rounded-heavy" style="margin-right:50px;width:245px;">
+	<% if current_user.staff %>
+	<% if @program.event != nil : "" %>
+
+	<div class="m1-regular large margin-sm">Time Slot</div>
+  	<div id="timeslot" class="form" style="margin:20px;">
+		<%= label_tag 'Day'%><br/>
+		<%= select_tag "day", options_for_select(days_of_the_week, :selected => @program.event.day_i, :multiple => false, :size => 1) %>
+		<br/><br/>
+		<%= label_tag 'Start Time' %><br/>
+		<span class="m1-bold">Hour</span>
+			<%= select_hour @program.showtime.starts_at.hour, :field_name => 'starts_at_hour' %>
+		<span class="m1-bold">Min</span>
+			<%= select_minute "00", :minute_step => 30, :field_name => 'starts_at_minute' %><br/>
+			<%= label_tag 'End Time' %><br/>
+		<span class="m1-bold">Hour</span>
+			<%= select_hour @program.showtime.ends_at.hour, :field_name => 'ends_at_hour' %>
+		<span class="m1-bold">Min</span>
+			<%= select_minute "00", :minute_step => 30, :field_name => 'ends_at_minute' %>
+  	</div>
+	<% else %>
+	<div class="m1-regular large margin-sm">Time Slot</div>
+  	<div class="form" style="margin:20px;">
+		<%= label_tag 'Day'%><br/>
+		<%= select_tag "day", options_for_select(days_of_the_week, :multiple => false, :size => 1) %>
+		<br/><br/>
+		<%= label_tag 'Start Time' %><br/>
+		<span class="m1-bold">Hour</span>
+			<%= select_hour Time.now.hour, :field_name => 'starts_at_hour' %>
+		<span class="m1-bold">Min</span>
+			<%= select_minute "00", :minute_step => 30, :field_name => 'starts_at_minute' %><br/>
+			<%= label_tag 'End Time' %><br/>
+		<span class="m1-bold">Hour</span>
+			<%= select_hour Time.now.hour, :field_name => 'ends_at_hour' %>
+		<span class="m1-bold">Min</span>
+			<%= select_minute "00", :minute_step => 30, :field_name => 'ends_at_minute' %>
+  	</div>
+	<% end %>
+	<div id="availability-button" class="pointer m1-light medium red-font">Check Availability</div>
+	<div class='m1-bold standard'>*The availability check is NOT able to detect conflicts if the conflicting (existing) show is two hours. </div>
+	
+	<% end %>
+	</div>
+
+
+  	<div class="form clear-left" style="padding-top:20px;">
+  	  <div class="m1-regular large margin-sm">Body</div>
+  	  <%= f.text_area :description, :class => "rounded-heavy", :style => "width:500px;" %>
+  	</div>
+  	<div class="form float-left" style="margin-left:401px;">
+  	  <%= f.submit %>
+  	</div>
+<br/><br/><br/>
+<% end %>
+<% content_for :page_js do %>
+$("#program_submit").addClass("rounded-heavy").addClass("m1-regular");	
+
+$("#availability-button").click(function(){
+	var dataString = $(":input").serializeArray();
+$.ajax({
+	url: "/schedule/timeslot_availability",
+	data: dataString,
+    type: "POST",
+    beforeSend: function (xhr) {
+	 $("#availability-button").html("Checking...")
+    },
+    success: function (xhr) {
+	 $("#availability-button").html("<span class=\"m1-bold\"> Try another time</span>");
+	
+		$.each(xhr['events'], function(i, data){
+			if(i <= 1){
+				var hour = data['starts_at'].split("\:")[0]
+				var day = data['day_i']
+				var duration = data['duration']
+				var name = data['name']
+				$("#availability-button").append("<br>Conflicts with <b>"+name+"</b>")	
+			}
+			});
+	},
+    complete: function (xhr) {
+		
+    },
+    error: function (xhr, status, error) {
+		$("#availability-button").html("Check Availability<br/><span style=\"cursor:text;\" class=\"m1-bold\"> w00t! Time slot available</span>");
+		
+    }
+});
+});
+
+
+
+<% end %>

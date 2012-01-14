@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= @message.user_id %>
+</p>
+
+<p>
+  <b>Nickname:</b>
+  <%= @message.nickname %>
+</p>
+
+<p>
+  <b>Ip address:</b>
+  <%= @message.ip_address %>
+</p>
+
+<p>
+  <b>Message:</b>
+  <%= @message.message %>
+</p>
+
+<p>
+  <b>Chatroom:</b>
+  <%= @message.chatroom_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_message_path(@message) %> |
+<%= link_to 'Back', messages_path %>

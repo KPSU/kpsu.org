@@ -1,0 +1,102 @@
+<% content_for :title do %>
+	Album Catalog
+<% end %>
+<div class="m1-light red-font huge">KPSU Catalog</div>
+
+<div style="padding:20px 20px 0px 20px">
+	<%= form_for :catalog, :url => catalog_search_path do |c| %>
+		Artist <%= c.text_field :artist %>
+		Album <%= c.text_field :album %>
+		<%= c.submit 'Search' %>
+	<% end %>
+</div>
+<style type="text/css" media="screen">
+	ul.horizontal {display:inline;}
+	ul.horizontal li {display:inline !important;}
+</style>
+<div style="padding:20px;">Filter Alphabetically
+	<br/>
+	<ul class="horizontal">
+		<li><%= link_to("A", catalogs_path(:alphabetical => "A"), :class => 'red-font') %></li>
+		<li><%= link_to("B", catalogs_path(:alphabetical => "B"), :class => 'red-font') %></li>
+		<li><%= link_to("C", catalogs_path(:alphabetical => "C"), :class => 'red-font') %></li>
+		<li><%= link_to("E", catalogs_path(:alphabetical => "E"), :class => 'red-font') %></li>
+		<li><%= link_to("F", catalogs_path(:alphabetical => "F"), :class => 'red-font') %></li>
+		<li><%= link_to("H", catalogs_path(:alphabetical => "H"), :class => 'red-font') %></li>
+		<li><%= link_to("I", catalogs_path(:alphabetical => "I"), :class => 'red-font') %></li>
+		<li><%= link_to("J", catalogs_path(:alphabetical => "J"), :class => 'red-font') %></li>
+		<li><%= link_to("K", catalogs_path(:alphabetical => "K"), :class => 'red-font') %></li>
+		<li><%= link_to("L", catalogs_path(:alphabetical => "L"), :class => 'red-font') %></li>
+		<li><%= link_to("M", catalogs_path(:alphabetical => "M"), :class => 'red-font') %></li>
+		<li><%= link_to("N", catalogs_path(:alphabetical => "N"), :class => 'red-font') %></li>
+		<li><%= link_to("O", catalogs_path(:alphabetical => "O"), :class => 'red-font') %></li>
+		<li><%= link_to("P", catalogs_path(:alphabetical => "P"), :class => 'red-font') %></li>
+		<li><%= link_to("Q", catalogs_path(:alphabetical => "Q"), :class => 'red-font') %></li>
+		<li><%= link_to("R", catalogs_path(:alphabetical => "R"), :class => 'red-font') %></li>
+		<li><%= link_to("S", catalogs_path(:alphabetical => "S"), :class => 'red-font') %></li>
+		<li><%= link_to("T", catalogs_path(:alphabetical => "T"), :class => 'red-font') %></li>
+		<li><%= link_to("U", catalogs_path(:alphabetical => "U"), :class => 'red-font') %></li>
+		<li><%= link_to("V", catalogs_path(:alphabetical => "V"), :class => 'red-font') %></li>
+		<li><%= link_to("W", catalogs_path(:alphabetical => "W"), :class => 'red-font') %></li>
+		<li><%= link_to("X", catalogs_path(:alphabetical => "X"), :class => 'red-font') %></li>
+		<li><%= link_to("Y", catalogs_path(:alphabetical => "Y"), :class => 'red-font') %></li>
+		<li><%= link_to("Z", catalogs_path(:alphabetical => "Z"), :class => 'red-font') %></li>
+
+	</ul>	
+</div>
+
+<style type="text/css" media="screen">
+	.div-table {
+		
+	}
+	.wide-col {
+		width:274px;
+	}
+	.narrow-col {
+		width:145px;
+	}
+	.narrower-col {
+		width:72px;
+	}
+	.mini-col {
+		width:32px;
+	}
+	.row {
+		background-color:#F0F0F0;
+		padding:5px;
+		width:870px;
+		float:left;
+	}
+	.row:hover {
+		background-color:#FFC1C1;
+	}
+	.cat-id {
+		opacity:0.8;
+		-moz-opacity:0.8;
+
+	}
+	.download:hover {
+		opacity:1;
+		-moz-opacity:1;
+	}
+</style>
+<div style="background-color:#E8E8E8;border:#E8E8E8 3px solid;height:auto;float:left;padding:10px;" class="rounded-heavy div-table">
+	<div style="width:870px;background-color:#E8E8E8;height:30px;text-align:left;padding:5px 0px 0px 5px;">
+		<div class="m1-bold narrower-col float-left">Id</div>
+		<div class="m1-bold wide-col float-left">Artist</div>
+		<div class="m1-bold wide-col float-left">Album</div>
+		<div class="m1-bold narrower-col float-left">Year</div>
+		<div class="m1-bold narrow-col float-left">Label</div>
+	</div>
+	<% @catalogs.each do |catalog| %>
+		<div class="row">
+			<div style="padding-top:6px;" class="narrower-col cat-id float-left"><%= catalog.number %></div></a>
+			<div style="padding-top:6px;padding-left:3px;" class="float-left wide-col"><%= catalog.artist %></div>
+			<div style="padding-top:6px;" class="float-left wide-col"><%= catalog.album %></div>
+			<div style="padding-top:6px;" class="float-left narrower-col"><%= catalog.year %></div>
+			<div style="padding-top:6px;" class="float-left narrower-col"><%= catalog.label %></div>
+		</div>
+	<% end %>
+</div>
+
+<%= will_paginate(@catalogs) %>

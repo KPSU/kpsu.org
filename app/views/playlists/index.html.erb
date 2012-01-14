@@ -1,0 +1,26 @@
+<div class="m1-thin american">Playlists</div>
+<br/>
+<div class="m1-regular extra-large">Latest</div>
+<% @playlists.each do |p| %>
+<div class="playlist" style="padding:10px 0px 10px 15px;width:400px;">
+	<div class="m1-regular normal red-font playlist-title"><%= link_to(p.title, playlist_path(p), :class => "red-font" ) %></div>
+	Tracks: 
+		<ul style="">
+			<% @i =0; p.tracks.each do |t| %>
+			<% @i +=1 %>
+			<% if @i <= 4 %>
+			<li class="m1-regular standard" style="display:block !important;padding:0px 0px 0px 5px;">Track <%= @i %>: <%= t.title %> 
+				<% if t.album.name == "" %>
+				
+					<%else%>
+				(<%= t.album.name %>)</li>
+				<% end %>
+			<% end %>
+			<% end %>
+		</ul>
+		<% if p.tracks.size >= 4 %>
+		<div class="m1-regular standard float-right"><%= link_to("View More", playlist_path(p), :class => "red-font") %></div>
+		<% end %>
+		
+</div>
+<% end %>
