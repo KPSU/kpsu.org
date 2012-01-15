@@ -389,8 +389,14 @@ class UsersController < ApplicationController
 
   def get_djs
     @users = Event.includes(:program => [:user => [:downloads]]).collect do |e|
-      if e.program.user.avatar.exists? && e.program.user.downloads.size >= 1
-        e.program.user 
+      unless RAILS_ENV == "development"
+        if e.program.user.avatar.exists? && e.program.user.downloads.size >= 1
+          e.program.user 
+        end
+      else
+        if !e.program.user.avatar.exists? && e.program.user.downloads.size >= 1
+          e.program.user 
+        end
       end
     end.compact
   end
