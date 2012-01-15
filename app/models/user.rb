@@ -58,12 +58,12 @@ class User < ActiveRecord::Base
      
 
   def to_param
-    dj_name.gsub(" ", "-").downcase
+    dj_name.gsub(" ", "_").downcase
   end
 
   def self.find(*args)
     unless (args[0].class == Symbol) || (args[0].to_i > 0)
-      find_by_dj_name(args[0].gsub("-", " "))
+      find_by_dj_name(args[0].gsub("_", " "))
     else
       super
     end
