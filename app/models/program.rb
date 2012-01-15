@@ -32,13 +32,13 @@ class Program < ActiveRecord::Base
   acts_as_taggable
   acts_as_taggable_on :tags
   def to_param
-    title.gsub(" ", "-").downcase
+    title.gsub(" ", "_").downcase
   end
 
   def self.find(*args)
     
     unless args[0].to_i > 0
-      find_by_title(args[0].gsub("-", " "))
+      find_by_title(args[0].gsub("_", " "))
     else
       super
     end
