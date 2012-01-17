@@ -20,6 +20,6 @@ namespace :deploy do
   task :stop do ; end
   task :restart, :roles => :app, :except => { :no_release => true } do
     run "cd /var/www/kpsu.org/current; #{sudo} /opt/ruby-1.9.3/bin/bundle install"
-    run "#{sudo} /etc/init.d/thin restart -O"
+    run "#{sudo} /etc/init.d/thin restart"
   end
 end
