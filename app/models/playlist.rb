@@ -25,7 +25,7 @@ class Playlist < ActiveRecord::Base
 
     def self.find(*args)
     
-    unless args[0].to_i > 0
+    unless (args[0].class == Symbol) || (args[0].to_i > 0)
       @title = args[0].gsub(/[\-]/, " ").downcase
       find(:first, :conditions => ['title LIKE ?', @title])
     else
