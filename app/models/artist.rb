@@ -15,14 +15,13 @@ class Artist < ActiveRecord::Base
   end
 
   def self.find(*args)
-    unless args[0].to_i > 0
+    unless (args[0].class == Symbol) || (args[0].to_i > 0)
       @name = args[0].gsub(/[\-]/, " ").downcase
-      Rails.logger.info @name
       find(:first, :conditions => ['name LIKE ?', @name])
     else
       super
     end
 
   end
-
+  
 end

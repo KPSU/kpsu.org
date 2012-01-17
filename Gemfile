@@ -1,9 +1,17 @@
 source 'http://gemcutter.org'
 
 gem 'rails', '3.0.3'
-gem 'em-synchrony'
-gem 'em-http-request'
-gem 'rack-fiber_pool'
+
+# Async GEMs
+
+gem 'em-synchrony', :require => ['em-synchrony',
+                                 'em-synchrony/em-http',
+                                 'em-synchrony/activerecord']
+gem 'em-http-request', :require => 'em-http'
+gem 'eventmachine'
+gem 'rack-fiber_pool',  :require => 'rack/fiber_pool'
+gem "mysql2", "~> 0.2.7"
+
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 gem 'memcache-client'
 gem "recaptcha", :require => 'recaptcha/rails'
@@ -22,7 +30,6 @@ gem 'json'
 gem "will_paginate", "~> 3.0.pre2"
 gem 'twitter_oauth'
 gem 'flickr'
-gem "mysql2", "~> 0.2.7"
 gem 'oauth'
 gem 'RedCloth'
 gem 'rmagick'
