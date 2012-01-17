@@ -223,6 +223,7 @@ DEPENDENCIES
   default_value_for
   em-http-request
   em-synchrony
+  eventmachine
   fastercsv
   flickr
   hpricot

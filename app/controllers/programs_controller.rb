@@ -48,6 +48,7 @@ class ProgramsController < ApplicationController
        @title += "%"
        @program = Program.first(:conditions => ['title like ?', @title], :include => [:user, :event, :downloads, :playlists])
     end
+    @sidebar_downloads = Download.where("user_id = ? AND title IS NOT ? OR program_id > ?", @program.user, nil, 0).includes(:program, :user).order("created_at DESC").limit(10)
     @downloads = @program.downloads.sort! {|x,y| x.title.to_i <=> y.title.to_i }
     @playlists = @program.playlists.order("created_at DESC").paginate(:page => params[:page], :per_page => 5)
     respond_to do |format|
