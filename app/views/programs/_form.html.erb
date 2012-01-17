@@ -50,7 +50,7 @@
 	</div>
 	<div class="float-right clear-right bg-lightest-gray padding-med rounded-heavy" style="margin-right:50px;width:245px;">
 	<% if current_user.staff %>
-	<% if @program.event != nil : "" %>
+	<% unless @program.event nil || "" %>
 
 	<div class="m1-regular large margin-sm">Time Slot</div>
   	<div id="timeslot" class="form" style="margin:20px;">
