@@ -36,7 +36,7 @@ class User < ActiveRecord::Base
   has_many :unique_objs, :as => :objectifiable
   
   if RAILS_ENV == "development"
-    @url = "http://archive.kpsu.org/system/files/avatars/:id/:style/:basename.:extension"
+    @url = "http://kpsu.org/system/files/avatars/:id/:style/:basename.:extension"
   else
     @url = "/system/files/avatars/:id/:style/:basename.:extension"
   end
