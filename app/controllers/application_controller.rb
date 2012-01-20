@@ -6,13 +6,39 @@ include Amazon::AWS::Search
 class ApplicationController < ActionController::Base
   protect_from_forgery
   helper_method :current_user_session, :current_user
-  
+  rescue_from ActiveRecord::RecordNotFound, :with => :not_found_error
+
+
+  def four_oh_four_error
+    render :action => "site/four_oh_four"
+  end
+
   private
+
   
   def days_in_month(month)
     (Date.new(Time.now.year,12,31).to_date<<(12-month)).day
   end
-  
+    
+  def lookup_album_art(release)
+    @release = release
+    rg = ResponseGroup.new( 'Large' )
+    req = Request.new
+    il = ItemLookup.new( 'ASIN', { 'ItemId' => @release.asin,
+                                    'MerchantId' => 'Amazon' } )
+    begin
+      @req = req.search( il, rg, 1 )
+      @medium = @req.item_lookup_response.items.item.first.medium_image.url.to_s
+      @large = @req.item_lookup_response.items.item.first.large_image.url.to_s 
+      @image = {}
+      @image[:small] = @medium
+      @image[:large] = @large
+    rescue      
+      @image = nil
+    end
+    return @image                          
+  end
+    
   def large_album_cover_fetch(song)
     artist, album, track = [song[:artist], song[:album], song[:track]]
     rg = ResponseGroup.new( 'Large' )
