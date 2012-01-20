@@ -8,6 +8,7 @@ Kpsu::Application.routes.draw do
   match '/about' => "contents#view", :as => :about, :title => "About KPSU"
   match '/reset_password' => 'password_resets#edit'
   match '/shows/:title' => 'programs#show'
+  match '/em_show/:id' => 'artists#em_show'
   match '/catalogs/search/' => "catalogs#search", :as => "catalog_search"
   match '/archives/search/' => "archives#search", :as => "archive_search"
   match '/users/feed' => 'users#feed', :as => "feed"
@@ -20,6 +21,7 @@ Kpsu::Application.routes.draw do
   match '/playlists/new/search' => 'playlists#search', :as => "create_playlist_search"
   match '/messages/send_message' => 'messages#send_message', :as => "send_message"
   match '/happenings/find' => 'happenings#find', :as => "find_happening"
+  match '/programs/program_manager_edit/:id' => 'programs#program_manager_edit', :as => "program_manager_edit"
   match '/strikes/user_search' => 'strikes#user_search', :as => "strike_user_search"
   match '/strikes/user_lookup' => 'strikes#user_lookup', :as => "strike_user_lookup"
   match '/site/featured_artists' => 'site#featured_artist', :as => "featured_artists_mgmt"

@@ -23,11 +23,15 @@ class PlaylistsController < ApplicationController
   # GET /playlists/1.xml
   def show
     @playlist = Playlist.find(params[:id])
-    @tracks = @playlist.playlist_items.all
-    @tracks.sort! { |x,y| x.position <=> y.position }
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @playlist }
+    if @playlist != nil
+      @tracks = @playlist.playlist_items.all
+      @tracks.sort! { |x,y| x.position <=> y.position }
+      respond_to do |format|
+        format.html # show.html.erb
+        format.xml  { render :xml => @playlist }
+      end
+    else
+      four_oh_four_error
     end
   end
   
