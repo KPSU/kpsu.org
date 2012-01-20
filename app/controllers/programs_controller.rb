@@ -65,7 +65,27 @@ class ProgramsController < ApplicationController
     @genres = Genre.all
     respond_to do |format|
       format.html # new.html.erb
+      format.js { render :partial => "form" }
       format.xml  { render :xml => @program }
+    end
+  end
+
+  def program_manager_edit
+    @genres = Genre.all
+    unless current_user.staff
+      @users = User.find(:all, :conditions => ['id = ?', current_user.id])
+      if current_user.programs.include?(Program.find(params[:id]))
+        @program = Program.find(params[:id])
+      else
+        redirect_to(dashboard_path, :notice => "Whoops! Something went wrong, we've logged it and will look into it.")
+      end
+    else
+      @users = User.all
+      @program = Program.find(params[:id])
+    end
+    respond_to do |format|
+      format.html
+      format.js { render :partial => "form"}
     end
   end
 

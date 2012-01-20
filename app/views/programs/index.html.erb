@@ -1,37 +1,162 @@
 <style type="text/css" media="screen">
-	th, table, tr, td {
-		font-family:"M1Cregular" !important;
-		padding:10px;
-	}
-	td.header {
-		font-family:"M1Cbold" !important;
-	}
-	.rows {
-		padding:5px !important;
-		margin:5px !important;
-	}
+  #program-manager-wrapper {
+      width:800px;
+      min-height:400px;
+      margin-top:10px;
+      float:left;
+      background-color:#232323; 
+      border: 3px solid #343434;
+      border-radius:10px;
+  }
+  #programs-list {
+    position:absolute;
+    left:249px;
+    top:381px;
+    width:250px;
+    display:none;
+    z-index:100;
+  }
+  #programs-list ul{
+    height:300px;
+    overflow: scroll;
+  }
+  #programs-list li{
+    list-style-type: none;
+    width: 250px;
+    height: 25px;
+    padding-top:15px;
+    text-align: center;
+    margin-top: 1px;
+    margin-bottom: 1px;
+    background-color: #111;
+  }
+  #programs-list li.program:hover span {
+    text-decoration:underline;
+  }
+  #program-manager-toolbar ul {
+    width:800px;
+    padding-top:10px;
+    background-color:#343434;
+    height:25px;
+  }
+  #program-manager-toolbar li {
+    margin-left:5px;
+    border-radius:4px;
+    padding:4px 6px 4px 6px;
+    color:#AAA;
+    padding-left:5px;
+    display: inline;
+    cursor: pointer;
+  }
+  #program-manager-toolbar li:hover {
+    color:#CCC;
+    text-decoration:underline;
+  }
+  #program-form{
+    float:left;
+    width:800px;
+  }
+  .program-manager-section-heading {
+    float:right;
+    margin-top:5px;
+    margin-right:5px;
+  }
+  #program-form .program-title{
+    margin-top: 20px;
+    margin-left: 20px;
+    float: left;
+  }
+  #program-form .program-genre {
+    margin-top: 20px;
+    margin-left: 84px;
+    float: left;
+  }
+  #program-form .program-graphic {
+    margin-top: 20px;
+    margin-left: 20px;
+    float: left; 
+  }
+  #program-form .program-dj {
+    margin-top: 20px;
+    margin-left: 20px;
+    float: left;
+  }
+  #program-form .program-timeslot {
+    width:255px;
+    float:right;
+  }
+  #program-form .program-body {
+    margin-top: 20px;
+    margin-left: 20px;
+    float: left;
+  }
+  #program-form .program-save{
+    margin-right: 15px;
+    margin-top: 15px;
+  }
+  .program-save input[type="submit"]{
+    background-color:transparent;
+    border:none;
+    font-size:.75em;
+  }
+  #availability-button {
+    margin-bottom:5px;
+  }
 </style>
-<div class="m1-thin huge float-left red-font float-left clear-both">Program Manager</div>
 
-<table class="rounded-heavy" style="background-color:#f7f7f7;clear:both;float:left;width:580px;margin-top:20px;">
-  <tr>
-    <td style="text-align:center;width:300px;padding:2px;" class='header'>Title</td>
-    <td style="text-align:center;width:150px;padding:2px;" class='header'>Genre</td>
-    <td style="text-align:center;width:250px;padding:2px;" class='header'>User</td>
-    <td style="text-align:center;width:100px;padding:2px;" class='header'>&nbsp;</td>
-    <td style="text-align:center;width:100px;padding:2px;" class='header'>Options</td>
-    <td style="text-align:center;width:100px;padding:2px;" class='header'>&nbsp;</td>
-  </tr>
+<div class="bebas twenty-pt yellow-text float-left clear-both">Program&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Manager</div>
 
-<% @programs.each do |program| %>
-  <tr class="rows">
-    <td><%= link_to(program.title, edit_program_path(program),:class => "red-font") %></td>
-    <td><%= if program.genre then program.genre.title end %></td>
-    <td><%= program.user.dj_name rescue nil %></td>
-    <td><%= link_to 'Show', program %></td>
-    <td><%= link_to 'Edit', edit_program_path(program) %></td>
-    <td><%= link_to 'Destroy', program, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
+<div id="program-manager-wrapper">
+  <div id="program-manager-toolbar">
+    <ul>
+      <li class="dejavu-book twelve-pt edit-programs">EDIT PROGRAMS</li><li class="dejavu-book twelve-pt new-program">CREATE NEW</li><li class="dejavu-book twelve-pt remove-program">REMOVE</li>
+    </ul>
+    </ul>
+  </div>
+  <div id="programs-list">
+    <ul>
+      <li class="fourteen-pt dejavu-book"><span class="yellow-text">Program Title</span> (<span class="white-text">DJ's Name</span>)</li>
+      <% @programs.each do |program| %>
+      <li class="program edit-program-link pointer ten-pt dejavu-condensed" data-url="<%= program_manager_edit_path(program) %>"><span class="yellow-text"><%= program.title %></span> (<span class="white-text"><%= program.user.f_name %> <%= program.user.l_name %></span>)</li>
+      <% end %>
+    </ul>
+  </div>
+  <div id="program-form">
+  </div>
+</div>
 
+
+<script type="text/javascript">
+  $(".edit-programs").click(function(){
+      $("#programs-list").slideToggle("slow");
+  });
+  $(".new-program").click(function(){
+      $.ajax({
+        url: "<%= new_program_path %>",
+        dataType: "script",
+        complete: function(xhr, status){
+          $("#program-form").html(xhr.response);
+          $("#program-form").prepend("<div class=\"program-manager-section-heading\"><div class=\"sixteen-pt white-text bebas\">New Program</div></div>");
+        }
+      });
+  });
+  $(".edit-program-link").click(function(){
+      var purl = $(this).attr("data-url");
+      $.ajax({
+        url: purl,
+        dataType: "script",
+        error: function(){
+          alert("Shit! Something broke. Email: admin@kpsu.org");
+        },
+        complete: function(xhr, status){
+          $("#program-form").html(xhr.response);
+          $("#programs-list").slideToggle("slow");
+          $("#program-form").prepend("<div class=\"program-manager-section-heading\"><div class=\"sixteen-pt white-text bebas\">Editing Program</div></div>");
+        }
+      });
+  });
+  $("form").live("beforeSend", function(){
+    $("input[type='submit']").attr("disabled", "disabled");
+    $("input[type='submit']").val("Saving...");
+  });
+</script>
