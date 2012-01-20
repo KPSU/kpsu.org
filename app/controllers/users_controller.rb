@@ -106,15 +106,18 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id], :include => [:playlists])
     @page = params[:page]
-
-    @blogs = Post.where(:user_id => @user.id).order("created_at DESC").paginate(:page => @page, :per_page => 4)
-    unless @user == nil
-    respond_to do |format|
-        format.html # show.html.erb
-        format.xml  { render :xml => @user }
-    end
+    if @user != nil
+      @blogs = Post.where(:user_id => @user.id).order("created_at DESC").paginate(:page => @page, :per_page => 4)
+      unless @user == nil
+      respond_to do |format|
+          format.html # show.html.erb
+          format.xml  { render :xml => @user }
+      end
+      else
+        redirect_to(users_path)
+      end
     else
-      redirect_to(users_path)
+      four_oh_four_error
     end
   end
   
