@@ -55,7 +55,7 @@
 	</div>
 	<div class="float-right clear-right bg-lightest-gray padding-med rounded-heavy" style="margin-right:0px;width:245px;">
 	<% if current_user.staff %>
-	<% if @program.event != nil : "" %>
+	<% unless @program.event %>
 
 	<div class="chunk-five blue-text">Time Slot</div>
   	<div id="timeslot" class="form" style="margin:20px;">
@@ -84,12 +84,12 @@
 		<span class="chunk-five blue-text">Hour</span>
 			<%= select_hour Time.now.hour, :field_name => 'starts_at_hour' %>
 		<span class="chunk-five blue-text">Min</span>
-			<%= select_minute "00", :minute_step => 30, :field_name => 'starts_at_minute' %><br/>
+			<%= select_minute(00, :minute_step => 30, :field_name => 'starts_at_minute') %><br/>
 			<%= label_tag 'End Time', 'End Time', :class => 'chunk-five blue-text' %><br/>
 		<span class="chunk-five blue-text">Hour</span>
 			<%= select_hour Time.now.hour, :field_name => 'ends_at_hour' %>
 		<span class="chunk-five blue-text">Min</span>
-			<%= select_minute "00", :minute_step => 30, :field_name => 'ends_at_minute' %>
+			<%= select_minute(00, :minute_step => 30, :field_name => 'ends_at_minute') %>
   	</div>
 	<% end %>
 	<div id="availability-button" class="pointer bebas yellow-text">Check Availability</div>
