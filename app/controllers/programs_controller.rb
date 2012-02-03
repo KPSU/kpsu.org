@@ -5,6 +5,7 @@ class ProgramsController < ApplicationController
   before_filter :is_staff, :only => ['new', 'create', 'destroy', 'index']
   before_filter :has_profile_filled_out
   before_filter :increment_visit, :only => ['show']
+
   
   # GET /programs
   # GET /programs.xml
@@ -227,8 +228,8 @@ class ProgramsController < ApplicationController
   def update_schedule(event, day, p)
     @starts_at = Time.parse("01/01/2000 #{p[:starts_at_hour]}:#{p[:starts_at_minute]}")
     @ends_at = Time.parse("01/01/2000 #{p[:ends_at_hour]}:#{p[:ends_at_minute]}")
-    event.starts_at = @starts_at
-    event.ends_at = @ends_at
+    event.starts_at = @starts_at.strftime("%R")
+    event.ends_at = @ends_at.strftime("%R")
     event.day_i = day
     if event.save
         return true
