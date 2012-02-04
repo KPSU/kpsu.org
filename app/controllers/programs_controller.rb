@@ -145,6 +145,7 @@ class ProgramsController < ApplicationController
   def update
     @program = Program.find(params[:id])
     @program.title = params[:program][:title]
+    puts @program.title.to_s
     @program.genre = Genre.find(params[:genre])
     @program.thumb = params[:program][:thumb]
     @program.description = params[:program][:description]
@@ -231,13 +232,14 @@ class ProgramsController < ApplicationController
     event.starts_at = @starts_at.strftime("%R")
     event.ends_at = @ends_at.strftime("%R")
     event.day_i = day
+    event.name = params[:program][:title]
     if event.save
         return true
     else      
         return false
     end
   end
-  
+
   def increment_visit
       @p = Program.find(params[:id])
       if @p
