@@ -44,7 +44,7 @@
 		   					<% if @i <= 4 %>
 		   					<tr>
 		   						<td style="width:204px" class="rounded-light"><%= t.title %></td>
-		   						<td style="width:200px" class="rounded-light"><%= link_to(t.artist.name, artist_path(t.artist), :class => "magenta-text") %></td>
+		   						<td style="width:200px" class="rounded-light"><%= t.artist.name %></td>
 		   						<td style="width:200px" class="rounded-light"><%= t.album.name %></td>
 		   					</tr>
 		   					<% else %>
