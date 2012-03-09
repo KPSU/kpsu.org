@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+  class UsersController < ApplicationController
   
   layout 'alternative'
   before_filter :require_user, :except => ['index', 'show', 'blogs', 'posts']
@@ -323,10 +323,14 @@ class UsersController < ApplicationController
         format.html { redirect_to(@user, :notice => 'User was successfully created.') }
         format.js { render :partial => "saved_new_user.js"}
         format.xml  { render :xml => @user, :status => :created, :location => @user }
+        
         end
     else
+        respond_to do |format|
         format.html { render :action => "new" }
         format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
+
+        end
     end
     
   end
