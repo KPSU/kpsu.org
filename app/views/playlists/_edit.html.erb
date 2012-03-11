@@ -1,17 +1,4 @@
-<% unless @inpage %>
-<br/>
-<div id="playlist-container">
-<div class="float-left blue rounded-heavy-top clear-left" style="margin-top: 0px;padding-left: 10px;width: 654px;height: 34px;padding-top: 10px;">
-	<ul class="horizontal">
-		<li class="horizontal pointer bebas manage_playlists"><%= link_to "Manage Playlists", playlists_path(:inpage => true), :remote => true, :class => "black-text", :rel => ":address/#{url_for(playlists_path)}" %></li>
-		<li class="horizontal black-text chunk-five">&#183;</li>
-		<li class="horizontal pointer bebas black-text new_playlist"><%= link_to "New Playlist", new_playlist_path(), :remote => true, :class => "black-text", :rel => ":address/#{url_for(new_playlist_path)}" %></li>
-	</ul>
-</div>
-<div class="playlist-wrapper">
-<% end %>
-	
-	<style type="text/css" media="screen">
+		<style type="text/css" media="screen">
 		.search-button:hover {
 			text-shadow: 0 0 5px rgba(255, 109, 100, 2);
 		    -webkit-text-shadow: 0 0 5px rgba(255, 109, 100, 2); 
