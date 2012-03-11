@@ -23,7 +23,7 @@
 </style>
 <div id="dj-profile">
 	<div class="details-wrapper float-left" style="width:265px;text-align:right;">
-	<div class=""><span class="bebas twenty-pt <%= random_text_color %>" title="<%= @user.dj_name %>'s profile"><%= @user.dj_name %></span><div title="Link to DJ" style="font-size:10px;padding:10px;" class="dejavu-condensed white-text">http://kpsu.org/<%= @user.dj_name.gsub(/\s/, "_").downcase %></div></div>
+	<div class=""><span class="bebas twenty-pt <%= random_text_color %>" title="<%= @user.dj_name %>'s profile"><%= @user.dj_name %></span><div title="Link to DJ" style="font-size:10px;padding:10px;" class="dejavu-condensed white-text">http://kpsu.org/users/<%= @user.dj_name.gsub(/\s/, "_").downcase %></div></div>
 	<div class="m1-regular yellow-text" style="word-wrap:break-word;width: 100%;"><% @user.roles.each do |r| %><%= r.title.split(' ').map {|w| w.capitalize }.join(' ') %><br/><% end %></div>
 	
 	<div id="photos" style="width:100%;">
