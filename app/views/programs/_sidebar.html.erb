@@ -21,7 +21,7 @@
 </style>
 <div class="generic-sidebar">
 	<div style="padding-bottom:10px;width:260px;" class="float-left">
-		<div id="program-url" class="program url white-text" style="font-size:10px;padding-left:10px;margin-top:10px;">http://kpsu.org/shows/<%= @program.title.gsub("\s", "_").downcase %></div>
+		<div id="program-url" class="program url white-text" style="font-size:10px;padding-left:10px;margin-top:10px;">http://kpsu.org/programs/<%= @program.title.gsub("\s", "_").downcase %></div>
 		<div id="program-copy" style="position:relative;font-size:8px;"><div id="program-copy-button" class="white-text">Copy URL to Clipboard</div></div>
 	</div>
 	<% if @program.event %>
