@@ -4,12 +4,7 @@ gem 'rails', '3.0.3'
 
 # Async GEMs
 
-gem 'em-synchrony', :require => ['em-synchrony',
-                                 'em-synchrony/em-http',
-                                 'em-synchrony/activerecord']
-gem 'em-http-request', :require => 'em-http'
-gem 'eventmachine'
-gem 'rack-fiber_pool',  :require => 'rack/fiber_pool'
+
 gem "mysql2", "~> 0.2.7"
 
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
