@@ -7,7 +7,7 @@ namespace :archive do
     # from it's broken-ass drupal installation. I'll fix it later.
     # hopefully by moving to amazon S3
     
-    @pages = ["http://archive.kpsu.org/files/audio/", "http://archive.kpsu.org/files/audio_files/"]
+    @pages = ["http://archive.kpsu.org/files/"]
     
     @pages.each do |page|
       html << open(page)
