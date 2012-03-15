@@ -317,22 +317,18 @@
     @password = params[:password]
     @user.listener = false
     @user.chatroom_id = ActiveSupport::SecureRandom::hex(16)
-    if @user.save
-        respond_to do |format|
+   
+    respond_to do |format|  
+      if @user.save
         UserMailer.welcome_email(@user, @password).deliver
         format.html { redirect_to(@user, :notice => 'User was successfully created.') }
         format.js { render :partial => "saved_new_user.js"}
         format.xml  { render :xml => @user, :status => :created, :location => @user }
-        
-        end
-    else
-        respond_to do |format|
+      else
         format.html { render :action => "new" }
         format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
-
-        end
+      end
     end
-    
   end
 
 
