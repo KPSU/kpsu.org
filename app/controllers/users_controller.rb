@@ -294,8 +294,6 @@
     @title = "Edit Profile" 
     if current_user == @lookup || current_user.staff
       @user = User.find(params[:id])
-    else
-      redirect_to(edit_user_path(current_user))
     end
     respond_to do |format|
       format.html
