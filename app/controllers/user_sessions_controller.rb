@@ -10,7 +10,7 @@ class UserSessionsController < ApplicationController
     @user_session = UserSession.new(params[:user_session])
     @user_session.save do |result|
       if result
-        initialize_chatroom
+        
         flash[:notice] = "Login successful!"
         redirect_back_or_default dashboard_path
       else
