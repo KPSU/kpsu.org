@@ -98,8 +98,6 @@ class SchedulesController < ApplicationController
     @day = params[:day]
     @starts_at_h = params[:date][:starts_at_hour]
     @starts_at_m = params[:date][:starts_at_minute]
-    @ends_at_h = params[:date][:ends_at_hour]
-    @ends_at_m = params[:date][:ends_at_minute]
     @starts_at = "#{@starts_at_h}:#{@starts_at_m}"
     @ends_at = "#{@ends_at_h}:#{@ends_at_m}"
     

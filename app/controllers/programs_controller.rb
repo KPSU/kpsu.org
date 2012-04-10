@@ -233,6 +233,7 @@ class ProgramsController < ApplicationController
     event.ends_at = @ends_at.strftime("%R")
     event.day_i = day
     event.name = params[:program][:title]
+
     if event.save
         return true
     else      
