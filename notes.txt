@@ -1,3 +1,11 @@
+-new user
+	-create user
+ -volunteer hours
+ -DJ page not showing all DJs
+ -Program manger delete
+
+
+
 to do:
 	finish chat
 	finish popup player/kpsu listener playlists
