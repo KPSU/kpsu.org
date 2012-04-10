@@ -1,4 +1,4 @@
-  class UsersController < ApplicationController
+class UsersController < ApplicationController
   
   layout 'alternative'
   before_filter :require_user, :except => ['index', 'show', 'blogs', 'posts']
@@ -295,7 +295,7 @@
     if current_user == @lookup || current_user.staff
       @user = User.find(params[:id])
     else
-      redirect_to(edit_user_path(current_user))
+      redirect_to(edit_user_path(current_user)).
     end
     respond_to do |format|
       format.html
@@ -382,7 +382,7 @@
     end
   end
   
-  private
+  
 
   def get_users_by_genre(genre)
     @genre = Genre.includes(:programs => [:user => [:downloads]]).find(params[:genre])
@@ -433,5 +433,5 @@
         @v.save
       end
   end
-  
+  end
 end

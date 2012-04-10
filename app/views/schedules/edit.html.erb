@@ -1,22 +1,22 @@
 <div class="auxiliary">
 	<div class="m1-thin extra-large header-padding">Station Schedule</div>
 	<div id="sunday" style="">
-	<div class="m1-thin large">Sunday</div>
+	<div class="m1-thin large"></div>
 	<div class="float-left rounded-light" style="width:535px;padding:25px;">
-		<div style="background-color:#E8E8E8;border:#E8E8E8 3px solid;height:auto;float:left;padding:10px;" class="rounded-heavy div-table">
-			<div style="width:535px;background-color:#E8E8E8;height:30px;text-align:left;padding:5px 0px 0px 5px;">
-				<div class="m1-bold wide-col float-left">Program Name</div>
-				<div class="m1-bold narrower-col float-left">Time</div>
-				<div class="m1-bold narrow-col float-right">Options</div>
-			</div>
+		<table style="background-color:#E8E8E8;border:#E8E8E8 3px solid;height:auto;float:left;padding:10px;" class="rounded-heavy div-table">
+			<tr style="width:535px;background-color:#E8E8E8;height:30px;text-align:left;padding:5px 0px 0px 5px;">
+				<th class="m1-bold wide-col float-left">Program Name</th>
+				<th class="m1-bold narrower-col float-left">Time</th>
+				<th class="m1-bold narrow-col float-right">Options</th>
+			</tr>
 			<% @sun.each do |e| %>
-				<div class="micro-row" style="width:532px !important;" id="">
-					<div style="padding-top:6px;padding-left:3px;" class="float-left medium wide-col"><a href=""><span class="program-name"><%= e.name %></span></a></div>
-					<div style="padding-top:6px;" class="float-left medium narrower-col"><%= Time.zone.at(e.starts_at.to_i).strftime("%I:%M %p") %></div>
-					<div data-id="<%= e.id %>" class="adopt-link float-right medium narrow-col"><span class="red-font pointer">Remove</span> - <span class="red-font pointer">Edit</span></div>
-				</div>
+				<tr class="micro-row" style="width:532px !important;" id="">
+					<td style="padding-top:6px;padding-left:3px;" class="float-left medium wide-col"><a href=""><span class="program-name"><%= e.name %></span></a></td>
+					<td style="padding-top:6px;" class="float-left medium narrower-col"><%= Time.zone.at(e.starts_at.to_i).strftime("%I:%M %p") %></td>
+					<td data-id="<%= e.id %>" class="adopt-link float-right medium narrow-col"><span class="red-font pointer">Remove</span> - <span class="red-font pointer">Edit</span></td>
+				</tr>
 			<% end %>
-		</div>
+		</table>
 	</div>
 	</div>
 </div>

@@ -1,20 +1,20 @@
 	<div class="m1-light large float-left clear-both" style="margin:15px 0px 0px 0px;padding:5px;">My Posts</div>
 	
-	<div style="background-color:#E8E8E8;border:#E8E8E8 3px solid;height:auto;float:left;padding:10px;" class="rounded-heavy div-table">
-		<div style="width:870px;background-color:#E8E8E8;height:30px;text-align:left;padding:5px 0px 0px 5px;">
-			<div class="m1-bold wide-col float-left">Post</div>
-			<div class="m1-bold wide-col float-left">DJ</div>
-			<div class="m1-bold narrow-col float-left">Date</div>
-			<div class="m1-bold narrow-col float-left">Comments</div>
-		</div>
+	<table style="background-color:#E8E8E8;border:#E8E8E8 3px solid;height:auto;float:left;padding:10px;" class="rounded-heavy div-table">
+		<tr style="width:870px;background-color:#E8E8E8;height:30px;text-align:left;padding:5px 0px 0px 5px;">
+			<th class="m1-bold wide-col float-left">Post</th>
+			<th class="m1-bold wide-col float-left">DJ</th>
+			<th class="m1-bold narrow-col float-left">Date</th>
+			<th class="m1-bold narrow-col float-left">Comments</th>
+		</tr>
 		<% @posts.each do |p| %>
 		<% if p.user != nil %>
-			<div class="row">
-				<div style="padding-top:6px;padding-left:3px;" class="float-left wide-col"><%= link_to(p.title, post_path(p), :class => "red-font", :title => "View Post" ) %></div>
-				<div style="padding-top:6px;" class="float-left wide-col"><%= link_to(p.user.dj_name, user_path(p.user), :class => "red-font", :title => "") %></div>
-				<div style="padding-top:6px;" class="float-left narrow-col"><%= p.created_at.to_s(:simple)%></div>
-				<div style="padding-top:6px;" class="float-left narrower-col"><%= p.comments.size %></div>
-			</div>
+			<tr class="row">
+				<td style="padding-top:6px;padding-left:3px;" class="float-left wide-col"><%= link_to(p.title, post_path(p), :class => "red-font", :title => "View Post" ) %></td>
+				<td style="padding-top:6px;" class="float-left wide-col"><%= link_to(p.user.dj_name, user_path(p.user), :class => "red-font", :title => "") %></td>
+				<td style="padding-top:6px;" class="float-left narrow-col"><%= p.created_at.to_s(:simple)%></td>
+				<td style="padding-top:6px;" class="float-left narrower-col"><%= p.comments.size %></td>
+			</tr>
 		<% end %>
 		<% end %>
-	</div>
+	</table>
