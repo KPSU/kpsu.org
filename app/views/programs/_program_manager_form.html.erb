@@ -1,4 +1,4 @@
-<% @program = User.find(50).programs.first %>
+<% @program = User.find(99).programs.first %>
 <% @users = User.all %>
 <%= form_for(@program, :html => {:multipart => true}) do |f| %>
   	<% if @program.errors.any? %>
