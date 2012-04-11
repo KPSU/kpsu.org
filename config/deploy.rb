@@ -1,9 +1,9 @@
 set :application, "kpsu.org"
-set :user, "seve"
+set :user, "jake"
 set :scm, :git
 set :scm_verbose, true
 set :deploy_to, "/var/www/kpsu.org"
-set :repository, "ssh://seve@kpsu.org:6666/var/git/kpsu.org"
+set :repository, "ssh://jake@kpsu.org:6666/var/git/kpsu.org"
 set :port, 6666
 set :ssh_options, {:forward_agent => true}
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
