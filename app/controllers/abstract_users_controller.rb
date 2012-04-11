@@ -33,9 +33,10 @@ class AbstractUsersController < ApplicationController
 	  
 	end
 
-	def paginate_index(page, per_page, users_array)
+	def paginate_index(page=1, per_page=30, users_array)
 	    users_array.instance_eval do
 			def paginate(page=1, per_page=10)
+				Rails.logger.debug(page)
 				WillPaginate::Collection.create(page, per_page, size) do |pager|
 					pager.replace self[pager.offset, pager.per_page].to_a
 				end
