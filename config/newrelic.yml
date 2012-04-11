@@ -193,6 +193,7 @@ development:
   # NOTE: for initial evaluation purposes, you may want to temporarily 
   # turn agent communication on in development mode.
   monitor_mode: true
+  app_name: www (dev)
 
   # Rails Only - when running in Developer Mode, the New Relic Agent will 
   # present performance information on the last 100 transactions you have
@@ -203,6 +204,9 @@ development:
   
   # Enable textmate links
   # textmate: true
+
+background:
+  <<: *default_settings
 
 test:
   <<: *default_settings
