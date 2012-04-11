@@ -1,1 +1,14 @@
 public/system/avatars
+config/deploy.rb
+.bundle/
+*.log
+app/assets/
+config/.DS_Store
+config/initializers/action_view_patch.rb
+local_gems/
+newrelic_rpm/
+vendor/assets/
+vendor/bundle/.DS_Store
+vendor/cache/awesome_print-1.0.2.gem
+vendor/cache/newrelic_rpm-3.3.2.1.gem
+vendor/gems/.DS_Store
