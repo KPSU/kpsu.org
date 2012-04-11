@@ -7,7 +7,9 @@ class UsersController < AbstractUsersController
   before_filter :has_profile_filled_out, :except => ['edit', 'update', 'dashboard']
   before_filter :increment_visit, :only => ['show']
 
-  
+  caches_action :index, 
+                :cache_path => proc {|controller| controller.params.merge({:only_path => true}) },
+                :expires_in => 1.hours
 
   respond_to :html, :json, :xml
 
@@ -37,8 +39,8 @@ class UsersController < AbstractUsersController
   
     # Now setup pagination, and paginate
     # returning back the paginated @users
-
-    @users = paginate_index(params[:page], 30, @users)
+    params[:page] ? @page = params[:page] : @page = 1
+    @users = paginate_index(@page, 30, @users)
     
     # Setup error notice
 
