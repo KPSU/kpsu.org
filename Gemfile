@@ -1,3 +1,4 @@
+source :rubygems
 source 'http://gemcutter.org'
 
 gem 'rails', '3.0.3'
@@ -38,5 +39,5 @@ gem 'juggernaut'
 gem 'rubyzip'
 gem 'fastercsv'
 gem 'capistrano'
-gem 'newrelic_rpm'
+gem "newrelic_rpm", "~> 3.3.4.beta1"
 gem 'thin'
