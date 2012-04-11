@@ -122,7 +122,7 @@
 		<div class="header">
 			<% if @post.content_type_id == 1 %>
 				<div class="green-text post-type">BLOG</div>
-				<div class="green chunk-five yellow-text float-left title-bar"><%= link_to @post.title, @post, :class => "yellow-text" %>
+				<div class="green chunk-five yellow-text float-left title-bar"><%= link_to @post.title, @post, :class => "black-text" %>
 				<% if current_user %>
 				<% if (current_user.id == @post.user.id) || current_user.staff %>
 					<a title="Edit Post" href='/dashboard/#/posts/<%= @post.id -%>/edit'><span class="white-text edit-post">Edit Post<span></a>
