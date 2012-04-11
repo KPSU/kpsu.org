@@ -33,7 +33,8 @@ class ApplicationController < ActionController::Base
       @image = {}
       @image[:small] = @medium
       @image[:large] = @large
-    rescue      
+    rescue Exception => e
+      Rails.logger.error(e)      
       @image = nil
     end
     return @image                          
@@ -48,7 +49,7 @@ class ApplicationController < ActionController::Base
     begin
       @req = req.search( il, rg, 1 )
       @image = @req.item_search_response.items.item.first.large_image.url 
-    rescue
+    rescue Exception => e
       @image = nil
     end
     return @image
@@ -106,11 +107,9 @@ class ApplicationController < ActionController::Base
       :consumer_key => twitter_consumer_key,
       :consumer_secret => twitter_consumer_secret
     )
-    
     request_token = client.request_token(:oauth_callback => "http://kpsu.org/twitter/callback")
     session[:request_token] = request_token.token
     session[:request_token_secret] = request_token.secret
-    logger.info session
     redirect_to request_token.authorize_url.gsub('authorize', 'authenticate')
   end
 
@@ -167,12 +166,12 @@ class ApplicationController < ActionController::Base
   
   def no_listener
     if current_user
-    if current_user.listener == true
-      store_location
-      flash[:notice] = "Aw shucks! Seems like you got a bit turned around, we've redirected back to the listener home."
-      redirect_to(listener_path)
-      return false
-    end
+      if current_user.listener == true
+        store_location
+        flash[:notice] = "Aw shucks! Seems like you got a bit turned around, we've redirected back to the listener home."
+        redirect_to(listener_path)
+        return false
+      end
     else
       redirect_to(login_path)
     end
@@ -188,7 +187,12 @@ class ApplicationController < ActionController::Base
           @bullshit = true
         end
       end
-      @has_about = if current_user.about == "This DJ hasn't filled out any information yet, hastle 'em about it!" then false else true end
+      @has_about = ""
+      if current_user.about == "This DJ hasn't filled out any information yet, hastle 'em about it!" 
+            @has_about = false
+          else
+            @has_about = true 
+      end
       if @has_pic == false || @has_about == false || @has_phone == false
         @msg = "To continue using KPSU please complete the following: <br/><br/>"
         if @has_about == false
