@@ -6,7 +6,7 @@ include Amazon::AWS::Search
 class ApplicationController < ActionController::Base
   protect_from_forgery
   helper_method :current_user_session, :current_user
-  rescue_from ActiveRecord::RecordNotFound, :with => :not_found_error
+  rescue_from ActiveRecord::RecordNotFound, :with => :four_oh_four_error
 
 
   def four_oh_four_error
