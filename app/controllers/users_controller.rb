@@ -237,22 +237,28 @@ class UsersController < AbstractUsersController
   end
 
   # GET /users/1/edit
+  
   def edit
+    
     @lookup = User.find(params[:id])
     @title = "Edit Profile" 
+    
     if current_user == @lookup || current_user.staff
       @user = User.find(params[:id])
     else
       redirect_to(edit_user_path(current_user))
     end
+    
     respond_to do |format|
       format.html
       format.js { render :partial => "form" }
     end
+
   end
 
   # POST /users
   # POST /users.xml
+
   def create
     @user = User.new(params[:user])
     
@@ -264,7 +270,6 @@ class UsersController < AbstractUsersController
     
     @password = params[:password]
     @user.listener = false
-    @user.chatroom_id = ActiveSupport::SecureRandom::hex(16)
    
     respond_to do |format|  
       if @user.save
@@ -277,6 +282,7 @@ class UsersController < AbstractUsersController
         format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
       end
     end
+
   end
 
 
@@ -295,9 +301,11 @@ class UsersController < AbstractUsersController
     
     @user.f_name = params[:user][:f_name]
     @user.l_name = params[:user][:l_name]
+    
     if params[:user][:avatar]
       @user.avatar = params[:user][:avatar]
     end
+
     @user.phone = @phone.to_i
     @user.influences = params[:user][:influences]
     @user.about = params[:user][:about]
