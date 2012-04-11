@@ -232,9 +232,4 @@ class ApplicationController < ActionController::Base
     session[:return_to] = nil
   end
   
-  def initialize_chatroom(user = current_user)
-    user.chatroom_id = ActiveSupport::SecureRandom::hex(24)
-    user.save
-  end
-    
 end
