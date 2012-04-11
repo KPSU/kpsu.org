@@ -7,9 +7,7 @@ class UsersController < AbstractUsersController
   before_filter :has_profile_filled_out, :except => ['edit', 'update', 'dashboard']
   before_filter :increment_visit, :only => ['show']
 
-  caches_action :index, 
-                :cache_path => proc {|controller| controller.params.merge({:only_path => true}) },
-                :expires_in => 1.hours
+  
 
   respond_to :html, :json, :xml
 
