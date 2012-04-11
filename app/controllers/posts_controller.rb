@@ -5,6 +5,9 @@ class PostsController < ApplicationController
   before_filter :no_listener, :only => ['new', 'edit', 'destroy', 'update', 'create']
   before_filter :increment_visit, :only => ['show']
 
+  caches_action :index, 
+                :cache_path => proc {|controller| controller.params.merge({:only_path => true}) },
+                :expires_in => 10.minutes
   # GET /posts
   # GET /posts.xml
   

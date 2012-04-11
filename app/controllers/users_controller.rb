@@ -10,6 +10,10 @@ class UsersController < AbstractUsersController
   caches_action :index, 
                 :cache_path => proc {|controller| controller.params.merge({:only_path => true}) },
                 :expires_in => 1.hours
+  
+  caches_action :show, 
+                :cache_path => proc {|controller| controller.params.merge({:only_path => true}) },
+                :expires_in => 1.hours
 
   respond_to :html, :json, :xml
 
