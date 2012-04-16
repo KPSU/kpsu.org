@@ -1,5 +1,5 @@
 set :application, "kpsu.org"
-set :user, "seve"
+set :user, "jake"
 set :scm, :git
 set :scm_verbose, true
 set :deploy_to, "/var/www/kpsu.org"
