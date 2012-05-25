@@ -147,6 +147,15 @@
 				<% end %>
 				<% end %>
 				</div>
+			<% elsif @post.content_type_id == 4 %>
+				<div class="magenta-text post-type">Review</div>
+				<div class="magenta chunk-five white-text float-left title-bar"><%= link_to @post.title, @post, :class => "white-text" %>
+				<% if current_user %> 
+				<% if (current_user.id == @post.user.id) || current_user.staff %>
+					<a title="Edit Post" href='/dashboard/posts/<%= @post.id -%>/edit'><span class="white-text edit-post">Edit Post<span></a> | <%= link_to 'Destroy', @post, :confirm => 'Are you sure?', :method => :delete %>
+				<% end %>
+				<% end %>
+				</div>	
 			<% end %>
 		</div>
 
@@ -162,7 +171,9 @@
 	<% elsif @post.content_type_id == 3 %>
 		<div class="footer yellow">
 	<% elsif @post.content_type_id == 2 %>
-		<div class="footer blue">		
+		<div class="footer blue">	
+	<% elsif @post.content_type_id == 4 %>
+		<div class="footer magenta">	
 	<% end %>	
 			<div id="view-comments" class="float-left dejavu-condensed white-text">View Comments</div>
 			<div id="share" class="share float-right">
