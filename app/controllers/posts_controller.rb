@@ -51,6 +51,7 @@ class PostsController < ApplicationController
     @posts = Post.order('created_at DESC').where(:user_id => current_user.id)
     respond_to do |format|
       format.html 
+      format.js { render :partial => "user_posts" }
       format.xml  { render :xml => @posts }
     end
   end

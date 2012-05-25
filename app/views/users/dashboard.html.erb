@@ -132,7 +132,7 @@
 				<% end %>
 				<li class="vertical pointer blue dj">DJ</li>
 				<li class="invisible pointer dj new-blog db-subclass"><%= link_to("Create a New Blog", new_post_path, :remote => true, :rel => ":address/#{url_for(new_post_path)}" ) %></li>
-				<li class="invisible pointer dj db-subclass"><%= link_to("My Posts", users_posts_path(current_user)) %></li>
+				<li class="invisible pointer dj db-subclass"><%= link_to("My Posts", users_posts_path(current_user), :remote => true, :rel => ":address/#{url_for(users_posts_path(current_user))}") %></li>
 				<li class="invisible pointer dj db-subclass"><%= link_to("Downloads Manager", user_downloads_path(current_user), :remote => true, :rel => ":address/#{url_for(user_downloads_path(current_user))}") %></li>
 				<li class="invisible pointer dj db-subclass"><%= link_to("Playlist Manager", playlists_path, :remote => true, :rel => ":address/#{url_for(playlists_path)}" ) %></li>
 				<li class="invisible pointer dj edit-profile db-subclass"><%= link_to("Edit Profile", edit_user_path(current_user), :remote => true, :rel => ":address/#{url_for(edit_user_path(current_user))}" ) %></li>
@@ -156,7 +156,7 @@
 
 	<div id="dashboard-content" class="float-right" style="width:700px;margin-bottom:50px;">
 	</div>
-asdfadf
+
 
 
 </div>
