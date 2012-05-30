@@ -1,0 +1,19 @@
+<div id="" class="downloads-manager-wrapper rounded-heavy" style="margin-left:30px;">
+		<div class="twenty-pt chunk-five yellow-text purple rounded-heavy" style="margin:0px;width:580px;padding:10px;">My Posts</div>	
+<table style="width:600px; background-color:#343434;height:auto;float:left;padding:10px;" class="rounded-heavy div-table">
+	<tr style="width:600px;background-color:#343434;height:30px;text-align:left;padding:5px 0px 0px 5px;">
+		<th class="m1-bold white-text wide-col float-left">Post</th>
+		<th class="m1-bold white-text narrow-col float-left" style="margin-left:140px;">Date</th>
+		<th class="m1-bold white-text narrow-col float-left">Comments</th>
+	</tr>
+	<% @posts.each do |p| %>
+	<% if p.user != nil %>
+		<tr class="row">
+			<td style="width:325px;padding-top:6px;padding-left:3px; margin-left:20px" class="red-text float-left"><%= link_to(p.title, post_path(p), :class => "yellow-text", :title => "View Post" ) %></td>
+			<td style="padding-top:6px; margin-left:20px;" class="float-left white-text narrow-col"><%= p.created_at.to_s(:simple)%></td>
+			<td style="padding-top:6px;" class="float-left white-text narrower-col"><%= p.comments.size %></td>
+		</tr>
+	<% end %>
+	<% end %>
+</table>
+</div>
