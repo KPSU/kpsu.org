@@ -39,5 +39,5 @@ gem 'juggernaut'
 gem 'rubyzip'
 gem 'fastercsv'
 gem 'capistrano'
-gem "newrelic_rpm", "~> 3.3.4.beta1"
+gem 'newrelic_rpm', '3.3.5.beta1'
 gem 'thin'
