@@ -4,7 +4,7 @@ class ArchivesController < ApplicationController
   
   
   def index
-    @downloads = Download.paginate(:all, :order => 'title DESC', :conditions => ['program_id > ?', 0], :include => [:user, :program], :page => params[:page], :per_page => 25)
+    @downloads = Download.where("program_id != ?", 0).includes(:user, :program).order('title DESC').paginate(:page => params[:page], :per_page => 25)
   end
   
   def list

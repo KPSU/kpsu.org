@@ -1,7 +1,7 @@
 source :rubygems
 source 'http://gemcutter.org'
 
-gem 'rails', '3.0.3'
+gem 'rails', '3.0.10'
 
 # Async GEMs
 
@@ -30,7 +30,7 @@ gem 'oauth'
 gem 'RedCloth'
 gem 'rmagick'
 gem 'hpricot'
-gem 'omniauth'
+gem "omniauth", "~> 0.2.6"
 gem 'multi_json'
 gem 'musicbrainz-ruby'
 gem 'musicbrainz_automatcher'
@@ -41,3 +41,4 @@ gem 'fastercsv'
 gem 'capistrano'
 gem 'newrelic_rpm', '3.3.5.beta1'
 gem 'thin'
+gem 'aws-sdk'
