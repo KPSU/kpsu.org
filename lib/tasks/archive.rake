@@ -22,7 +22,6 @@ namespace :archive do
 
     # get a list of all object keys in a bucket
     bucket = s3.buckets[bucket_name].objects.collect(&:key)
-
     @current_pdt_time = Time.now.utc + Time.zone_offset("PDT")
     @url = "https://s3.amazonaws.com/archive-complete/"
     tracks = bucket.each do |track| 
