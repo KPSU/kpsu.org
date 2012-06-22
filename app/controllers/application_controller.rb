@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
 
 
   def four_oh_four_error
-    render :action => "site/four_oh_four"
+    render :template => "site/four_oh_four", :status => :not_found
   end
 
   private
