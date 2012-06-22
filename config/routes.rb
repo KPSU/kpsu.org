@@ -7,7 +7,6 @@ Kpsu::Application.routes.draw do
   match '/calendar(/:year(/:month))' => 'calendar#index', :as => :calendar, :constraints => {:year => /\d{4}/, :month => /\d{1,2}/}
   match '/about' => "contents#view", :as => :about, :title => "About KPSU"
   match '/reset_password' => 'password_resets#edit'
-  match '/shows/:title' => 'programs#show'
   match '/em_show/:id' => 'artists#em_show'
   match '/catalogs/search/' => "catalogs#search", :as => "catalog_search"
   match '/archives/search/' => "archives#search", :as => "archive_search"
@@ -109,6 +108,7 @@ Kpsu::Application.routes.draw do
   match '/comments/:type/:id' => "comments#index", :as => "content_comment"
   match '/program/:title' => "programs#show"
   match '/auth/:provider' => 'authentications#passthru'
+  match '*a', :to => 'errors#routing'
   # Route globbing FTW for DJ lookup
   
   
