@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   helper_method :current_user_session, :current_user
   rescue_from ActiveRecord::RecordNotFound, :with => :four_oh_four_error
-
+  rescue_from ActionController::RoutingError, :with => :four_oh_four_error
 
   def four_oh_four_error
     render :template => "site/four_oh_four", :status => :not_found
