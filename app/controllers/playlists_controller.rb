@@ -49,6 +49,7 @@ class PlaylistsController < ApplicationController
       end
       
       if params[:album_search]
+        
         @albums = Album.name_like(params[:search])
         @aa = @albums.map{|a| a.id }
         @tracks = Track.find_all_by_album_id(@aa) rescue nil
