@@ -11,7 +11,7 @@ class CatalogsController < ApplicationController
       @catalogs = Catalog.paginate(:all, :order => "artist ASC", :page => params[:page], :conditions => [ 'artist LIKE ?', "#{params[:alphabetical]}%" ])
 
     else
-      @catalogs = Catalog.paginate(:all, :order => "number DESC", :page => params[:page])
+      @catalogs = Catalog.paginate(:order => "number DESC", :page => params[:page])
     end
     respond_to do |format|
       format.html # index.html.erb
