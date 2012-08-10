@@ -118,7 +118,7 @@
       <li class="fourteen-pt dejavu-book"><span class="yellow-text">Program Title</span> (<span class="white-text">DJ's Name</span>)</li>
 	
       <% @programs.each do |program| %>
-		<% if program.user_id != nil %>
+		<% if program.user.f_name != nil %>
       <li class="program edit-program-link pointer ten-pt dejavu-condensed" data-url="<%= program_manager_edit_path(program) %>"><span class="yellow-text"><%= program.title %></span> (<span class="white-text"><%= program.user.f_name %> <%= program.user.l_name %></span>)</li>
 		<% end %>
       <% end %>
