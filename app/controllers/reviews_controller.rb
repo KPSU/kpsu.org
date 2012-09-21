@@ -10,7 +10,8 @@ class ReviewsController < ApplicationController
   autocomplete :label, :name, :full => false, :display_value => :label_autocomplete
   
   def index
-    @reviews = Review.paginate(:all, :page => params[:page], :per_page => 5, :order => 'id DESC')
+    @reviews = Review.paginate(:page => params[:page], :per_page => 5, :order => 'id DESC')
+    #@reviews = WillPaginate::Collection.create(:all, :page => params[:page], :per_page => params[:per_page], :order => 'id DESC')
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @reviews }
