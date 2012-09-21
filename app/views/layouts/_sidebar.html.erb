@@ -22,7 +22,7 @@
 <div class="generic-sidebar">
 	<div class="float-left sidebar-happenings-wrapper">
 	<img src="/images/v3/events.png">
-	<a href="http://www.musicfestnw.com/"><div style="width:160px; height:600px; float:right;"><img src="/images/v3/mfnwskyscraper.gif" width="160px" height="600px" style="float:right;" /></div></a>
+	<a href="/images/v3/sept_oct_events_color.png"><div style="width:264px; height:600px; float:right;"><img src="/images/v3/sept_oct_events_color.png" width="264px" height="600px" style="float:right;" /></div></a>
 	<% Happening.where("ends_at > ?", Time.zone.now).limit(4).reverse.each do |event| %>
 	<div class="sidebar-happenings" style="width:100%;">
 		<div class="float-left bebas magenta-text" style="width:100%;"><%= event.title %></div>
