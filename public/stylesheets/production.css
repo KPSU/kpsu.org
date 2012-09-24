@@ -35,7 +35,7 @@ input[type='password']:focus,input[type='text']:focus,textarea:focus{border:1px 
 #banner-on-air-and-player{float:left;width:282px;height:508px;background-image:url('/images/v3/banner-on-air-and-player.png');background-position:0;}
 #banner{float:left;}
 #more-stuff{float:left;clear:right;margin-top:-80px;width:424px;height:116px;background-image:url('/images/v3/midsection-sprite.png');background-position:0 0px;}
-#featured-artists{float:left;clear:left;width:507px;height:538px;background-image:url('');background-position:0px 0px;margin:60px 0px 0px 17px;}
+#featured-artists{float:left;clear:left;width:507px;height:780px;background-image:url('');background-position:0px 0px;margin:60px 0px 0px 17px;}
 #kpsu-presents{float:left;width:535px;height:216px;background-image:url('/images/v3/midsection-sprite.png');background-position:0px -555px;margin:40px 0px 0px 15px;}
 .kpsu-presents-art{float:left;width:432px;height:75px;background-image:url("/images/v3/top-down.png");margin-top:87px;margin-left:91px;}
 #twitter-feed{float:right;width:385px;height:716px;background-image:url('/images/v3/midsection-sprite.png');background-position:385px -60.3px;margin-right:38px;}
