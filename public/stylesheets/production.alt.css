@@ -166,7 +166,7 @@ input[type='password']:focus, input[type='text']:focus, textarea:focus {
 	float: left;
 	clear:left;
 	width: 507px;
-	height: 433px;
+	height: 1038px;
 	background-image: url('/images/v3/midsection-sprite.png');
 	background-position: -28px -120px;
 	margin: 60px 0px 0px 17px;
@@ -190,19 +190,26 @@ input[type='password']:focus, input[type='text']:focus, textarea:focus {
 	margin-left: 91px;
 }
 
+#rotator {
+	float:left;
+	background-color:#171717;
+	margin-top:60.3px;
+	margin-left:16px;
+}
+
 #twitter-feed {
 	float: right;
-	width: 385px;
-	height: 718px;
-	background-image: url('/images/v3/midsection-sprite.png');
-	background-position: 385px -60.3px;
-	margin-right: 38px;
+	width: 300px;
+	height: 473px;
+	background-image: url('/images/v3/twitter-background.png');
+	margin-top:120px;
+	margin-left: 0px;
 }
 
 #tweets {
-	margin:262px auto 0 auto;
-	width:370px;
-	height:403px;
+	margin:150px auto 0 auto;
+	width:290px;
+	height:310px;
 }
 
 /* views/posts/index */
@@ -979,9 +986,10 @@ label {
 	/* SIDEBAR */
 
 .sidebar {
-	width: 180px;
-	margin-left: 56px;
+	width: 261px;
+	margin-left: 0px;
 	outline: none;
+	background-image:url('/images/v3/sidebar-sprite.png');
 	transition: all 0.25s ease-in-out;
 	-webkit-transition: all 0.25s ease-in-out;
 	-moz-transition: all 0.25s ease-in-out;

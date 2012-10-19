@@ -6,8 +6,8 @@
 
   <title>KPSU | <%= yield(:title) %></title>
   <%= csrf_meta_tag %>
-  <%= stylesheet_link_tag "production.css", :cache => true %>
-  <%= javascript_include_tag 'production.min.js', :cache => true %>
+  <%= stylesheet_link_tag "production.alt.css", :cache => true %>
+  <%= javascript_include_tag 'production.alt.js', :cache => true %>
 	
   <% if RAILS_ENV == "development" %>
   	<script src="http://localhost:8080/application.js" type="text/javascript" charset="utf-8"></script>
@@ -29,64 +29,142 @@
   })();
 
 </script>
+
+
+
+<!--Rotating blocks - experimental -->
+
+<style>
+	#rotator { width: 990px; height: 395px; position: relative; padding: 20px; }
+	#block-1 { background: #f7ff20; }
+	#block-2 { background: #0096ff; }
+	#block-3 { background: #4e4e4e; }
+	#rotator > div { 
+		position: absolute; 
+		overflow: hidden;
+		-webkit-transition: all 0.5s ease;
+		-moz-transition: all 0.5s ease;
+		-o-transition: all 0.5s ease;
+	}
+	#rotator > div > div { 
+		padding: 20px; 
+	}
+	#rotator > div > div img {
+		float: right;
+		margin: 0 0 2px 10px;
+	}
+	#rotator .active { top: 20px; left: 20px; width: 600px; height: 395px; }
+	#rotator .non-active-top { top: 20px; left: 640px; height: 187.5px; width: 370px; }
+	#rotator .non-active-bottom { top: 227.5px; left: 640px; height: 187.5px; width: 370px; }		
+	#rotator .non-active-top:hover, #rotator .non-active-bottom:hover { 
+		cursor: pointer;
+		-webkit-box-shadow: 0 0 10px rgba(0,0,0,0.4); 
+		-moz-box-shadow: 0 0 10px rgba(0,0,0,0.4); 
+		box-shadow: 0 0 10px rgba(0,0,0,0.4); 
+	}
+	#rotator h2 {
+		text-align: center; 
+		line-height: 130px;
+	}
+	#rotator .active h2 {
+		display: none;
+	}
+</style>
+
+<script src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js'></script>
+
+<!-- 
+	Thought of using jQuery UI's .addClass transitions as fallback (or primary) but doesn't work as well
+	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script> 
+-->
+
+<script>
+	// DOM Ready
+	$(function() {
+	
+		var current;
+				
+		function rotate() {
+		
+			// This seems like a sucky way to do it, but you can't select by classes because they execute in order
+						
+			if (current == 1) {
+				$("#block-1").removeClass().addClass("active");
+				$("#block-2").removeClass().addClass("non-active-top");
+				$("#block-3").removeClass().addClass("non-active-bottom");
+			} else if (current == 2) {
+				$("#block-1").removeClass().addClass("non-active-bottom");
+				$("#block-2").removeClass().addClass("active");
+				$("#block-3").removeClass().addClass("non-active-top");
+			} else {
+				$("#block-1").removeClass().addClass("non-active-top");
+				$("#block-2").removeClass().addClass("non-active-bottom");
+				$("#block-3").removeClass().addClass("active");
+			}
+		
+		}
+		
+		$("#rotator div").click(function() {
+		
+			// Enables reversing, idea via Andrea Canton: https://twitter.com/andreacanton/status/24954634279849985
+			current = this.id.substr(6);			
+			rotate();
+		
+		});
+	
+	});
+
+	function Block1ToVideo(){
+		document.getElementById('block1switch').innerHTML='<div style="padding:0px;margin-left:20px;height:40px;font-size:1.8em;" class="post-type bebas">KPSU  KRUISE  -  RADIATION  CITY</div><div style="padding:20px;"><iframe width="560" height="315" src="http://www.youtube.com/embed/HqPsUApbb_U" frameborder="0" allowfullscreen mozallowfullscreen></iframe></div>';
+	}
+	function Block1ToImage(){
+		document.getElementById('block1switch').innerHTML='<div style="background-color:#171717;""><img src="images/v3/kpsu_kruise.png" style="width:370px;height:187.5px;" /></div>';
+	}
+	function Block2ToImage(){
+		document.getElementById('block2switch').innerHTML='<div><img src="images/v3/jay_image.jpg"></div>';
+	}
+	function Block2ToContent(){
+		document.getElementById('block2switch').innerHTML='<div style="margin-left:20px;padding:0px;height:40px;font-size:1.8em" class="bebas post-type">BINDERS   FULL   OF   WOMEN</div><div style="padding:20px;"><iframe width="560" height="315" src="http://www.youtube.com/embed/QlwilbVYvUg" frameborder="0" allowfullscreen mozallowfullscreen></iframe></div>';
+	}
+	function Block3ToImage(){
+		document.getElementById('block3switch').innerHTML='<div><img src="images/v3/recruit.png"></div>';
+
+	}
+	function Block3ToContent(){
+		document.getElementById('block3switch').innerHTML='<div style="margin-left:20px;padding:0px;height:40px;font-size:1.8em" class="bebas post-type">GET  INVOLVED  AT  KPSU</div><div style="padding:20px;"><iframe width="560" height="315" src="http://www.youtube.com/embed/xIaLhxJj6Ak" frameborder="0" allowfullscreen mozallowfullscreen></iframe></div>';
+	}
+</script>
 </head>
 <body>
-	<div id="content-wrapper" class="m1-regular">
-		<div id="top-left-banner">
-			&nbsp;
-		</div>
-		<div id="top-right-navigation-wrapper">
-			
-			<div id="top-banner-filler" class="top">
+	<div id="content-wrapper">
+						
+		<div id="alt-nav" class="chunk-five yellow-text sixteen-pt">
+			<ul class="vertical yellow-text chunk-five">
 			<% if current_user && current_user.listener == false %>
-				<a title="KPSU Dashboard" href="/dashboard"><div id="dashboard"></div></a>
-			<% else %>
-				
+			<li class="vertical chunk-five"><%= link_to("dashboard", dashboard_path, :class => "yellow-text") %></li>
+			<% elsif current_user && current_user.listener == true %>
+			<li class="vertical chunk-five"><%= link_to("home", listener_path, :class => "yellow-text") %></li>
 			<% end %>
-			</div>
-			
-			<div id="top-banner-filler" class="bottom">
-				&nbsp;
-			</div>
-			<div id="blue-brush">
-
-			<a title="Donate to KPSU!" href="https://www.foundation.pdx.edu/publicgift/kpsu.jsp">
-			<div id="donate-nav-button" class="tnb pointer">	
-			</div>
-			</a>
-
-			<a title="Contact KPSU" href="<%= url_for(contact_path)%>">
-			<div id="contact-nav-button" class="tnb pointer">
-			</div>
-			</a>
-			
+			<li class="vertical yellow-text chunk-five"><a class="yellow-text" href="https://www.foundation.pdx.edu/publicgift/kpsu.jsp">donate</a></li>
+			<li class="vertical chunk-five"><a class="yellow-text" href="/programs/all">programs</a></li>
+			<li class="vertical chunk-five"><a class="yellow-text" href="/underwriting">underwriting</a></li>
+			<li class="vertical chunk-five"><a class="yellow-text" href="/contact">contact</a></li>
+			<li class="vertical chunk-five"><a class="yellow-text" href="/about">about</a></li>
 			<% unless current_user %>
-				<div id="login-nav-button" class="tnb pointer">
-				
-				</div>
+			<li class="vertical chunk-five"><a class="yellow-text" href="/login">login</a></li>
 			<% else %>
-				<a title="logout" href="/logout">
-				<div id="logout-nav-button" class="pointer">
-				
-				</div>
-				</a>
+			<li class="vertical chunk-five"><a class="yellow-text" href="/logout">logout</a></li>
 			<% end %>
-			<a title="Learn about KPSU" href="<%= url_for(about_path)%>">			
-			<div id="about-nav-button" class="tnb pointer">
-				
-			</div>
-			</a>
-			
-			</div>
-			
+			</ul>
 		</div>
-		
-		<div id="banner-on-air-and-player" style="clear:left;">
+		<div id="mini-banner"> 
+			<img src="/images/v3/mini-banner.png" usemap="#mini-bannermap" style="position: absolute;clip: rect(0px 619px 301px 196px);">
+			<map id="mini-bannermap" name="mini-bannermap"><area shape="poly" alt="Download Podcasts from our program archive" title="" coords="362,237,365,253,488,222,471,206,423,220" href="/archives" target="" /><area shape="poly" alt="Our live streaming schedule" title="" coords="494,213,492,223,582,194,575,179" href="/schedule" target="" /><area shape="poly" alt="View KPSU's DJs" title="" coords="418,270,488,252,485,235,406,247" href="/djs" target="" /><area shape="poly" alt="Our Artist Database" title="" coords="409,279,499,261,493,282,409,294,408,286" href="/artists" target="" /><area shape="poly" alt="Listen to KPSU!" title="" coords="499,237,587,209,587,231,497,249" href="/listen" target="" /><area shape="poly" alt="Check out the latest music and event reviews!" title="" coords="502,260,511,271,591,262,586,239" href="/reviews" target="" /><area shape="poly" alt="KPSU Home Page" title="" coords="323,185,333,235,613,167,592,114" href="/" target="" /><!-- Created by Online Image Map Editor (http://www.maschek.hu/imagemap/index) --></map>
 			<div id="on-air-offset">
-			<% cache('application_who_is_playing') do %>
+			<% cache('alternative_who_is_playing') do %>
 			<div id="on-air-program" class="m1-light yellow-text">
 				<% unless currently_playing.class == String %>
-					<%= link_to(currently_playing[0], program_path(currently_playing[1]), :class => "m1-light yellow-text", :style => "line-height: 23px;") %>
+					<%= link_to(currently_playing[0], program_path(currently_playing[1]), :class => "m1-light yellow-text", :style => "line-height: 15px;") %>
 				<% else %>
 					<span class="m1-light yellow-text">"We're on Auto Pilot!"</span>
 				<% end %>
@@ -119,36 +197,44 @@
 				<% else %>
 					<span class="m1-light red-text">"We're on Auto Pilot!"</span>
 				<% end %>
+			</div>	
+			<% end %>		
 			</div>
-			<% end %>
-			</div>
 		</div>
-		<div id="banner" style="margin-top:-1px;">
-			<img src="/images/v3/banner.png" usemap="#bannermap" style-="">
-			<map id="bannermap" name="bannermap"><area shape="rect" alt="View KPSU's DJs" title="View KPSU's DJs" coords="276,504,352,540" href="/djs" target="_self" /><area shape="rect" alt="View KPSU's DJs" title="View KPSU's DJs" coords="344,480,432,524" href="/djs" target="_self" /><area shape="rect" alt="Listen to KPSU!" title="Listen to KPSU!" coords="472,464,532,500" href="/listen" target="" /><area shape="rect" alt="Listen to KPSU!" title="Listen to KPSU!" coords="520,440,596,480" href="/listen" target="" /><area shape="poly" alt="Check out the latest music and event reviews!" title="Check out the latest music and event reviews!" coords="466,520,494,560,688,542,662,482,662,482" href="/reviews" target="" /><area shape="poly" alt="Download Podcasts from our program archive" title="Download Podcasts from our program archive" coords="144,478,158,510,454,460,426,416" href="/archives" target="" /><area shape="poly" alt="Our live streaming schedule" title="Our live streaming schedule" coords="460,422,464,450,676,398,654,350,648,352" href="/schedule" target="" /><area shape="poly" alt="Our Artist Catalog" title="Our Artist Catalog" coords="264,568,432,520,468,580,260,596" href="/artists" target="" /><area shape="poly" alt="KPSU.org Index" title="KPSU.org Index" coords="48,336,84,484,712,328,680,192,676,184" href="/" target="" /></map>
+		<div id="page-headline">
+			<%= yield(:page_headline) %>
 		</div>
-		<div id="more-stuff">
-			<!--div style="width:879px; height:109px;"><img src="/images/v3/Grizzly_Bear_pdx_879xn.jpg" /></div-->
-		</div>
-
 		
-		<div id="stuff-before-content">
-			<div id="featured-artists">
-			
-				<div style="width:427px; height:660px;"><a href="/images/v3/kaki_king.jpg"><img style="width:427px, height:660px" src="/images/v3/kaki_king.jpg" /></a></div>
-			</div>
 
-			<div id="twitter-feed" class="hand-written">
-				<div id="tweets">
-					
-				</div>
-				<!--div id="twitter-feed-adspace">
-					<div style="width: 370px; height: 308px;">
-						<img src="/images/v3/Grizzly_Bear_pdx_370xn.jpg" />
-					</div>
-				</div-->
+		<div id="rotator">
+		
+			<div id="block-1" class="active" style="padding:0px;">
+				<span id="block1switch" onclick="Block1ToVideo();Block2ToImage();Block3ToImage()">
+				<div style="margin-left:20px;padding:0px;height:40px;font-size:1.8em;" class="post-type bebas">KPSU  KRUISE  -  RADIATION  CITY</div>
+				<div style="padding:20px;"><iframe width="560" height="315" src="http://www.youtube.com/embed/HqPsUApbb_U" frameborder="0" allowfullscreen mozallowfullscreen></iframe></div>
+				</span>
 			</div>
+			
+			<div id="block-2" class="non-active-top">
+				<span id="block2switch" onclick="Block1ToImage();Block2ToContent();Block3ToImage()">
+				<div>
+					<img src="images/v3/jay_image.jpg">
+				</div>
+				</span>			
+			</div>
+			
+			<div id="block-3" class="non-active-bottom">
+				<span id="block3switch" onclick="Block1ToImage();Block2ToImage();Block3ToContent()">
+				<div>
+					<img src="images/v3/recruit.png">
+				</div>
+				</span>			
+			</div>
+		
 		</div>
+	
+
+	
 
 		<!--div id="kpsu-kruise-video">
 			<div id="kruise-header" style="width: 968px; height:217px;"><img src="/images/v3/kpsu_kruise_header.jpg" /></div>
@@ -157,10 +243,12 @@
 		</div-->
 
 
-		<%= yield %>
+		<%= yield %>  <!-- this is the reviews/content? -->
+
+
 		<div id="sidebar" class="float-right">
 			
-			<!--div style="width:260px; height:163px;" class="green"><a href="https://esiebelarecprod.redcrossblood.com/eevents_enu/start.swe?SWEApplet0=ARC+BDC+Upcoming+Drives+Applet+Clone&SWECmd=GotoView&_sn=RbeJt.JfjqRQLQnwFJwq0nlQuC1rT-JE-MDBr5ztewzm54DcduONz4qSOccdVodoQ0F2EIhnxBw_&SWEView=ARC+City+State+Blank+Results+View+Clone&SWERowId0=1-4XDITV&SWETS=1343336408&SWEHo=esiebelarecprod.redcrossblood.com"><h3 style="margin-left:15px;"><b>Portland State Blood Drive</b></h3><img src="/images/v3/red-cross.jpeg" /></a></div-->
+		
 			<div class="sidebar events"></div>
 			<ul class="vertical green-text dejavu-condensed">
 				<% @downloads.each do |d| %>
@@ -187,20 +275,26 @@
 			
 		
 			<ul style="vertical yellow-text st-marie">
-				<li style="margin-left:10px;"><a  class="yellow-text st-marie" href="http://www.wweek.com"><b>Willamette Week<b/></a></li>
-				<li style="margin-left:10px;"><a  class="yellow-text st-marie" href="http://www.lagunitas.com/"><b>Lagunitas Brewing<b/></a></li>
+				<li style="margin-left:10px;"><a  class="yellow-text st-marie" href="http://www.wweek.com"><b>Willamette Week</b></a></li>
+				<li style="margin-left:10px;"><a  class="yellow-text st-marie" href="http://www.lagunitas.com/"><b>Lagunitas Brewing</b></a></li>
 				<li style="margin-left:10px;"><a  class="yellow-text st-marie" href="http://www.portlandfarmersmarket.org/markets/psu/"><b>PSU Farmers Market</b></a></li>
-				<li style="margin-left:10px;"><a  class="yellow-text st-marie" href="http://psu.tv/"><b>PSU TV<b/></a></li>
-				<li style="margin-left:10px;"><a  class="yellow-text st-marie" href="http://wwhttp://www.portlandfarmersmarket.org/markets/psu/w.spotmagazine.net/"><b>Spot Magazine<b/></a></li>
-				<li style="margin-left:10px;"><a  class="yellow-text st-marie" href="http://www.liquidbeatrecords.com"><b>Liquid Beat Records<b/></a></li>
-				<li style="margin-left:10px;"><a  class="yellow-text st-marie" href="http://www.facebook.com/pages/Food-for-Thought-Cafe/147701107092"><b>Food For Thought Cafe<b/></a></li>
-				<li style="margin-left:10px;"><a  class="yellow-text st-marie" href="http://www.abovethepearl.com"><b>Above the Pearl Tattoo<b/></a></li>
-				<li style="margin-left:10px;"><a  class="yellow-text st-marie" href="/underwriting"><b>Support KPSU!<b/></a></li>
+				<li style="margin-left:10px;"><a  class="yellow-text st-marie" href="http://psu.tv/"><b>PSU TV</b></a></li>
+				<li style="margin-left:10px;"><a  class="yellow-text st-marie" href="http://wwhttp://www.portlandfarmersmarket.org/markets/psu/w.spotmagazine.net/"><b>Spot Magazine</b></a></li>
+				<li style="margin-left:10px;"><a  class="yellow-text st-marie" href="http://www.liquidbeatrecords.com"><b>Liquid Beat Records</b></a></li>
+				<li style="margin-left:10px;"><a  class="yellow-text st-marie" href="http://www.facebook.com/pages/Food-for-Thought-Cafe/147701107092"><b>Food For Thought Cafe</b></a></li>
+				<li style="margin-left:10px;"><a  class="yellow-text st-marie" href="http://www.abovethepearl.com"><b>Above the Pearl Tattoo</b></a></li>
+				<li style="margin-left:10px;"><a  class="yellow-text st-marie" href="/underwriting"><b>Support KPSU!</b></a></li>
 			</ul>
 			
-			
-			<!--a href="http://www.musicfestnw.com/"><div style="width:320px; height:662px; float:right;"><img src="/images/v3/sept_oct_events_color_small.png" width="320px" height="662px" style="float:right;" /></div></a-->
 		</div>
+
+		<div id="twitter-feed" class="hand-written">
+			<div id="tweets">
+				
+			</div>
+		</div>
+
+		
 		<div id="login" title="Login" style="display:none;">
 			<div class="dejavu-condensed" style="margin:10px;">
 				<%= form_for(@user_session) do |f| %>
@@ -235,7 +329,6 @@
 			</div>
 			</div>
 		</div>
-	</div>
 	
 
 
@@ -316,7 +409,7 @@
 		var loadTwitter = function(json){
 			$.each(json.results, function(i, tweet){
 				if ( i <= 3 ) {
-				$("#tweets").append("<div class=\"hand-written\" style=\"clear:both;width:320px;margin:5px auto 10px auto;line-height:1em;\"><div style=\"word-wrap: break-word;padding:3px;height:auto;font-size:14pt;\">"+tweet['text']+"</div><div style=\"text-align:right;margin-top:5px;\">from <em>"+tweet['from_user']+"</em></div></div>");
+				$("#tweets").append("<div class=\"hand-written\" style=\"clear:both;width:290px;margin:5px auto 10px auto;line-height:1em;\"><div style=\"word-wrap: break-word;padding:3px;height:auto;font-size:14pt;\">"+tweet['text']+"</div><div style=\"text-align:right;margin-top:5px;\">from <em>"+tweet['from_user']+"</em></div></div>");
 				}
 				
 			});
