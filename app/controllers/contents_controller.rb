@@ -6,6 +6,8 @@ class ContentsController < ApplicationController
   before_filter :no_listener, :only => ['new', 'edit', 'destroy', 'update', 'create']
   
   def index
+    @downloads = Download.find(:all, :limit => 5, :order => "downloads.created_at DESC", :include => [:user, :program], :conditions => ['downloads.user_id IS NOT ? AND downloads.program_id IS NOT ? AND downloads.program_id > ?', nil, nil, 0])
+    @rev = Review.order("created_at DESC").limit(5)
     @roles = current_user.roles
     @abilities = []
     @roles.each {|r| r.abilities.each { |a| @abilities << a }}
