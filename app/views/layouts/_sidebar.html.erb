@@ -1,4 +1,4 @@
-<style type="text/css" media="screen">
+<!--style type="text/css" media="screen">
 	.generic-sidebar {
 		float:left;
 		width:264px;
@@ -21,7 +21,6 @@
 </style>
 <div class="generic-sidebar">
 	<div class="float-left sidebar-happenings-wrapper">
-	<!--img src="/images/v3/events.png"-->
 	<% Happening.where("ends_at > ?", Time.zone.now).limit(4).reverse.each do |event| %>
 	<div class="sidebar-happenings" style="width:100%;">
 		<div class="float-left bebas magenta-text" style="width:100%;"><%= event.title %></div>
@@ -38,4 +37,65 @@
 		<% end %>
 		<% end %>
 	</ul>
+</div-->
+
+<div id="sidebar" class="container float-right" style="float:left;margin-right:0px;">
+	<section class="ac-container">
+		<div>
+			<input id="ac-1" name="accordion-1" type="checkbox" />
+			<label for="ac-1" style="background-image:url('/images/v3/sidebar-sprite.png');height:75px;background-position:0 0;"></label>
+			<article class="ac-medium">
+				<p>
+				<ul class="vertical green-text dejavu-condensed">
+					<% Download.where("user_id != ?", "nil").includes(:program).order("created_at DESC").limit(10).each do |d| %>
+					<% if d.program %>
+					<li><a class="ten-pt yellow-text dejavu-condensed" href="<%= url_for(download_path(:id => d.id)) %>"><%= d.program.title %> (<%= Time.zone.at(d.title.to_i).strftime("%d\.%b\.%Y")%>)</a></li>
+					<% end %>
+					<% end %>
+				</ul>
+				</p>
+			</article>
+		</div>
+
+				<div>
+					<input id="ac-2" name="accordion-1" type="checkbox" />
+					<label for="ac-2" style="background-image:url('/images/v3/sidebar-sprite.png');height:75px;background-position:0 323px;"></label>
+					<article class="ac-medium">
+						<p><ul class="vertical magenta-text chunk-five">
+							<% @rev=Review.order("created_at DESC").limit(5) %>
+							<% @rev.each do |review| %>
+							<%= link_to "#{truncate review.title, :length => 22}", review, :class => "magenta-text" %>
+							<% end %>
+				
+						</ul></p>
+					</article>
+				</div>
+
+		<div>
+			<input id="ac-3" name="accordion-1" type="checkbox" />
+			<label for="ac-3" style="background-image:url('/images/v3/sidebar-sprite.png');height:72px;background-position:0 240px;"></label>
+			<article class="ac-small">
+				<p><ul class="vertical orange-text chunk-five">
+		<li><a class='orange-text' href='http://twitter.com/#!/KPSU_PDX'>Twitter</a>&nbsp;&nbsp;&nbsp;<a href='http://www.facebook.com/pages/KPSU/131711936862193' class='orange-text'>Facebook</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='http://www.flickr.com/photos/kpsu' class='orange-text'>Flickr</a></li>
+	</ul> </p>
+			</article>
+		</div>
+		<div>
+			<input id="ac-4" name="accordion-1" type="checkbox" />
+			<label for="ac-4" style="background-image:url('/images/v3/sidebar-sprite.png');height:74px;background-position:0 176px;"></label>
+			<article class="ac-large">
+				<p><ul style="vertical yellow-text st-marie">
+		<li style="margin-left:10px;"><a  class="yellow-text st-marie" href="http://www.wweek.com"><b>Willamette Week</b></a></li>
+		<li style="margin-left:10px;"><a  class="yellow-text st-marie" href="http://www.lagunitas.com/"><b>Lagunitas Brewing</b></a></li>
+		<li style="margin-left:10px;"><a  class="yellow-text st-marie" href="http://www.portlandfarmersmarket.org/markets/psu/"><b>PSU Farmers Market</b></a></li>
+		<li style="margin-left:10px;"><a  class="yellow-text st-marie" href="http://psu.tv/"><b>PSU TV</b></a></li>
+		<li style="margin-left:10px;"><a  class="yellow-text st-marie" href="http://wwhttp://www.portlandfarmersmarket.org/markets/psu/w.spotmagazine.net/"><b>Spot Magazine</b></a></li>
+		<li style="margin-left:10px;"><a  class="yellow-text st-marie" href="http://www.liquidbeatrecords.com"><b>Liquid Beat Records</b></a></li>
+		<li style="margin-left:10px;"><a  class="yellow-text st-marie" href="http://www.facebook.com/pages/Food-for-Thought-Cafe/147701107092"><b>Food For Thought Cafe</b></a></li>
+		<li style="margin-left:10px;"><a  class="yellow-text st-marie" href="http://www.abovethepearl.com"><b>Above the Pearl Tattoo</b></a></li>
+		<li style="margin-left:10px;"><a  class="yellow-text st-marie" href="/underwriting"><b>Support KPSU!</b></a></li>
+	</ul> </p>
+			</article>
+		</div>
+	</section>
 </div>
