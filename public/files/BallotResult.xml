@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0">
+  
+  <channel>
+
+
+        <title>Ballot Result Radio</title>
+        <description>Punk Music on KPSU.org!</description>
+        <link>http://www.facebook.com/ballotresult</link>
+        <language>en-us</language>
+        <copyright>Creative Commons License 3.0</copyright>
+        <lastBuildDate>Wed, 05 Dec 2012 23:00:00 -0800</lastBuildDate>
+        <pubDate>Thu, 27 Nov 2012 17:30:00 -0800</pubDate>
+        <webMaster>ballotresultradio@gmail.com</webMaster>
+
+
+    <itunes:author>DJ Ben</itunes:author>
+        <itunes:subtitle>Ballot Result Radio is a show on KPSU showcasing punk, hardcore, pop-punk and melodic hardcore, Wednesdays at 8PM on kpsu.org </itunes:subtitle>
+        <itunes:summary>Each week Ballot Result features new punk music from across the spectrum. Regularly appearing on the show are both local and national punk acts, and you can find videos of our in-studio performances on http://www.facebook.com/ballotresult </itunes:summary>
+
+
+        <itunes:owner>
+               <itunes:name>Ben King</itunes:name>
+               <itunes:email>ballotresultradio@gmail.com</itunes:email>
+        </itunes:owner>
+
+
+<itunes:explicit>No</itunes:explicit>
+
+
+<itunes:image href=""/>
+    
+<itunes:category text="Music">
+</itunes:category>
+<item>
+<title>Ballot Result Radio Episode 0055: 12/05/2012 </title>
+<link>http://kpsu.org/playlists/ballot-result-episode-0055:-12_05_2012</link>
+<guid>https://s3.amazonaws.com/archive-complete/1354762801.mp3</guid>
+<description> This week’s show features new music from MEAN JEANS, COMADRE, THE LOSS, JEFF ROSENSTOCK, TOY LOVE and GREAT LAKES.</description>
+<enclosure url="https://s3.amazonaws.com/archive-complete/1354762801.mp3" length="57653400" type="audio/mpeg"/>
+<category>Podcasts</category>
+<pubDate>Wed, 05 Dec 2012 17:00:00 -0800</pubDate>
+
+
+<itunes:author>Ben</itunes:author>
+
+
+<itunes:explicit>No</itunes:explicit>
+<itunes:subtitle>This week’s show features new music from MEAN JEANS, COMADRE, THE LOSS, JEFF ROSENSTOCK, TOY LOVE and GREAT LAKES.</itunes:subtitle>
+<itunes:summary> This week’s show features new music from MEAN JEANS, COMADRE, THE LOSS, JEFF ROSENSTOCK, TOY LOVE and GREAT LAKES.</itunes:summary>
+<itunes:duration>00:60:12</itunes:duration>
+<itunes:keywords>punk, punk rock, portland, hardcore, post-punk, melodic hardcore, pop-punk</itunes:keywords>
+
+
+</item>
+
+
+<item>
+<title>Ballot Result Radio Episode 0054: 11/22/2012 </title>
+<link>http://kpsu.org/playlists/11773</link>
+<guid>https://s3.amazonaws.com/archive-complete/1353553206.mp3</guid>
+<description> This week’s show features new music from THE BRONX and PISSED JEANS.</description>
+<enclosure url="https://s3.amazonaws.com/archive-complete/1353553206.mp3" length="57577472" type="audio/mpeg"/>
+<category>Podcasts</category>
+<pubDate>Wed, 22 Nov 2012 17:00:00 -0800</pubDate>
+
+
+<itunes:author>Ben</itunes:author>
+
+
+<itunes:explicit>No</itunes:explicit>
+<itunes:subtitle>This week’s show features new music from THE BRONX and PISSED JEANS.</itunes:subtitle>
+<itunes:summary> This week’s show features new music from THE BRONX and PISSED JEANS.</itunes:summary>
+<itunes:duration>00:59:58</itunes:duration>
+<itunes:keywords>punk, punk rock, portland, hardcore, post-punk, melodic hardcore, pop-punk</itunes:keywords>
+
+
+</item>
+
+
+</channel>
+
+
+</rss>
