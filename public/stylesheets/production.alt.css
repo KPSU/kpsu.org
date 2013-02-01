@@ -373,7 +373,7 @@ input[type='password']:focus, input[type='text']:focus, textarea:focus {
 	height: 120px;
 }
 .ac-container input:checked ~ article.ac-large{
-	height: 400px;
+	height: 420px;
 }
 
 #sidebar {
