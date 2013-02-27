@@ -44,7 +44,7 @@
 		<div>
 			<input id="ac-1" name="accordion-1" type="checkbox" />
 			<label for="ac-1" style="background-image:url('/images/v3/sidebar-sprite.png');height:75px;background-position:0 0;"></label>
-			<article class="ac-medium">
+			<article class="ac-small">
 				<p>
 				<ul class="vertical green-text dejavu-condensed">
 					<% Download.where("user_id != ?", "nil").includes(:program).order("created_at DESC").limit(10).each do |d| %>
@@ -60,7 +60,7 @@
 				<div>
 					<input id="ac-2" name="accordion-1" type="checkbox" />
 					<label for="ac-2" style="background-image:url('/images/v3/sidebar-sprite.png');height:75px;background-position:0 323px;"></label>
-					<article class="ac-medium">
+					<article class="ac-small">
 						<p><ul class="vertical magenta-text chunk-five" style="margin-right:20px;">
 							<% @rev=Review.order("created_at DESC").limit(5) %>
 							<% @rev.each do |review| %>
@@ -74,16 +74,38 @@
 		<div>
 			<input id="ac-3" name="accordion-1" type="checkbox" />
 			<label for="ac-3" style="background-image:url('/images/v3/sidebar-sprite.png');height:72px;background-position:0 240px;"></label>
-			<article class="ac-small">
+			<article class="ac-large">
 				<p><ul class="vertical orange-text chunk-five" style="float;left;margin-right:20px;">
 		<li><a class='orange-text' href='http://twitter.com/#!/KPSU_PDX'>Twitter</a>&nbsp;&nbsp;&nbsp;<a href='http://www.facebook.com/pages/KPSU/131711936862193' class='orange-text'>Facebook</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='http://www.flickr.com/photos/kpsu' class='orange-text'>Flickr</a></li>
+		<li>Ben: <a class='green-text' href='http://www.facebook.com/BallotResult/app_197602066931325'>FB</a> | <a class='magenta-text' href='http://www.twitter.com/ballotresult'>Twitter</a>
+		<li>Buddytime: <a class='green-text' href='http://www.facebook.com/pages/DJ-Buddytime-Audio-Cuddle-Puddle'>FB</a> | <a class='magenta-text' href='http://www.twitter.com/djbuddytime'>Twitter</a></li>
+		<li>Crouton Bombay: <a class='green-text' href='http://facebook.com/croutonbombay'>FB</a> | <a class='magenta-text' href='https://twitter.com/CROUTONBOMBAY'>Twitter</a></li>
+		<li>Dirty Mollie: <a class='green-text' href='http://www.facebook.com/dirtymollie'>FB</a> | <a class='magenta-text' href='http://www.twitter.com/dirtymollie'>Twitter</a></li>
+		<li>Ian: <a class='green-text' href='https://www.facebook.com/pages/Ians-Hour-of-Musical-Power-on-KPSU/160049997360775?ref=hl'>FB</a> | <a class='magenta-text' href='http://twitter.com/ianshourofmusic'>Twitter</a></li>
+		<li>Jake: <a class='green-text' href='http://facebook.com/jakeontheradio'>FB</a> | <a class='magenta-text' href='http://twitter.com/#!/JakeSauvageau'>Twitter</a></li>
+		<li>Jaycation: <a class='magenta-text' href='http://twitter.com/#!/jaycation'>Twitter</a></li>
+		<li>JC Craze: <a class='green-text' href='http://www.facebook.com/TheCrazeTrain'>FB</a> | <a class='magenta-text' href='https://twitter.com/DJ_jc_Craze'>Twitter</a></li>
+		<li>Keegan: <a class='green-text' href='https://www.facebook.com/MANTERBANTERKPSU'>FB</a> | <a class='magenta-text' href='https://twitter.com/MANTERBANTER'>Twitter</a></li>
+		<li>Matt Nelkin: <a class='green-text' href='http://facebook.com/liquidbeat'>FB</a> | <a class='magenta-text' href='http://twitter.com/#!/liquidbeat'>Twitter</a></li>
+		<li>Meguno: <a class='green-text' href='http://www.facebook.com/pages/2-Stupid-People/116573238458715?fref=ts'>FB</a> | <a class='magenta-text' href='https://twitter.com/2StupidPeople'>Twitter</a></li>
+		<li>Miss Rikki: <a class='green-text' href='http://www.facebook.com/closetradio'>FB</a> | <a class='magenta-text' href='http://www.twitter.com/closetradio'>Twitter</a></li>
+		<li>Pep: <a class='green-text' href='http://kpsu.org/programs/let%27s_build_a_forte'>KPSU</a> | <a class='magenta-text' href='https://twitter.com/letsbuildaforte'>Twitter</a></li>
+		<li>Perspectacle: <a class='green-text' href='http://facebook.com/thesweetskpsu'>FB</a> | <a class='magenta-text' href='http://twitter.com/thesweetskpsu'>Twitter</a></li>
+		<li>Peter: <a class='green-text' href='http://www.facebook.com/pages/Between-The-Eyes-on-KPSUorg/259181877832?fref=ts'>FB</a> | <a class='magenta-text' href='http://twitter.com/#!/petersampson'>Twitter</a></li>
+		<li>Ricardo Wang: <a class='green-text' href='http://www.facebook.com/whatsthiscalled'>FB</a> | <a class='magenta-text' href='http://twitter.com/WhatsThisCalled'>Twitter</a></li>
+		<li>Shaun: <a class='green-text' href='http://www.facebook.com/TheContinuumKPSU'>FB</a></li>
+		<li>Skutta: <a class='green-text' href='https://www.facebook.com/DJskutta'>FB</a> | <a class='magenta-text' href='https://twitter.com/DJskutta'>Twitter</a></li>
+		<li>Tara Kay: <a class='green-text' href='http://www.facebook.com/pages/Faculty-Fridays/270015543099810?fref=ts'>FB</a></li>
+		<li>Walk of Shame: <a class='green-text' href='http://facebook.com/walkofshameradio'>FB</a> | <a class='magenta-text' href='http://www.twitter.com/walkofshamefm'>Twitter</a></li>
+		<li>Victrola: <a class='green-text' href='https://www.facebook.com/guitarshopradio?fref=ts'>FB</a></li>
+		<li>ZFission: <a class='green-text' href='http://www.facebook.com/TheMeanGlean'>FB</a> | <a class='magenta-text' href='http://www.twitter.com/#!/the_mean_glean'>Twitter</a></li>
 	</ul> </p>
 			</article>
 		</div>
 		<div>
 			<input id="ac-4" name="accordion-1" type="checkbox" />
 			<label for="ac-4" style="background-image:url('/images/v3/sidebar-sprite.png');height:74px;background-position:0 176px;"></label>
-			<article class="ac-large">
+			<article class="ac-medium">
 				<p><ul style="vertical yellow-text st-marie" style="margin-right:20px;">
 		<li style="margin-left:10px;"><a  class="yellow-text st-marie" href="http://www.wweek.com"><b>Willamette Week</b></a></li>
 		<li style="margin-left:10px;"><a  class="yellow-text st-marie" href="http://www.lagunitas.com/"><b>Lagunitas Brewing</b></a></li>
