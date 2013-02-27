@@ -368,13 +368,13 @@ input[type='password']:focus, input[type='text']:focus, textarea:focus {
 	box-shadow: 0px 0px 0px 0px rgba(155,155,155,0.3);
 }
 .ac-container input:checked ~ article.ac-small{
-	height: 80px;
-}
-.ac-container input:checked ~ article.ac-medium{
 	height: 120px;
 }
+.ac-container input:checked ~ article.ac-medium{
+	height: 300px;
+}
 .ac-container input:checked ~ article.ac-large{
-	height: 230px;
+	height: 520px;
 }
 
 #sidebar {
