@@ -12,8 +12,6 @@ role :web, application                          # Your HTTP server, Apache/etc
 role :app, application
 role :db,  application, :primary => true # This is where Rails migrations will run
 
-
-
 # if you're still using the script/reaper helper you will need
 # these http://github.com/rails/irs_process_scripts
 default_run_options[:pty] = true 
