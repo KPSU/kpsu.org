@@ -3,9 +3,9 @@
 development:
   adapter: mysql2
   user: root
-  database: kpsu_development
+  database: kpsu_production
   host: localhost
-  password: Stoner1138
+  password: 29jas0@Ji#
   socket: /var/run/mysqld/mysqld.sock
 
 # Warning: The database defined as "test" will be erased and
@@ -20,7 +20,7 @@ test:
 production:
   adapter: mysql2
   user: root
-  password: Stoner1138
-  database: kpsu_development
+  password: 29jas0@Ji#
+  database: kpsu_production
   host: localhost
   socket: /var/run/mysqld/mysqld.sock
