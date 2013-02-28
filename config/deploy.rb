@@ -1,9 +1,9 @@
 set :application, "kpsu.org"
-set :user, "jake"
+set :user, "mike"
 set :scm, :git
 set :scm_verbose, true
 set :deploy_to, "/var/www/kpsu.org"
-set :repository, "ssh://jake@kpsu.org:6666/var/git/kpsu.org"
+set :repository, "ssh://mike@kpsu.org:6666/var/git/kpsu.org"
 set :port, 6666
 set :ssh_options, {:forward_agent => true}
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
@@ -11,6 +11,8 @@ set :ssh_options, {:forward_agent => true}
 role :web, application                          # Your HTTP server, Apache/etc
 role :app, application
 role :db,  application, :primary => true # This is where Rails migrations will run
+
+
 
 # if you're still using the script/reaper helper you will need
 # these http://github.com/rails/irs_process_scripts
