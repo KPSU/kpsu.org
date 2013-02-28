@@ -1,11 +1,3 @@
-GIT
-  remote: git://github.com/odorcicd/authlogic.git
-  revision: a087ad0cba3c165ba22fcf176c28b6f7517931e8
-  branch: rails3
-  specs:
-    authlogic (2.1.3)
-      activesupport
-
 GEM
   remote: http://rubygems.org/
   remote: http://gemcutter.org/
@@ -42,6 +34,9 @@ GEM
       rails (~> 3.0)
     addressable (2.2.4)
     arel (2.0.10)
+    authlogic (3.1.3)
+      activerecord (>= 3.0.0)
+      activesupport (>= 3.0.0)
     aws-sdk (1.5.2)
       httparty (~> 0.7)
       json (~> 1.4)
@@ -177,7 +172,6 @@ GEM
     redis (3.0.1)
     rest-client (1.6.7)
       mime-types (>= 1.16)
-    rmagick (2.13.1)
     ruby-aaws (0.7.0)
     ruby-openid (2.1.8)
     ruby-openid-apps-discovery (1.2.0)
@@ -214,7 +208,7 @@ PLATFORMS
 DEPENDENCIES
   RedCloth
   acts-as-taggable-on
-  authlogic!
+  authlogic
   aws-sdk
   bb-ruby
   capistrano
@@ -239,7 +233,6 @@ DEPENDENCIES
   rails3-jquery-autocomplete
   rbrainz
   recaptcha
-  rmagick
   ruby-aaws
   rubyzip
   sqlite3-ruby
