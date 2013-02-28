@@ -131,6 +131,13 @@ class PlaylistsController < ApplicationController
         @programs << p
       end
     end
+    @downloads = []
+    @dsetup = Download.all
+    @dsetup.each do |d|
+      if d.program_id == current_user.programs.first.id
+        @downloads << d
+      end
+    end
     respond_to do |format|
       format.js { render :partial => "new" }
       format.xml  { render :xml => @playlist }
