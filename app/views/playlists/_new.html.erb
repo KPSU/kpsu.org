@@ -43,6 +43,9 @@
 			<div class="float-left blue-text chunk-five clear-both">
 			Program	<%= select_tag "programs", options_from_collection_for_select(@programs, "id", "title", :selected => "#{ current_user.programs.first.id rescue nil }") %>
 			</div>
+			<div class="float-left blue-text chunk-five clear-both">
+				Download	<%= select_tag "downloads", options_from_collection_for_select(@downloads, "id", "title") %>
+			</div>
 			<div class="float-left clear-both blue-text chunk-five" style="margin-top:5px;">
 			Title <input class="rounded-heavy form" id="playlist_title" name="playlist[title]" size="30" type="text" value="">
 			Do not start with # and no special characters.
