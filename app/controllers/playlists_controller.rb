@@ -169,6 +169,7 @@ class PlaylistsController < ApplicationController
     @description = params[:playlist][:description]
     @tmp_tracks = params[:tracks].split(",")
     @program = Program.find(params[:programs])
+    @download = Download.find(params[:downloads])
     @playlist = Playlist.new(:title => @title, :program => @program, :description => @description, :user_id => current_user.id, :download_id => @download)
     @playlist.save
     @playlist.reload
