@@ -28,7 +28,7 @@ gem 'twitter_oauth'
 gem 'flickr'
 gem 'oauth'
 gem 'RedCloth'
-
+gem 'rmagick'
 gem 'hpricot'
 gem "omniauth", "~> 0.2.6"
 gem 'multi_json'
