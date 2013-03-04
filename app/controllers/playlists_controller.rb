@@ -152,7 +152,16 @@ class PlaylistsController < ApplicationController
       if p.event
         @programs << p
       end
-    end    
+    end
+    #@downloads = []
+    #@dsetup = Download.all
+    #@dsetup.each do |d|
+    #  if d.program_id == current_user.programs.first.id
+    #    @downloads << d
+    #  end
+    #end
+    /above i am replicating the iteration right before it/
+    /error may lie in being careless here; someone double check/
     @playlist = Playlist.find(params[:id])
     @pi = @playlist.playlist_items.sort! { |a,b| a.position <=> b.position }
     respond_to do |format|
@@ -169,8 +178,12 @@ class PlaylistsController < ApplicationController
     @description = params[:playlist][:description]
     @tmp_tracks = params[:tracks].split(",")
     @program = Program.find(params[:programs])
-    @download = params[:downloads].id
-    @playlist = Playlist.new(:title => @title, :program => @program, :description => @description, :user_id => current_user.id, :download_id => @download)
+    #@download = params[:downloads]
+    #here i am attempting to extract the variable (downloads) taken in from the form (on the view.)
+    #i belive an error may lie in the local variable @download taking the entire object instead of just the string
+    #then, below, when we initialize a playlist object below, it's taking a bad format for that attribute
+    @playlist = Playlist.new(:title => @title, :program => @program, :description => @description, :user_id => current_user.id)
+    #@playlist = Playlist.new(:title => @title, :program => @program, :description => @description, :user_id => current_user.id, :download_id => @download.id)
     @playlist.save
     @playlist.reload
     @i = 0
@@ -194,8 +207,9 @@ class PlaylistsController < ApplicationController
     @ii = 0
     @playlist = Playlist.find(params[:id])
     @program = Program.find(params[:programs])
-    
-    @playlist.update_attributes(:title => params[:playlist][:title], :description => params[:playlist][:description], :program => @program)
+    @download = params[:downloads]
+
+    @playlist.update_attributes(:title => params[:playlist][:title], :description => params[:playlist][:description], :program => @program, :download_id => @download.id)
     @tmp_tracks = params[:tracks].split(",")
     @playlist.playlist_items.each do |pi|
         pi.destroy
