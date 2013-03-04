@@ -43,6 +43,7 @@
 				<div class="float-left blue-text chunk-five clear-both">
 				Program	<%= select_tag "programs", options_from_collection_for_select(@programs, "id", "title", :selected => "#{ current_user.programs.first.id rescue nil }") %>
 				</div>
+				<!--This is where the downloads drop-down discussed in _new.html.erb of this directory will go, just like however it'll look in the 'new' form.-->
 				<div class="float-left clear-both blue-text chunk-five" style="margin-top:5px;">
 				Title <input class="rounded-heavy form" id="playlist_title" name="playlist[title]" size="30" type="text" value="<%= @playlist.title %>">
 				Do not start with # and no special characters.
