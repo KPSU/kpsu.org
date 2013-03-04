@@ -172,6 +172,7 @@ GEM
     redis (3.0.1)
     rest-client (1.6.7)
       mime-types (>= 1.16)
+    rmagick (2.13.2)
     ruby-aaws (0.7.0)
     ruby-openid (2.1.8)
     ruby-openid-apps-discovery (1.2.0)
@@ -233,6 +234,7 @@ DEPENDENCIES
   rails3-jquery-autocomplete
   rbrainz
   recaptcha
+  rmagick
   ruby-aaws
   rubyzip
   sqlite3-ruby
