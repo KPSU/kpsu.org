@@ -44,7 +44,7 @@
 		<div>
 			<input id="ac-1" name="accordion-1" type="checkbox" />
 			<label for="ac-1" style="background-image:url('/images/v3/sidebar-sprite.png');height:75px;background-position:0 0;"></label>
-			<article class="ac-small">
+			<article class="ac-medium">
 				<p>
 				<ul class="vertical green-text dejavu-condensed">
 					<% Download.where("user_id != ?", "nil").includes(:program).order("created_at DESC").limit(10).each do |d| %>
