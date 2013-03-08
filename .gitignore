@@ -1,5 +1,6 @@
 public/system/avatars
 config/deploy.rb
+config/database.yml
 .bundle/
 *.log
 app/assets/
