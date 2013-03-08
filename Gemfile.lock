@@ -1,6 +1,6 @@
 GEM
   remote: http://rubygems.org/
-  remote: http://gemcutter.org/
+  remote: http://rubygems.org/
   specs:
     RedCloth (4.2.9)
     abstract (1.0.0)
