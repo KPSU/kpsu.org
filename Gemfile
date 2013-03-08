@@ -1,5 +1,5 @@
 source :rubygems
-source 'http://gemcutter.org'
+source 'http://rubygems.org'
 
 gem 'rails', '3.0.10'
 

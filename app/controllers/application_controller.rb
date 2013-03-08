@@ -205,7 +205,8 @@ class ApplicationController < ActionController::Base
           unless @bullshit == true
             @msg += "Please enter a valid phone number. Entering an incorrect one may result in a strike."
           else
-            @msg += "No really... You have to in your phone number. The KPSU staff has been notified."
+            @msg += "Please enter a valid phone number. Entering an incorrect one may result in a strike."
+            #was: @msg += "No really... You have to in your phone number. The KPSU staff has been notified."
           end
         end
         flash[:notice] = @msg
