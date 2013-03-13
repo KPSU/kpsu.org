@@ -1,4 +1,4 @@
-source :rubygems
+# => source :rubygems
 source 'http://rubygems.org'
 
 gem 'rails', '3.0.10'
@@ -42,3 +42,4 @@ gem 'capistrano'
 gem 'newrelic_rpm', '3.3.5.beta1'
 gem 'thin'
 gem 'aws-sdk'
+gem 'whenever', :require => false
