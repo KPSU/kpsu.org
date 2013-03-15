@@ -153,13 +153,13 @@ class PlaylistsController < ApplicationController
         @programs << p
       end
     end
-    #@downloads = []
-    #@dsetup = Download.all
-    #@dsetup.each do |d|
-    #  if d.program_id == current_user.programs.first.id
-    #    @downloads << d
-    #  end
-    #end
+    @downloads = []
+    @dsetup = Download.all
+    @dsetup.each do |d|
+      if d.program_id == current_user.programs.first.id
+        @downloads << d
+      end
+    end
     /above i am replicating the iteration right before it/
     /error may lie in being careless here; someone double check/
     @playlist = Playlist.find(params[:id])
