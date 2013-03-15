@@ -178,14 +178,17 @@ class PlaylistsController < ApplicationController
     @description = params[:playlist][:description]
     @tmp_tracks = params[:tracks].split(",")
     @program = Program.find(params[:programs])
-    #@download = params[:downloads]
+    @download = Download.find(params[:downloads])
     #here i am attempting to extract the variable (downloads) taken in from the form (on the view.)
     #i belive an error may lie in the local variable @download taking the entire object instead of just the string
     #then, below, when we initialize a playlist object below, it's taking a bad format for that attribute
-    @playlist = Playlist.new(:title => @title, :program => @program, :description => @description, :user_id => current_user.id)
-    #@playlist = Playlist.new(:title => @title, :program => @program, :description => @description, :user_id => current_user.id, :download_id => @download.id)
+    #@playlist = Playlist.new(:title => @title, :program => @program, :description => @description, :user_id => current_user.id)
+    @playlist = Playlist.new(:title => @title, :program => @program, :description => @description, :user_id => current_user.id, :download_id => @download.id)
     @playlist.save
     @playlist.reload
+
+    #@download.playlist_id = @playlist.id
+
     @i = 0
     @tmp_tracks.each do |track|
       @i += 1
@@ -207,7 +210,7 @@ class PlaylistsController < ApplicationController
     @ii = 0
     @playlist = Playlist.find(params[:id])
     @program = Program.find(params[:programs])
-    @download = params[:downloads]
+    @download = Download.find(params[:downloads])
 
     @playlist.update_attributes(:title => params[:playlist][:title], :description => params[:playlist][:description], :program => @program, :download_id => @download.id)
     @tmp_tracks = params[:tracks].split(",")
