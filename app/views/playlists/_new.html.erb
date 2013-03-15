@@ -43,9 +43,9 @@
 			<div class="float-left blue-text chunk-five clear-both">
 			Program	<%= select_tag "programs", options_from_collection_for_select(@programs, "id", "title", :selected => "#{ current_user.programs.first.id rescue nil }") %>
 			</div>
-			<!--div class="float-left blue-text chunk-five clear-both">
+			<div class="float-left blue-text chunk-five clear-both">
 				Download	<%= select_tag "downloads", options_from_collection_for_select(@downloads, "id", "created_at") %>
-			</div-->
+			</div>
 			<!--So above will create a drop-down populated by the array 'downloads' created in the controller (in playlistscontroller#new; there should be matching code in the _edit.html.erb file for this view that matches like the above two with playlistscontroller#edit.  I'm not 100% sure here what data the object I'm extracting has.  Is it just an object with accessible members 'id' and 'created at'?  No, that would be too easy.  Maybe it is an object that matches up perfectly and all of the data from the download entry in the database is available in this download object in the controller?  Does it even work like that, with forms passing directly to controllers?  I gotta read up on this.-->
 			<div class="float-left clear-both blue-text chunk-five" style="margin-top:5px;">
 			Title <input class="rounded-heavy form" id="playlist_title" name="playlist[title]" size="30" type="text" value="">
