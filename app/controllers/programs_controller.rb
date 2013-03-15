@@ -44,7 +44,24 @@ class ProgramsController < ApplicationController
     @program = Program.find(params[:id])
     if @program != nil
       @sidebar_downloads = Download.where("user_id = ? AND title IS NOT ? OR program_id > ?", @program.user, nil, 0).includes(:program, :user).order("created_at DESC").limit(10)
-      @downloads = @program.downloads.sort! {|x,y| x.title.to_i <=> y.title.to_i }
+      
+      #@downloads = @program.downloads.sort! {|x,y| x.title.to_i <=> y.title.to_i }
+      @playlists_with_downloads = Array.new
+      @playlists_all = @program.playlists
+      @playlists_all.each do |p_a|
+        if p_a.download_id != nil
+          @playlists_with_downloads.push p_a
+        end
+      end
+      @downloads = Array.new
+      @playlists_with_downloads.each do |p_w_d|
+        @d = Download.find(p_w_d.download_id)
+        @downloads.push @d
+      end
+
+      #OK, so I've replaced the old "Downloads" array with a new one.  It first pulls all playlists that have download ids
+      #Then it creates a downloads array based off those playlists.  Simple enough.
+
       @playlists = @program.playlists.order("created_at DESC").paginate(:page => params[:page], :per_page => 5)
       respond_to do |format|
         format.html # show.html.erb
