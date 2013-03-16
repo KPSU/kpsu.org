@@ -26,4 +26,5 @@
 #Set a log path.
 every '5 * * * *' do
   rake "archive:update"
+  rake "cache_expire:update"
 end
