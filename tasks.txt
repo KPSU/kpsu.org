@@ -1,9 +1,9 @@
-[ ] Put the rake task (archive:update) in sudo crontabs hourly.
+[X] Put the rake task (archive:update) in sudo crontabs hourly.
+	This was done by adding the proper tasks to the crontab; an action I performed using the gem 'whenever' (superfluous)
+[X] Follow-up on rake tasks not automating?
+[X] Keep investigating why crontab doesn't execute rake command.
 [ ] Investigate Unicorn.
-[ ] Follow-up on rake tasks not automating?
 [ ] Keeping watching Railscasts, then move on to the tutorial, and creating the blog on the guide.rubyonrails.org site.
-[ ] Keep investigating why crontab doesn't execute rake command.
--- Cronjob load rails app
 [ ] In application.html.erb - where is "currently_playing" declared and initialized?
 [ ] Site crashes on UsersController#Create when attempting to create a user (failing on receiving the attached file? See "Show Env Dump"
 [ ] Look into previously_automix in the archive.rake file
