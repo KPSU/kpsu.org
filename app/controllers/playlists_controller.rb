@@ -211,7 +211,6 @@ class PlaylistsController < ApplicationController
     @playlist = Playlist.find(params[:id])
     @program = Program.find(params[:programs])
     @download = Download.find(params[:downloads])
-
     @playlist.update_attributes(:download_id => @download.id)
     @tmp_tracks = params[:tracks].split(",")
     @playlist.playlist_items.each do |pi|
