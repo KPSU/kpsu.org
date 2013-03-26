@@ -13,7 +13,6 @@ vendor/bundle/.DS_Store
 vendor/cache/awesome_print-1.0.2.gem
 vendor/cache/newrelic_rpm-3.3.2.1.gem
 vendor/gems/.DS_Store
-vendor/*
 public/system/files/avatars/1/square_thumb_tiny/306803_658512363996_598783857_n.jpg
 .DS_Store
 Gemfile.lock
@@ -26,11 +25,6 @@ public/javascripts/all.js
 public/javascripts/v3_alt_js.js
 public/stylesheets/all.css
 public/stylesheets/v3_alt_css.css
-public/system/files/avatars/1/big_thumb/306803_658512363996_598783857_n.jpg
-public/system/files/avatars/1/original/306803_658512363996_598783857_n.jpg
-public/system/files/avatars/1/square_thumb_big/306803_658512363996_598783857_n.jpg
-public/system/files/avatars/1/thumb/306803_658512363996_598783857_n.jpg
-public/system/files/avatars/1/tiny/306803_658512363996_598783857_n.jpg
 tmp/
 .gitignore
 db/schema.rb
