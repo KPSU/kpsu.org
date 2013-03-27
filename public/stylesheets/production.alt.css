@@ -715,7 +715,7 @@ ul.vertical,li.vertical {
 	float:left;
 }
 
-#rotator { width: 990px; height: 395px; position: relative; padding: 20px; }
+#rotator { width: 661px; height: 297px; position: relative; padding: 10px; }
 #block-1 { background: #f7ff20; }
 #block-2 { background: #4e4e4e; }
 #block-3 { background: #0096ff; }
@@ -727,24 +727,24 @@ ul.vertical,li.vertical {
 	-o-transition: all 0.5s ease;
 }
 #rotator > div > div { 
-	padding: 20px; 
+	padding: 10px; 
 }
 #rotator > div > div img {
 	float: right;
-	margin: 0 0 2px 10px;
+	margin: 0 0 1px 5px;
 }
-#rotator .active { top: 20px; left: 20px; width: 600px; height: 395px; }
-#rotator .non-active-top { top: 20px; left: 640px; height: 187.5px; width: 370px; }
-#rotator .non-active-bottom { top: 227.5px; left: 640px; height: 187.5px; width: 370px; }		
+#rotator .active { top: 10px; left: 10px; width: 350px; height: 297px; }
+#rotator .non-active-top { top: 10px; left: 370px; height: 144px; width: 297px; }
+#rotator .non-active-bottom { top: 164px; left: 370px; height: 144px; width: 297px; }		
 #rotator .non-active-top:hover, #rotator .non-active-bottom:hover { 
 	cursor: pointer;
-	-webkit-box-shadow: 0 0 10px rgba(0,0,0,0.4); 
-	-moz-box-shadow: 0 0 10px rgba(0,0,0,0.4); 
-	box-shadow: 0 0 10px rgba(0,0,0,0.4); 
+	-webkit-box-shadow: 0 0 5px rgba(0,0,0,0.4); 
+	-moz-box-shadow: 0 0 5px rgba(0,0,0,0.4); 
+	box-shadow: 0 0 5px rgba(0,0,0,0.4); 
 }
 #rotator h2 {
 	text-align: center; 
-	line-height: 130px;
+	line-height: 65px;
 }
 #rotator .active h2 {
 	display: none;
