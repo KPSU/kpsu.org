@@ -52,15 +52,15 @@ namespace :archive do
         unless download
           puts download.to_json
           if _e && @previously_automix == false
-            download = Download.where(:title => "Current Show")
-            download.program_id = _e.program_id
+            download = Download.new
+            download.program = _e.program
             download.url = url
             download.count = 0
             download.user = _e.program.user
             download.title = _t
             download.save
           elsif(!_e)
-            download = Download.where(:title => "Current Show")
+            download = Download.new
             download.program_id = 0
             download.url = url
             download.count = 0
@@ -68,17 +68,12 @@ namespace :archive do
             download.title = _t
             download.save
           end
-          else
-            if download.url != url
-                download.url = url
-            end
-            download.program = _e.program
-            download.url = url
-            download.count = 0
-            download.user = _e.program.user
-            download.title = _t
-            download.save
+        else
+          if download.url != url
+              download.url = url
+              download.save
           end
+        end
     	else 
     		nil
     	end
