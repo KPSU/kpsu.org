@@ -1,1 +1,1 @@
-ENV['AMAZONRCDIR'] = "#{RAILS_ROOT}/config/"
+ENV['AMAZONRCDIR'] = "#{::Rails.root.to_s}/config/"
