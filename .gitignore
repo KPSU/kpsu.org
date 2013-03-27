@@ -26,6 +26,6 @@ public/javascripts/v3_alt_js.js
 public/stylesheets/all.css
 public/stylesheets/v3_alt_css.css
 tmp/
-.gitignore
 db/schema.rb
 db/test.sqlite3
+.gitignore
