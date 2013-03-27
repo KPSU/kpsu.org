@@ -35,7 +35,7 @@ class User < ActiveRecord::Base
   has_many :views, :as => :viewable
   has_many :unique_objs, :as => :objectifiable
   
-  if RAILS_ENV == "development"
+  if ::Rails.env == "development"
     @url = "/system/files/avatars/:id/:style/:basename.:extension"
   else
     @url = "/system/files/avatars/:id/:style/:basename.:extension"
