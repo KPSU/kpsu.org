@@ -14,9 +14,6 @@
 
 class StaticController < ApplicationController
   layout 'alternative'
-  before_filter :require_user, :only => ['new', 'edit', 'index', 'search', 'destroy', 'update', 'create']
-  before_filter :has_profile_filled_out
-  before_filter :no_listener, :only => ['new', 'edit', 'destroy', 'index', 'update', 'create']
   def show
     render params[:page]
   end
