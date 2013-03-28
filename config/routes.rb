@@ -4,7 +4,7 @@ Kpsu::Application.routes.draw do
   root :to => "posts#index"
   match '/posts/user/:id' => "posts#user_posts", :as => "users_posts" 
   match '/listen' => "contents#view", :as => :listen, :title => "listen"
-  match '/calendar(/:year(/:month))' => 'calendar#index', :as => :calendar, :constraints => {:year => /\d{4}/, :month => /\d{1,2}/}
+  #match '/calendar(/:year(/:month))' => 'calendar#index', :as => :calendar, :constraints => {:year => /\d{4}/, :month => /\d{1,2}/}
   match '/about' => "contents#view", :as => :about, :title => "About KPSU"
   match '/reset_password' => 'password_resets#edit'
   match '/em_show/:id' => 'artists#em_show'
@@ -27,6 +27,9 @@ Kpsu::Application.routes.draw do
   match '/programs/all' => 'programs#public_index', :as => "program_index"
   match '/users/stats' => 'users#stats', :as => "stats"
   match '/station/directory' => 'users#directory', :as => "station_directory" # this is a directory of users (not listeners) at the station
+  
+
+
   resources :playlists do
     get :autocomplete_artist_name, :on => :collection
     get :autocomplete_album_name, :on => :collection
@@ -108,7 +111,19 @@ Kpsu::Application.routes.draw do
   match '/comments/:type/:id' => "comments#index", :as => "content_comment"
   match '/program/:title' => "programs#show"
   match '/auth/:provider' => 'authentications#passthru'
+
+
+
+  get "/:page" => "static#show"
+  #as per http://stackoverflow.com/questions/5911794/adding-a-new-page-in-ruby-on-rails
+  #in conjunction with building a semi-static calendar view page (under app/views/static)
+  #it was important that the error routing take place after this, as it defines everything not defined above it to get
+  #re-routed to a 404 page.
+
   match '*a', :to => 'errors#routing'
+
+
+
   # Route globbing FTW for DJ lookup
   
   
@@ -168,4 +183,6 @@ Kpsu::Application.routes.draw do
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id(.:format)))'
+
+
 end
