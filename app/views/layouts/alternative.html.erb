@@ -117,14 +117,14 @@
 				<% unless currently_playing.class == String %>
 					<%= link_to(currently_playing[0], program_path(currently_playing[1]), :class => "m1-light yellow-text", :style => "line-height: 15px;") %>
 				<% else %>
-					<span class="m1-light yellow-text">"We're on Auto Pilot!"</span>
+					<span class="m1-light yellow-text">KPSU</span>
 				<% end %>
 			</div>
 			<div id="on-air-dj" class="m1-light purple-text">
 				<% unless currently_playing.class == String %>
 					<span class="m1-light purple-text"><%= currently_playing[2] %></span>
 				<% else %>
-					<span class="m1-light purple-text">AUTOMIXTRON 3000</span>
+					<span class="m1-light purple-text">Portland's College Radio</span>
 				<% end %>
 			</div>
 			<div id="hidden-player" style="width:0px;height:0px;"></div>
