@@ -1,0 +1,23 @@
+#class StaticController < ApplicationController
+  
+  #def index
+  #  @month = (params[:month] || Time.zone.now.month).to_i
+  #  @year = (params[:year] || Time.zone.now.year).to_i
+
+  #  @shown_month = Date.civil(@year, @month)
+
+  #  @event_strips = Event.event_strips_for_month(@shown_month)
+  #end
+
+  #The above was an old implementation that was sitting there.  Below is my attempt at creating a semi-static page from here:
+  #http://stackoverflow.com/questions/5911794/adding-a-new-page-in-ruby-on-rails
+
+class StaticController < ApplicationController
+  layout 'alternative'
+  before_filter :require_user, :only => ['new', 'edit', 'index', 'search', 'destroy', 'update', 'create']
+  before_filter :has_profile_filled_out
+  before_filter :no_listener, :only => ['new', 'edit', 'destroy', 'index', 'update', 'create']
+  def show
+    render params[:page]
+  end
+end
