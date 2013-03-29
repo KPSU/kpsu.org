@@ -1,6 +1,0 @@
-Time::DATE_FORMATS[:post_month] = "%b"
-Time::DATE_FORMATS[:post_day] = "%d"
-Time::DATE_FORMATS[:in_words] = "%A/%B/%e"
-Time::DATE_FORMATS[:meridian_time] = "%I:%M %p"
-Time::DATE_FORMATS[:simple] = "%b %d %y"
-Time::DATE_FORMATS[:time_and_date] = "%b %d %y %I:%M %p"
