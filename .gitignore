@@ -3,6 +3,6 @@ log/*
 */.DS_Store
 public/system/files/avatars/1/*
 tmp/
-config/database.yml
-config/deploy.rb
+config/
 .gitignore
+lib/tasks/archive.rake
