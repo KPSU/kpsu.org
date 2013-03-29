@@ -1,4 +1,3 @@
-# Does this line even matter?
 log/*
 .DS_Store
 */.DS_Store
