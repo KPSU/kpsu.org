@@ -3,7 +3,7 @@
 development:
   adapter: mysql2
   user: root
-  database: kpsu_development
+  database: kpsu_production
   host: localhost
   password: 29jas0@Ji#
   socket: /var/run/mysqld/mysqld.sock
