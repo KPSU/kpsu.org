@@ -15,3 +15,5 @@ config/initializers/twitter.rb
 config/initializers/omniauth.rb
 config/initializers/recaptcha.rb
 config/initializers/secret_token.rb
+lib/tasks/archive.rake
+README
