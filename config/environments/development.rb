@@ -32,5 +32,7 @@ Kpsu::Application.configure do
     :password             => 'kpsu.org2010',
     :authentication       => 'plain',
     :enable_starttls_auto => true  }
+
+
 end
 
