@@ -3,9 +3,6 @@ log/*
 */.DS_Store
 public/system/files/avatars/1/*
 tmp/
-#.gitignore
-#config/
-#lib/tasks/archive.rake
-README
-
-#Remove the above comments when you are working with the correct (private) versions of those files
+config/database.yml
+config/deploy.rb
+.gitignore
