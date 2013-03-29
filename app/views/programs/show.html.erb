@@ -158,13 +158,13 @@
 		</div>
 		<% @downloads.each do |d| %>
 		<% if Time.zone.now - Time.at(d.title.to_i) <= 7.weeks %>
-			<% unless d.playlist.nil? %>
+			<!--% unless d.playlist.nil? %-->
 				<div class="micro-row">
 					<a href="<%= url_for(download_path(:id => d.id)) %>" title="Click to Download <%= d.title %>"><div class="download float-left">&nbsp;</div></a>
 					<div style="padding-top:6px;padding-left:3px;" class="float-left medium wide-col"><%= link_to(Time.zone.at(d.title.to_i).strftime("%B %e\, %Y"), download_path(:id => d.id), :class => "red-font", :title => "Original Air Time: #{Time.at(d.title.to_i)}") %></div>
 					<div style="padding-top:6px;" class="float-left medium narrower-col"><%= d.count %></div>
 				</div>
-			<% end %>
+			<!--% end %-->
 		<% end %>
 		<% end %>
 	</div>
