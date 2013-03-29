@@ -3,17 +3,9 @@ log/*
 */.DS_Store
 public/system/files/avatars/1/*
 tmp/
-config/database.yml
-config/deploy.rb
-.gitignore
-config/.amazonrc
-config/lastfm.yml
-config/newrelic.yml
-config/database.yml
-config/deploy.rb
-config/initializers/twitter.rb
-config/initializers/omniauth.rb
-config/initializers/recaptcha.rb
-config/initializers/secret_token.rb
-lib/tasks/archive.rake
-README
+#.gitignore
+#config/
+#lib/tasks/archive.rake
+#README
+
+#Remove the above comments when you are working with the correct (private) versions of those files
