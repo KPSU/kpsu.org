@@ -209,7 +209,7 @@ class PlaylistsController < ApplicationController
     #archive.rake looks for a download called "Archive_rake Changes Me" each time it runs
     #If it finds it, it just puts the playlist ID on the Download it makes anyway, and erases "Archive_rake Changes Me"
     #Thus, that download is just a placeholder token for the playlist ID when the playlist is made in the middle of a show.
-  
+
 
 
 
@@ -247,8 +247,10 @@ class PlaylistsController < ApplicationController
       @download.update_attributes(:playlist_id => @playlist.id)
       @download.save
       @download.reload
+      @playlist.update_attributes(:download_id => @download.id)
+      @playlist.save
+      @playlist.reload
     end
-    @playlist.update_attributes(:download_id => @download.id)
     @tmp_tracks = params[:tracks].split(",")
     @playlist.playlist_items.each do |pi|
         pi.destroy
@@ -263,8 +265,7 @@ class PlaylistsController < ApplicationController
       @pi.position = @ii
       @pi.save
     end
-    @playlist.save
-    @playlist.reload
+    
 
     
     respond_to do |format|
