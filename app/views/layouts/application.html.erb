@@ -136,7 +136,7 @@
 			<div id="block-2" class="non-active-top">
 				<span id="block2switch" onclick="Block1ToImage();Block2ToContent();Block3ToImage()">
 				<div>
-					<img src="images/v3/jay_image.jpg" style="width:297px;height:144px;">
+					<img src="images/v3/megan.jpg" style="width:297px;height:144px;">
 				</div>
 				</span>			
 			</div>
@@ -148,15 +148,6 @@
 			</div>
 		
 		</div>
-	
-
-	
-
-		<!--div id="kpsu-kruise-video">
-			<div id="kruise-header" style="width: 968px; height:217px;"><img src="/images/v3/kpsu_kruise_header.jpg" /></div>
-			<div id="kruise-space" style="width:968px; height:10px;"></div>
-			<object width="968" height="545"><param name="allowfullscreen" value="true"></param><param name="movie" value="https://www.facebook.com/v/407516359313527"></param><embed src="https://www.facebook.com/v/407516359313527" type="application/x-shockwave-flash" allowfullscreen="1" width="968" height="545"></embed></object>
-		</div-->
 
 
 		<div id="sidebar" class="container float-right">
@@ -239,49 +230,6 @@
 
 		<%= yield %>
 
-
-
-		<!--div id="sidebar" class="float-right">
-			
-		
-			<div class="sidebar events"></div>
-			<ul class="vertical green-text dejavu-condensed">
-				<% @downloads.each do |d| %>
-				<li><a class="green-text dejavu-condensed" href="<%= url_for(download_path(:id => d.id)) %>"><%= d.program.title rescue nil %> (<%= Time.zone.at(d.title.to_i).strftime("%d\.%b\.%Y")%>)</a></li>
-				<% end %>
-			</ul>
-			<div class="sidebar reviews"></div>
-			<ul class="vertical magenta-text chunk-five">
-				<% @rev.each do |review| %>
-				<li><%= link_to "#{truncate review.title, :length => 22}", review, :class => "magenta-text" %></li>
-				<% end %>
-				
-			</ul>
-			
-			<div class="sidebar social">
-				
-			</div>
-			<ul class="vertical orange-text chunk-five">
-				<li><a class='orange-text' href='http://twitter.com/#!/KPSU_PDX'>Twitter</a>&nbsp;&nbsp;&nbsp;<a href='http://www.facebook.com/pages/KPSU/131711936862193' class='orange-text'>Facebook</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='http://www.flickr.com/photos/kpsu' class='orange-text'>Flickr</a></li>
-			</ul>
-			<div class="sidebar support">
-				
-			</div>
-			
-		
-			<ul style="vertical yellow-text st-marie">
-				<li style="margin-left:10px;"><a  class="yellow-text st-marie" href="http://www.wweek.com"><b>Willamette Week</b></a></li>
-				<li style="margin-left:10px;"><a  class="yellow-text st-marie" href="http://www.lagunitas.com/"><b>Lagunitas Brewing</b></a></li>
-				<li style="margin-left:10px;"><a  class="yellow-text st-marie" href="http://www.portlandfarmersmarket.org/markets/psu/"><b>PSU Farmers Market</b></a></li>
-				<li style="margin-left:10px;"><a  class="yellow-text st-marie" href="http://psu.tv/"><b>PSU TV</b></a></li>
-				<li style="margin-left:10px;"><a  class="yellow-text st-marie" href="http://wwhttp://www.portlandfarmersmarket.org/markets/psu/w.spotmagazine.net/"><b>Spot Magazine</b></a></li>
-				<li style="margin-left:10px;"><a  class="yellow-text st-marie" href="http://www.liquidbeatrecords.com"><b>Liquid Beat Records</b></a></li>
-				<li style="margin-left:10px;"><a  class="yellow-text st-marie" href="http://www.facebook.com/pages/Food-for-Thought-Cafe/147701107092"><b>Food For Thought Cafe</b></a></li>
-				<li style="margin-left:10px;"><a  class="yellow-text st-marie" href="http://www.abovethepearl.com"><b>Above the Pearl Tattoo</b></a></li>
-				<li style="margin-left:10px;"><a  class="yellow-text st-marie" href="/underwriting"><b>Support KPSU!</b></a></li>
-			</ul>
-			
-		</div-->
 
 		<div id="twitter-feed" class="hand-written">
 			<div id="tweets">
