@@ -1,0 +1,9 @@
+# Does this line even matter?
+log/*
+.DS_Store
+*/.DS_Store
+public/system/files/avatars/1/*
+tmp/
+config/database.yml
+config/deploy.rb
+.gitignore
