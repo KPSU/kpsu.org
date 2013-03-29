@@ -6,5 +6,7 @@ require 'amazon/aws/search'
 require 'rbrainz'
 include MusicBrainz
 
+
 # Initialize the rails application
 Kpsu::Application.initialize!
+
