@@ -138,6 +138,9 @@ class PlaylistsController < ApplicationController
         @downloads << d
       end
     end
+    @downloads.sort! {|y,x| x.title.to_i <=> y.title.to_i}
+    @currently_playing_option = Download.find_by_title("Currently Playing")
+    @downloads << @currently_playing_option
     respond_to do |format|
       format.js { render :partial => "new" }
       format.xml  { render :xml => @playlist }
@@ -160,9 +163,12 @@ class PlaylistsController < ApplicationController
         @downloads << d
       end
     end
+    @downloads.sort! {|y,x| x.title.to_i <=> y.title.to_i}
+
     /above i am replicating the iteration right before it/
     /error may lie in being careless here; someone double check/
     @playlist = Playlist.find(params[:id])
+    @this_download = Download.find(@playlist.download_id)
     @pi = @playlist.playlist_items.sort! { |a,b| a.position <=> b.position }
     respond_to do |format|
       format.js { render :partial => "edit" }
@@ -178,16 +184,42 @@ class PlaylistsController < ApplicationController
     @description = params[:playlist][:description]
     @tmp_tracks = params[:tracks].split(",")
     @program = Program.find(params[:programs])
-    @download = Download.find(params[:downloads])
+    if params[:downloads]
+      #@download_id = Download.find(params[:downloads]).id
+      unless params[:downloads] = 18049
+        @download = Download.find(params[:downloads])
+        @download.update_attributes(:playlist_id => @playlist.id)  
+        @download.save
+        @download.reload
+        @playlist = Playlist.new(:title => @title, :program => @program, :description => @description, :user_id => current_user.id, :download_id => @download.id)
+        @playlist.save
+        @playlist.reload
+      end
+      if params[:downloads] = 18049
+        @playlist = Playlist.new(:title => @title, :program => @program, :description => @description, :user_id => current_user.id, :download_id => Download.last.id + 1)
+        @playlist.save
+        @playlist.reload
+        @download = Download.new(:title => "Archive_rake Changes Me", :playlist_id => @playlist.id)
+        @download.save
+        @download.reload
+      end
+    end
+    #The above asks if the user chose those "Currently Playing" token - in this case "2000-01-01 00:00:00"
+    #If it does (i.e. if params[:downloads] = 18049) then it creates a Download called "Archive_rake Changes Me"
+    #archive.rake looks for a download called "Archive_rake Changes Me" each time it runs
+    #If it finds it, it just puts the playlist ID on the Download it makes anyway, and erases "Archive_rake Changes Me"
+    #Thus, that download is just a placeholder token for the playlist ID when the playlist is made in the middle of a show.
+  
+
+
+
     #here i am attempting to extract the variable (downloads) taken in from the form (on the view.)
     #i belive an error may lie in the local variable @download taking the entire object instead of just the string
     #then, below, when we initialize a playlist object below, it's taking a bad format for that attribute
     #@playlist = Playlist.new(:title => @title, :program => @program, :description => @description, :user_id => current_user.id)
-    @playlist = Playlist.new(:title => @title, :program => @program, :description => @description, :user_id => current_user.id, :download_id => @download.id)
-    @playlist.save
-    @playlist.reload
+   
 
-    #@download.playlist_id = @playlist.id
+    
 
     @i = 0
     @tmp_tracks.each do |track|
@@ -210,8 +242,12 @@ class PlaylistsController < ApplicationController
     @ii = 0
     @playlist = Playlist.find(params[:id])
     @program = Program.find(params[:programs])
-    @download = Download.find(params[:downloads])
-    @download.update_attributes(:playlist_id => @playlist.id)   
+    if params[:downloads]
+      @download = Download.find(params[:downloads])
+      @download.update_attributes(:playlist_id => @playlist.id)
+      @download.save
+      @download.reload
+    end
     @playlist.update_attributes(:download_id => @download.id)
     @tmp_tracks = params[:tracks].split(",")
     @playlist.playlist_items.each do |pi|
@@ -229,8 +265,7 @@ class PlaylistsController < ApplicationController
     end
     @playlist.save
     @playlist.reload
-    @download.save
-    @download.reload
+
     
     respond_to do |format|
       format.js { render :partial => "saved.js.erb" }
