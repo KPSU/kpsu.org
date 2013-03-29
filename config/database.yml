@@ -3,10 +3,10 @@
 development:
   adapter: mysql2
   user: root
-  database: kpsu_production
+  database: kpsu_development
   host: localhost
-  password: 29jas0@Ji#
-  socket: /var/run/mysqld/mysqld.sock
+  password: 
+  socket: /tmp/mysql.sock
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
