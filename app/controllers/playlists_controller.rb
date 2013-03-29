@@ -186,7 +186,7 @@ class PlaylistsController < ApplicationController
     @program = Program.find(params[:programs])
     if params[:downloads]
       #@download_id = Download.find(params[:downloads]).id
-      unless params[:downloads] = 18049
+      unless params[:downloads] = 18050
         @download = Download.find(params[:downloads])
         @download.update_attributes(:playlist_id => @playlist.id)  
         @download.save
@@ -195,7 +195,7 @@ class PlaylistsController < ApplicationController
         @playlist.save
         @playlist.reload
       end
-      if params[:downloads] = 18049
+      if params[:downloads] = 18050
         @playlist = Playlist.new(:title => @title, :program => @program, :description => @description, :user_id => current_user.id, :download_id => Download.last.id + 1)
         @playlist.save
         @playlist.reload
