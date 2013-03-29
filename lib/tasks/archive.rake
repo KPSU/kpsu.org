@@ -58,6 +58,12 @@ namespace :archive do
             download.count = 0
             download.user = _e.program.user
             download.title = _t
+            if Download.find_by_title("Archive_rake Changes Me")
+              download.playlist_id = Download.find_by_title("Archive_rake Changes Me").playlist_id
+              @xxx = Download.find_by_title("Archive_rake Changes Me")
+              @xxx.delete
+              @xxx.save
+            end
             download.save
           elsif(!_e)
             download = Download.new

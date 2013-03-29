@@ -45,22 +45,42 @@ class ProgramsController < ApplicationController
     if @program != nil
       @sidebar_downloads = Download.where("user_id = ? AND title IS NOT ? OR program_id > ?", @program.user, nil, 0).includes(:program, :user).order("created_at DESC").limit(10)
       
-      #@downloads = @program.downloads.sort! {|x,y| x.title.to_i <=> y.title.to_i }
-      @playlists_with_downloads = Array.new
-      @playlists_all = @program.playlists
-      @playlists_all.each do |p_a|
-        if p_a.download_id != nil
-          @playlists_with_downloads.push p_a
-        end
-      end
-      @downloads = Array.new
-      @playlists_with_downloads.each do |p_w_d|
-        @d = Download.find(p_w_d.download_id)
-        @downloads.push @d
-      end
+      #@playlists_with_downloads = Array.new
+      #@playlists_all = @program.playlists
+      #@playlists_all.each do |p_a|
+      #  if p_a.download_id != nil
+      #    @playlists_with_downloads.push p_a
+      #  end
+      #end
+
+
+      #@playlists_with_downloads.each do |p_w_d|
+      #  @d = Download.find(p_w_d.download_id)
+      #  @downloads.push @d
+      #end
+
 
       #OK, so I've replaced the old "Downloads" array with a new one.  It first pulls all playlists that have download ids
       #Then it creates a downloads array based off those playlists.  Simple enough.
+
+
+
+
+      #Below is the current iteration.
+      #All downloads must have a playlist ID.  They're given one on the playlist form (both new and edit)
+      #If a download doesn't have a playlist id, it won't show up (unless it's from before March 28th, 2013) - free pass
+      
+
+      @downloads = Array.new
+      @program.downloads.each do |dl|
+        if dl.playlist_id or dl.created_at.to_i < 1364529283
+          @downloads.push dl
+        end
+      end
+
+      @downloads.sort! {|y,x| x.title.to_i <=> y.title.to_i }
+
+
 
       @playlists = @program.playlists.order("created_at DESC").paginate(:page => params[:page], :per_page => 5)
       respond_to do |format|
