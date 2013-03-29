@@ -210,7 +210,8 @@ class PlaylistsController < ApplicationController
     @ii = 0
     @playlist = Playlist.find(params[:id])
     @program = Program.find(params[:programs])
-    @download = Download.find(params[:downloads])   
+    @download = Download.find(params[:downloads])
+    @download.update_attributes(:playlist_id => @playlist.id)   
     @playlist.update_attributes(:download_id => @download.id)
     @tmp_tracks = params[:tracks].split(",")
     @playlist.playlist_items.each do |pi|
@@ -225,8 +226,11 @@ class PlaylistsController < ApplicationController
       @pi.playlist = @playlist
       @pi.position = @ii
       @pi.save
-      @playlist.reload
     end
+    @playlist.save
+    @playlist.reload
+    @download.save
+    @download.reload
     
     respond_to do |format|
       format.js { render :partial => "saved.js.erb" }
