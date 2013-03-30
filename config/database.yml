@@ -5,7 +5,7 @@ development:
   user: root
   database: kpsu_production
   host: localhost
-  password: 
+  password: 29jas0@Ji#
   socket: /var/run/mysqld/mysqld.sock
 
 # Warning: The database defined as "test" will be erased and
