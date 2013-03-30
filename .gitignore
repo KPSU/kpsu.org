@@ -3,3 +3,4 @@ log/
 tmp/
 config/
 public/system/files/avatars/
+.gitignore
