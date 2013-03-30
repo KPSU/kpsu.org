@@ -1,8 +1,5 @@
-log/*
-.DS_Store
-*/.DS_Store
-public/system/files/avatars/1/*
+log/
+*.DS_Store
+public/system/files/avatars/1/
 tmp/
-#config/
-#.gitignore
-#lib/tasks/archive.rake
+config/
