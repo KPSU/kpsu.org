@@ -13,13 +13,13 @@ Requirements:
 * MySQL (tested on 5.6.10)
 * ImageMagick
 * Git
-* config directory (available to KPSU affiliates on request - email admin at kpsu dot org)
+* config directory and SQL database (available to KPSU affiliates on request - email admin at kpsu dot org)
 
 Installation:
 -------------
 
 1.  Git clone the repo (git@github.com:KPSU/kpsu.org.git)
-2.  Transfer the config directory (not included) into the application directory.
+2.  Transfer the config directory and kpsu_db_sample.dump (not included) into the application directory.
 3.  Start the MySQL server with "mysql.server start" or equivalent command.
 4.  Create an empty mysql utf8 encoded database "kpsu_development", "kpsu_production", or some such name.
 5.  Fill out the config/database.yml file with the appropriate database name, user, password, socket, etc.
