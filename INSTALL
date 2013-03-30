@@ -1,0 +1,37 @@
+Kpsu.org installation
+----------------------
+
+KPSU - Portland's College Radio
+http://www.kpsu.org
+
+Requirements:
+-------------
+
+* Ruby 1.8.7, 1.9.2, or 1.9.3
+* Rubygems
+* Bundler >= 1.0.21
+* MySQL (tested on 5.6.10)
+* ImageMagick
+* Git
+* config directory (available to KPSU affiliates on request - email admin at kpsu dot org)
+
+Installation:
+-------------
+
+1.  Git clone the repo (git@github.com:KPSU/kpsu.org.git)
+2.  Transfer the config directory (not included) into the application directory.
+3.  Start the MySQL server with "mysql.server start" or equivalent command.
+4.  Create an empty mysql utf8 encoded database "kpsu_development", "kpsu_production", or some such name.
+5.  Fill out the config/database.yml file with the appropriate database name, user, password, socket, etc.
+6.  Bundle install in the app directory to install the gems.
+7.  Run "rake db:migrate" in the app directory to create your database structure.
+8.  Set permissions to 777 for tmp, log, and public directories.
+9.  Populate the MySQL database (kpsu_development, kpsu_production, whatever you named it):
+		mysql -u root -p database_name < kpsu_db_sample.dump
+10. Run "rake archive:update" to populate the database with the current podcasts from Amazon
+11. To your crontab (run "sudo crontab -e") add the following line (filling out /path/to/kpsu.org):
+		5 * * * * /bin/bash -l -c 'cd /path/to/kpsu.org && RAILS_ENV=production bundle exec rake archive:update --silent'
+12. If you don't have a web server installed (such as Apache), test the application using the WEBrick server:
+		ruby script/rails server -e production
+13. The admin email is "admin@kpsu.org" and the password is 'admin'
+14. Enjoy!
