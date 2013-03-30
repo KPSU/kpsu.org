@@ -1,3 +1,14 @@
+Hi, and welcome to kpsu.org, the website for Portland's College Radio.
+
+The configuration files have been left out of this code until we can securely post them.  In the mean time, if you are a KPSU affiliate and would like to develop for this application, email admin at kpsu dot org for the missing files.
+
+You will also need to install the following sudo cronjob to automatically populate new downloads:
+
+5 * * * * /bin/bash -l -c 'cd /Users/michael/kpsu.org && RAILS_ENV=production bundle exec rake archive:update --silent'
+
+
+Enjoy!
+
 == Welcome to Rails
 
 Rails is a web-application framework that includes everything needed to create
