@@ -1,0 +1,14 @@
+March 29th, 2013:
+-----------------
+Put all the code on GitHub (git@github.com:KPSU/kpsu.org.git)
+
+A user can now change their config/deploy.rb file to perform a Capistrano deployment once they follow these guides:
+1.https://help.github.com/articles/deploying-with-capistrano
+2.https://help.github.com/articles/managing-deploy-keys
+3.https://help.github.com/articles/generating-ssh-keys
+
+One thing to note is that config/ folder does not exist in the public repository, nor should it EVER be pushed to it.  It is in the .gitignore file for good reason.  The only changes that really need to be made to the files are MySQL access protocols in config/database.yml and the user name in config/deploy.rb.
+
+I added to the deploy.rb file to copy the config/ folder from /var/config_backup on the server during each capistrano deploy (which is just doing a new git pull from GitHub and putting it in an appropriately named folder, pushing back the old one, and creating a new symlink at /var/www/kpsu.org/current)
+
+The git remote 'origin' that was on the server at /var/git/kpsu.org is now 'old_origin' and now the GitHub repo is 'origin'.
