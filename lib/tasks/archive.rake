@@ -48,6 +48,16 @@ namespace :archive do
           end
 
         end
+
+        cp_id = 0
+        
+        #already has a playlist made for it
+        if Download.find_by_title("1364776013")
+          cp_id = Download.find_by_title("1364776013").playlist_id
+          @xxx = Download.find_by_title("1364776013")
+          @xxx.delete
+          @xxx.save
+        end
         
         unless download
           puts download.to_json
@@ -58,11 +68,8 @@ namespace :archive do
             download.count = 0
             download.user = _e.program.user
             download.title = _t
-            if Download.find_by_title("1364776013")
-              download.playlist_id = Download.find_by_title("1364776013").playlist_id
-              @xxx = Download.find_by_title("1364776013")
-              @xxx.delete
-              @xxx.save
+            if cp_id != 0
+              download.playlist_id = cp_id
             end
             download.save
           elsif(!_e)
