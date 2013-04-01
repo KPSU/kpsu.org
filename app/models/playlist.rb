@@ -6,7 +6,7 @@ class Playlist < ActiveRecord::Base
   belongs_to :program
   belongs_to :user
   has_one :genre
-  has_one :download
+  has_many :download
   has_many :playlist_items
   has_many :tracks, :through => :playlist_items
   has_many :comments

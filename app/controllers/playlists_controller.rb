@@ -131,16 +131,27 @@ class PlaylistsController < ApplicationController
         @programs << p
       end
     end
-    @downloads = []
-    @dsetup = Download.all
-    @dsetup.each do |d|
-      if d.program_id == current_user.programs.first.id
-        @downloads << d
-      end
-    end
+    #@downloads = []
+    #@dsetup = Download.all
+    #@dsetup.each do |d|
+    #  if d.program_id == current_user.programs.first.id
+    #    @downloads << d
+    #  end
+    #end
+
+    #@downloads = Array.new
+    #current_user.programs.first.playlists.each do |pl|
+    #  @downloads.push pl.download
+    #end
+
+    @downloads = current_user.programs.first.downloads
+
+
     @downloads.sort! {|y,x| x.title.to_i <=> y.title.to_i}
-    @currently_playing_option = Download.find_by_title("Currently Playing")
+    @currently_playing_option = Download.find_by_title("1111111111") #currently playing; must be integer
     @downloads << @currently_playing_option
+
+
     respond_to do |format|
       format.js { render :partial => "new" }
       format.xml  { render :xml => @playlist }
@@ -156,19 +167,25 @@ class PlaylistsController < ApplicationController
         @programs << p
       end
     end
-    @downloads = []
-    @dsetup = Download.all
-    @dsetup.each do |d|
-      if d.program_id == current_user.programs.first.id
-        @downloads << d
-      end
-    end
+    #@downloads = []
+    #@dsetup = Download.all
+    #@dsetup.each do |d|
+    #  if d.program_id == current_user.programs.first.id
+    #    @downloads << d
+    #  end
+    #end
+    #@downloads.sort! {|y,x| x.title.to_i <=> y.title.to_i}
+    @downloads = current_user.programs.first.downloads
+
     @downloads.sort! {|y,x| x.title.to_i <=> y.title.to_i}
+    @currently_playing_option = Download.find_by_title("1111111111")
+    @downloads << @currently_playing_option
+
 
     /above i am replicating the iteration right before it/
     /error may lie in being careless here; someone double check/
     @playlist = Playlist.find(params[:id])
-    @this_download = Download.find(@playlist.download_id)
+    @this_download = Download.find(@playlist.download) rescue nil
     @pi = @playlist.playlist_items.sort! { |a,b| a.position <=> b.position }
     respond_to do |format|
       format.js { render :partial => "edit" }
@@ -191,15 +208,15 @@ class PlaylistsController < ApplicationController
         @download.update_attributes(:playlist_id => @playlist.id)  
         @download.save
         @download.reload
-        @playlist = Playlist.new(:title => @title, :program => @program, :description => @description, :user_id => current_user.id, :download_id => @download.id)
+        @playlist = Playlist.new(:title => @title, :program => @program, :description => @description, :user_id => current_user.id)
         @playlist.save
         @playlist.reload
       end
       if params[:downloads] = 18050
-        @playlist = Playlist.new(:title => @title, :program => @program, :description => @description, :user_id => current_user.id, :download_id => Download.last.id + 1)
+        @playlist = Playlist.new(:title => @title, :program => @program, :description => @description, :user_id => current_user.id)
         @playlist.save
         @playlist.reload
-        @download = Download.new(:title => "Archive_rake Changes Me", :playlist_id => @playlist.id)
+        @download = Download.new(:title => "2222222222", :playlist_id => @playlist.id)
         @download.save
         @download.reload
       end
@@ -247,9 +264,6 @@ class PlaylistsController < ApplicationController
       @download.update_attributes(:playlist_id => @playlist.id)
       @download.save
       @download.reload
-      @playlist.update_attributes(:download_id => @download.id)
-      @playlist.save
-      @playlist.reload
     end
     @tmp_tracks = params[:tracks].split(",")
     @playlist.playlist_items.each do |pi|
