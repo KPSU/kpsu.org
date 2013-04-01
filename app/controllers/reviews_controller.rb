@@ -23,7 +23,7 @@ class ReviewsController < ApplicationController
   def show
     @color = ["blue", "green", "magenta", "purple", "yellow", "orange", "red"].shuffle[0]
     @review = Review.find(params[:id])
-    #@amazon = album_cover_fetch(:artist => @review.artist.name, :album => @review.album.name)
+    @amazon = album_cover_fetch(:artist => @review.artist.name, :album => @review.album.name)
     @genres = Genre.all
     
     respond_to do |format|
