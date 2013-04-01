@@ -148,8 +148,8 @@ class PlaylistsController < ApplicationController
 
 
     @downloads.sort! {|y,x| x.title.to_i <=> y.title.to_i}
-    @currently_playing_option = Download.find_by_title("1111111111") #currently playing; must be integer
-    @downloads << @currently_playing_option
+    #@currently_playing_option = Download.find_by_title("1111111111") #currently playing; must be integer
+    #@downloads << @currently_playing_option
 
 
     respond_to do |format|
@@ -178,8 +178,8 @@ class PlaylistsController < ApplicationController
     @downloads = current_user.programs.first.downloads
 
     @downloads.sort! {|y,x| x.title.to_i <=> y.title.to_i}
-    @currently_playing_option = Download.find_by_title("1111111111")
-    @downloads << @currently_playing_option
+    #@currently_playing_option = Download.find_by_title("1111111111")
+    #@downloads << @currently_playing_option
 
 
     /above i am replicating the iteration right before it/
@@ -203,7 +203,7 @@ class PlaylistsController < ApplicationController
     @program = Program.find(params[:programs])
     if params[:downloads]
       #@download_id = Download.find(params[:downloads]).id
-      unless params[:downloads] == "18050"
+      unless params[:curently_playing] == "true"
         @playlist = Playlist.new(:title => @title, :program => @program, :description => @description, :user_id => current_user.id)
         @playlist.save
         @playlist.reload
@@ -211,13 +211,12 @@ class PlaylistsController < ApplicationController
         @download.update_attributes(:playlist_id => @playlist.id)  
         @download.save
       end
-      if params[:downloads] == "18050"
+      if params[:currently_playing] == "true"
         @playlist = Playlist.new(:title => @title, :program => @program, :description => @description, :user_id => current_user.id)
         @playlist.save
         @playlist.reload
         @download = Download.new(:title => "1364776013", :playlist_id => @playlist.id)
         @download.save
-        @download.reload
       end
     end
     #The above asks if the user chose those "Currently Playing" token - in this case "2000-01-01 00:00:00"
