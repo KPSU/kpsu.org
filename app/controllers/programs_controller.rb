@@ -96,7 +96,7 @@ class ProgramsController < ApplicationController
       #second loop pulls downloads with no playlist_id but were created during the amnesty period
 
 
-      @downloads.delete_if {|d| d.id == 18051}
+      @downloads.delete_if {|d| d.title == "1364776013"}
       #if they've chosen the currently playing option, it creates a token download just to store the playlist_id.
       #when archive.rake runs at the top of the next hour, it looks for that token Download
       #this line just prevents it from showing up in the podcasts in the meantime
