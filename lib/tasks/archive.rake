@@ -58,9 +58,9 @@ namespace :archive do
             download.count = 0
             download.user = _e.program.user
             download.title = _t
-            if Download.find_by_title("2222222222")
-              download.playlist_id = Download.find_by_title("2222222222").playlist_id
-              @xxx = Download.find_by_title("2222222222")
+            if Download.find_by_title("1364776013")
+              download.playlist_id = Download.find_by_title("1364776013").playlist_id
+              @xxx = Download.find_by_title("1364776013")
               @xxx.delete
               @xxx.save
             end
