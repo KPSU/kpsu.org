@@ -44,7 +44,7 @@
 				Program	<%= select_tag "programs", options_from_collection_for_select(@programs, "id", "title", :selected => "#{ current_user.programs.first.id rescue nil }") %>
 				</div>
 				<div class="float-left blue-text chunk-five clear-both">
-				Download	<%= select_tag "downloads", options_from_collection_for_select(@downloads, "id", "created_at") %>
+				Download	<%= select_tag "downloads", options_from_collection_for_select(@downloads, "id", "created_at") %>       ...or currently playing? <%= check_box_tag 'currently_playing', true, false %>
 				</div>
 				<!--This is where the downloads drop-down discussed in _new.html.erb of this directory will go, just like however it'll look in the 'new' form.-->
 				<div class="float-left clear-both blue-text chunk-five" style="margin-top:5px;">
