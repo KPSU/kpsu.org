@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130227213807) do
+ActiveRecord::Schema.define(:version => 20130331221855) do
 
   create_table "abilities", :force => true do |t|
     t.integer  "role_id"
@@ -406,7 +406,6 @@ ActiveRecord::Schema.define(:version => 20130227213807) do
     t.datetime "updated_at"
     t.integer  "nid"
     t.integer  "user_id"
-    t.integer  "download_id"
   end
 
   add_index "playlists", ["id"], :name => "index_playlists_on_id"

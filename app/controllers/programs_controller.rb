@@ -71,12 +71,36 @@ class ProgramsController < ApplicationController
       #If a download doesn't have a playlist id, it won't show up (unless it's from before March 28th, 2013) - free pass
       
 
+      #@downloads = Array.new
+      #@program.downloads.each do |dl|
+      #  if dl.playlist_id or dl.created_at.to_i < 1364529283
+      #    @downloads.push dl
+      #  end
+      #end
+
       @downloads = Array.new
+      @program.playlists.each do |p|
+        unless p.download.nil?
+          p.download.each do |pd|
+            @downloads.push pd
+          end
+        end
+      end
       @program.downloads.each do |dl|
-        if dl.playlist_id or dl.created_at.to_i < 1364529283
+        if dl.playlist_id.nil? && dl.created_at.to_i < 1364767979 && dl.title
           @downloads.push dl
         end
       end
+
+      #first loop pulls downloads with a playlist_id
+      #second loop pulls downloads with no playlist_id but were created during the amnesty period
+
+
+      @downloads.delete_if {|d| d.title == "2222222222"}
+      #if they've chosen the currently playing option, it creates a token download just to store the playlist_id.
+      #when archive.rake runs at the top of the next hour, it looks for that token Download
+      #this line just prevents it from showing up in the podcasts in the meantime
+
 
       @downloads.sort! {|y,x| x.title.to_i <=> y.title.to_i }
 
