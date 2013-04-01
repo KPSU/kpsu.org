@@ -18,6 +18,16 @@
 			<div style="padding: 10px 0px 0px 10px;width: 634px;" class="<%= @program_color %> float-left large m1-regular clear-both">
 				<span class="bebas twenty-pt black-text">DJ</span>&nbsp;<%= link_to(@program.user.dj_name, user_path(@program.user), :class => "bebas twenty-pt white-text") %>
 			</div>
+			<div class="float-left" style="mtext-align:left !important;margin: 7px 0px 0px 0px;">
+				<% if current_user %>
+					<% if @program.user == current_user %>
+						<a class="red-text dejavu-condensed twelve-pt" href='/programs/<%= @program.id %>/destroy'>Delete</a>
+					<% elsif current_user.staff %>
+						<a class="red-text dejavu-condensed twelve-pt" href='/programs/<%= @program.id %>/destroy'>Delete</a>
+					<% else %>
+					<% end %>
+				<% end %>
+			</div>
 			<div class="dejavu-condensed clear-both normal float-left white-text" style="width:624px;padding:15px 10px 15px 10px;background-color:#343434;">
 				<%= raw @program.description %>
 			</div>
