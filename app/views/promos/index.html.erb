@@ -1,0 +1,92 @@
+<% content_for :title do %>Promo Manager<% end %>
+
+<%= render :partial => 'layouts/sidebar' %>
+
+<div class="promo-wrapper">
+
+  <div>
+    <%= link_to 'ADD A NEW PROMO/PSA', new_promo_path, :class => "red-text chunk-five twenty-four-pt", :title => "To change an item's title/category, click its name" %>
+  </div>
+  <br />
+  <br />
+
+  <div class="table-wrapper">
+    <table>
+      <tr>
+        <th class="blue-text chunk-five">Promos</th>
+        <th class="blue-text chunk-five">PSAs</th>
+        <th class="blue-text chunk-five">Timely PSAs</th>
+      </tr>
+      <tr>
+        <td>
+          <table style="margin-left:20px;">
+            <tr class="yellow-text chunk-five clear-both">
+              <th></th>
+              <th>Title</th>
+              <th>Count</th>
+              <th></th>
+            </tr>
+
+            <% @promopromos.each do |promo| %>
+            <tr>
+              <td><%= link_to "", promo.promomp3_url.to_s, :class => "download float-left", :title => "Click to listen" %></td>
+              <td><%= link_to promo.title, edit_promo_path(promo), :title => "Edit", :class => "green-text float-left" %></td>
+              <!--td class="yellow-text chunk-five"><%= promo.category %></td-->
+              <td class="orange-text chunk-five float-right"><%= promo.count %></td>
+              <!--Add link to listen here-->
+              <td><%= link_to 'Destroy', promo, :confirm => 'Are you sure?', :method => :delete, :class => "magenta-text", :style => "font-size:xx-small; vertical-align:top;" %></td>
+            </tr>
+            <% end %>
+          </table>
+        </td>
+        <td>
+          <table style="margin-left:40px;">
+            <tr class="yellow-text chunk-five clear-both">
+              <th></th>
+              <th>Title</th>
+              <th>Count</th>
+              <th></th>
+            </tr>
+
+            <% @psapromos.each do |promo| %>
+            <tr>
+              <td><%= link_to "", promo.promomp3_url.to_s, :class => "download float-left", :title => "Click to listen" %></td>
+              <td><%= link_to promo.title, edit_promo_path(promo), :title => "Edit", :class => "green-text float-left" %></td>
+              <!--td class="yellow-text chunk-five"><%= promo.category %></td-->
+              <td class="orange-text chunk-five float-right"><%= promo.count %></td>
+              <!--Add link to listen here-->
+              <td><%= link_to 'Destroy', promo, :confirm => 'Are you sure?', :method => :delete, :class => "magenta-text", :style => "font-size:xx-small; vertical-align:top;" %></td>
+            </tr>
+            <% end %>
+          </table>
+        </td>
+        <td>
+          <table style="margin-left:40px;">
+            <tr class="yellow-text chunk-five clear-both">
+              <th></th>
+              <th>Title</th>
+              <th>Count</th>
+              <th></th>
+              <th></th>
+              <th></th>
+            </tr>
+
+            <% @psatimelypromos.each do |promo| %>
+            <tr>
+              <td><%= link_to "", promo.promomp3_url.to_s, :class => "download float-left", :title => "Click to listen" %></td>
+              <td><%= link_to promo.title, edit_promo_path(promo), :title => "Edit", :class => "green-text float-left" %></td>
+              <!--td class="yellow-text chunk-five"><%= promo.category %></td-->
+              <td class="orange-text chunk-five float-right"><%= promo.count %></td>
+              <!--Add link to listen here-->
+              <td><%= link_to 'Destroy', promo, :confirm => 'Are you sure?', :method => :delete, :class => "magenta-text", :style => "font-size:xx-small; vertical-align:top;" %></td>
+            </tr>
+            <% end %>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <br />
+
+</div>
