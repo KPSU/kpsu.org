@@ -1,8 +1,8 @@
 class PromosController < ApplicationController
   layout 'alternative'
-  before_filter :require_user, :only => ['new', 'edit', 'destroy', 'update', 'create', 'index']
-  before_filter :no_listener, :only => ['new', 'edit', 'destroy', 'update', 'create', 'index']
-  before_filter :is_staff, :only => ['new', 'edit', 'destroy', 'update', 'create', 'index']
+  before_filter :require_user, :only => ['new', 'edit', 'destroy', 'update', 'create']
+  before_filter :no_listener, :only => ['new', 'edit', 'destroy', 'update', 'create']
+  before_filter :is_staff, :only => ['new', 'edit', 'destroy', 'update', 'create']
   before_filter :has_profile_filled_out
 
   # GET /promos
@@ -10,8 +10,11 @@ class PromosController < ApplicationController
   def index
     @promos = Promo.all
     @promopromos = Promo.where(:category => 1)
+    @promopromos.sort!{|x,y| x.title <=> y.title}
     @psapromos = Promo.where(:category => 2)
+    @psapromos.sort!{|x,y| x.title <=> y.title}
     @psatimelypromos = Promo.where(:category => 3)
+    @psatimelypromos.sort!{|x,y| x.title <=> y.title}
 
     respond_to do |format|
       format.html # index.html.erb

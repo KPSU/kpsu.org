@@ -78,6 +78,20 @@
 			<div class="float-left clear-both blue-text chunk-five" style="">
 			Description <br/><textarea name="playlist[description]" style="" class="dejavu-condensed twelve form"rows="3" cols="70"></textarea>
 			</div>
+			<table class="float-left blue-text chunk-five clear-both">
+			<tr>
+			<div id="promopromos"><td>Promo: </td><td><%=select_tag "promopromo", options_from_collection_for_select(@promopromos, "id", "title"), {:include_blank => true, :default => nil} %></td>
+			</div>
+			</tr>
+			<tr>
+			<div id="psapromos"><td>PSA: </td><td><%=select_tag "psapromo", options_from_collection_for_select(@psapromos, "id", "title"), {:include_blank => true, :default => nil} %></td>
+			</div>
+			</tr>
+			<tr>
+			<div id="psatimelypromos"><td>Timely PSA: </td><td><%=select_tag "psatimelypromo", options_from_collection_for_select(@psatimelypromos, "id", "title"), {:include_blank => true, :default => nil} %></td>
+			</div>
+			</tr>
+			</table>
 			</div>
 			<div class="float-left clear-both blue rounded-heavy-top black-text bebas" style="margin-top:10px;width: 649px;height: 30px;padding: 15px 0 0 15px;">
 							Current Tracks

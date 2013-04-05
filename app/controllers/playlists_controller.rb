@@ -133,6 +133,13 @@ class PlaylistsController < ApplicationController
     end
     @downloads = current_user.programs.first.downloads
     @downloads.sort! {|y,x| x.title.to_i <=> y.title.to_i}
+
+    @promopromos = Promo.where(:category => 1)
+    @promopromos.sort!{|x,y| x.title <=> y.title}
+    @psapromos = Promo.where(:category => 2)
+    @psapromos.sort!{|x,y| x.title <=> y.title}
+    @psatimelypromos = Promo.where(:category => 3)
+    @psatimelypromos.sort!{|x,y| x.title <=> y.title}
  
     respond_to do |format|
       format.js { render :partial => "new" }
@@ -208,22 +215,23 @@ class PlaylistsController < ApplicationController
       end
     end
 
-    #The above asks if the user chose those "Currently Playing" token - in this case "2000-01-01 00:00:00"
-    #If it does (i.e. if params[:downloads] = 18049) then it creates a Download called "Archive_rake Changes Me"
-    #archive.rake looks for a download called "Archive_rake Changes Me" each time it runs
-    #If it finds it, it just puts the playlist ID on the Download it makes anyway, and erases "Archive_rake Changes Me"
-    #Thus, that download is just a placeholder token for the playlist ID when the playlist is made in the middle of a show.
+    if params[:promopromo] != ""
+      @promopromo = Promo.find(params[:promopromo])
+      @promopromo.count += 1
+      @promopromo.save
+    end
 
+    if params[:psapromo] != ""
+      @psapromo = Promo.find(params[:psapromo])
+      @psapromo.count += 1
+      @psapromo.save
+    end
 
-
-
-    #here i am attempting to extract the variable (downloads) taken in from the form (on the view.)
-    #i belive an error may lie in the local variable @download taking the entire object instead of just the string
-    #then, below, when we initialize a playlist object below, it's taking a bad format for that attribute
-    #@playlist = Playlist.new(:title => @title, :program => @program, :description => @description, :user_id => current_user.id)
-   
-
-    
+    if params[:psatimelypromo] != ""
+      @psatimelypromo = Promo.find(params[:psatimelypromo])
+      @psatimelypromo.count += 1
+      @psatimelypromo.save
+    end
 
     @i = 0
     @tmp_tracks.each do |track|
