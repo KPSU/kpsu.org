@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130331221855) do
+ActiveRecord::Schema.define(:version => 20130405030610) do
 
   create_table "abilities", :force => true do |t|
     t.integer  "role_id"
@@ -451,6 +451,16 @@ ActiveRecord::Schema.define(:version => 20130331221855) do
   add_index "programs", ["genre_id"], :name => "index_programs_on_genre_id"
   add_index "programs", ["id"], :name => "index_programs_on_id"
   add_index "programs", ["user_id"], :name => "index_programs_on_user_id"
+
+  create_table "promos", :force => true do |t|
+    t.string   "title"
+    t.integer  "category"
+    t.integer  "count"
+    t.string   "url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "promomp3"
+  end
 
   create_table "reviews", :force => true do |t|
     t.string   "title"

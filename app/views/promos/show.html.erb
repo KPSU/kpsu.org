@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @promo.title %>
+</p>
+
+<p>
+  <b>Category:</b>
+  <%= @promo.category %>
+</p>
+
+<p>
+  <b>Count:</b>
+  <%= @promo.count %>
+</p>
+
+<p>
+  <b>Url:</b>
+  <%= @promo.url %>
+</p>
+
+<p>
+	<%= link_to 'Listen', @promo.promomp3_url.to_s %>
+</p>
+
+<%= link_to 'Edit', edit_promo_path(@promo) %> |
+<%= link_to 'Back', promos_path %>
