@@ -135,11 +135,17 @@ class PlaylistsController < ApplicationController
     @downloads.sort! {|y,x| x.title.to_i <=> y.title.to_i}
 
     @promopromos = Promo.where(:category => 1)
-    @promopromos.sort!{|x,y| x.title <=> y.title}
+    if @promopromos != nil
+      @promopromos.sort!{|x,y| x.title <=> y.title}
+    end
     @psapromos = Promo.where(:category => 2)
-    @psapromos.sort!{|x,y| x.title <=> y.title}
+    if @psapromos != nil
+      @psapromos.sort!{|x,y| x.title <=> y.title}
+    end
     @psatimelypromos = Promo.where(:category => 3)
-    @psatimelypromos.sort!{|x,y| x.title <=> y.title}
+    if @psatimelypromos != nil
+      @psatimelypromos.sort!{|x,y| x.title <=> y.title}
+    end
  
     respond_to do |format|
       format.js { render :partial => "new" }
