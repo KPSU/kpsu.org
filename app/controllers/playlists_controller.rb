@@ -131,27 +131,9 @@ class PlaylistsController < ApplicationController
         @programs << p
       end
     end
-    #@downloads = []
-    #@dsetup = Download.all
-    #@dsetup.each do |d|
-    #  if d.program_id == current_user.programs.first.id
-    #    @downloads << d
-    #  end
-    #end
-
-    #@downloads = Array.new
-    #current_user.programs.first.playlists.each do |pl|
-    #  @downloads.push pl.download
-    #end
-
     @downloads = current_user.programs.first.downloads
-
-
     @downloads.sort! {|y,x| x.title.to_i <=> y.title.to_i}
-    #@currently_playing_option = Download.find_by_title("1111111111") #currently playing; must be integer
-    #@downloads << @currently_playing_option
-
-
+ 
     respond_to do |format|
       format.js { render :partial => "new" }
       format.xml  { render :xml => @playlist }
@@ -167,26 +149,12 @@ class PlaylistsController < ApplicationController
         @programs << p
       end
     end
-    #@downloads = []
-    #@dsetup = Download.all
-    #@dsetup.each do |d|
-    #  if d.program_id == current_user.programs.first.id
-    #    @downloads << d
-    #  end
-    #end
-    #@downloads.sort! {|y,x| x.title.to_i <=> y.title.to_i}
     @downloads = current_user.programs.first.downloads
-
     @downloads.sort! {|y,x| x.title.to_i <=> y.title.to_i}
-    #@currently_playing_option = Download.find_by_title("1111111111")
-    #@downloads << @currently_playing_option
-
-
-    /above i am replicating the iteration right before it/
-    /error may lie in being careless here; someone double check/
     @playlist = Playlist.find(params[:id])
-    @this_download = Download.find(@playlist.download) rescue nil
+    #@this_download = Download.find(@playlist.download) rescue nil
     @pi = @playlist.playlist_items.sort! { |a,b| a.position <=> b.position }
+
     respond_to do |format|
       format.js { render :partial => "edit" }
       format.xml  { render :xml => @playlist }
@@ -201,24 +169,45 @@ class PlaylistsController < ApplicationController
     @description = params[:playlist][:description]
     @tmp_tracks = params[:tracks].split(",")
     @program = Program.find(params[:programs])
-    if params[:downloads]
-      #@download_id = Download.find(params[:downloads]).id
+
+    #If it's a one-hour show
+    if params[:download]
+      @playlist = Playlist.new(:title => @title, :program => @program, :description => @description, :user_id => current_user.id)
+      @playlist.save
+      @playlist.reload
       unless params[:curently_playing] == "true"
-        @playlist = Playlist.new(:title => @title, :program => @program, :description => @description, :user_id => current_user.id)
-        @playlist.save
-        @playlist.reload
-        @download = Download.find(params[:downloads])
+        @download = Download.find(params[:download])
         @download.update_attributes(:playlist_id => @playlist.id)  
         @download.save
       end
       if params[:currently_playing] == "true"
-        @playlist = Playlist.new(:title => @title, :program => @program, :description => @description, :user_id => current_user.id)
-        @playlist.save
-        @playlist.reload
         @download = Download.new(:title => "1364776013", :playlist_id => @playlist.id)
         @download.save
       end
     end
+
+    #If it's a two-hour show
+    if params[:first_download]
+      @playlist = Playlist.new(:title => @title, :program => @program, :description => @description, :user_id => current_user.id)
+      @playlist.save
+      @playlist.reload
+      unless params[:currently_playing] == "true"
+        @download = Download.find(params[:first_download])
+        @download.update_attributes(:playlist_id => @playlist.id)  
+        @download.save
+        @download = Download.find(params[:second_download])
+        @download.update_attributes(:playlist_id => @playlist.id)
+        @download.save
+      end
+      if params[:currently_playing] == "true"
+        @download = Download.find(params[:first_download])
+        @download.update_attributes(:playlist_id => @playlist.id)
+        @download.save
+        @download = Download.new(:title => "1364776013", :playlist_id => @playlist.id)
+        @download.save
+      end
+    end
+
     #The above asks if the user chose those "Currently Playing" token - in this case "2000-01-01 00:00:00"
     #If it does (i.e. if params[:downloads] = 18049) then it creates a Download called "Archive_rake Changes Me"
     #archive.rake looks for a download called "Archive_rake Changes Me" each time it runs
@@ -261,7 +250,16 @@ class PlaylistsController < ApplicationController
       @download = Download.find(params[:downloads])
       @download.update_attributes(:playlist_id => @playlist.id)
       @download.save
-      @download.reload
+    end
+    if params[:first_download]
+      @download = Download.find(params[:first_download])
+      @download.update_attributes(:playlist_id => @playlist.id)
+      @download.save
+    end
+    if params[:second_download]
+      @download = Download.find(params[:second_download])
+      @download.update_attributes(:playlist_id => @playlist.id)
+      @download.save
     end
     @tmp_tracks = params[:tracks].split(",")
     @playlist.playlist_items.each do |pi|
@@ -277,7 +275,8 @@ class PlaylistsController < ApplicationController
       @pi.position = @ii
       @pi.save
     end
-    
+    @title = params[:playlist][:title]
+    @playlist.update_attributes(:title => params[:playlist][:title])
 
     
     respond_to do |format|

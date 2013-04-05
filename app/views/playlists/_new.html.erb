@@ -36,6 +36,22 @@
 	}
 </style>
 
+
+
+
+<script type="text/javascript" charset="utf-8">
+	function toggle_fields(x) {  
+		if (document.getElementById(x).style.display == "block")
+			document.getElementById(x).style.display = "none";
+		else
+			document.getElementById(x).style.display = "block";
+	}
+	function playlist_explain(){
+		alert('If you are making this playlist live (on-air), you must make it in the second hour of your show.\n\nMake sure the first podcast selected is that of your first hour.\n\nAs with one-hour shows, if you select "Currently Playing", your second podcast choice does not matter.');
+	}
+</script>
+
+
 <div class="float-left clear-both" style="width: 664px;">
 	<div id="new-playlist-wrapper" style="margin-bottom:30px;">
 		<form accept-charset="UTF-8" action="/playlists" class="new_playlist" data-remote="true" id="new_playlist" method="post"> 
@@ -43,12 +59,18 @@
 			<div class="float-left blue-text chunk-five clear-both">
 			Program	<%= select_tag "programs", options_from_collection_for_select(@programs, "id", "title", :selected => "#{ current_user.programs.first.id rescue nil }") %>
 			</div>
-			<div class="float-left blue-text chunk-five clear-both">
-				Download	<%= select_tag "downloads", options_from_collection_for_select(@downloads, "id", "created_at") %>       ...or currently playing? <%= check_box_tag 'currently_playing', true, false %>
+			<div id="downloads" class="float-left blue-text chunk-five clear-both" style="display:block;">
+				Download	<%= select_tag "first_download", options_from_collection_for_select(@downloads, "id", "created_at") %>       ...or currently playing? <%= check_box_tag 'currently_playing', true, false %>
 			</div>
-			<!--div class="float-right blue-text chunk-five clear-both"> Currently playing? <%= check_box_tag @currently_playing, "yes", "no" %>
-			</div-->
-			<!--So above will create a drop-down populated by the array 'downloads' created in the controller (in playlistscontroller#new; there should be matching code in the _edit.html.erb file for this view that matches like the above two with playlistscontroller#edit.  I'm not 100% sure here what data the object I'm extracting has.  Is it just an object with accessible members 'id' and 'created at'?  No, that would be too easy.  Maybe it is an object that matches up perfectly and all of the data from the download entry in the database is available in this download object in the controller?  Does it even work like that, with forms passing directly to controllers?  I gotta read up on this.-->
+			<div id="first_dl_menu" class="float-left blue-text chunk-five clear-both" style="display:none;">1st Podcast	<%= select_tag "first_download", options_from_collection_for_select(@downloads, "id", "created_at") %>   </div>
+			<div id="second_dl_menu" class="float-left blue-text chunk-five clear-both" style="display:none;">2nd Podcast	<%= select_tag "second_download", options_from_collection_for_select(@downloads, "id", "created_at") %>       ...or currently playing? <%= check_box_tag "currently_playing", true, false %></div>
+			<div id="clickSecond" class="float-left yellow-text chunk-five clear-both" style="display:block;">
+				<%= link_to_function "My show is two hours", "toggle_fields('second_dl_menu');toggle_fields('first_dl_menu');toggle_fields('downloads');toggle_fields('clickSecond');toggle_fields('clickFirst');playlist_explain()", :style => "color:yellow;" %>
+			</div>
+			<div id="clickFirst" class="float-left chunk-five clear-both" style="display:none;">
+				<%= link_to_function "My show is one hour", "toggle_fields('second_dl_menu');toggle_fields('first_dl_menu');toggle_fields('downloads');toggle_fields('clickSecond');toggle_fields('clickFirst')", :style => "color:yellow;" %>
+			</div>
+
 			<div class="float-left clear-both blue-text chunk-five" style="margin-top:5px;">
 			Title <input class="rounded-heavy form" id="playlist_title" name="playlist[title]" size="30" type="text" value="">
 			Do not start with # and no special characters.
@@ -144,6 +166,8 @@
 		</div>
 	</div>
 </div>
+
+
 <script type="text/javascript" charset="utf-8">
 	function resetPlaylistLive(){
 		$(".track").die();
