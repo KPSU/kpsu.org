@@ -15,6 +15,10 @@
 class StaticController < ApplicationController
   layout 'alternative'
   def show
-    render params[:page]
+    if params[:page] == "calendar" || params[:page] == "radiorevival"
+      render params[:page]
+    else
+      raise ActionController::RoutingError.new('Not Found') 
+    end
   end
 end
