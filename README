@@ -4,7 +4,7 @@ The configuration files have been left out of this code until we can securely po
 
 You will also need to install the following sudo cronjob to automatically populate new downloads:
 
-5 * * * * /bin/bash -l -c 'cd /Users/michael/kpsu.org && RAILS_ENV=production bundle exec rake archive:update --silent'
+5 * * * * /bin/bash -l -c 'cd /path/to/kpsu.org && RAILS_ENV=production bundle exec rake archive:update --silent'
 
 
 Enjoy!
