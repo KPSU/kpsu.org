@@ -13,7 +13,7 @@
   #http://stackoverflow.com/questions/5911794/adding-a-new-page-in-ruby-on-rails
 
 class StaticController < ApplicationController
-  layout 'alternative'
+  #layout 'alternative'
   def show
     if params[:page] == "calendar" || params[:page] == "radiorevival"
       render params[:page]
