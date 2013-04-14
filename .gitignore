@@ -10,4 +10,4 @@ npm-debug.log
 public/javascripts/three.min.js
 public/stream/
 public/uploads/
-vendor/cache/carrierwave-0.5.8.gem
+vendor/cache
