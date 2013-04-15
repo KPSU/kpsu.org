@@ -45,7 +45,7 @@ input[type='password']:focus,input[type='text']:focus,textarea:focus{border:1px 
 #kpsu-kruise-video{float:left;width:968px;height:752px;margin-left:38px;margin-right:38px;}
 #kruise-header{float:left;width:968px;height:227px;background-color:#f7ff20;}
 #kruise-space{float:left;height:10px;}
-#post-wrapper{width:661px;height:auto;float:left;margin-left:16px;margin-top:40px;}
+#post-wrapper{width:661px;height:auto;float:left;margin-left:16px;margin-top:20px;}
 .post{float:left;}
 .post .header{width:661px;height:48px;}
 .header .post-type{font-size:48pt;float:right;clear:both;font-family:"BebasRegular";margin-bottom:-10px;}
