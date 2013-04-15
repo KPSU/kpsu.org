@@ -2,11 +2,28 @@ class TwitterController < ApplicationController
   before_filter :require_user, :except => [:callback, :kpsu_recent_tweets] 
   before_filter :no_listener, :except => [:callback, :kpsu_recent_tweets, :tweet]
   respond_to :json, :js, :html
+
+  def kpsu_twitter_token
+    Rails.application.config.kpsu_twitter_token
+  end
+  
+  def kpsu_twitter_secret
+    Rails.application.config.kpsu_twitter_secret
+  end
+  
+  def twitter_consumer_secret
+    Rails.application.config.twitter_consumer_secret
+  end
+  
+  def twitter_consumer_key
+    Rails.application.config.twitter_consumer_key
+  end
+
   def index    
     if current_user.access_tokens.count >= 1
     @timeline = TwitterOAuth::Client.new(
-        :consumer_key => 'GRpxk6zjTKk3o7wTuXiSw',
-        :consumer_secret => 'q2yX19uuy2izSHKKcunNEMjk1BCGjnEeRg0JCCMF18',
+        :consumer_key => twitter_consumer_key,
+        :consumer_secret => twitter_consumer_secret,
         :token => current_user.access_tokens.first.token, 
         :secret => current_user.access_tokens.first.secret
     ).home_timeline
@@ -19,7 +36,9 @@ class TwitterController < ApplicationController
   end
   
   def kpsu_recent_tweets
-      @timeline = twitter.search('#kpsu')
+      @timeline = twitter.search('#kpsu OR #radrev')
+      #@radiorevival = twitter.search('#radrev')
+      #@radiorevival = @radiorevival.to_json
       @timeline = @timeline.to_json
       respond_with(@timeline)
   end
@@ -52,8 +71,8 @@ class TwitterController < ApplicationController
     if access_token
       if current_user
         client = TwitterOAuth::Client.new(
-            :consumer_key => 'GRpxk6zjTKk3o7wTuXiSw',
-            :consumer_secret => 'q2yX19uuy2izSHKKcunNEMjk1BCGjnEeRg0JCCMF18',
+            :consumer_key => twitter_consumer_key,
+            :consumer_secret => twitter_consumer_secret,
             :token => access_token.token, 
             :secret => access_token.secret
         )

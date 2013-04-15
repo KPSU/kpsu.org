@@ -13,9 +13,9 @@
   #http://stackoverflow.com/questions/5911794/adding-a-new-page-in-ruby-on-rails
 
 class StaticController < ApplicationController
-  #layout 'alternative'
+  layout 'alternative'
   def show
-    if params[:page] == "calendar" || params[:page] == "radiorevival"
+    if params[:page] == "calendar"
       render params[:page]
     else
       raise ActionController::RoutingError.new('Not Found') 

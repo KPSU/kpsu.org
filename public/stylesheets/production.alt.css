@@ -191,12 +191,13 @@ input[type='password']:focus, input[type='text']:focus, textarea:focus {
 	margin-left: 91px;
 }
 
-#rotator {
+/*#rotator {
 	float:left;
 	background-color:#171717;
 	margin-top:60.3px;
 	margin-left:16px;
-}
+}*/
+/*This corresponds to the rotating feature box in the layout/application.html.erb*/
 
 #twitter-feed {
 	float: right;
@@ -205,6 +206,7 @@ input[type='password']:focus, input[type='text']:focus, textarea:focus {
 	background-image: url('/images/v3/twitter-background.png');
 	margin-top:60px;
 	margin-left: 0px;
+	overflow: hidden;
 }
 
 #tweets {
@@ -220,7 +222,7 @@ input[type='password']:focus, input[type='text']:focus, textarea:focus {
 	height:auto;
 	float:left;
 	margin-left: 16px;
-	margin-top: 40px;
+	margin-top: 20px;
 	
 }
 
@@ -1407,6 +1409,7 @@ a.orphans:hover {
 .hand-written {
 	font-family:"HandWritten";
 }
+
 
 @font-face {
 	font-family: 'BebasRegular';

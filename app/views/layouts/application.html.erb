@@ -33,24 +33,10 @@
 
 
 
-
-
-<!--Rotating blocks - experimental -->
-
-<!--script src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js'></script-->
-
-<!-- 
-	Thought of using jQuery UI's .addClass transitions as fallback (or primary) but doesn't work as well
-	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script> 
--->
-
-
 </head>
 <body>
 	<div id="content-wrapper">
-		<!--div>
-			<img src="images/v3/radiorevival.png" style="display:block;margin-left: auto;margin-right: auto;"></img>
-		</div-->	
+
 
 		<div>
 			<a href="/radiorevival"><img src="images/v3/radiorevival_small.png" style="float:left;margin-top:35px;margin-left:20px;" /></a>
@@ -125,32 +111,6 @@
 			<%= yield(:page_headline) %>
 		</div>
 
-		
-		
-
-		<div id="rotator" style="float:left;margin-left:-90px;">
-		
-			<div id="block-1" class="active" style="padding:0px;">
-				<span id="block1switch" onclick="Block1ToVideo();Block2ToImage();Block3ToImage()">
-				<div style="margin-left:10px;padding:0px;height:20px;font-size:1.8em" class="bebas post-type">GET  INVOLVED  AT  KPSU</div><div style="padding:20px;"><iframe width="310" height="247" src="http://www.youtube.com/embed/xIaLhxJj6Ak" frameborder="0" allowfullscreen mozallowfullscreen></iframe></div>
-				</span>
-			</div>
-			
-			<div id="block-2" class="non-active-top">
-				<span id="block2switch" onclick="Block1ToImage();Block2ToContent();Block3ToImage()">
-				<div>
-					<img src="images/v3/megan.jpg" style="width:297px;height:144px;">
-				</div>
-				</span>			
-			</div>
-			
-			<div id="block-3" class="non-active-bottom">
-				<span id="block3switch" onclick="Block1ToImage();Block2ToImage();Block3ToContent()">
-				<div style="background-color:#171717;"><img src="images/v3/kpsu_kruise.png" style="width:297px;height:144px;" /></div>
-				</span>			
-			</div>
-		
-		</div>
 
 
 		<div id="sidebar" class="container float-right">
@@ -234,7 +194,7 @@
 		<%= yield %>
 
 
-		<div id="twitter-feed" class="hand-written">
+		<div id="twitter-feed" class="twitter-font">
 			<div id="tweets">
 				
 			</div>
@@ -280,59 +240,7 @@
 
 	<script type="text/javascript" charset="utf-8">
 
-		$(function() {
-			
-				var current;
-						
-				function rotate() {
-				
-					// This seems like a sucky way to do it, but you can't select by classes because they execute in order
-								
-					if (current == 1) {
-						$("#block-1").removeClass().addClass("active");
-						$("#block-2").removeClass().addClass("non-active-top");
-						$("#block-3").removeClass().addClass("non-active-bottom");
-					} else if (current == 2) {
-						$("#block-1").removeClass().addClass("non-active-bottom");
-						$("#block-2").removeClass().addClass("active");
-						$("#block-3").removeClass().addClass("non-active-top");
-					} else {
-						$("#block-1").removeClass().addClass("non-active-top");
-						$("#block-2").removeClass().addClass("non-active-bottom");
-						$("#block-3").removeClass().addClass("active");
-					}
-				
-				}
-				
-				$("#rotator div").click(function() {
-				
-					// Enables reversing, idea via Andrea Canton: https://twitter.com/andreacanton/status/24954634279849985
-					current = this.id.substr(6);			
-					rotate();
-				
-				});
 		
-			});
-
-			function Block1ToVideo(){
-				document.getElementById('block1switch').innerHTML='<div style="margin-left:10px;padding:0px;height:20px;font-size:1.8em" class="bebas post-type">GET  INVOLVED  AT  KPSU</div><div style="padding:20px;"><iframe width="310" height="247" src="http://www.youtube.com/embed/xIaLhxJj6Ak" frameborder="0" allowfullscreen mozallowfullscreen></iframe></div>';
-			}
-			function Block1ToImage(){
-				document.getElementById('block1switch').innerHTML='<div><img src="images/v3/recruit.png" style="width:297px;height:144px;"></div>';
-			}
-			function Block2ToImage(){
-				document.getElementById('block2switch').innerHTML='<div><img src="images/v3/megan.jpg" style="width:297px;height:144px;"></div>';
-			}
-			function Block2ToContent(){
-				document.getElementById('block2switch').innerHTML='<div style="margin-left:10px;padding:0px;height:20px;font-size:1.3em" class="bebas post-type"><a href="programs/haircut_meganomics" style="color:black;">HAIRCUT MEGANOMICS - TUES @ 4PM</a></div><div style="padding:10px;text-align:center;width:310px;margin-left:auto;margin-right:auto;margin-top:50px;"><table style="width:100%;background-color:#434343;text-align:center;"><tr><th class="blue-text" style="text-align:center;height: 30px;vertical-align: middle;width:204px">DATE</th><th class="blue-text" style="text-align:center;height: 30px;vertical-align: middle;width:200px">DOWNLOADS</th></tr><% @time = (Time.zone.now-12.weeks) %><%@downloads = Program.find_by_title("Haircut Meganomics").downloads.sort!{|x,y|x.title.to_i <=> y.title.to_i}[-9..-1] %><%@downloads.each do |d| %><tr><td style="width:204px" class="rounded-light"><%= link_to(Time.at(d.title.to_i).to_s(:simple), download_path(:id => d.id), :class => "#{random_text_color}", :title => "Download #{Program.find_by_title("Haircut Meganomics").user.dj_name}s Podcast for the week of #{Time.at(d.title.to_i).to_s(:simple)}") %></td><td style="width:204px" class="white-text rounded-light"><%= d.count %></td></tr><% end %></table></div>';
-			}
-
-			function Block3ToImage(){
-				document.getElementById('block3switch').innerHTML='<div><img src="images/v3/kpsu_kruise.png" style="width:297px;height:144px;"></div>';
-			}
-			function Block3ToContent(){
-				document.getElementById('block3switch').innerHTML='<div style="margin-left:10px;padding:0px;height:20px;font-size:1.3em" class="bebas post-type">2012 KPSU KRUISE</div><div style="padding:10px;"><iframe width="325" height="257" src="http://www.youtube.com/embed/HqPsUApbb_U" frameborder="0" allowfullscreen mozallowfullscreen></iframe></div>';
-			}
 
 		$(document).ready(function(){
 		
@@ -409,8 +317,8 @@
 		});
 		var loadTwitter = function(json){
 			$.each(json.results, function(i, tweet){
-				if ( i <= 3 ) {
-				$("#tweets").append("<div class=\"hand-written\" style=\"clear:both;width:290px;margin:5px auto 10px auto;line-height:1em;\"><div style=\"word-wrap: break-word;padding:3px;height:auto;font-size:14pt;\">"+tweet['text']+"</div><div style=\"text-align:right;margin-top:5px;\">from <em>"+tweet['from_user']+"</em></div></div>");
+				if ( i <= 2 ) {
+				$("#tweets").append("<div class=\"dejavu-book\" style=\"clear:both;width:290px;margin:5px auto 10px auto;line-height:1em;\"><div style=\"word-wrap: break-word;padding:3px;height:auto;font-size:10pt;\">"+tweet['text']+"</div><div style=\"text-align:right;margin-top:5px;\">from <em>"+tweet['from_user']+"</em></div></div>");
 				}
 				
 			});
