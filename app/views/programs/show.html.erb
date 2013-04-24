@@ -82,9 +82,11 @@
 						<div class="bebas twenty-pt <%= @download_color %> white-text" style="width: 634px;height: 30px;padding: 10px 0 0 10px;">
 							<%= @program.title %> Podcasts
 						</div>
-						<table style="width:100%;background-color:#434343;text-align:center;">
+						<table style="width:100%;background-color:#434343;text-align:center">
 							<tr>
-								<th class="blue-text" style="text-align:center;height: 30px;vertical-align: middle;width:204px">DATE</th>
+								<th class="blue-text" style="text-align:center;height: 30px;vertical-align: middle;width:1px;padding-left:100px">DATE</th>
+								<th style="width:16px;margin-left:-100px;"></th>
+								<th style="width:16px;"></th>
 								<th class="blue-text" style="text-align:center;height: 30px;vertical-align: middle;width:200px">DOWNLOADS</th>
 							</tr>
 							<% @time = (Time.zone.now-12.weeks) #set how far back to look for downloads, current max is 90 days and run from a cronjob on the archive server %>
@@ -92,7 +94,9 @@
 							<!--Changed the above to below, in conjunction with changes made in this controller.-->
 							<%@downloads.each do |d| %>
 							<tr>
-								<td style="width:204px" class="rounded-light"><%= link_to(Time.at(d.title.to_i).to_s(:simple), download_path(:id => d.id), :class => "#{random_text_color}", :title => "Download #{@program.user.dj_name}'s Podcast for the week of #{Time.at(d.title.to_i).to_s(:simple)}") %></td>
+								<td style="width:1px;padding-left:100px;" class="rounded-light"><%= link_to(Time.at(d.title.to_i).to_s(:simple), hear_path(:id => d.id), :class => "#{random_text_color}", :title => "Download #{@program.user.dj_name}'s Podcast for the week of #{Time.at(d.title.to_i).to_s(:simple)}") %></td>
+								<td><a href="<%= url_for(hear_path(:id => d.id)) %>" style="height:auto;margin-left:-100px;" title="Listen"><div class="hear" style="display:none;"></div></a></td>
+								<td><a href="<%= d.url %>" download="<%=d.program.title%>_<%=d.id%>.mp3" style="height:auto;" title="Download"><div class="download-link" style="display:none;"></div></a></td>
 								<td style="width:204px" class="white-text rounded-light"><%= d.count %></td>
 							</tr>
 							<% end %>
@@ -168,13 +172,11 @@
 		</div>
 		<% @downloads.each do |d| %>
 		<% if Time.zone.now - Time.at(d.title.to_i) <= 7.weeks %>
-			<!--% unless d.playlist.nil? %-->
-				<div class="micro-row">
-					<a href="<%= url_for(download_path(:id => d.id)) %>" title="Click to Download <%= d.title %>"><div class="download float-left">&nbsp;</div></a>
-					<div style="padding-top:6px;padding-left:3px;" class="float-left medium wide-col"><%= link_to(Time.zone.at(d.title.to_i).strftime("%B %e\, %Y"), download_path(:id => d.id), :class => "red-font", :title => "Original Air Time: #{Time.at(d.title.to_i)}") %></div>
-					<div style="padding-top:6px;" class="float-left medium narrower-col"><%= d.count %></div>
-				</div>
-			<!--% end %-->
+			<div class="micro-row">
+				<a href="<%= url_for(download_path(:id => d.id)) %>" title="Click to Download <%= d.title %>"><div class="download float-left">&nbsp;</div></a>
+				<div style="padding-top:6px;padding-left:3px;" class="float-left medium wide-col"><%= link_to(Time.zone.at(d.title.to_i).strftime("%B %e\, %Y"), download_path(:id => d.id), :class => "red-font", :title => "Original Air Time: #{Time.at(d.title.to_i)}") %></div>
+				<div style="padding-top:6px;" class="float-left medium narrower-col"><%= d.count %></div>
+			</div>
 		<% end %>
 		<% end %>
 	</div>
@@ -314,6 +316,17 @@
 	
 	
 <% end %>
+
+<script type="text/javascript">
+	if('download' in document.createElement('a')){
+		var elems = document.getElementsByClassName('download-link');
+		var elems2 = document.getElementsByClassName('hear');
+		for (var i in elems){
+			elems[i].style.display = "block";
+			elems2[i].style.display = "block";
+		}
+	}
+</script>
 
 <script type="text/javascript" charset="utf-8">
 	ZeroClipboard.setMoviePath( '/files/ZeroClipboard10.swf' );

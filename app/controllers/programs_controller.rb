@@ -26,7 +26,7 @@ class ProgramsController < ApplicationController
     end
   end
   
-  def download
+  def hear
     @download = Download.find(params[:id])
     if @download.count == nil
       @download.count = 0
@@ -36,6 +36,9 @@ class ProgramsController < ApplicationController
     end
     @download.save
     redirect_to("#{@download.url}")
+  end
+
+  def download
   end
   
   # GET /programs/1
