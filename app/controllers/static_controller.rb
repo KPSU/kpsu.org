@@ -21,4 +21,8 @@ class StaticController < ApplicationController
       raise ActionController::RoutingError.new('Not Found') 
     end
   end
+
+  def kruise
+    redirect_to "http://www.portlandspirit.com"
+  end
 end
