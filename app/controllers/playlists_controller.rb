@@ -131,7 +131,13 @@ class PlaylistsController < ApplicationController
         @programs << p
       end
     end
-    @downloads = current_user.programs.first.downloads
+    @downloads = []
+    current_user.programs.each do |program|
+      program.downloads.each do |dl|
+        @downloads << dl
+      end
+    end
+    #@downloads = current_user.programs.first.downloads
     @downloads.sort! {|y,x| x.title.to_i <=> y.title.to_i}
 
     @promopromos = Promo.where(:category => 1)
