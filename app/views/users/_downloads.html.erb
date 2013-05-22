@@ -54,7 +54,7 @@
 	<span class="normal m1-regular">Which show would you like to add this download to?</span>
 	<br/><br/>
 	<% @user.programs.each do |p| %>
-		<%= link_to(p.title, url_for(own_download_path(:program_id => p.id)), :remote => true, :method => "put", :class => "magneta-text orphans transition-0-25")%><br/>
+		<%= link_to(p.title, url_for(own_download_path(:program_id => p.id, :id => p.id)), :remote => true, :method => "put", :class => "magneta-text orphans transition-0-25")%><br/>
 	<% end %>
 	</div>
 	<div class="success" style="display:none;">
