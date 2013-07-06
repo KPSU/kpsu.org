@@ -309,9 +309,9 @@
 			$("#hidden-player").jPlayer("volume", vol);
 		});
 		var loadTwitter = function(json){
-			$.each(json.results, function(i, tweet){
+			$.each(json.statuses, function(i, tweet){
 				if ( i <= 2 ) {
-				$("#tweets").append("<div class=\"dejavu-book\" style=\"clear:both;width:290px;margin:5px auto 10px auto;line-height:1em;\"><div style=\"word-wrap: break-word;padding:3px;height:auto;font-size:10pt;\">"+tweet['text']+"</div><div style=\"text-align:right;margin-top:5px;\">from <em>"+tweet['from_user']+"</em></div></div>");
+				$("#tweets").append("<div class=\"dejavu-book\" style=\"clear:both;width:290px;margin:5px auto 10px auto;line-height:1em;\"><div style=\"word-wrap: break-word;padding:3px;height:auto;font-size:10pt;\">"+tweet['text']+"</div><div style=\"text-align:right;margin-top:5px;\">from <em>"+tweet.user['name']+"</em></div></div>");
 				}
 				
 			});
