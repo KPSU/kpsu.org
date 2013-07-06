@@ -4,7 +4,6 @@ tmp/
 config/
 public/system/files/avatars/
 .gitignore
-app/uploaders/
 lib/tasks/archive.rake
 npm-debug.log
 public/javascripts/three.min.js
