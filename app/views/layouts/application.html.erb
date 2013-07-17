@@ -59,7 +59,7 @@
 		<div id="mini-banner" style="margin-left:200px;"> 
 			<img src="/images/v3/mini-banner.png" usemap="#mini-bannermap" style="position: absolute;clip: rect(0px 619px 301px 196px);">
 			<map id="mini-bannermap" name="mini-bannermap"><area shape="poly" alt="Download Podcasts from our program archive" title="" coords="362,237,365,253,488,222,471,206,423,220" href="/archives" target="" /><area shape="poly" alt="Our live streaming schedule" title="" coords="494,213,492,223,582,194,575,179" href="/schedule" target="" /><area shape="poly" alt="View KPSU's DJs" title="" coords="418,270,488,252,485,235,406,247" href="/djs" target="" /><area shape="poly" alt="Our Artist Database" title="" coords="409,279,499,261,493,282,409,294,408,286" href="/artists" target="" /><area shape="poly" alt="Listen to KPSU!" title="" coords="499,237,587,209,587,231,497,249" href="/listen" target="" /><area shape="poly" alt="Check out the latest music and event reviews!" title="" coords="502,260,511,271,591,262,586,239" href="/reviews" target="" /><area shape="poly" alt="KPSU Home Page" title="" coords="323,185,333,235,613,167,592,114" href="/" target="" /><!-- Created by Online Image Map Editor (http://www.maschek.hu/imagemap/index) --></map>
-			<div id="on-air-offset">
+			<div id="on-air-offset" style="position: absolute"> <!-- changed from no style to position absolute -->
 			<% cache('alternative_who_is_playing') do %>
 			<div id="on-air-program" class="m1-light yellow-text">
 				<% unless currently_playing.class == String %>
