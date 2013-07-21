@@ -2,11 +2,10 @@ log/
 *.DS_Store
 tmp/
 config/
-public/system/files/avatars/
-.gitignore
+public/system/
 lib/tasks/archive.rake
 npm-debug.log
 public/javascripts/three.min.js
 public/stream/
 public/uploads/
-vendor/cache
+vendor/cache/

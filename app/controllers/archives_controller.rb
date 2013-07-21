@@ -14,7 +14,6 @@ class ArchivesController < ApplicationController
     response = http.request(request)
     feed = Crack::XML.parse(response.body)
     @archive = JSON.parse("#{feed.to_json}")
-    binding.pry
     respond_to do |format|
       format.json { render :partial => "archives/list.json.erb" }
     end
