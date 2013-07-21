@@ -8,12 +8,13 @@ class ArchivesController < ApplicationController
   end
   
   def list
-    uri = URI.parse("http://archive.kpsu.org/rss.xml")
+    uri = URI.parse("http://bugs.kpsu.org/rss.xml")
     http = Net::HTTP.new(uri.host, uri.port)
     request = Net::HTTP::Get.new(uri.request_uri)
     response = http.request(request)
     feed = Crack::XML.parse(response.body)
-    @archive = JSON.parse("feed.to_json}")
+    @archive = JSON.parse("#{feed.to_json}")
+    binding.pry
     respond_to do |format|
       format.json { render :partial => "archives/list.json.erb" }
     end

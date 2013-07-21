@@ -36,7 +36,7 @@ class TwitterController < ApplicationController
   end
   
   def kpsu_recent_tweets
-      @timeline = twitter.search('#kpsu OR #radrev')
+      @timeline = twitter.search('#kpsu')
       #@radiorevival = twitter.search('#radrev')
       #@radiorevival = @radiorevival.to_json
       @timeline = @timeline.to_json

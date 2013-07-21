@@ -1,21 +1,20 @@
 {"shows":[
 	<% @i = 0 %>
-	<% @archive.each do |archive| %>
-		<% if @i < @archive.size %>
+	<% @archive["rss"]["channel"]["item"].each do |item| %>
+		<% if @i < @archive["rss"]["channel"]["item"].size %>
 		<% @i = @i + 1%>
+		<% show = Download.find_by_url(item["link"]) || Download.last %>
 		
-		{"id":"<%= archive.id %>",
-		 "title":"<%= page.title %>",
-		 "name":"<%= page.name %>",
-		 "body":"<%= escape_javascript(page.body) %>",
-		 "post_type":"<%= page.post_type %>"
+		{"id":"<%= show.id %>",
+		 "title":"<%= show.title %>",
+		 "name":"<%= show.program.title if show.program_id != 0 && show.program.valid? %>",
+		 "body":"<%= show.program.description if show.program_id != 0 && show.program.valid? %>"
 		},
 		<% else %>
-		{"id":"<%= page.id %>",
-		 "title":"<%= page.title %>",
-		 "name":"<%= page.name %>",
-		 "body":"<%= escape_javascript(page.body) %>",
-		 "post_type":"<%= page.post_type %>"
+		{"id":"<%= show.id %>",
+		 "title":"<%= show.title %>",
+		 "name":"<%= show.program.title if show.program_id != 0 && show.program.valid? %>",
+		 "body":"<%= show.program.description if show.program_id != 0 && show.program.valid? %>"
 		}
 		<% end %>
 	<% end %>
