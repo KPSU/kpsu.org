@@ -96,7 +96,7 @@
 							<tr>
 								<td style="width:1px;padding-left:100px;" class="rounded-light"><%= link_to(Time.at(d.title.to_i).to_s(:simple), hear_path(:id => d.id), :class => "#{random_text_color}", :title => "Download #{@program.user.dj_name}'s Podcast for the week of #{Time.at(d.title.to_i).to_s(:simple)}") %></td>
 								<td><a href="<%= url_for(hear_path(:id => d.id)) %>" style="height:auto;margin-left:-100px;" title="Listen"><div class="hear" style="display:none;height:18px"></div></a></td>
-								<td><a href="<%= d.url %>" download="<%=d.program.title%>_<%=d.id%>.mp3" style="height:auto;" title="Download"><div class="download-link" style="display:none;height:18px;"></div></a></td>
+								<td><a href="<%= d.url %>" download="<%=d.program.title unless d.program.nil?%>_<%=d.id%>.mp3" style="height:auto;" title="Download"><div class="download-link" style="display:none;height:18px;"></div></a></td>
 								<td style="width:204px" class="white-text rounded-light"><%= d.count %></td>
 							</tr>
 							<% end %>

@@ -277,6 +277,7 @@ class ProgramsController < ApplicationController
       @event = @program.event
       @event.destroy
     end
+    @program.downloads.each {|d| d.delete; d.save}
     @program.destroy
     
     respond_to do |format|
