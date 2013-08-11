@@ -41,7 +41,17 @@
 		   		<% @playlists.each do |p| %>
 					<% @playlist_color = random_color %>
 		   			<div style="background-color:#343434;margin-bottom:20px;" class="float-left clear-both">
-		   				<div class="dejavu-condensed twenty-pt <%= @playlist_color %>" style="width: 634px;height: 30px;padding: 10px 0 0 10px;"><%= link_to(p.title.upcase, p, :class => "bebas black-text") %></div>
+		   				<div class="dejavu-condensed twenty-pt <%= @playlist_color %>" style="width: 634px;height: 30px;padding: 10px 0 0 10px;"><%= link_to(p.title.upcase, p, :class => "bebas black-text") %>
+		   				<!-- show the data if the playlist was created after Time.new(y,m,d) --> 
+
+	   					<%  if( p.created_at.to_i > Time.new(2013,6,1).to_i)
+      							t = p.created_at.strftime("%m/%d/%Y")
+    							else
+      							t = nil
+						    end
+						%>  <%= t %>
+						
+		   				</div>
 		   				<% @i = 0 %>
 		   				<table style="width:100%;background-color:#434343;">
 		   					<tr>
