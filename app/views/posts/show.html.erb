@@ -25,7 +25,7 @@
 #post-wrapper .options {
 	margin-left:500px;
 }
-	
+
 
 #post-wrapper .post .background-color {
 	margin-top:41px;
@@ -75,7 +75,7 @@
 }
 
 #post-wrapper .post .background-color .body .body-text {
-	
+
 }
 
 #post-wrapper .post .comments-wrapper {
@@ -112,7 +112,7 @@
 	float: right;
 	margin-right: 17px;
 }
-	
+
 </style>
 <%= render :partial => 'layouts/sidebar' %>
 <p id="notice" class="float-right"><%= notice %></p>
@@ -125,7 +125,7 @@
 				<div class="green chunk-five yellow-text float-left title-bar"><%= link_to @post.title, @post, :class => "black-text" %>
 				<% if current_user %>
 				<% if (current_user.id == @post.user.id) || current_user.staff %>
-					<a title="Edit Post" href='/dashboard/#/posts/<%= @post.id -%>/edit'><span class="white-text edit-post">Edit Post<span></a>
+					<a title="Edit Post" href='/dashboard/#/posts/<%= @post.id -%>/edit'><span class="white-text edit-post">Edit Post<span></a> | <%= link_to 'Destroy', @post, :confirm => 'Are you sure?', :method => :delete %>
 				<% end %>
 				<% end %>
 				</div>
@@ -269,15 +269,15 @@
 		    	$("#saving-comment").html(_ajax_saving_black);
 		    },
 		    success: function (xhr) {
-			
+
 				$.each(xhr, function(i, data){
-					
+
 						$(".comments-wrapper").append("<div id=\"comment-"+xhr['comment']['id']+"\" class=\"comment\" style=\"margin:5px 0px 5px 0px;width:636px;height:auto;clear:both;float:left;\"><img src=\"<%= current_user.avatar.url(:thumb)%>\"> <div style=\"margin-right:50px;\" class=\"float-right\"><div class=\"title float-left white-text\" style=\"clear:both;\">"+xhr['comment']['title']+"</div><div class=\"time float-right small\"></div><div class=\"body float-left m1-regular rounded-heavy\" style=\"margin-top:5px;clear:both;width:431px;min-height:100px;background-color:#232323;padding:5px;\">"+xhr['comment']['body']+"</div><div class=\"comment-options float-right pointer clear-both standard red-font\">Edit | Delete</div></div><div class=\"float-left white-text\" style=\"word-wrap:break-word;width:80px;margin-left:1px;\">"+xhr['comment']['user']['f_name']+" "+xhr['comment']['user']['l_name']+"</div>");
 						$(".comments-wrapper").prepend("<div class=\"invisible\"><a class=\"anchorLink\" href=\"#comment-"+xhr['comment']['id']+"\">scroll to</a></div>");
 						$("a.anchorLink").anchorAnimate()
 						$(".anchorLink").click();
 					});
-					
+
 			$(":input").val("");
 			Recaptcha.reload();
 
@@ -303,7 +303,7 @@
 		}
 
 	});
-	
+
 	$("#view-comments").click(function(){
 		var txt = $(this).text();
 		$(".comments-wrapper").toggleClass('invisible');
@@ -339,13 +339,13 @@
 					console.log("shit")
 				 $("#loader").remove();		
 			}});
-			
+
 		}else{
 			$(this).html("View Comments");
 			$(".comment.content").remove();
 		}
 	});
-	
+
 	$(".delete-comment").live("click", function(){
 		var cid = $(this).attr("data-id");
 		var murl = "/comments/"+cid;
@@ -365,6 +365,3 @@
 		$("#view-comments").click();
 	}
 <% end %>
-
-
-
