@@ -552,7 +552,31 @@ input[type='password']:focus, input[type='text']:focus, textarea:focus {
 	color:#FFFFFF !important;
 }
 /* misc generic */
+/* Yuhas Colors */
 
+.indianred {
+	background-color:#CD5C5C;
+}
+
+.indianred-text {
+	color:#CD5C5C;
+}
+
+.paleviolet {
+	background-color: #D8BFD8;
+}
+
+.paleviolet-text {
+	color:#D8BFD8;
+}
+
+.sandy {
+	background-color: #F4A460;
+}
+
+.sandy-text {
+	color:#F4A460;
+}
 .hover:hover {
 	opacity:1;
 	-moz-opacity:1;

@@ -551,6 +551,31 @@ input[type='password']:focus, input[type='text']:focus, textarea:focus {
 .white-text {
 	color:#FFFFFF !important;
 }
+/* Yuhas Colors */
+
+.indianred {
+	background-color:#CD5C5C !important;
+}
+
+.indianred-text {
+	color:#CD5C5C !important;
+}
+
+.paleviolet {
+	background-color: #D8BFD8 !important;
+}
+
+.paleviolet-text {
+	color:#D8BFD8 !important;
+}
+
+.sandy {
+	background-color: #F4A460 !important;
+}
+
+.sandy-text {
+	color:#F4A460 !important;
+}
 /* misc generic */
 
 .hover:hover {
