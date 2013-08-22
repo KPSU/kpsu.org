@@ -95,6 +95,29 @@ input[type='password']:focus,input[type='text']:focus,textarea:focus{border:1px 
 .black-content{background-color:#171717;}
 .black-text{color:#171717 !important;}
 .white-text{color:#FFFFFF !important;}
+.indianred {
+	background-color:#CD5C5C;
+}
+
+.indianred-text {
+	color:#CD5C5C;
+}
+
+.paleviolet {
+	background-color: #D8BFD8;
+}
+
+.paleviolet-text {
+	color:#D8BFD8;
+}
+
+.sandy {
+	background-color: #F4A460;
+}
+
+.sandy-text {
+	color:#F4A460;
+}
 /* misc generic */
 .hover:hover{opacity:1;-moz-opacity:1;-webkit-opacity:1;}
 .invisible{display:none;}
