@@ -2,14 +2,20 @@
 	<div class="post">
 		<div class="header">
 			<% if post.content_type_id == 1 %>
-				<div class="green-text post-type">BLOG</div>
-				<div class="green chunk-five yellow-text float-left title-bar"><%= link_to post.title, post, :class => "yellow-text" %></div>
+				<div class="indianred-text post-type">BLOG</div>
+				<div class="indianred chunk-five float-left title-bar"><%= link_to post.title, post, :class => "black-text" %></div>
+
 			<% elsif post.content_type_id == 3 %>
-				<div class="yellow-text post-type">ANNOUNCEMENT</div>
-				<div class="yellow chunk-five magenta-text float-left title-bar"><%= link_to post.title, post, :class => "magenta-text" %></div>
+				<div class="paleviolet-text post-type">ANNOUNCEMENT</div>
+				<div class="paleviolet chunk-five black-text float-left title-bar"><%= link_to post.title, post, :class => "black-text" %></div>
+
 			<% elsif post.content_type_id == 2 %>
 				<div class="blue-text post-type">NEWS</div>
 				<div class="blue chunk-five white-text float-left title-bar"><%= link_to post.title, post, :class => "white-text" %></div>
+
+			<% elsif post.content_type_id == 4 %>
+				<div class="sandy-text post-type">REVIEW</div>
+				<div class="sandy chunk-five white-text float-left title-bar"><%= link_to post.title, post, :class => "black-text" %></div>	
 			<% end %>
 		</div>
 		<div class="body">
@@ -19,18 +25,21 @@
 			</div>
 		</div>
 		<% if post.content_type_id == 1 %>
-			<div class="footer green">
+			<div class="footer indianred">
 			
 		<% elsif post.content_type_id == 3 %>
-			<div class="footer yellow">
+			<div class="footer paleviolet">
 			
 		<% elsif post.content_type_id == 2 %>
 			<div class="footer blue">
+
+		<% elsif post.content_type_id == 4 %>
+			<div class="footer sandy">
 			
 		<% end %>			
-		<div id="view-comments" class="float-left dejavu-condensed magenta-text">View Comments</div>
+		<div id="view-comments" class="float-left dejavu-condensed white-text">View Comments</div>
 			<div id="share" class="share float-right">
-				<div class="text dejavu-condensed float-left magenta-text">SHARE</div>
+				<div class="text dejavu-condensed float-left white-text">SHARE</div>
 				<div class="float-right icons">
 				<!-- REGARDING FACEBOOK %2F stands for / and w -->
 					<iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fkpsu.org<%= url_for(post) %>&amp;layout=button_count&amp;show_faces=true&amp;width=40&amp;action=like&amp;font=segoe+ui&amp;colorscheme=light&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:80px; height:21px;" allowTransparency="true">

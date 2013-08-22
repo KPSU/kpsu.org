@@ -563,11 +563,11 @@ input[type='password']:focus, input[type='text']:focus, textarea:focus {
 	color:#CD5C5C;
 }
 
-.orangered {
+.paleviolet {
 	background-color: #D8BFD8;
 }
 
-.orangered-text {
+.paleviolet-text {
 	color:#D8BFD8;
 }
 
