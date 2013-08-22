@@ -259,7 +259,7 @@ input[type='password']:focus, input[type='text']:focus, textarea:focus {
 	float:left;
 	clear:both;
 	font-size:.75em;
-	background-color:#171717;
+	background-color:#000000;
 	color:#F7F7F7;
 	padding:20px;
 }
@@ -552,6 +552,31 @@ input[type='password']:focus, input[type='text']:focus, textarea:focus {
 
 .white-text {
 	color:#FFFFFF !important;
+}
+/* Yuhas Colors */
+
+.indianred {
+	background-color:#CD5C5C;
+}
+
+.indianred-text {
+	color:#CD5C5C;
+}
+
+.orangered {
+	background-color: #D8BFD8;
+}
+
+.orangered-text {
+	color:#D8BFD8;
+}
+
+.sandy {
+	background-color: #F4A460;
+}
+
+.sandy-text {
+	color:#F4A460;
 }
 /* misc generic */
 
@@ -1464,8 +1489,10 @@ a.orphans:hover {
 
 }
 
-.dejavu-book {
-	font-family:"DejaVuSansBook";
+.dejavu-book { /* Joe Yuhas Changed 8/21/13 */
+	font-family:"Arial";
+	font-size:125%;
+
 }
 
 .dejavu-condensed {
