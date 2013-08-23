@@ -28,12 +28,13 @@
 <% end %>
 <% if current_user.feed %>		
 	<% @feed.each do |f| %>
-	<% if f.comment_id %> 
-	<div class="feed-comment feed-item float-left clear-right  rounded-heavy" id="comment-<%= f.comment.id %>">
-		<div class="feed-item-header blue rounded-light float-left" style="width:100%;">
-		<div class="float-left clear-both" style="padding: 5px 10px;"><span class="white-text bebas sixteen-pt"><%= f.comment.rendered_title %></span></div>
-		<div class="icon comment" style="width: 32px; float:right; "><img src="/images/chat.png" style="width:100%;"></div>
-		</div>
+
+		<% if f.comment_id %> 
+			<div class="feed-comment feed-item float-left clear-right  rounded-heavy" id="comment-<%= f.comment.id %>">
+			<div class="feed-item-header blue rounded-light float-left" style="width:100%;">
+			<div class="float-left clear-both" style="padding: 5px 10px;"><span class="white-text bebas sixteen-pt"><%= f.comment.rendered_title %></span></div>
+			<div class="icon comment" style="width: 32px; float:right; "><img src="/images/chat.png" style="width:100%;"></div>
+			</div>
 		<div style="width:600px;float:left;">
 			<div class="float-left" style="width:110px;padding:10px;">
 				<div class="float-left" style="margin:auto;width:110px;text-align:center;"><%= image_tag(f.comment.user.avatar.url(:thumb)) %></div>
@@ -68,6 +69,7 @@
 		</div>
 	</div>
 	<% elsif f.post_id %>
+	<%if f.post.id != nil%> <!-- sup -->
 		<div class="feed-status feed-item float-left clear-right  rounded-heavy" id="post-<%= f.post.id %>">
 			<div class="feed-item-header magenta rounded-light float-left" style="width:100%;">
 			<div class="float-left clear-both" style="padding: 5px 10px;"><span class="white-text bebas sixteen-pt">New Post</span></div>
@@ -82,9 +84,11 @@
 					<div class="float-left clear-both"><span class="m1-bold"><%= link_to f.post.title, f.post, :class => "red-font" %></span></div>
 					<div class="float-left yellow-text clear-left"> <span class="m1-bold"><%= f.post.created_at.to_s(:time_and_date) %></span></div>
 					<div class="status-text float-left clear-both"><div class="dejavu-condensed "><%= truncate("#{f.post.body.gsub(/<\/?.*?>/, "")}", :length => 250, :omission => "...")%></div></div>
+	
 				</div>	
 			</div>
 		</div>
+	<%end%>
 	<% elsif f.program_id %>
 		<% if f.program.event %>
 		<div class="feed-status feed-item float-left clear-right  rounded-heavy" id="program-<%= f.program.id %>">
