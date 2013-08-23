@@ -69,7 +69,7 @@
 		</div>
 	</div>
 	<% elsif f.post_id %>
-	<%if f.post.id != nil%> <!-- sup -->
+	<%if f.post != nil%> <!-- sup -->
 		<div class="feed-status feed-item float-left clear-right  rounded-heavy" id="post-<%= f.post.id %>">
 			<div class="feed-item-header magenta rounded-light float-left" style="width:100%;">
 			<div class="float-left clear-both" style="padding: 5px 10px;"><span class="white-text bebas sixteen-pt">New Post</span></div>
