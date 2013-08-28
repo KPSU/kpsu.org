@@ -188,7 +188,7 @@
 				<div style="width:74px;" class="chunk-five sixteen-pt black-text float-left">Downloads</div>
 			</div>
 			<% @user.downloads.order("created_at DESC").each do |d| %>
-			<% %>
+			<% if d != nil%> <!-- fixes podcast being shown with no link -->
 			<% if Time.zone.now - Time.at(d.title.to_i) <= 12.weeks %>
 				<div class="micro-row">
 					<a href="<%= url_for(download_path(:id => d.id)) %>" title="Click to Download <%= d.title %>"><div class="download float-left">&nbsp;</div></a>
@@ -196,6 +196,7 @@
 					<div style="padding-top:6px;width:230px;" class="float-left"><%= link_to(Time.zone.at(d.title.to_i).strftime("%B %e\, %Y"), download_path(:id => d.id), :class => "blue-text", :title => "Original Air Time: #{Time.at(d.title.to_i)}") %></div>
 					<div style="padding-top:6px;width:72px;" class="float-left green-text"><%= d.count %></div>
 				</div>
+			<% end %>
 			<% end %>
 			<% end %>
 		</div>
