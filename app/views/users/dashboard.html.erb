@@ -119,23 +119,37 @@
 				<li class="vertical rounded-heavy-top control_panel">Control Panel</li>
 				<li class="vertical pointer blue feed">Feed</li>
 				<li class="invisible pointer feed all db-subclass"><%= link_to("All", feed_path, :remote => true, :rel => ":address/#{url_for(feed_path)}")%></li>
+				
 				<li class="invisible pointer feed announcements db-subclass"><%= link_to("Announcements", feed_path(:announcement => true), :remote => true, :rel => ":address/#{url_for(feed_path(:announcement => true))}")%></li>
+
 				<li class="invisible pointer feed comments db-subclass"><%= link_to("Comments", feed_path(:comments => true), :remote => true, :rel => ":address/#{url_for(feed_path(:comments => true))}")%></li>
+
+				<!-- Station -->
 				<li class="vertical pointer blue station">Station</li>
 				<li class="invisible pointer station directory db-subclass"><%= link_to("Directory", station_directory_path, :remote => true, :rel => ":address/#{url_for(station_directory_path)}")%></li>
 				<li class="invisible pointer station handbook db-subclass"><%= link_to("DJ Handbook", handbook_pages_path, :remote => true, :rel => ":address/#{url_for(handbook_pages_path)}")%></li>
 				<li class="invisible pointer station db-subclass"><%= link_to("Browse Catalog", catalogs_path)%></li>
-				<li class="invisible pointer station db-subclass"><%= link_to("Write Review", new_review_path, :remote => true, :rel => ":address/#{url_for(new_review_path)}")%></li>
+				
 				<li class="invisible pointer station db-subclass"><%= link_to("Volunteer Hours", vh_path, :remote => true, :rel => ":address/#{url_for(vh_path)}" )%></li>
 				<% if current_user.staff %>
 				<li class="invisible pointer station db-subclass"><%= link_to("New Catalog Item", new_catalog_path, :remote => true, :rel => ":address/#{url_for(new_catalog_path)}" )%></li>
+
+				<li class="invisible pointer station db-subclass"><%= link_to("Promos",  promos_path)%></li>
 				<% end %>
+
+				<!-- DJ -->
 				<li class="vertical pointer blue dj">DJ</li>
+				<li class="invisible pointer dj db-subclass"><%= link_to("Write Review", new_review_path, :remote => true, :rel => ":address/#{url_for(new_review_path)}")%></li>
 				<li class="invisible pointer dj new-blog db-subclass"><%= link_to("Create a New Blog", new_post_path, :remote => true, :rel => ":address/#{url_for(new_post_path)}" ) %></li>
+
 				<li class="invisible pointer dj db-subclass"><%= link_to("My Posts", users_posts_path(current_user), :remote => true, :rel => ":address/#{url_for(users_posts_path(current_user))}") %></li>
+
 				<li class="invisible pointer dj db-subclass"><%= link_to("Downloads Manager", user_downloads_path(current_user), :remote => true, :rel => ":address/#{url_for(user_downloads_path(current_user))}") %></li>
+
 				<li class="invisible pointer dj db-subclass"><%= link_to("Playlist Manager", playlists_path, :remote => true, :rel => ":address/#{url_for(playlists_path)}" ) %></li>
+
 				<li class="invisible pointer dj edit-profile db-subclass"><%= link_to("Edit Profile", edit_user_path(current_user), :remote => true, :rel => ":address/#{url_for(edit_user_path(current_user))}" ) %></li>
+
 				<li class="vertical pointer blue shows">Shows</li>
 				<% current_user.programs.each do |p| %>
 				<li class="invisible pointer shows db-subclass"><%= link_to p.title, edit_program_path(p), :remote => true, :rel => ":address/#{url_for(edit_program_path(p))}" %></li>
