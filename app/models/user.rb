@@ -220,7 +220,9 @@ class User < ActiveRecord::Base
     @total = 0
     @d = self.downloads.where("created_at >= ?", time)
     @d.each do |download|
-      @total = @total + download.count
+      if(download.count != nil) 
+        @total = @total + download.count
+      end
     end
     return @total
   end
