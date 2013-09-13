@@ -13,8 +13,8 @@
 				<div class="indianred-text post-type">BLOG</div>
 				<div class="indianred chunk-five  float-left title-bar"><%= link_to post.title, post, :class => "black-text" %></div>
 			<% elsif post.content_type_id == 3 %>
-				<div class="orangered-text post-type">ANNOUNCEMENT</div>
-				<div class="orangered chunk-five black-text float-left title-bar"><%= link_to post.title, post, :class => "black-text" %></div>
+				<div class="paleviolet-text post-type">ANNOUNCEMENT</div>
+				<div class="paleviolet chunk-five black-text float-left title-bar"><%= link_to post.title, post, :class => "black-text" %></div>
 			<% elsif post.content_type_id == 2 %>
 				<div class="blue-text post-type">NEWS</div>
 				<div class="blue chunk-five white-text float-left title-bar"><%= link_to post.title, post, :class => "black-text" %></div>
@@ -24,16 +24,19 @@
 			<% end %>
 		</div>
 		<div class="body">
+			<% if post.user != nil %>
 			<div class="author deja-condensed float-right">BY <span class="blue-text"><%= link_to post.user.dj_name.upcase, post.user, :class => "blue-text" %></span></div>
 			<div class="content dejavu-book float-left">
-				<%= raw post.body.bbcode_to_html({}, false) %>
+				<!--<%= raw post.body.bbcode_to_html({}, false) %> -->
+				<%= raw post.body.gsub(/\n/, '<br/>').bbcode_to_html({}, false) %>
 			</div>
+			<%end%>
 		</div>
 		<% if post.content_type_id == 1 %>
 			<div class="footer indianred">
 			
 		<% elsif post.content_type_id == 3 %>
-			<div class="footer orangered">
+			<div class="footer paleviolet">
 			
 		<% elsif post.content_type_id == 2 %>
 			<div class="footer blue">
