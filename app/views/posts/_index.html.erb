@@ -21,7 +21,7 @@
 		<div class="body">
 			<div class="author deja-condensed float-right">BY <span class="blue-text"><%= link_to post.user.dj_name.upcase, post.user, :class => "blue-text" %></span></div>
 			<div class="content dejavu-book float-lef">
-				<%= raw post.body.bbcode_to_html({}, false) %>
+				<%= raw post.body.gsub(/\n/, '<br/>').bbcode_to_html({}, false) %>
 			</div>
 		</div>
 		<% if post.content_type_id == 1 %>
