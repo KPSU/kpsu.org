@@ -21,7 +21,7 @@ class Playlist < ActiveRecord::Base
   default_value_for :title, "#{Time.zone.now.strftime("%A %B\%e %Y")}"
   
   def to_param
-    title.gsub(/[\.]|[\/]/, "_").gsub(/[\s]/, "-").downcase
+    title.gsub(/[\.]|[\/]/, "_").gsub(/[\s]/, "_").gsub("-","_").downcase
   end
 
     def self.find(*args)
