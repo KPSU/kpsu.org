@@ -82,7 +82,7 @@ class UsersController < AbstractUsersController
           end
         end
       end
-      @feed = FeedItem.find(@f).paginate(:page => @page, :per_page => 5)
+      @feed = FeedItem.find(@f).paginate_index(:page => @page, :per_page => 5)
     elsif params[:comments]
       @url_param = "?comments=true"
       @c = Comment.where(:profile_id => current_user.id)
@@ -312,6 +312,7 @@ class UsersController < AbstractUsersController
     @user.homepage = params[:user][:homepage]
     @user.age = params[:user][:age]
     @user.dj_name = params[:user][:dj_name]
+    @user.twitter_username = params[:user][:twitter_username]#fix?
     
     respond_to do |format|
       if @user.save
