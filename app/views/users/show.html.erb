@@ -33,7 +33,9 @@
 	</div>
 	
 	<div class="float-left" style="width:100%;text-align:right;">
+		<% if @user.age != nil && @user.age != 0  %>
 		<div class="float-right dejavu-condensed white-text clear-both"><span class="sixteen chunk-five blue-text ">Age</span> <br/><%= @user.age %></div>
+		<% end %>
 		<div title="DJ's shows" class="sixteen chunk-five blue-text float-right clear-both">Shows</div>
 			<% if @user.programs.size == 0 %>
 				<div class="twelve-pt magenta-text dejavu-condensed float-right clear-both">This DJ ain't got no shows!</div><br/><br/>
@@ -45,8 +47,10 @@
 				<% end %>
 			<% end %>
 		</div>
+		<% if @user.twitter_username != nil %> 
 		<div title="Twitter" class="sixteen chunk-five blue-text float-right clear-both">Twitter</div>
 		<div class="twelve-pt dejavu-condensed float-right clear-both"> <a class="fourteen-pt indianred-text dejavu-condensed float-right clear-both"  href="https://twitter.com/<%= @user.twitter_username %>"><%= @user.twitter_username%></a> </div>
+		<% end %>
 
 	</div>
 	
