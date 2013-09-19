@@ -37,7 +37,7 @@
   	</div>
 	<div class="form program-dj">
 		<div class="dejavu-condensed blue-text sixteen-pt">DJ</div>
-		<%= select_tag "user", options_from_collection_for_select(@users, "id", "dj_name", :selected => "#{ @program.user == nil ? "0" : @program.user.id }") %>
+		<%= select_tag "user", options_from_collection_for_select(@dj, "id", "dj_name", :selected => "#{ @program.user == nil ? "0" : @program.user.id }") %>
 	</div>
 	<div class="program-timeslot dejavu-condensed white-text twelve-pt">
 	<% if current_user.staff %>
