@@ -123,6 +123,7 @@ class ProgramsController < ApplicationController
   # GET /programs/new.xml
   def new
     @users = User.where(:listener => false)
+    @dj = User.find(:all, :order => "dj_name ASC")
     @program = Program.new
     @genres = Genre.all
     respond_to do |format|
@@ -271,6 +272,7 @@ class ProgramsController < ApplicationController
 
   # DELETE /programs/1
   # DELETE /programs/1.xml
+  # Can programs have multiple events? that could be the problem
   def destroy
     @program = Program.find(params[:id])
     if @program.event
