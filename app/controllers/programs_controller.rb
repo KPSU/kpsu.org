@@ -135,6 +135,7 @@ class ProgramsController < ApplicationController
 
   def program_manager_edit
     @genres = Genre.all
+    @dj = User.find(:all, :order => "dj_name ASC")
     unless current_user.staff
       @users = User.find(:all, :conditions => ['id = ?', current_user.id])
       if current_user.programs.include?(Program.find(params[:id]))
@@ -155,6 +156,7 @@ class ProgramsController < ApplicationController
   # GET /programs/1/edit
   def edit
     @genres = Genre.all
+    @dj = User.find(:all, :order => "dj_name ASC",:conditions => ['id = ?', current_user.id])
     unless current_user.staff
       @users = User.find(:all, :conditions => ['id = ?', current_user.id])
       if current_user.programs.include?(Program.find(params[:id]))
