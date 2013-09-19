@@ -52,7 +52,7 @@
   	</div>
 	<div class="form float-left">
 		<div class="chunk-five blue-text">DJ</div>
-		<%= select_tag "user", options_from_collection_for_select(@users, "id", "dj_name", :selected => "#{ @program.user == nil ? "0" : @program.user.id }") %>
+		<%= select_tag "user", options_from_collection_for_select(@dj, "id", "dj_name", :selected => "#{ @program.user == nil ? "0" : @program.user.id }") %>
 	</div>
 	<div class="float-right clear-right bg-lightest-gray padding-med rounded-heavy" style="margin-right:0px;width:245px;">
 	<% if current_user.staff %>
