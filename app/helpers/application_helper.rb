@@ -151,7 +151,51 @@ module ApplicationHelper
   # Get the latest top dj
 
   def top_dj
-    @u = TopDj.last.user
+    #@u = TopDj.first.user
+    @dl = []
+    @max = []
+    @z = []
+    @dl = Download.last(24)
+    @dl.each do |u|
+      if u != nil && u.count != nil
+        @max << u
+      end
+    end
+    #@z = @max.max_by(&:count)
+    @z = @max.sort {|a,b| a.count <=> b.count }
+    @u = @z.last.user
+    return @u
+  end
+
+  def second_dj
+    @dl = []
+    @max = []
+    @z = []
+    @dl = Download.last(12)
+    @dl.each do |u|
+      if u != nil && u.count != nil
+        @max << u
+      end
+    end
+    #@z = @max.max_by(&:count)
+    @z = @max.sort {|a,b| a.count <=> b.count }
+    @u = @z[10].user
+    return @u
+  end
+
+   def third_dj
+    @dl = []
+    @max = []
+    @z = []
+    @dl = Download.last(6)
+    @dl.each do |u|
+      if u != nil && u.count != nil
+        @max << u
+      end
+    end
+    #@z = @max.max_by(&:count)
+    @z = @max.sort {|a,b| a.count <=> b.count }
+    @u = @z[4].user
     return @u
   end
   
