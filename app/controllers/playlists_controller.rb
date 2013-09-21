@@ -126,17 +126,32 @@ class PlaylistsController < ApplicationController
     @playlist = Playlist.new
     @psetup = Program.all
     @programs = []
+    @person = current_user
+    @j = "no downloads"
     @psetup.each do |p|
       if p.event
         @programs << p
       end
     end
     @downloads = []
+    @dsetup = Download.last(50)
+    if current_user.programs.first.downloads.all != []
+      @j = "downloads"
+    end
+
     current_user.programs.each do |program|
       program.downloads.each do |dl|
+      #@dsetup.each do |dl| #added this
         @downloads << dl
       end
     end
+
+    if @downloads == []
+        @dsetup.each do |dl| #added this
+          @downloads << dl
+        end
+    end
+
     #@downloads = current_user.programs.first.downloads
     @downloads.sort! {|y,x| x.title.to_i <=> y.title.to_i}
 
@@ -298,6 +313,8 @@ class PlaylistsController < ApplicationController
     @title = params[:playlist][:title]
     @playlist.update_attributes(:title => params[:playlist][:title])
 
+    @decription = params[:playlist][:description]
+    @playlist.update_attributes(:description => params[:playlist][:description])
     
     respond_to do |format|
       format.js { render :partial => "saved.js.erb" }
@@ -317,9 +334,16 @@ class PlaylistsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+  def download_time
+      @p = Playlist.find(params[:id])
+      @t = Time.new
+      @t = @p.download.created_at
+      return @t
+  end
   
   private
-  
+
   def increment_visit
       @p = Playlist.find(params[:id])
       if @p
