@@ -183,22 +183,22 @@
 	}
 </style>	
 		<%= render :partial => "layouts/sidebar"%>
-		<div class="special-label bebas blue-text twenty-four-pt float-left">FEATURED</div>
+		<div class="special-label bebas blue-text twenty-four-pt float-left">Trending DJs</div>
 		
 		<div id="special-djs" class="float-left">
 			<div id="all-time" class="clear-left special-dj-wrapper">
-				<div class="bebas sixteen-pt yellow-text special-type">DOWNLOAD CHAMP</a></div>
+				<div class="bebas sixteen-pt yellow-text special-type"></div>
 				
 				<div class="special-dj-avatar">
-					<a href="<%= url_for(download_champ) %>" title="Download Champ: The DJ with the most downloads this week.">
-						<div class="float-left special-dj-name"><span class="white-text"><%= download_champ.dj_name %></span></div>
-						<img src='<%= download_champ.avatar.url(:square_thumb_big) %>'>
+					<a href="<%= url_for(second_dj) %>" title="Download Champ: The DJ with the most downloads this week.">
+						<div class="float-left special-dj-name"><span class="white-text"><%= second_dj.dj_name %></span></div>
+						<img src='<%= second_dj.avatar.url(:square_thumb_big) %>'>
 					</a>
 				</div>
 				
 			</div>
 			<div id="month" class="special-dj-wrapper">
-				<div class="bebas sixteen-pt yellow-text special-type"><span class="magenta-text">TOP DJ</span></div>
+				<div class="bebas sixteen-pt yellow-text special-type"><span class="magenta-text"></span></div>
 				<div class="special-dj-avatar">
 					<a href="<%= url_for(top_dj) %>" title="Top DJ: KPSU's current top DJ, legend has it these DJs can manipulate the airwaves with their minds.">
 						<div class="float-left special-dj-name"><span class="white-text"><%= top_dj.dj_name %></span></div>
@@ -207,11 +207,11 @@
 				</div>
 			</div>
 			<div id="week" class="special-dj-wrapper">
-				<div class="bebas sixteen-pt yellow-text special-type">POPULAR THIS WEEK</div>
+				<div class="bebas sixteen-pt yellow-text special-type"></div>
 				<div class="special-dj-avatar">
-					<a href="<%= url_for(popular_this_week) %>" title="Popular This Week: Our most popular DJ this week based on traffic to their content.">
-						<div class="float-left special-dj-name"><span class="white-text"><%= popular_this_week.dj_name %></span></div>
-						<img src='<%= popular_this_week.avatar.url(:square_thumb_big) %>'>
+					<a href="<%= url_for(third_dj) %>" title="Popular This Week: Our most popular DJ this week based on traffic to their content.">
+						<div class="float-left special-dj-name"><span class="white-text"><%= third_dj.dj_name %></span></div>
+						<img src='<%= third_dj.avatar.url(:square_thumb_big) %>'>
 					</a>
 				</div>
 			</div>
