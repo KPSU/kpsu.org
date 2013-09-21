@@ -157,7 +157,7 @@ module ApplicationHelper
     @z = []
     @dl = Download.last(24)
     @dl.each do |u|
-      if u != nil && u.count != nil && u.user != nil
+      if u != nil && u.count != nil
         @max << u
       end
     end
@@ -173,7 +173,7 @@ module ApplicationHelper
     @z = []
     @dl = Download.last(12)
     @dl.each do |u|
-      if u != nil && u.count != nil && u.user != nil
+      if u != nil && u.count != nil
         @max << u
       end
     end
@@ -189,7 +189,7 @@ module ApplicationHelper
     @z = []
     @dl = Download.last(6)
     @dl.each do |u|
-      if u != nil && u.count != nil && u.user != nil
+      if u != nil && u.count != nil
         @max << u
       end
     end
