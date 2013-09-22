@@ -190,9 +190,9 @@
 				<div class="bebas sixteen-pt yellow-text special-type"></div>
 				
 				<div class="special-dj-avatar">
-					<a href="<%= url_for(second_dj) %>" title="Download Champ: The DJ with the most downloads this week.">
-						<div class="float-left special-dj-name"><span class="white-text"><%= second_dj.dj_name %></span></div>
-						<img src='<%= second_dj.avatar.url(:square_thumb_big) %>'>
+					<a href="<%= url_for(top_dj) %>" title="Top DJ">
+						<div class="float-left special-dj-name"><span class="white-text"><%= top_dj.dj_name %></span></div>
+						<img src='<%= top_dj.avatar.url(:square_thumb_big) %>'>
 					</a>
 				</div>
 				
@@ -200,16 +200,16 @@
 			<div id="month" class="special-dj-wrapper">
 				<div class="bebas sixteen-pt yellow-text special-type"><span class="magenta-text"></span></div>
 				<div class="special-dj-avatar">
-					<a href="<%= url_for(top_dj) %>" title="Top DJ: KPSU's current top DJ, legend has it these DJs can manipulate the airwaves with their minds.">
-						<div class="float-left special-dj-name"><span class="white-text"><%= top_dj.dj_name %></span></div>
-						<img src='<%= top_dj.avatar.url(:square_thumb_big) %>'>
+					<a href="<%= url_for(second_dj) %>" title="Second Place">
+						<div class="float-left special-dj-name"><span class="white-text"><%= second_dj.dj_name %></span></div>
+						<img src='<%= second_dj.avatar.url(:square_thumb_big) %>'>
 					</a>
 				</div>
 			</div>
 			<div id="week" class="special-dj-wrapper">
 				<div class="bebas sixteen-pt yellow-text special-type"></div>
 				<div class="special-dj-avatar">
-					<a href="<%= url_for(third_dj) %>" title="Popular This Week: Our most popular DJ this week based on traffic to their content.">
+					<a href="<%= url_for(third_dj) %>" title="Third Place">
 						<div class="float-left special-dj-name"><span class="white-text"><%= third_dj.dj_name %></span></div>
 						<img src='<%= third_dj.avatar.url(:square_thumb_big) %>'>
 					</a>
