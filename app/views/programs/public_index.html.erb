@@ -191,13 +191,13 @@
 						<% end %>
 				   		<% u.downloads.reverse.slice(0..@i).each do |d,i| %>
 						<% @download_ids << d.id %>
-				   		<div class="download-link float-left clear-both m1-regular" style="padding:0px 0px 0px 5px;margin:0px;width:130px;">
+				   		<div class="float-left clear-both m1-regular" style="padding:0px 0px 0px 5px;margin:0px;width:130px;">
 				   			<%= link_to "#{Time.at(d.title.to_i).to_s(:simple)}", download_path(:id => d.id), :class => "yellow-text" %>
 				   		</div>
 						<div class="tooltip m1-regular" style=""> 
 							<div style="float:left;margin:0 15px 20px 0;width:64px;">
 							<img src="/images/v3/download.png" alt="Download Podcast" 
-									style="width:100%;" />
+									style="width:10%;" />
 							</div>
 							<table style="margin:0"> 
 								<tr> 
