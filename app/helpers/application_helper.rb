@@ -155,7 +155,8 @@ module ApplicationHelper
     @dl = []
     @max = []
     @z = []
-    @dl = Download.last(24)
+    @dl = Download.last(48)
+   
     @dl.each do |u|
       if u != nil && u.count != nil && u.count != 0
         @max << u
@@ -163,7 +164,7 @@ module ApplicationHelper
     end
     #@z = @max.max_by(&:count)
     @z = @max.sort {|a,b| a.count <=> b.count }
-    @u = @z.last.user
+    @u = @z[@z.size-1].user
     return @u
   end
 
@@ -171,7 +172,8 @@ module ApplicationHelper
     @dl = []
     @max = []
     @z = []
-    @dl = Download.last(12)
+    @dl = Download.last(48)
+   
     @dl.each do |u|
       if u != nil && u.count != nil && u.count != 0
         @max << u
@@ -179,7 +181,7 @@ module ApplicationHelper
     end
     #@z = @max.max_by(&:count)
     @z = @max.sort {|a,b| a.count <=> b.count }
-    @u = @z[@max.size - 1].user
+    @u = @z[@z.size - 2].user
     return @u
   end
 
@@ -187,7 +189,7 @@ module ApplicationHelper
     @dl = []
     @max = []
     @z = []
-    @dl = Download.last(6)
+    @dl = Download.last(48)
     @dl.each do |u|
       if u != nil && u.count != nil && u.count != 0
         @max << u
@@ -195,7 +197,7 @@ module ApplicationHelper
     end
     #@z = @max.max_by(&:count)
     @z = @max.sort {|a,b| a.count <=> b.count }
-    @u = @z[@max.size - 1].user
+    @u = @z[@z.size - 3].user
     return @u
   end
   
