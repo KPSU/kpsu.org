@@ -189,10 +189,15 @@
 
 
 		<div id="twitter-feed" class="twitter-font">
+			<div id="twitter-feed" class="twitter-font">
 			<a class="twitter-timeline" href="https://twitter.com/KPSU_PDX" data-widget-id="380564333899423744">Tweets by @KPSU_PDX</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 
 			
+		</div>
+			<div id="tweets">
+				
+			</div>
 		</div>
 
 		
@@ -309,7 +314,7 @@
 			console.log("Volume:")
 			console.log(vol)
 			$("#hidden-player").jPlayer("volume", vol);
-		});/*
+		});
 		var loadTwitter = function(json){
 			$.each(json.statuses, function(i, tweet){
 				if ( i <= 2 ) {
@@ -340,7 +345,7 @@
 		});
 
 	});
-*/
+
 	$('.post-photos a').lightBox({fixedNavigation:true});
 		
 		<%= yield(:page_js) %>
