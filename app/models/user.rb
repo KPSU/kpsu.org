@@ -54,6 +54,17 @@ class User < ActiveRecord::Base
   before_validation :download_remote_image, :if => :image_url_provided?  
   validates_presence_of :image_remote_url, :if => :image_url_provided?, :message => 'is invalid or inaccessible'
   
+  validates_presence_of :dj_name, allow_blank: false, format: {
+    message: 'Please enter a DJ name, it can be the same as your full name if you don\'t have one' 
+  }
+  validates_presence_of :f_name, allow_blank: false, format: {
+    message: 'Please enter a first name' 
+  }
+  validates_presence_of :l_name, allow_blank: false, format: {
+    message: 'Please enter a last name' 
+  }
+  
+  default_value_for :age, "0"
   default_value_for :about, "This DJ hasn\'t filled out any information yet, hastle \'em about it!" 
      
 
@@ -68,7 +79,7 @@ class User < ActiveRecord::Base
       super
     end
   end
-
+  
   def deliver_password_reset_instructions!
     reset_perishable_token!
     Notifier.deliver_password_reset_instructions(self)
