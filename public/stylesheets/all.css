@@ -30,7 +30,8 @@ a:link,a:active,a:visited {
 
 #content-wrapper {
 	width:1044px;
-	margin:0px auto auto auto;
+
+	margin:-120px auto auto auto;
 }
 
 body#alternative #content-wrapper {
@@ -190,6 +191,7 @@ input[type='password']:focus, input[type='text']:focus, textarea:focus {
 	margin-top: 87px;
 	margin-left: 91px;
 }
+
 
 #rotator {
 	float:left;
@@ -782,6 +784,10 @@ ul.vertical,li.vertical {
 	margin-top: 100px;
 	margin-left: 105px;
 }
+#shirt {
+	
+	
+}
 
 #mini-banner {
 	margin-top:5px;
@@ -794,7 +800,7 @@ ul.vertical,li.vertical {
 /* MINI-PLAYER */
 
 #on-air-offset {
-	float: left;
+	
 	margin-top: 30px;
 	width: 180px;
 	height: 192px;
