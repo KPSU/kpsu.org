@@ -33,11 +33,11 @@
 </head>
 <body>
 	<div id="content-wrapper">
-		<div style = "position:relative;top:237px;">
+		<div style = "position:relative;top:237px; ">
 				<a href = "https://commerce.cashnet.com/kpsu"> <img src="/images/merchb.gif"> </a>
 		</div> 
-		<div id="alt-nav" class="chunk-five yellow-text sixteen-pt">
-			<ul class="vertical yellow-text chunk-five">
+		<div id="alt-nav" class="chunk-five yellow-text sixteen-pt" >
+			<ul class="vertical yellow-text chunk-five" style= "position: relative; z-index: 1000;">
 			<% if current_user && current_user.listener == false %>
 			<li class="vertical chunk-five"><%= link_to("dashboard", dashboard_path, :class => "yellow-text") %></li>
 			<% elsif current_user && current_user.listener == true %>
