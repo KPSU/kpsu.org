@@ -195,7 +195,7 @@
 				<div style="width:74px;" class="chunk-five sixteen-pt black-text float-left">Downloads</div>
 			</div>
 			<% @user.downloads.order("created_at DESC").each do |d| %>
-			<% if d != nil#fixes podcast being shown with no link %>
+			<% if d.user != nil %>
 			<% if Time.zone.now - Time.at(d.title.to_i) <= 12.weeks %>
 				<div class="micro-row">
 					<a href="<%= url_for(download_path(:id => d.id)) %>" title="Click to Download <%= d.title %>"><div class="download float-left">&nbsp;</div></a>
