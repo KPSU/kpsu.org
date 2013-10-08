@@ -59,17 +59,22 @@ class AbstractUsersController < ApplicationController
 	    if @download.user == current_user
 	      @download.user = nil
 	      @download.program = nil
+	     
 	      if @download.save
 	        @user = current_user
 	        respond_to do |format|
-	          format.js { render :partial => "my_downloads" }
+	          format.js { render "dashboard" }
 	        end
+	        
+
 	      else
-	        respond_to do |format|
-	          format.js { render :partial => "own_download_error.js.erb" }
-	        end
+	       redirect_to :back
+	        #respond_to do |format|
+	         # format.js { render :partial => "own_download_error.js.erb" }
+	        #end
 	      end
 	    end
+	    
   	end
   
   	def own_download
