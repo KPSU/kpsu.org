@@ -62,11 +62,7 @@
 	</div>
 </div>
 
-<div id="confirm" style="display:none;">
-	<span class="normal m1-regular">Are you sure you want to remove this download?</span>
-	<br/><br/>
-	<%= link_to("Yes", url_for(remove_download_path), :remote => true, :method => "put", :class => "magenta-text delete-downloads")%> | <span class="cancel">Cancel</span>
-</div>
+
 <script type="text/javascript" charset="utf-8">
 $("span.cancel").click(function(){
 	$(this).parent().dialog("close");
