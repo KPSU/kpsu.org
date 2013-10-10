@@ -69,7 +69,7 @@ class User < ActiveRecord::Base
      
 
   def to_param
-    dj_name.gsub(" ", "_").downcase
+    dj_name.gsub(/[\.]|[\/]/, "_").gsub(/[\s]/, "_").gsub("-","_").downcase
   end
 
   def self.find(*args)
