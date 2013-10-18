@@ -17,10 +17,26 @@ class SchedulesController < ApplicationController
     @fri = Event.find_all_by_day_i(5, :order => 'starts_at ASC')
     @sat = Event.find_all_by_day_i(6, :order => 'starts_at ASC')
     @sun = Event.find_all_by_day_i(7, :order => 'starts_at ASC')
-    @start = Event.find(:first, :order => 'starts_at ASC').starts_at.hour
+
+    @start = Event.all(:order => 'starts_at ASC')
     @end = Event.find(:last, :order => 'starts_at DESC').ends_at.hour
     @json = []
     @json += @sun += @mon += @tues += @wed += @thurs += @fri += @sat
+
+    @json.each do |u|
+      if(u.ends_at == u.starts_at)
+         @json.delete_at(@json.index(u))
+      end
+    end
+
+     @start.each do |u|
+      if(u.ends_at == u.starts_at)
+         @start.delete_at(@start.index(u))
+      end
+    end
+
+    @start = @start.first.starts_at.hour
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render :partial => "schedules/events.json" }
