@@ -122,9 +122,10 @@ module ApplicationHelper
           @p_array += @p.title.to_a
           @p_array += @p.id.to_a
           @p_array += @p.user.dj_name.to_a
+        else
+          @p_array = ""
+          @p_array = "We're on Auto Pilot!"
         end
-        @p_array = ""
-        @p_array = "We're on Auto Pilot!"
       else
         @p_array = ""
         @p_array = "We're on Auto Pilot!"
