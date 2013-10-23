@@ -103,11 +103,13 @@
 			</div>
 			<div id="on-next">
 
-				<% unless up_next.class == String %>
+				<!--<% unless up_next.class == String %>
+				<% if up_next.program != nil %>
 					<%= link_to(up_next[0], program_path(up_next[1]), :class => "m1-light red-text") %>
+				<%end%>
 				<% else %>
 					<span class="m1-light red-text">"We're on Auto-Pilot!"</span>
-				<% end %>
+				<% end %>-->
 
 			</div>	
 
