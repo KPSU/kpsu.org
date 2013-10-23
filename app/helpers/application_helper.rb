@@ -105,7 +105,7 @@ module ApplicationHelper
       @time = Time.parse("#{@h}:#{@m}").time_of_day!
       @e = Event.find(:first, :conditions => ['starts_at <= ? and ends_at >= ? and day_i = ?', "#{@h}:#{@m}", "#{@h}:#{@m}", @d])
       @p_array = []
-      unless @e == nil
+      unless @e == nil || @e.program == nil
         @p = Program.find(@e.program.id)
         @p_array = [@p.title, @p.id, @p.user.dj_name]
       else
@@ -116,11 +116,15 @@ module ApplicationHelper
       @d = Time.zone.now.to_date.cwday + 1
       @e = Event.find(:first, :conditions => ['starts_at <= ? and ends_at >= ? and day_i = ?', "#{00}:#{00}", "#{00}:#{00}", @d])
       @p_array = []
-      unless @e == nil || @e.program == nil
-        @p = Program.find(@e.program)
-        @p_array += @p.title.to_a
-        @p_array += @p.id.to_a
-        @p_array += @p.user.dj_name.to_a
+      unless @e == nil 
+        if @e.program == nil
+          @p = Program.find(@e.program)
+          @p_array += @p.title.to_a
+          @p_array += @p.id.to_a
+          @p_array += @p.user.dj_name.to_a
+        end
+        @p_array = ""
+        @p_array = "We're on Auto Pilot!"
       else
         @p_array = ""
         @p_array = "We're on Auto Pilot!"
