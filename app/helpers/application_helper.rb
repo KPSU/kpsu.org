@@ -116,7 +116,7 @@ module ApplicationHelper
       @d = Time.zone.now.to_date.cwday + 1
       @e = Event.find(:first, :conditions => ['starts_at <= ? and ends_at >= ? and day_i = ?', "#{00}:#{00}", "#{00}:#{00}", @d])
       @p_array = []
-      unless @e == nil
+      unless @e == nil || @e.program == nil
         @p = Program.find(@e.program)
         @p_array += @p.title.to_a
         @p_array += @p.id.to_a
@@ -125,6 +125,7 @@ module ApplicationHelper
         @p_array = ""
         @p_array = "We're on Auto Pilot!"
       end
+
       return @p_array
     end
   end
@@ -199,6 +200,10 @@ module ApplicationHelper
     @z = @max.sort {|a,b| a.count <=> b.count }
     @u = @z[@z.size - 3].user
     return @u
+  end
+
+  def download_destroy (down)
+      down.delete
   end
   
   # show_username
