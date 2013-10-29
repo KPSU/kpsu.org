@@ -17,12 +17,10 @@
   <script type="text/javascript">var RecaptchaOptions = {"theme":"clean"};</script>
   <script type="text/javascript" src="/javascripts/modernizr.custom.29473.js"></script>
 
-
-</head>
-
 <script type="text/javascript">
+
   var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-44967474-1']);
+  _gaq.push(['_setAccount', 'UA-20622260-1']);
   _gaq.push(['_trackPageview']);
 
   (function() {
@@ -30,235 +28,162 @@
     ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
+
 </script>
+
+			<div id="fb-root"><script>(function(d, s, id) {
+			  var js, fjs = d.getElementsByTagName(s)[0];
+			  if (d.getElementById(id)) return;
+			  js = d.createElement(s); js.id = id;
+			  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+			  fjs.parentNode.insertBefore(js, fjs);
+			}(document, 'script', 'facebook-jssdk'));</script></div>
+
+</head>
 <body>
-	<div id="content-wrapper">
-		<div style = "position:relative;top:237px; ">
-				<a href = "https://commerce.cashnet.com/kpsu"> <img src="/images/merchb.gif"> </a>
-		</div> 
-		<div id="alt-nav" class="chunk-five yellow-text sixteen-pt" >
-			<ul class="vertical yellow-text chunk-five" style= "position: relative; z-index: 1000;">
-			<% if current_user && current_user.listener == false %>
-			<li class="vertical chunk-five"><%= link_to("dashboard", dashboard_path, :class => "yellow-text") %></li>
-			<% elsif current_user && current_user.listener == true %>
-			<li class="vertical chunk-five"><%= link_to("home", listener_path, :class => "yellow-text") %></li>
-			<% end %>
-			<li class="vertical yellow-text chunk-five"><a class="yellow-text" href="https://www.foundation.pdx.edu/publicgift/kpsu.jsp">donate</a></li>
-			<li class="vertical chunk-five"><a class="yellow-text" href="/programs/all">programs</a></li>
-			<li class="vertical chunk-five"><a class="yellow-text" href="https://commerce.cashnet.com/kpsu">KPSU merch</a></li>
-			<li class="vertical chunk-five"><a class="yellow-text" href="/underwriting">underwriting</a></li>
-			<li class="vertical chunk-five"><a class="yellow-text" href="/contact">contact</a></li>
-			<li class="vertical chunk-five"><a class="yellow-text" href="/about">about</a></li>
-			<li class="vertical chunk-five"><a class="yellow-text" href ="" onclick="window.open('/popup_player', 'asdas', 'toolbars=0,width=290,height=290,scrollbars=0,resizable=0','status=0');" value="Open the window">pop-up player</a>
-			
-			<% unless current_user %>
-			<li class="vertical chunk-five"><a class="yellow-text" href="/login">login</a></li>
-			<% else %>
-			<li class="vertical chunk-five"><a class="yellow-text" href="/logout">logout</a></li>
-			<% end %>
-			</ul>
+
+
+	<div class = "banner-box">
+		<div class = "control-banner-box">
+
+			<div class = "banner-content-box">
+				<a href = "/" class = "home-box"> </a>	
+			</div>
+
+			<div class = "banner-link-box">
+				<a href = "/programs/all" class = "link-holder"> Programs </a>
+				<a class = "link-holder"> - </a>
+				<a href = "/archives" class = "link-holder"> Archive </a>
+				<a class = "link-holder"> - </a>
+				<a href = "/djs" class = "link-holder"> DJs </a>
+				<a class = "link-holder"> - </a>
+				<a href = "https://commerce.cashnet.com/kpsu" class = "link-holder"> Merchandise </a>
+				<a class = "link-holder"> - </a>
+				<a href = "https://www.foundation.pdx.edu/publicgift/kpsu.jsp" class = "link-holder">Donate</a>
+				<a class = "link-holder"> - </a>
+				<a href = "/about" class = "link-holder"> About </a>
+				<a class = "link-holder"> - </a>
+				<a href = "/contact" class = "link-holder"> Contact </a>
+				<a class = "link-holder"> - </a>
+				<a href = "/schedule" class = "link-holder"> Schedule </a>
+				<a class = "link-holder"> - </a>
+				<% unless current_user %>
+					<a class="link-holder" href="/login">Login</a>
+				<% else %>
+					<a class="link-holder" href="/dashboard">Dashboard</a>
+				<% end %>
+			</div>
 		</div>
+	</div>	
+
 		
-		<div id="mini-banner" style="margin-left:200px; margin-bottom:10px"> 
 
-			<img src="/images/v3/mini-banner.png" usemap="#mini-bannermap" style="position: absolute;clip: rect(0px 619px 301px 196px);">
-			<map id="mini-bannermap" name="mini-bannermap"><area shape="poly" alt="Download Podcasts from our program archive" title="" coords="362,237,365,253,488,222,471,206,423,220" href="/archives" target="" /><area shape="poly" alt="Our live streaming schedule" title="" coords="494,213,492,223,582,194,575,179" href="/schedule" target="" /><area shape="poly" alt="View KPSU's DJs" title="" coords="418,270,488,252,485,235,406,247" href="/djs" target="" /><area shape="poly" alt="Our Artist Database" title="" coords="409,279,499,261,493,282,409,294,408,286" href="/artists" target="" /><area shape="poly" alt="Listen to KPSU!" title="" coords="499,237,587,209,587,231,497,249" href="/listen" target="" /><area shape="poly" alt="Check out the latest music and event reviews!" title="" coords="502,260,511,271,591,262,586,239" href="/reviews" target="" /><area shape="poly" alt="KPSU Home Page" title="" coords="323,185,333,235,613,167,592,114" href="/" target="" /><!-- Created by Online Image Map Editor (http://www.maschek.hu/imagemap/index) --></map>
-			
-			<div style="position: relative;margin-top: 30px; width: 180px; margin-left:1px;height: 192px;"> <!-- changed from no style to position absolute -->
-					
-				
+	<div class =  "content-holder">
+		<div class = "post-holder">
+			<% @post_app.each do |post| %>
+				<div class = "post-box">
+					<div class = "post-title-box">
 
-			<% cache('alternative_who_is_playing') do %>
-			<div id="on-air-program" class="m1-light yellow-text">
-				<% unless currently_playing.class == String %>
-					<%= link_to(currently_playing[0], program_path(currently_playing[1]), :class => "m1-light yellow-text", :style => "line-height: 15px;") %>
-				<% else %>
-					<span class="m1-light yellow-text">KPSU</span>
-				<% end %>
-			</div>
-			<div id="on-air-dj" class="m1-light purple-text">
-				<% unless currently_playing.class == String %>
-					<span class="m1-light purple-text"><%= currently_playing[2] %></span>
-				<% else %>
-					<span class="m1-light purple-text">Portland's College Radio</span>
-				<% end %>
-			</div>
-			<div id="hidden-player" style="width:0px;height:0px;"></div>
-			<div id="player" class="float-left">
-
-				<div id="player_interface">
-					<div class="volume-bar">
-						<div class="indicator pointer player-buttons"></div>
-						<div class="volume-bar-value player-buttons"></div>
+						<a class = "title-text"> <%= link_to(truncate(post.title,:length =>50), post, :class => "title-text") %> </a>
 					</div>
-					<div class="volume-text">
-						<div class="quiet">quiet</div>
-						<div class="loud">loud</div>
-					</div>
-					<div class="play pointer player-buttons"></div>
-					<div class="stop pointer player-buttons"></div>
+						<p class = "body-text">
+							<% post.body = strip_tags(post.body).bbcode_to_html %> 
+							<%=  strip_tags(truncate(strip_tags(post.body),:length =>280).gsub("\n"," ").gsub("&apos;","'").gsub("&quot;","\"").gsub("&nbsp;","").gsub("&#39;","")) %>
+						</p>
+				</div>
+			<% end %>
 
+			<div class = "paginate-holder">
+				<%= will_paginate @post_app, :style => "color:red; margin-left:50px;" %>
+			</div>
+		</div>
+
+		<div class = "widget-holder">
+
+			<div class = "player-box">
+
+				<div id = "on-air-dj">
+					<% unless currently_playing.class == String %>
+						<span class = "on-air-dj-dynamic" style = ""><%= currently_playing[2] %></span>
+					<% else %>
+						<span class = "on-air-dj-dynamic" style = "">Portland's College Radio</span>
+					<% end %>
 				</div>
 
+				<div id="on-air-program">
+					<% unless currently_playing.class == String %>
+						<span class = "on-air-dj-text" style = "margin-top:-4px">	<%= link_to(currently_playing[0], program_path(currently_playing[1])) %> </span>
+					<% else %>
+						<span class="on-air-dj-text" style = "margin-top:-4px">KPSU</span>
+					<% end %>
+				</div>
+
+				<div id="on-next">
+					<% unless up_next.class == String %>
+						<%= link_to(up_next[0], program_path(up_next[1]), :class => "up-next-text") %>
+					<% else %>
+						<span class="up-next-text">"We're on Auto-Pilot!"</span>
+					<% end %>
+				</div>	
+
+				<div id="hidden-player" style="width:0px;height:0px;"></div>
+
+				<div class="play pointer player-buttons"></div>
+				<div class="stop pointer stop-button"></div>
+				<span class="pop-box"  href = "/twopointoh/open_in_new_window.png" onclick="window.open('/popup_player', 'asdas', 'toolbars=0,width=390,height=150,scrollbars=0,resizable=0,menubar=0directories=no,titlebar=no','status=0');" value="Open the window" style = "cursor:pointer; cursor:hand;">
+				</span>
 			</div>
-			<div id="on-next">
-
-				<% unless  up_next.class == String %>
-				
-				<%= link_to(up_next[0], program_path(up_next[1]), :class => "m1-light red-text") %>
 		
-				<% else %>
-					<span class="m1-light red-text">"We're on Auto-Pilot!"</span>
-				<% end %>
 
+			<div class = "twitter-box">
+				<a class="twitter-timeline" href="https://twitter.com/KPSU_PDX" data-widget-id="388561410478731264">Tweets by @KPSU_PDX</a>
+				<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+				</script>
+			</div>
+
+			<div class = "facebook-box">
+				<div class="fb-like-box" data-href="https://www.facebook.com/KPSUPORTLAND" data-width="350" data-height="580" data-colorscheme="light" data-show-faces="false" data-header="false" data-stream="true" data-show-border="false">
+				</div>
 			</div>	
 
-			<% end %>
-
-			</div>
-
-		</div>
 	
-		<div id="page-headline">
-			<%= yield(:page_headline) %>
 		</div>
 
-		
+	</div>
 
-		<center> 	<a href="https://www.facebook.com/KPSUPDX/events"> <img src="/images/OKGO_AD.png">  <a> </center>
-		<!-- change this banner after okgo -->
-			
+
+
+
 	
 
-		<div id="sidebar" class="container float-right">
-			<section class="ac-container">
-				<div>
-					<input id="ac-1" name="accordion-1" type="checkbox" />
-					<label for="ac-1" style="background-image:url('/images/v3/sidebar-sprite.png');height:75px;background-position:0 0;"></label>
-					<article class="ac-small">
-						<p>
-						<ul class="vertical green-text dejavu-condensed">
-							<% @downloads.each do |d| %>
-								<li><a class="green-text dejavu-condensed" href="<%= url_for(download_path(:id => d.id)) %>"><%= d.program.title rescue nil %> (<%= Time.zone.at(d.title.to_i).strftime("%d\.%b\.%Y")%>)</a></li>
-							<% end %>
-						</ul>
-						</p>
-					</article>
-				</div>
-				<div>
-					<input id="ac-2" name="accordion-1" type="checkbox" />
-					<label for="ac-2" style="background-image:url('/images/v3/sidebar-sprite.png');height:75px;background-position:0 323px;"></label>
-					<article class="ac-small">
-						<p><ul class="vertical magenta-text chunk-five">
-				<% @rev.each do |review| %>
-				<li><%= link_to "#{truncate review.title, :length => 22}", review, :class => "magenta-text" %></li>
-				<% end %>
-				
-			</ul></p>
-					</article>
-				</div>
-				<div>
-					<input id="ac-3" name="accordion-1" type="checkbox" />
-					<label for="ac-3" style="background-image:url('/images/v3/sidebar-sprite.png');height:72px;background-position:0 240px;"></label>
-					<article class="ac-large">
-						<p><ul class="vertical orange-text chunk-five">
-				<li><a class='orange-text' href='http://twitter.com/#!/KPSU_PDX'>Twitter</a>&nbsp;&nbsp;&nbsp;<a href='http://www.facebook.com/pages/KPSU/131711936862193' class='orange-text'>Facebook</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='http://www.flickr.com/photos/kpsu' class='orange-text'>Flickr</a></li>
-				<li>Ben: <a class='green-text' href='http://www.facebook.com/BallotResult/app_197602066931325'>FB</a> | <a class='magenta-text' href='http://www.twitter.com/ballotresult'>Twitter</a>
-		<li>Buddytime: <a class='green-text' href='http://www.facebook.com/pages/DJ-Buddytime-Audio-Cuddle-Puddle'>FB</a> | <a class='magenta-text' href='http://www.twitter.com/djbuddytime'>Twitter</a></li>
-		<li>Crouton Bombay: <a class='green-text' href='http://facebook.com/croutonbombay'>FB</a> | <a class='magenta-text' href='https://twitter.com/CROUTONBOMBAY'>Twitter</a></li>
-		<li>Dirty Mollie: <a class='green-text' href='http://www.facebook.com/dirtymollie'>FB</a> | <a class='magenta-text' href='http://www.twitter.com/dirtymollie'>Twitter</a></li>
-		<li>Ian: <a class='green-text' href='https://www.facebook.com/pages/Ians-Hour-of-Musical-Power-on-KPSU/160049997360775?ref=hl'>FB</a> | <a class='magenta-text' href='http://twitter.com/ianshourofmusic'>Twitter</a></li>
-		<li>Jake: <a class='green-text' href='http://facebook.com/jakeontheradio'>FB</a> | <a class='magenta-text' href='http://twitter.com/#!/JakeSauvageau'>Twitter</a></li>
-		<li>Jaycation: <a class='magenta-text' href='http://twitter.com/#!/jaycation'>Twitter</a></li>
-		<li>JC Craze: <a class='green-text' href='http://www.facebook.com/TheCrazeTrain'>FB</a> | <a class='magenta-text' href='https://twitter.com/DJ_jc_Craze'>Twitter</a></li>
-		<li>Keegan: <a class='green-text' href='https://www.facebook.com/MANTERBANTERKPSU'>FB</a> | <a class='magenta-text' href='https://twitter.com/MANTERBANTER'>Twitter</a></li>
-		<li>Matt Nelkin: <a class='green-text' href='http://facebook.com/liquidbeat'>FB</a> | <a class='magenta-text' href='http://twitter.com/#!/liquidbeat'>Twitter</a></li>
-		<li>Meguno: <a class='green-text' href='http://www.facebook.com/pages/2-Stupid-People/116573238458715?fref=ts'>FB</a> | <a class='magenta-text' href='https://twitter.com/2StupidPeople'>Twitter</a></li>
-		<li>Miss Rikki: <a class='green-text' href='http://www.facebook.com/closetradio'>FB</a> | <a class='magenta-text' href='http://www.twitter.com/closetradio'>Twitter</a></li>
-		<li>Pep: <a class='green-text' href='http://kpsu.org/programs/let%27s_build_a_forte'>KPSU</a> | <a class='magenta-text' href='https://twitter.com/letsbuildaforte'>Twitter</a></li>
-		<li>Perspectacle: <a class='green-text' href='http://facebook.com/thesweetskpsu'>FB</a> | <a class='magenta-text' href='http://twitter.com/thesweetskpsu'>Twitter</a></li>
-		<li>Peter: <a class='green-text' href='http://www.facebook.com/pages/Between-The-Eyes-on-KPSUorg/259181877832?fref=ts'>FB</a> | <a class='magenta-text' href='http://twitter.com/#!/petersampson'>Twitter</a></li>
-		<li>Ricardo Wang: <a class='green-text' href='http://www.facebook.com/whatsthiscalled'>FB</a> | <a class='magenta-text' href='http://twitter.com/WhatsThisCalled'>Twitter</a></li>
-		<li>Shaun: <a class='green-text' href='http://www.facebook.com/TheContinuumKPSU'>FB</a></li>
-		<li>Skutta: <a class='green-text' href='https://www.facebook.com/DJskutta'>FB</a> | <a class='magenta-text' href='https://twitter.com/DJskutta'>Twitter</a></li>
-		<li>Tara Kay: <a class='green-text' href='http://www.facebook.com/pages/Faculty-Fridays/270015543099810?fref=ts'>FB</a></li>
-		<li>Victrola: <a class='green-text' href='https://www.facebook.com/guitarshopradio?fref=ts'>FB</a></li>
-		<li>Walk of Shame: <a class='green-text' href='http://facebook.com/walkofshameradio'>FB</a> | <a class='magenta-text' href='http://www.twitter.com/walkofshamefm'>Twitter</a></li>
-		<li>ZFission: <a class='green-text' href='http://www.facebook.com/TheMeanGlean'>FB</a> | <a class='magenta-text' href='http://www.twitter.com/#!/the_mean_glean'>Twitter</a></li>
-			</ul> </p>
-					</article>
-				</div>
-				<div>
-					<input id="ac-4" name="accordion-1" type="checkbox" />
-					<label for="ac-4" style="background-image:url('/images/v3/sidebar-sprite.png');height:74px;background-position:0 176px;"></label>
-					<article class="ac-medium">
-						<p><ul style="vertical yellow-text st-marie">
-				<li style="margin-left:10px;"><a  class="yellow-text st-marie" href="http://www.wweek.com"><b>Willamette Week</b></a></li>
-				<li style="margin-left:10px;"><a  class="yellow-text st-marie" href="http://www.lagunitas.com/"><b>Lagunitas Brewing</b></a></li>
-				<li style="margin-left:10px;"><a  class="yellow-text st-marie" href="http://www.portlandfarmersmarket.org/markets/psu/"><b>PSU Farmers Market</b></a></li>
-				<li style="margin-left:10px;"><a  class="yellow-text st-marie" href="http://psu.tv/"><b>PSU TV</b></a></li>
-				<li style="margin-left:10px;"><a  class="yellow-text st-marie" href="http://wwhttp://www.portlandfarmersmarket.org/markets/psu/w.spotmagazine.net/"><b>Spot Magazine</b></a></li>
-				<li style="margin-left:10px;"><a  class="yellow-text st-marie" href="http://www.liquidbeatrecords.com"><b>Liquid Beat Records</b></a></li>
-				<li style="margin-left:10px;"><a  class="yellow-text st-marie" href="http://www.facebook.com/pages/Food-for-Thought-Cafe/147701107092"><b>Food For Thought Cafe</b></a></li>
-				<li style="margin-left:10px;"><a  class="yellow-text st-marie" href="http://www.abovethepearl.com"><b>Above the Pearl Tattoo</b></a></li>
-				<li style="margin-left:10px;"><a  class="yellow-text st-marie" href="/underwriting"><b>Support KPSU!</b></a></li>
-			</ul> </p>
-					</article>
-				</div>
-			</section>
-		</div>
-
-		<%= yield %>
 
 
-		<div id="twitter-feed" class="twitter-font">
-			<div id="twitter-feed" class="twitter-font">
-			<a class="twitter-timeline" href="https://twitter.com/KPSU_PDX" data-widget-id="380564333899423744">Tweets by @KPSU_PDX</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 
-			
-		</div>
-			<div id="tweets">
-				
-			</div>
-		</div>
 
-		
-		<div id="login" title="Login" style="display:none;">
-			<div class="dejavu-condensed" style="margin:10px;">
-				<%= form_for(@user_session) do |f| %>
-  				<% if @user_session.errors.any? %>
-  				  <div id="error_explanation">
-  				    <span><%= pluralize(@user_session.errors.count, "error") %> prohibited this session from being created:</span>
-				
-  				    <ul>
-  				    <% @user_session.errors.full_messages.each do |msg| %>
-  				      <li><%= msg %></li>
-  				    <% end %>
-  				    </ul>
-  				  </div>
-  				<% end %>
-				
-  				<div class="field">
-  				  <%= f.label :email %><br />
-  				  <%= f.text_field :email %>
-  				</div>
-  				<div class="field">
-  				  <%= f.label :password %><br />
-  				  <%= f.password_field :password %>
-  				</div>
-  				<div class="actions">
-  				  <%= f.submit "Login" %>
-  				</div>
-  				<% end %>
-				<div class="dejavu-condensed ten-pt float-left" style="margin-top:5px;">Forgot your password? 
-				<%= link_to("Click here to reset it", new_password_reset_path, :class => "yellow-text " )%>
-				</div>
-				<div class="float-left ten-pt clear-both m1-bold" style="margin-bottom:5px;">*Passwords are case sensitive</div>
-			</div>
-			</div>
-		</div>
-	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 	<script type="text/javascript" charset="utf-8">
@@ -330,7 +255,7 @@
 			// 80 is the width
 			// volume increment: 1.25 = 100/80
 			// volume increment = volMax / diff
-			var vol = ((100 - diff*1.25) / 100)
+			var vol = .8//((100 - diff*1.25) / 100)
 
 			console.log("ending Offset:")
 			console.log(offset)
@@ -373,14 +298,5 @@
 		
 		<%= yield(:page_js) %>
 		</script>
-		<script type="text/javascript">
-var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-</script>
-<script type="text/javascript">
-try{
-var pageTracker = _gat._getTracker("UA-44967474-1");
-pageTracker._trackPageview();
-} catch(err) {}</script>
 </body>
 </html>
