@@ -1,12 +1,4 @@
-<% content_for :title do %>
-	<%= @post.title %>
-<% end %>
-<% content_for :meta_description do %><%= @post.title %> by <%= @post.user.dj_name %>, <%= truncate(@post.body, :length => 100)%> on KPSU.org
-<% end %>
-<% content_for :meta_keywords do %><%= @post.user.dj_name %>, KPSU, <%= @post.title %>, Portland's College Radio, Internet Radio<% end %>
-<% content_for :meta_fb_description do %><%= truncate(@post.body, :length => 100) %><% end %>
-<% content_for :meta_fb_title do %><%= @post.title %> by <%= @post.user.dj_name %> on KPSU.org<% end %>
-<% content_for :meta_fb_image do %><%= @post.user.avatar.url(:big_thumb) %><% end %>
+
 
 
 
