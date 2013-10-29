@@ -20,9 +20,406 @@ html {
 }
 
 body {
-	background-image:url('/images/v3/kpsu-hardwood-optimized.jpg');
+	background-image:url('/twopointoh/skyline_1.png');
 	/*background-image:url('/images/v3/new-background.png');*/
 }
+
+
+
+
+/* jPlayer */
+.volume-bar {
+	margin-top: 16px;
+	float: right;
+	width: 98px;
+	height: 6px;
+	background-position: 0px -7px;
+	margin-right: 10px;
+	background-color:blue;
+}
+
+.pop-out {
+	max-width:32px;
+	max-height:32px;
+	width:32px;
+	height:32px;
+	margin-left:20px;
+	margin-top:-20px;
+	float:left;
+	cursor: hand;
+}
+
+#on-air-program {
+	margin-top: 5px;
+	float: left;
+	margin-left: 175px;
+}
+
+#on-air-dj {
+	margin-top:60px;
+	float: left;
+	margin-left: 175px;
+}
+
+#player_interface {
+	width: 55px;
+	height:100px;
+	float:left;
+	margin-right:440px;
+}
+
+.on-air-dj-dynamic {
+	width:200px;
+	font-family: Futura, "Trebuchet MS", Arial, sans-serif;;
+	font-size:.90em;
+	float:right;
+	margin-top:-10px;
+	margin-right:0px;
+}
+.on-air-dj-text {
+	width:200px;
+	font-family: Futura, "Trebuchet MS", Arial, sans-serif;;
+	font-size:.90em;
+	float:left;
+	margin-top:10px;
+	margin-right:10px;
+}
+
+#on-next {
+	float: right;
+	margin-top: 31px;
+	font-size: .75em;
+	margin-right: 10px;
+}
+
+.up-next-text {
+	margin-top:0px;
+	float:left;
+	font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+	font-size:125%;
+	margin-right:75px;
+}
+
+.pop-box {
+	height:25px;
+	width:175px;
+	display:block;
+	float:left;
+}
+
+
+.player-buttons {
+	background-size:95px,95px;
+	background-image:url("/twopointoh/player_play.png")
+}
+
+.stop-button {
+	background-size:95px,95px;
+	background-image:url("/twopointoh/player_stop.png")
+}
+
+
+
+.play {
+	margin-top: -95px;
+	margin-left:10px;
+	margin-right:330px;
+	margin-bottom: 30px;
+	width: 100px;
+	height: 100px;
+	float:left;
+}
+
+
+
+.stop {
+	display:none;
+	margin-top: -95px;
+	margin-left:10px;
+	margin-right:330px;
+	margin-bottom: 30px;
+	width: 100px;
+	height: 100px;
+	float:left;
+}
+
+.banner-box {
+	margin-top:20px;
+	width: auto;
+	height: 150px;
+}
+
+
+.player-box {
+	margin-top:23px;
+	margin-left:45px;
+	margin-bottom:20px;
+	background-size:400px 225px;
+	height: 225px;
+	width: 400px;
+	max-height:225px;
+	max-width:400px;
+	background-image:url("/twopointoh/player_img.png");
+}
+
+.player-controls {
+	float:left;
+}
+
+
+
+/* Banner */
+.home-box {
+	height:50px;
+	width:165px;
+	margin-left:10px;
+	bottom:0px;
+	margin-top:65px;
+	z-index:1000;
+	display:block;
+}
+
+.control-banner-box {
+	width: 1040px;
+	height:160px;
+	margin: 0 auto;
+	/*background-color: #F5FFFA;*/
+	border-radius:10px;
+}
+
+
+.link-holder:hover
+{ 
+	color:#487493;
+}
+
+.banner-link-box {
+	margin-top:10px;
+	width: 980px;
+	height: 30px;
+	padding-left:60px;
+	background-color: #DCDCDC;
+}
+
+.link-box {
+	margin-left:20px;
+	margin-right:20px;
+	margin-top:3px;
+	margin-bottom:20px;
+}
+
+.link-holder {
+	margin-left:10px;
+	margin-right:10px;
+	margin-top:6px;
+	margin-bottom:20px;
+	float:left;
+	color: black;
+	font-family: "Futura"
+}
+
+.banner-content-box {
+	padding-top:60px;
+	margin-bottom:-10px;
+	width: 1040px;
+	height:121px;
+	background-size: 1040px,121px;
+	background-image:url("/twopointoh/banner_image2.png");
+}
+
+.logo-holder {
+	max-width:225px;
+	max-height:225px;
+	width:225px;
+	height:225px;
+	float:right;
+	margin-right:430px;
+	margin-bottom:-60px;
+	margin-top:-41px;
+}
+
+/* main */
+ .content-holder {
+	width: 1040px;
+	margin: 0 auto;
+	height:780px;
+	margin-top: 20px;
+	/*background-image:url('/twopointoh/content_box_img.png'); */
+	border-radius:25px;
+	padding-top:5px;
+}
+
+.post-holder {
+	float:left;
+	margin-left:-20px;
+	width: 545px;
+}
+
+.post-box {
+	width: 520px;
+	margin-left: 50px;
+	margin-top: 20px;
+	height: 130px;
+	background-color:white;
+	opacity:1.0;
+	border-radius:25px;
+	border-top-left-radius:0px;
+	border-bottom: solid;
+	border-left:solid;
+	border-right:solid;
+	border-width:3px;
+	border-color: #DCDCDC;
+	/*box-shadow: 10px 10px 5px #888888;*/
+}
+
+.post-title-box {
+	width: 520px;
+	height:30px;
+	padding-right:10px;
+	left:10px;
+	margin-top:10px;
+	padding-top:5px;
+	padding-left:10px;
+	background-color:#DCDCDC;
+}
+
+.post-title-image {
+	width: 520px;
+	height:30px;
+	max-width: 520px;
+	max-height:30px;
+	background-image:url("/twopointoh/banner_thing_01.png")
+
+}
+
+.title-text {
+	color: black;
+	font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+	text-transform:uppercase;
+	font-style:italic;
+	font-size:110%;
+	
+}
+
+.title-text:hover
+{ 
+	color:white;
+}
+
+
+.body-text{
+	padding-top:5px;
+	margin-left:10px;
+	margin-right:10px;
+	margin-top:5px;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 93.7%;
+}
+
+.paginate-holder {
+	margin-top:5px;
+	margin-left:20px;
+}
+
+.paginate-text {
+	color: red;
+}
+
+.widget-holder {
+	margin-left: 580px;
+	padding-right:15px;
+	padding-top:20px;
+}
+
+.facebook-box {
+	background-color: white;
+	width: 370px;
+	height: 600px;
+	margin-bottom: 20px;
+	margin-top:20px;
+	margin-left:75px;
+	border-radius:25px;
+	/*box-shadow: 10px 10px 5px #888888;*/
+	
+}
+
+.twitter-box {
+	width:360px;
+	height:600px;
+	margin-left:75px;
+	border-radius:35px;
+	background-color:white;
+	/*box-shadow: 10px 10px 5px #888888;*/
+}
+
+/* Post Show */
+
+ .post-show-box {
+ 	margin-left:1px;
+ 	width:1010px;
+ 	height:auto;
+ 	background-color:white;
+ 	margin-top: 80px;
+ 	margin-bottom:20px;
+ 	padding-left:10px;
+ 	padding-right:10px;
+ 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+ 	background-color:#DCDCDC;
+ 	border-bottom: solid;
+	border-left:solid;
+	border-right:solid;
+	border-width:3px;
+	border-color: white;
+ }
+
+ .post-show-title-box {
+ 	height: 40px;
+ 	padding-left:0px;
+ 	width: 1030px;
+ 	margin-left: -10px;
+ 	padding-bottom:10px;
+ 	background-color: white;
+ 	margin-bottom: 20px;
+
+ }
+
+ .post-show-title-text {
+ 	font-size:150%;
+ 	padding-right:10px;
+ 	padding-left:10px;
+ 	margin-top:-5px;
+ 	font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+ 	text-transform:capitalize;
+ }
+
+ .post-show-author-text {
+ 	margin-top:-15px;
+ 	margin-right:50px;
+ 	font-size:75%;
+ 	height:10px;
+ 	float:right;
+ }
+
+ .post-show-bottom-box {
+ 	height: 35px;
+ 	width:1030px;
+ 	margin-top:10px;
+ 	margin-left:-10px;
+ 	background-color: white;
+ }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 a:link,a:active,a:visited {
 	text-decoration:none;
@@ -792,104 +1189,7 @@ ul.vertical,li.vertical {
 
 /* MINI-PLAYER */
 
-#on-air-offset {
-	float: left;
-	margin-top: 30px;
-	width: 180px;
-	height: 192px;
-}
 
-#on-air-program {
-	font-size: .75em;
-	margin-top: 7px;
-	float: right;
-	margin-right: 10px;
-}
-
-#on-air-dj {
-	float: right;
-	clear: both;
-	margin-right: 10px;
-	font-size: .75em;
-}
-
-#on-next {
-	float: right;
-	margin-top: 31px;
-	font-size: .75em;
-	margin-right: 10px;
-}
-
-#player_interface {
-	width: 180px;
-}
-
-.player-buttons {
-	background-image:url("/images/v3/mini-player-button-sprite.png");
-}
-
-.play {
-	margin-top: 15px;
-	margin-left: 20px;
-	margin-bottom: 15px;
-	width: 43px;
-	height: 61px;
-	background-position: 0px -13px;
-}
-
-
-
-.stop {
-	display:none;
-	margin-top: 15px;
-	margin-left: 20px;
-	margin-bottom: 15px;
-	width: 43px;
-	height: 61px;
-	background-position: 45px -13px;
-}
-
-.indicator {
-	width: 18px;
-	height: 19px;
-	background-position: -3px 25px;
-	float: right;
-	z-index: 30;
-	margin-bottom: -14px;
-}
-
-.volume-bar {
-	margin-top: 16px;
-	float: right;
-	width: 98px;
-	height: 6px;
-	background-position: 0px -7px;
-	margin-right: 10px;
-}
-
-.volume-bar-value {
-	float: right;
-	width: 86px;
-	height: 6px;
-}
-
-.volume-text {
-	color: #323232;
-	float: right;
-	width: 85px;
-	height: 12px;
-	font-size: .5em;
-	margin-top: 38px;
-	margin-right: -100px;
-}
-
-.volume-text .quiet {
-	float:left;
-}
-
-.volume-text .loud {
-	float:right;
-}
 
 /* SIDE NAVIGATION */
 
