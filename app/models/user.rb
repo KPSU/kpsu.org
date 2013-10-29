@@ -73,7 +73,7 @@ class User < ActiveRecord::Base
   end
 
   def self.find(*args)
-    if(args[0] != nil)
+    if(args[0] != 0)
       unless (args[0].class == Symbol) || (args[0].to_i > 0)
         find_by_dj_name(args[0].gsub("_", " "))
       else
