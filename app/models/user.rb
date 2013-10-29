@@ -73,10 +73,12 @@ class User < ActiveRecord::Base
   end
 
   def self.find(*args)
-    unless (args[0].class == Symbol) || (args[0].to_i > 0)
-      find_by_dj_name(args[0].gsub("_", " "))
-    else
-      super
+    if(args[0] != nil)
+      unless (args[0].class == Symbol) || (args[0].to_i > 0)
+        find_by_dj_name(args[0].gsub("_", " "))
+      else
+        super
+      end
     end
   end
   
@@ -290,7 +292,7 @@ class User < ActiveRecord::Base
   end
   
   def url_slug
-      return self.dj_name.gsub(" ", "-")
+      return self.gsub(/[\.]|[\/]/, "_").gsub(/[\s]/, "_").gsub("-","_").downcase
   end
 
   private
