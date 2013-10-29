@@ -1,155 +1,201 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-	"http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-	
+<% content_for :title do %>
+	<%= @post.title %>
+<% end %>
+<% content_for :meta_description do %><%= @post.title %> by <%= @post.user.dj_name %>, <%= truncate(@post.body, :length => 100)%> on KPSU.org
+<% end %>
+<% content_for :meta_keywords do %><%= @post.user.dj_name %>, KPSU, <%= @post.title %>, Portland's College Radio, Internet Radio<% end %>
+<% content_for :meta_fb_description do %><%= truncate(@post.body, :length => 100) %><% end %>
+<% content_for :meta_fb_title do %><%= @post.title %> by <%= @post.user.dj_name %> on KPSU.org<% end %>
+<% content_for :meta_fb_image do %><%= @post.user.avatar.url(:big_thumb) %><% end %>
 
 
-  
-  <%= csrf_meta_tag %>
-  <% if RAILS_ENV == "development" %>
-  	<script src="http://localhost:8080/application.js" type="text/javascript" charset="utf-8"></script>
-  <% else %>
-	<script src="http://kpsu.org:8080/application.js" type="text/javascript" charset="utf-8"></script>
-  <% end %>
-  <%= stylesheet_link_tag "production.alt.css", :cache => "v3_alt_css" %>
-  <%= javascript_include_tag 'production.alt.js', :cache => "v3_alt_js" %>
-	
-</head>
-<body id="alternative" style="float:left;float:top">
-	<div id="content-wrapper">
-						
 
-		<div id="mini-banner" style="float:left"> 
-			<img src="/images/v3/mini-banner.png" usemap="#mini-bannermap" style="position: absolute;clip: rect(0px 619px 301px 196px);">
-			
-			<div id="on-air-offset" style="position: absolute">
-			<% cache('alternative_who_is_playing') do %>
-			<div id="on-air-program" class="m1-light yellow-text">
-				<% unless currently_playing.class == String %>
-					<%= link_to(currently_playing[0], program_path(currently_playing[1]), :class => "m1-light yellow-text", :style => "line-height: 15px;") %>
-				<% else %>
-					<span class="m1-light yellow-text">KPSU</span>
-				<% end %>
-			</div>
-			<div id="on-air-dj" class="m1-light purple-text">
-				<% unless currently_playing.class == String %>
-					<span class="m1-light purple-text"><%= currently_playing[2] %></span>
-				<% else %>
-					<span class="m1-light purple-text">Portland's College Radio</span>
-				<% end %>
-			</div>
-			<div id="hidden-player" style="width:0px;height:0px;"></div>
-			<div id="player" class="float-left">
-				<div id="player_interface">
-					<div class="volume-bar">
-						<div class="indicator pointer player-buttons"></div>
-						<div class="volume-bar-value player-buttons"></div>
-					</div>
-					<div class="volume-text">
-						<div class="quiet">quiet</div>
-						<div class="loud">loud</div>
-					</div>
-					<div class="play pointer player-buttons"></div>
-					<div class="stop pointer player-buttons"></div>
-				</div>
-			</div>
-			<div id="on-next">
-				<% unless up_next.class == String %>
-					<%= link_to(up_next[0], program_path(up_next[1]), :class => "m1-light red-text") %>
-				<% else %>
-					<span class="m1-light red-text">"We're on Auto Pilot!"</span>
-				<% end %>
-			</div>	
-			<% end %>		
-			</div>
-		</div>
-		<div id="page-headline">
-			<%= yield(:page_headline) %>
-		</div>
-		<div id="content" class="float-left" style="width:946px;height:100%;">
-		<%= yield %>
-		</div>
+<div class = "post-show-box">
+	<div class = "post-show-title-box">
+		</br>
+		<center class = "post-show-title-text"> <%= @post.title %> </center>
 	</div>
 
-	<script type="text/javascript" charset="utf-8">
-		$(document).ready(function(){
-				$("#hidden-player").jPlayer( {
-				  ready: function () {
-				    $(this).jPlayer("setMedia", {
-				          mp3: "http://stream.kpsu.org:8080/listen"
-				    }).jPlayer("stop");
-				  },
-				  ended: function (event) {			
-					$(this).jPlayer("play");		
-				  },
-				  supplied: "mp3",
-				  swfPath: "/players/v3/",
-				  volume: 0.8
-				});	
-				function showStopBtn()
-				{
-					$(".play").fadeOut(function(){
-						$(".stop").fadeIn();
+	<a class = "post-show-author-text" style = "margin-right:130px"> Author:</a>
+	<%= link_to @post.user.dj_name, @post.user, :class => "post-show-author-text" %>
+	
+</br>
+	<%= raw @post.body.gsub(/\n/, '<br/>').gsub("<img","<center><img").gsub("\"/>","></center>").bbcode_to_html({}, false) %>
+
+	<div class = "post-show-bottom-box">
+		<% if current_user %> 
+			<% if (current_user.id == @post.user.id) || current_user.staff %>
+				<a title="Edit Post" href='/dashboard/#/posts/<%= @post.id -%>/edit'>
+					<span>Edit Post<span>
+				</a> 
+				| <%= link_to 'Destroy', @post, :confirm => 'Are you sure?', :method => :delete %>
+			<% end %>
+		<% end %>
+	</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<% content_for :page_js do %>
+	$('.post-photos a').lightBox({fixedNavigation:true});
+	<% if @post.audio_files %>
+		<% @post.audio_files.each do |a| %>
+    		$("#jquery_jplayer_<%= a.id %>").jPlayer({
+    		    ready: function() {
+    		        $(this).jPlayer("setMedia", {
+    		            mp3: "<%= a.url %>"
+    		        }).jPlayer("play");
+    		    },
+    		    ended: function(event) {
+    		    },
+    		    supplied: "mp3"
+    		}).bind($.jPlayer.event.play,
+    		function() {
+    		    $(this).jPlayer("pauseOthers");
+    		});
+    		$("#jplayer_inspector_<%= a.id %>").jPlayerInspector({
+    		    jPlayer: $("#jquery_jplayer_<%= a.id %>")
+    		});
+			<% end %>
+	<% end %>
+	<% if current_user %>
+	$(".submit").click(function(){
+		var dataString = $(":input").serializeArray();
+		$.ajax({
+			url: "/comments",
+			data: dataString,
+			dataType: 'json',
+		    type: "POST",
+		    beforeSend: function (xhr) {
+		    	$("#saving-comment").html(_ajax_saving_black);
+		    },
+		    success: function (xhr) {
+
+				$.each(xhr, function(i, data){
+
+						$(".comments-wrapper").append("<div id=\"comment-"+xhr['comment']['id']+"\" class=\"comment\" style=\"margin:5px 0px 5px 0px;width:636px;height:auto;clear:both;float:left;\"><img src=\"<%= current_user.avatar.url(:thumb)%>\"> <div style=\"margin-right:50px;\" class=\"float-right\"><div class=\"title float-left white-text\" style=\"clear:both;\">"+xhr['comment']['title']+"</div><div class=\"time float-right small\"></div><div class=\"body float-left m1-regular rounded-heavy\" style=\"margin-top:5px;clear:both;width:431px;min-height:100px;background-color:#232323;padding:5px;\">"+xhr['comment']['body']+"</div><div class=\"comment-options float-right pointer clear-both standard red-font\">Edit | Delete</div></div><div class=\"float-left white-text\" style=\"word-wrap:break-word;width:80px;margin-left:1px;\">"+xhr['comment']['user']['f_name']+" "+xhr['comment']['user']['l_name']+"</div>");
+						$(".comments-wrapper").prepend("<div class=\"invisible\"><a class=\"anchorLink\" href=\"#comment-"+xhr['comment']['id']+"\">scroll to</a></div>");
+						$("a.anchorLink").anchorAnimate()
+						$(".anchorLink").click();
 					});
-				}
 
-				function showPlayBtn()
-				{
-					$(".stop").fadeOut(function(){
-						$(".play").fadeIn();
-					});
-				}
+			$(":input").val("");
+			Recaptcha.reload();
 
-				$(".play").click(function() {
-					$("#hidden-player").jPlayer("play");
-					showStopBtn();
-					return false;
-				});		
-
-				$(".stop").click(function() {
-					$("#hidden-player").jPlayer("stop");
-					showPlayBtn();
-					return false;
-				});
-				$(".indicator").draggable({
-					axis: "x", 
-					containment: "parent" });
-				$(".indicator").bind("dragstart", function(){
-					var offset = $(this).offset().left;
-					console.log("Initial Offset:")
-					console.log(offset)
-					$(this).attr("data-start-offset", offset)	
-				});
-				$(".indicator").bind("dragstop", function(){
-					var offset = $(this).offset().left;
-					var parOffset = $(".volume-bar").offset().left + $(".volume-bar").outerWidth() - 18;
-					var diff = (parOffset - offset);
-					var vol = ((86 - diff*1.25) / 100)
-
-					console.log("ending Offset:")
-					console.log(offset)
-					console.log("Volume:")
-					console.log(vol)
-					$("#hidden-player").jPlayer("volume", vol);
-				});
-			
-				<%= yield(:page_js) %>
-				
+			},
+		    complete: function (xhr) {
+		    	$("#saving-comment").html("");
+		    },
+		    error: function (xhr, status, error) {
+				alert("Please try again!")
+				Recaptcha.reload();
+		    }
 		});
-	</script>
-	<script type="text/javascript">
+	});
+	<% end %>
+	$("#post-comment").click(function(){
+		var text = $(this).text();
+		if(text == "New Comment"){
+			$(this).text("Hide New Comment")
+			$(".comment.new").toggleClass("invisible").show();
+		}else if(text == "Hide New Comment"){
+			$(this).text("New Comment")
+			$(".comment.new").slideUp().toggleClass("invisible");
+		}
 
-	  var _gaq = _gaq || [];
-	  _gaq.push(['_setAccount', 'UA-20622260-1']);
-	  _gaq.push(['_trackPageview']);
+	});
 
-	  (function() {
-	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-	  })();
+	$("#view-comments").click(function(){
+		var txt = $(this).text();
+		$(".comments-wrapper").toggleClass('invisible');
+		$(".comment.new").hide();
+		if (txt == "View Comments"){
+			$(this).html("Hide Comments");
 
-	</script>
-</body>
-</html>
+			$.ajax({
+				url: "/comments/post/<%= @post.id %>",
+				dataType: 'json',
+			    type: "GET",
+			    beforeSend: function (xhr) {
+			    	$(".comments-wrapper").append(_ajax_loader_black);
+			    },
+			    success: function (xhr) {
+
+				},
+			    complete: function (xhr) {
+					json = eval("(" + xhr['response'] + ")")					
+						$.each(json['comments'], function(i, data){
+							$("#loader").remove();
+							if(data['owner'] == "true"){
+								var del = " <span class=\"delete-comment\" data-id=\""+data['id']+"\"> Delete<span>";
+								var edit = " <span class=\"edit-comment\" data-id=\""+data['id']+"\">Edit <span>";
+								var c_options = edit + "|" + del
+							}else{
+								var c_options = "";
+							}
+							$(".comments-wrapper").append("<div class=\"comment content\" data-comment-id=\""+data['id']+"\" style=\"margin:5px 0px 5px 0px;width:636px;height:auto;clear:both;float:left;\"><img src=\"" + data['user']['pic'] +"\"><div style=\"margin-right:50px;\" class=\"float-right\"><div class=\"title float-left white-text\" style=\"clear:both;\">"+data['title']+"</div><div class=\"time float-right small\"></div><div class=\"body float-left m1-regular rounded-heavy\" style=\"margin-top:5px;clear:both;width:431px;min-height:100px;background-color:#232323;padding:5px;\">"+data['body']+"</div><div class=\"comment-options float-right pointer clear-both standard red-font\">"+c_options+"</div></div><div class=\"float-left white-text\" style=\"word-wrap:break-word;width:80px;margin-left:1px;\">"+data['user']['name']+"</div></div>");
+							});
+			},
+				error: function(){
+					console.log("shit")
+				 $("#loader").remove();		
+			}});
+
+		}else{
+			$(this).html("View Comments");
+			$(".comment.content").remove();
+		}
+	});
+
+	$(".delete-comment").live("click", function(){
+		var cid = $(this).attr("data-id");
+		var murl = "/comments/"+cid;
+		if ( confirm("Are you sure you want to delete this comment?") ){
+		$.ajax({
+			url: murl,
+			type: "POST",
+			dataType: 'script',
+			data: { '_method': 'delete' },
+			success: function(xhr){
+				$(".comment.content[data-comment-id=\""+cid+"\"]").remove();
+			}
+		});
+		return false;}
+	});
+	if(window.location.hash == "#comments"){
+		$("#view-comments").click();
+	}
+<% end %>
