@@ -190,10 +190,11 @@
 				<div class="bebas sixteen-pt yellow-text special-type"></div>
 				
 				<div class="special-dj-avatar">
-					<a href="<%= url_for(top_dj) %>" title="Top DJ">
-						
-							<div class="float-left special-dj-name"><span class="white-text"><%= top_dj.dj_name %></span></div>
-							<img src='<%= top_dj.avatar.url(:square_thumb_big) %>'>
+					<!-- last dj created to expose new dj's to the public! -->
+					<a href="<%= url_for(User.last.dj_name) %>" title="Top DJ">
+						<a></a>
+							<div class="float-left special-dj-name"><span class="white-text"><%= User.last.dj_name %></span></div>
+							<img src='<%= User.last.avatar.url(:square_thumb_big) %>'>
 						
 					</a>
 				</div>
