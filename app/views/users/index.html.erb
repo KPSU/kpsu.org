@@ -191,7 +191,7 @@
 				
 				<div class="special-dj-avatar">
 					<a href="<%= url_for(top_dj) %>" title="Top DJ">
-						<%if(top_dj.dj_name != nil %>
+						<%if(top_dj.dj_name != nil) %>
 							<div class="float-left special-dj-name"><span class="white-text"><%= top_dj.dj_name %></span></div>
 							<img src='<%= top_dj.avatar.url(:square_thumb_big) %>'>
 						<% end %>
