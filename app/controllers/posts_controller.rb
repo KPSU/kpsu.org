@@ -11,19 +11,21 @@ class PostsController < ApplicationController
   
   def index
     @user_session = UserSession.new
+    @post_app = Post.search(params[:search], params[:page]).per_page(10)
 
     unless params[:page]
+    
     @downloads = Download.find(:all, :limit => 5, :order => "downloads.created_at DESC", :include => [:user, :program], :conditions => ['downloads.user_id IS NOT ? AND downloads.program_id IS NOT ? AND downloads.program_id > ?', nil, nil, 0])
     @start = Date.strptime("12/31/2010 01:01:01", "%m/%d/%Y %H:%M").to_time
     @rev = Review.order("created_at DESC").limit(5)
     @post = Post.where(:content_type_id => 1).order("created_at DESC").limit(2)
 
     if params[:blog]
-      @posts = Post.paginate(:all, :order => "created_at DESC", :conditions => ['content_type_id = ? AND created_at > ?', 1, @start], :per_page => 7, :page => params[:page])
+      @post_app = Post.paginate(:all, :order => "created_at DESC", :conditions => ['content_type_id = ? AND created_at > ?', 1, @start], :per_page => 10, :page => params[:page])
     elsif params[:review]
-      @posts = Post.paginate(:all, :order => "created_at DESC", :conditions => ['content_type_id = ? AND created_at > ?', 1, @start], :per_page => 7, :page => params[:page])
+      @post_app = Post.paginate(:all, :order => "created_at DESC", :conditions => ['content_type_id = ? AND created_at > ?', 1, @start], :per_page => 10, :page => params[:page])
     else 
-      @posts = Post.where('posts.created_at > ?', @start).includes(:user).order("posts.created_at DESC").paginate(:per_page => 7, :page => params[:page])
+      @post_app = Post.where('posts.created_at > ?', @start).includes(:user).order("posts.created_at DESC").paginate(:per_page => 10, :page => params[:page])
     end
     respond_to do |format|
       format.html # show.html.erb
