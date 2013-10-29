@@ -13,6 +13,12 @@ class Post < ActiveRecord::Base
   
   validates_presence_of :content_type, :title, :body, :user_id
   
+  def self.search(search, page)
+    @start = Date.strptime("12/31/2010 01:01:01", "%m/%d/%Y %H:%M").to_time
+    paginate :per_page => 10, :page => page,
+           :order => 'created_at DESC'
+  end
+
   def images
     @images = []
     @images_array = self.assets.each do |i|
