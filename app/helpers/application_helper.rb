@@ -171,9 +171,9 @@ module ApplicationHelper
     #@z = @max.max_by(&:count)
     @z = @max.sort {|a,b| a.count <=> b.count }
     @u = @z[@z.size-1].user
-    if(@u == nil)
-      @u = User.last
-    end
+    
+    @u = User.last
+
     return @u
   end
 
