@@ -84,101 +84,48 @@
 	});
 	</script>
   <% end %>
-<script type="text/javascript">
-
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-44967474-1']);
-  _gaq.push(['_setDomainName', 'kpsu.org']);
-  _gaq.push(['_setAllowLinker', true]);
-  _gaq.push(['_trackPageview']);
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-
-</script>
+	
 </head>
-<body id="alternative" align="left">
-	<div id="content-wrapper">				
-		<div id="alt-nav" class="chunk-five yellow-text sixteen-pt">
-			<ul class="vertical yellow-text chunk-five">
-			<% if current_user && current_user.listener == false %>
-			<li class="vertical chunk-five"><%= link_to("dashboard", dashboard_path, :class => "yellow-text") %></li>
-			<% elsif current_user && current_user.listener == true %>
-			<li class="vertical chunk-five"><%= link_to("home", listener_path, :class => "yellow-text") %></li>
-			<% end %>
-			<li class="vertical yellow-text chunk-five"><a class="yellow-text" href="https://www.foundation.pdx.edu/publicgift/kpsu.jsp">donate</a></li>
-			<li class="vertical chunk-five"><a class="yellow-text" href="/programs/all">programs</a></li>
-			<li class="vertical chunk-five"><a class="yellow-text" href="/underwriting">underwriting</a></li>
-			<li class="vertical chunk-five"><a class="yellow-text" href="/contact">contact</a></li>
-			<li class="vertical chunk-five"><a class="yellow-text" href="/about">about</a></li>
-			<li class="vertical chunk-five"><a class="yellow-text" href ="" onclick="window.open('/popup_player', 'asdas', 'toolbars=0,width=290,height=290,scrollbars=0,resizable=0');" value="Open the window">pop-up player</a></li>
-
-			<% unless current_user %>
-			<li class="vertical chunk-five"><a class="yellow-text" href="/login">login</a></li>
-			<% else %>
-			<li class="vertical chunk-five"><a class="yellow-text" href="/logout">logout</a></li>
-			<% end %>
-			</ul>
-		</div>
-		<div id="mini-banner" style="margin:0;padding:0;"> 
-			<img src="/images/v3/mini-banner.png" usemap="#mini-bannermap" style="position: absolute;clip: rect(0px 619px 301px 196px);">
-			<map id="mini-bannermap" name="mini-bannermap"><area shape="poly" alt="Download Podcasts from our program archive" title="" coords="362,237,365,253,488,222,471,206,423,220" href="/archives" target="" /><area shape="poly" alt="Our live streaming schedule" title="" coords="494,213,492,223,582,194,575,179" href="/schedule" target="" /><area shape="poly" alt="View KPSU's DJs" title="" coords="418,270,488,252,485,235,406,247" href="/djs" target="" /><area shape="poly" alt="Our Artist Database" title="" coords="409,279,499,261,493,282,409,294,408,286" href="/artists" target="" />
-				<area shape="poly" alt="Listen to KPSU!" title="" coords="499,237,587,209,587,231,497,249" href="/listen" target="" />
-				<area shape="poly" alt="Check out the latest music and event reviews!" title="" coords="502,260,511,271,591,262,586,239" href="/reviews" target="" /><area shape="poly" alt=
-				"KPSU Home Page" title="" coords="323,185,333,235,613,167,592,114" href="/" target="" /><!-- Created by Online Image Map Editor (http://www.maschek.hu/imagemap/index) --></map>
-			<div id="on-air-offset" style="position: absolute">
-			<% cache('alternative_who_is_playing') do %>
-			<div id="on-air-program" class="m1-light yellow-text">
-				<% unless currently_playing.class == String %>
-					<%= link_to(currently_playing[0], program_path(currently_playing[1]), :class => "m1-light yellow-text", :style => "line-height: 15px;") %>
-				<% else %>
-					<span class="m1-light yellow-text">KPSU</span>
-				<% end %>
-
-			</div>
-			<div id="on-air-dj" class="m1-light purple-text">
-				<% unless currently_playing.class == String %>
-					<span class="m1-light purple-text"><%= currently_playing[2] %></span>
-				<% else %>
-					<span class="m1-light purple-text">Portland's College Radio</span>
-				<% end %>
-			</div>
-			<div id="hidden-player" style="width:0px;height:0px;"></div>
-			<div id="player" class="float-left">
-				<div id="player_interface">
-					<div class="volume-bar">
-						<div class="indicator pointer player-buttons"></div>
-						<div class="volume-bar-value player-buttons"></div>
-					</div>
-					<div class="volume-text">
-						<div class="quiet">quiet</div>
-						<div class="loud">loud</div>
-					</div>
-					<div class="play pointer player-buttons"></div>
-					<div class="stop pointer player-buttons"></div>
+<body>
+	<div class= "content-holder">
+		<div class = "banner-box">
+			<div class = "control-banner-box" style = "margin-top:-30px;">
+				<div class = "banner-content-box">
+				<a href = "/" class = "home-box"> </a>	
+				</div>
+				<div class = "banner-link-box">
+					<a href = "/programs/all" class = "link-holder"> Programs </a>
+					<a class = "link-holder"> - </a>
+					<a href = "/archives" class = "link-holder"> Archive </a>
+					<a class = "link-holder"> - </a>
+					<a href = "" onclick="window.open('/popup_player', 'asdas', 'toolbars=0,width=290,height=290,scrollbars=0,resizable=0','status=0');" value="Open the window" class = "link-holder"> Player </a> 
+					<a class = "link-holder"> - </a>
+					<a href = "https://commerce.cashnet.com/kpsu" class = "link-holder"> Merchandise </a>
+					<a class = "link-holder"> - </a>
+					<a href = "https://www.foundation.pdx.edu/publicgift/kpsu.jsp" class = "link-holder">Donate</a>
+					<a class = "link-holder"> - </a>
+					<a href = "/about" class = "link-holder"> About </a>
+					<a class = "link-holder"> - </a>
+					<a href = "/contact" class = "link-holder"> Contact </a>
+					<a class = "link-holder"> - </a>
+					<a href = "/schedule" class = "link-holder"> Schedule </a>
+					<a class = "link-holder"> - </a>
+					<% unless current_user %>
+						<a class="link-holder" href="/login">Login</a>
+					<% else %>
+						<a class="link-holder" href="/dashboard">Dashboard</a>
+					<% end %>
 				</div>
 			</div>
-			<div id="on-next">
-				<% unless up_next.class == String %>
-					<%= link_to(up_next[0], program_path(up_next[1]), :class => "m1-light red-text") %>
-				<% else %>
-					<span class="m1-light red-text">"We're on Auto Pilot!"</span>
-				<% end %>
-			</div>	
-			<% end %>		
-			</div>
-		</div>
-		<div id="page-headline">
-			<%= yield(:page_headline) %>
-		</div>
-		<div id="content" class="float-left" style="width:946px;height:100%;">
+		</div>	
+		
 		<%= yield %>
-		</div>
-
+		
 	</div>
+
+	
+	
+
 
 	<script type="text/javascript" charset="utf-8">
 		$(document).ready(function(){
@@ -246,6 +193,18 @@
 				
 		});
 	</script>
-	
+	<script type="text/javascript">
+
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-20622260-1']);
+	  _gaq.push(['_trackPageview']);
+
+	  (function() {
+	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+
+	</script>
 </body>
 </html>
