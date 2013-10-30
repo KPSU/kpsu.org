@@ -87,8 +87,16 @@
 						<a class = "title-text"> <%= link_to(truncate(post.title,:length =>50), post, :class => "title-text") %> </a>
 					</div>
 						<p class = "body-text">
-							<% b = strip_tags(post.body).bbcode_to_html %> 
-							<%=  strip_tags(truncate(strip_tags(b),:length =>280).gsub("\n"," ").gsub("&apos;","'").gsub("&quot;","\"").gsub("&nbsp;","").gsub("&#39;","").gsub("HTML Generator Sample Page","").gsub("&ldquo;","")) %>
+							<% b = strip_tags(post.body) %> 
+							<% b.gsub!("&ldquo;","") if b.include? "&ldquo;" %>
+							<% b.gsub!("&rsquo;","") if b.include? "&rsquo;" %>
+							<% b.gsub!("&rdquo;","") if b.include? "&rdquo;" %>
+							<% b.gsub!("&nbsp;","") if b.include? "&nbsp;" %>
+							<% b.gsub!("&#39;","") if b.include? "&#39;" %>
+							<% b = b.bbcode_to_html %>
+
+							<%=  strip_tags(truncate(strip_tags(b).html_safe,:length =>280).gsub("\n"," ").gsub("HTML Generator Sample Page","")).html_safe %>
+						
 							
 							
 				</div>
