@@ -89,35 +89,37 @@
 <body>
 	<div class= "content-holder">
 		<div class = "banner-box">
-			<div class = "control-banner-box" style = "margin-top:-30px;">
-				<div class = "banner-content-box">
+		<div class = "control-banner-box">
+
+			<div class = "banner-content-box">
 				<a href = "/" class = "home-box"> </a>	
-				</div>
-				<div class = "banner-link-box">
-					<a href = "/programs/all" class = "link-holder"> Programs </a>
-					<a class = "link-holder"> - </a>
-					<a href = "/archives" class = "link-holder"> Archive </a>
-					<a class = "link-holder"> - </a>
-					<a href = "" onclick="window.open('/popup_player', 'asdas', 'toolbars=0,width=290,height=290,scrollbars=0,resizable=0','status=0');" value="Open the window" class = "link-holder"> Player </a> 
-					<a class = "link-holder"> - </a>
-					<a href = "https://commerce.cashnet.com/kpsu" class = "link-holder"> Merchandise </a>
-					<a class = "link-holder"> - </a>
-					<a href = "https://www.foundation.pdx.edu/publicgift/kpsu.jsp" class = "link-holder">Donate</a>
-					<a class = "link-holder"> - </a>
-					<a href = "/about" class = "link-holder"> About </a>
-					<a class = "link-holder"> - </a>
-					<a href = "/contact" class = "link-holder"> Contact </a>
-					<a class = "link-holder"> - </a>
-					<a href = "/schedule" class = "link-holder"> Schedule </a>
-					<a class = "link-holder"> - </a>
-					<% unless current_user %>
-						<a class="link-holder" href="/login">Login</a>
-					<% else %>
-						<a class="link-holder" href="/dashboard">Dashboard</a>
-					<% end %>
-				</div>
 			</div>
-		</div>	
+
+			<div class = "banner-link-box">
+				<a href = "/programs/all" class = "link-holder"> Programs </a>
+				<a class = "link-holder"> - </a>
+				<a href = "/archives" class = "link-holder"> Archive </a>
+				<a class = "link-holder"> - </a>
+				<a href = "/djs" class = "link-holder"> DJs </a>
+				<a class = "link-holder"> - </a>
+				<a href = "https://commerce.cashnet.com/kpsu" class = "link-holder"> Merchandise </a>
+				<a class = "link-holder"> - </a>
+				<a href = "https://www.foundation.pdx.edu/publicgift/kpsu.jsp" class = "link-holder">Donate</a>
+				<a class = "link-holder"> - </a>
+				<a href = "/about" class = "link-holder"> About </a>
+				<a class = "link-holder"> - </a>
+				<a href = "/contact" class = "link-holder"> Contact </a>
+				<a class = "link-holder"> - </a>
+				<a href = "/schedule" class = "link-holder"> Schedule </a>
+				<a class = "link-holder"> - </a>
+				<% unless current_user %>
+					<a class="link-holder" href="/login">Login</a>
+				<% else %>
+					<a class="link-holder" href="/dashboard">Dashboard</a>
+				<% end %>
+			</div>
+		</div>
+	</div>		
 		
 		<%= yield %>
 		
