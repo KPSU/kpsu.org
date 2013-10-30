@@ -87,15 +87,17 @@
           </br>
             <table style = "margin-left:50px">
               <th class="blue-text chunk-five">Underwriting</th>
-            <% @underwriting.each do |promo| %>
-            <tr>
-              <td><%= link_to "", promo.promomp3_url.to_s, :class => "download float-left", :title => "Click to listen" %></td>
-              <td><%= link_to promo.title, edit_promo_path(promo), :title => "Edit", :class => "green-text float-left" %></td>
-              <!--td class="yellow-text chunk-five"><%= promo.category %></td-->
-              <td class="orange-text chunk-five float-right"><%= promo.count %></td>
-              <!--Add link to listen here-->
-              <td><%= link_to 'Destroy', promo, :confirm => 'Are you sure?', :method => :delete, :class => "magenta-text", :style => "font-size:xx-small; vertical-align:top;" %></td>
-            </tr>
+            <% if @underwriting != nil %>
+              <% @underwriting.each do |promo| %>
+              <tr>
+                <td><%= link_to "", promo.promomp3_url.to_s, :class => "download float-left", :title => "Click to listen" %></td>
+                <td><%= link_to promo.title, edit_promo_path(promo), :title => "Edit", :class => "green-text float-left" %></td>
+                <!--td class="yellow-text chunk-five"><%= promo.category %></td-->
+                <td class="orange-text chunk-five float-right"><%= promo.count %></td>
+                <!--Add link to listen here-->
+                <td><%= link_to 'Destroy', promo, :confirm => 'Are you sure?', :method => :delete, :class => "magenta-text", :style => "font-size:xx-small; vertical-align:top;" %></td>
+              </tr>
+              <% end %>
             <% end %>
           </table>
 
