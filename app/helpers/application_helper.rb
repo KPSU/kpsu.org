@@ -210,6 +210,7 @@ module ApplicationHelper
     if(@u == nil || @u.dj_name == nil)
       @u = User.last(3)
       @u = @u[1]
+    end
     return @u
   end
 
