@@ -212,10 +212,12 @@
 			<div id="week" class="special-dj-wrapper">
 				<div class="bebas sixteen-pt yellow-text special-type"></div>
 				<div class="special-dj-avatar">
-					<a href="<%= url_for(third_dj) %>" title="Third Place">
-						<div class="float-left special-dj-name"><span class="white-text"><%= third_dj.dj_name %></span></div>
-						<img src='<%= third_dj.avatar.url(:square_thumb_big) %>'>
-					</a>
+					<% if third_dj != nil %>
+						<a href="<%= url_for(third_dj) %>" title="Third Place">
+							<div class="float-left special-dj-name"><span class="white-text"><%= third_dj.dj_name %></span></div>
+							<img src='<%= third_dj.avatar.url(:square_thumb_big) %>'>
+						</a>
+					<% end %>
 				</div>
 			</div>
 		</div>
