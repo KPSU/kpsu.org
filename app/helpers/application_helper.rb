@@ -207,6 +207,9 @@ module ApplicationHelper
     #@z = @max.max_by(&:count)
     @z = @max.sort {|a,b| a.count <=> b.count }
     @u = @z[@z.size - 3].user
+    if(@u == nil || @u.dj_name == nil)
+      @u = User.last(3)
+      @u = @u[1]
     return @u
   end
 
