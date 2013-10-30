@@ -10,18 +10,22 @@
       </ul>
     </div>
   <% end %>
-
+<div style = "margin-top:100px; background-color:white">
   <div class="field">
     <%= f.label :title %><br />
     <%= f.text_field :title %>
   </div>
-  <div class="field">
+  <div class="field" style = "background-color:white">
     <%= radio_button_tag(:category, 1) %>
     <%= label_tag(:category_1, "Promo") %>
     <%= radio_button_tag(:category, 2) %>
     <%= label_tag(:category_2, "PSA") %>
     <%= radio_button_tag(:category, 3) %>
     <%= label_tag(:category_3, "PSA-Timely") %>
+    <%= radio_button_tag(:category, 4) %>
+    <%= label_tag(:category_4, "Underwriting") %>
+    <%= radio_button_tag(:category, 5) %>
+    <%= label_tag(:category_5, "DJ-Tools") %>
   </div>
   <div class="field">
     <%= f.file_field :promomp3 %>
@@ -30,4 +34,5 @@
   <div class="actions">
     <%= f.submit %>
   </div>
+</div>
 <% end %>
