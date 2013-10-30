@@ -183,44 +183,7 @@
 	}
 </style>	
 		<%= render :partial => "layouts/sidebar"%>
-		<div class="special-label bebas blue-text twenty-four-pt float-left">Trending DJs</div>
-		
-		<div id="special-djs" class="float-left">
-			<div id="all-time" class="clear-left special-dj-wrapper">
-				<div class="bebas sixteen-pt yellow-text special-type"></div>
-				
-				<div class="special-dj-avatar">
-					<!-- last dj created to expose new dj's to the public! -->
-					<a href="<%= url_for(User.last.dj_name) %>" title="Top DJ">
-						<a></a>
-							<div class="float-left special-dj-name"><span class="white-text"><%= User.last.dj_name %></span></div>
-							<img src='<%= User.last.avatar.url(:square_thumb_big) %>'>
-						
-					</a>
-				</div>
-				
-			</div>
-			<div id="month" class="special-dj-wrapper">
-				<div class="bebas sixteen-pt yellow-text special-type"><span class="magenta-text"></span></div>
-				<div class="special-dj-avatar">
-					<a href="<%= url_for(second_dj) %>" title="Second Place">
-						<div class="float-left special-dj-name"><span class="white-text"><%= second_dj.dj_name %></span></div>
-						<img src='<%= second_dj.avatar.url(:square_thumb_big) %>'>
-					</a>
-				</div>
-			</div>
-			<div id="week" class="special-dj-wrapper">
-				<div class="bebas sixteen-pt yellow-text special-type"></div>
-				<div class="special-dj-avatar">
-					<% if third_dj != nil %>
-						<a href="<%= url_for(third_dj) %>" title="Third Place">
-							<div class="float-left special-dj-name"><span class="white-text"><%= third_dj.dj_name %></span></div>
-							<img src='<%= third_dj.avatar.url(:square_thumb_big) %>'>
-						</a>
-					<% end %>
-				</div>
-			</div>
-		</div>
+	
 		<div class="dj-container float-left m1-regular medium">
 			<div class="flash-notice"><%= flash[:notice] %></div>
 			<% @users.shuffle!.each do |u| %>
