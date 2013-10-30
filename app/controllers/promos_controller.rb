@@ -15,7 +15,11 @@ class PromosController < ApplicationController
     @psapromos.sort!{|x,y| x.title <=> y.title}
     @psatimelypromos = Promo.where(:category => 3)
     @psatimelypromos.sort!{|x,y| x.title <=> y.title}
-
+    @underwriting = Promo.where(:category => 4)
+    @underwriting.sort!{|x,y| x.title <=> y.title}
+    @misc = Promo.where(:category => 5)
+    @misc.sort!{|x,y| x.title <=> y.title}
+    
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @promos }
