@@ -98,9 +98,18 @@
 		</tr>
 		<% (24).times do |i| %>
 		<% unless i < @start %>
+		<% if i >= 13 %>
+			<% j = i - 12 %>
+		<% end %>
 		<tr class="table-r" data-hour="<%= (i).to_s %>">
 			<td class="dejavu-sans">
-				<span class="dejavu-sans white-font clock-time"><%= (i).to_s %>:00</span>
+				<% if i < 12 %>
+					<span class="dejavu-sans white-font clock-time"><%= (i).to_s %>:00am</span>
+				<% elsif i == 12 %>
+					<span class="dejavu-sans white-font clock-time"><%= (i).to_s %>:00pm</span>
+				<% else %>
+					<span class="dejavu-sans white-font clock-time"><%= (j).to_s %>:00pm</span>
+				<% end %>
 			</td>
 			<td data-cat="day" data-date="7" data-hour="<%= sprintf '%02d', (i) %>" class="normal sun" >
 			</td>                                                                                      
