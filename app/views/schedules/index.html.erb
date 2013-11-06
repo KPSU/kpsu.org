@@ -71,12 +71,13 @@
 	}
 	
 </style>
-
+<div style = "margin-left:200px">
 <% content_for :page_headline do %>
 	<span class="bebas sixteen yellow-text" style='text-align:right;'>Live Stream<br/> Schedule</span>
 <% end %>
 <%= render :partial => "layouts/sidebar" %>
 <div style="width:662px;border:2px solid #232323;margin:40px 0 50px 15px;float:left;" class="rounded-heavy">
+	SUPPPPP
 	<table id="schedule-table" cellspacing="0" width="644px" border="0" cellspacing="5" cellpadding="5">
 		<col class="day-column time"></colgroup>
 		<col class="day-column sunday"></colgroup>
@@ -153,7 +154,8 @@
 			var day = data['day_i']
 			var duration = data['duration']
 			var cellSelector = "td[data-date=\""+day+"\"][data-hour=\""+hour+"\"]"
-			var txt = "<a href=\"" + data['url'] +"\">" + data['name'] + "</a>"			
+			var txt = "<a href=\"" + data['url'] +"\">" + data['name'] + "</a>"
+			var description = "<a>" + data['description'] + "</a>"		
 			$(cellSelector).html(txt);
 			if(duration > 1){
 				if((hour.split("0")[0] == 0)) {
@@ -170,3 +172,4 @@
 	});
 	
 <% end %>
+</div>
