@@ -8,6 +8,7 @@
 <% content_for :page_headline do %>
 	<span class="bebas purple-text">KSPU Archive</span>
 <% end %>
+<div style = "margin-left:200px">
 <%= render :partial => "layouts/sidebar" %>
 
 <div class="blue float-left rounded-heavy-top titlebar">
@@ -46,4 +47,5 @@
 	<div class="float-left clear-both" style="width:100%;text-align:center;">
 		<%= will_paginate(@downloads)%>
 	</div>
+</div>
 </div>
