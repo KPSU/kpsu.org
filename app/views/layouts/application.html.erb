@@ -93,6 +93,7 @@
 							<% b.gsub!("&rdquo;","") if b.include? "&rdquo;" %>
 							<% b.gsub!("&nbsp;","") if b.include? "&nbsp;" %>
 							<% b.gsub!("&#39;","") if b.include? "&#39;" %>
+							<% b.gsub!("&quot;","") if b.include? "&quot;" %>
 							<% b = b.bbcode_to_html %>
 
 							<%=  strip_tags(truncate(strip_tags(b).html_safe,:length =>280).gsub("\n"," ").gsub("HTML Generator Sample Page","")).html_safe %>
