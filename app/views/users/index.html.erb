@@ -183,7 +183,7 @@
 	}
 </style>	
 		<%= render :partial => "layouts/sidebar"%>
-	
+<div style = "margin-left:200px">	
 		<div class="dj-container float-left m1-regular medium">
 			<div class="flash-notice"><%= flash[:notice] %></div>
 			<% @users.shuffle!.each do |u| %>
@@ -273,7 +273,7 @@
 <% end %>
 </ul>
 <!-- tooltip element --> 
-
+</div>
 
 <% content_for :page_js do %>
 $("li.category.genre").toggle(function(){		
