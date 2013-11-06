@@ -2,6 +2,7 @@
 	<%= @title %>
 <% end %>
 <%= render :partial => "layouts/sidebar" %>
+<div style = "margin-right:200px">
 <div class="blue float-left rounded-heavy-top titlebar" style="float:right;">
 	<div id="" class="chunk-five sixteen">
 		<%= @title %>
@@ -11,6 +12,7 @@
 <% # The div below, has a class of "container" that's important for the saved.js.erb partial inside: views/contents/_saved.js.erb %>
 <div class="dejavu-condensed container twelve-pt listen" style="padding-left:10px;clear:both;">
 	<div style="padding:0px 0px 0px 10px;">
+
 		<%= raw @content.body %>
 	</div>
 	<div class="dejavu-condensed edit-content" style="clear:left;">
@@ -34,4 +36,5 @@
 		$(".generic-post div").html(_ajax_saving_black);
 	});
 </script>
+</div>
 <% end %>
