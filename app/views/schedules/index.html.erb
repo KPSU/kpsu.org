@@ -108,6 +108,8 @@
 					<span class="dejavu-sans white-font clock-time"><%= (i).to_s %>:00am</span>
 				<% elsif i == 12 %>
 					<span class="dejavu-sans white-font clock-time"><%= (i).to_s %>:00pm</span>
+				<% elsif i == 0  %>
+					<span class="dejavu-sans white-font clock-time"> 12:00am </span>
 				<% else %>
 					<span class="dejavu-sans white-font clock-time"><%= (j).to_s %>:00pm</span>
 				<% end %>
