@@ -43,19 +43,29 @@
 
 </head>
 <body>
-
+	<!--<div style="padding:20px 20px 20px 0px;">
+		<%= form_for :download, :url => archive_search_path, :method => :get, :html => {:style => "margin:0 0 0 58px;"} do |c| %>
+			<span class="bebas sixteen-pt purple-text">Program</span> <%= c.text_field :program %>
+			<span class="bebas sixteen-pt purple-text">DJ</span> <%= c.text_field :dj %>
+			<%= c.submit 'Search' %>
+		<% end %>
+	</div>-->
 
 	<div class = "banner-box">
 		<div class = "control-banner-box">
-
+			<!--<div style = "height:125px; width:700px; position:absolute; margin-left:340px; background-color:white;">
+				come to our trivia night
+			</div>-->
 			<div class = "banner-content-box">
 				<a href = "/" class = "home-box"> </a>	
 			</div>
 
 			<div class = "banner-link-box">
-				<a href = "/programs/all" class = "link-holder"> Programs </a>
+				<a href = "/schedule" class = "link-holder"> Schedule </a>
 				<a class = "link-holder"> - </a>
 				<a href = "/podcasts" class = "link-holder"> Podcasts </a>
+				<a class = "link-holder"> - </a>
+				<a href = "/programs/all" class = "link-holder"> Programs </a>
 				<a class = "link-holder"> - </a>
 				<a href = "/djs" class = "link-holder"> DJs </a>
 				<a class = "link-holder"> - </a>
@@ -66,8 +76,6 @@
 				<a href = "/about" class = "link-holder"> About </a>
 				<a class = "link-holder"> - </a>
 				<a href = "/contact" class = "link-holder"> Contact </a>
-				<a class = "link-holder"> - </a>
-				<a href = "/schedule" class = "link-holder"> Schedule </a>
 				<a class = "link-holder"> - </a>
 				<% unless current_user %>
 					<a class="link-holder" href="/login">Login</a>
