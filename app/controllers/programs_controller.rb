@@ -83,7 +83,7 @@ class ProgramsController < ApplicationController
 
       @downloads = Array.new
       @program.playlists.each do |p|
-        unless p.download.nil?
+        unless p.download.nil? 
           p.download.each do |pd|
             @downloads.push pd
           end
@@ -106,13 +106,12 @@ class ProgramsController < ApplicationController
 
 
       @downloads.sort! {|y,x| x.title.to_i <=> y.title.to_i }
-
-
-
       @playlists = @program.playlists.order("created_at DESC").paginate(:page => params[:page], :per_page => 5)
+      @playXML = @program.playlists.order("created_at DESC")
       respond_to do |format|
         format.html # show.html.erb
-        format.xml  { render :xml => @program }
+        #format.xml  { render :xml => @dxml}
+        format.xml  
       end
     else
       four_oh_four_error
@@ -136,6 +135,11 @@ class ProgramsController < ApplicationController
   def program_manager_edit
     @genres = Genre.all
     @dj = User.find(:all, :order => "dj_name ASC")
+    @program = Program.find(params[:id])
+    if @program.event.starts_at == @program.event.ends_at
+      @program.event = Event.new
+      @program.event.save
+    end
     unless current_user.staff
       @users = User.find(:all, :conditions => ['id = ?', current_user.id])
       if current_user.programs.include?(Program.find(params[:id]))
@@ -155,8 +159,13 @@ class ProgramsController < ApplicationController
 
   # GET /programs/1/edit
   def edit
+    
     @genres = Genre.all
     @dj = User.find(:all, :order => "dj_name ASC",:conditions => ['id = ?', current_user.id])
+    @program = Program.find(params[:id])
+    if(@program.event.starts_at == @program.event.ends_at)
+      @program.event = nil
+    end
     unless current_user.staff
       @users = User.find(:all, :conditions => ['id = ?', current_user.id])
       if current_user.programs.include?(Program.find(params[:id]))
