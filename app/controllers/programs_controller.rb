@@ -111,7 +111,8 @@ class ProgramsController < ApplicationController
       respond_to do |format|
         format.html # show.html.erb
         #format.xml  { render :xml => @dxml}
-        format.xml  
+        format.xml
+        format.rss  
       end
     else
       four_oh_four_error
