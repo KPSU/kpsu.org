@@ -23,7 +23,7 @@ xml.rss "xmlns:itunes" => "http://www.itunes.com/dtds/podcast-1.0.dtd" do
         xml.itunes :duration, "1:00:00"
         if list.download.first != nil 
           xml.guid list.download.first.url
-          xml.enclosure "url= " + list.download.first.url + " type= audio/mpeg"
+          xml.enclosure :url => list.download.first.url, :length => list.download.first.file_size, :type => 'audio/mpeg'
         end 
       end
     end
