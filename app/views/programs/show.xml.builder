@@ -12,7 +12,7 @@ xml.rss "xmlns:itunes" => "http://www.itunes.com/dtds/podcast-1.0.dtd" do
     end
    
     if @program.user.avatar.url != nil
-      xml.itunes :image, "kpsu.org" + @program.user.avatar.url
+      xml.itunes :image, :href => "kpsu.org" + @program.user.avatar.url
     end
 
     @playXML.each do |list|
