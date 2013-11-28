@@ -1,5 +1,5 @@
 xml.instruct!
-xml.rss "xmlns:itunes" => "http://www.itunes.com/dtds/podcast-1.0.dtd" do
+xml.rss "xmlns:itunes" => "http://www.itunes.com/dtds/podcast-1.0.dtd", :version => "2.0" do
   xml.channel do
     xml.title @program.title
     xml.link "kpsu.org"
