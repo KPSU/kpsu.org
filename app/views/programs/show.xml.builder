@@ -15,7 +15,7 @@ xml.rss "xmlns:itunes" => "http://www.itunes.com/dtds/podcast-1.0.dtd" do
       xml.item do
         xml.title list.title
         xml.itunes :subtitle, truncate(list.description,:length => 50)
-        xml.pubDate list.updated_at.strftime "%Y-%m-%d"
+        xml.pubDate list.updated_at.to_s(:rfc822)
         if list.download.first != nil 
           xml.guid list.download.first.url
         end 
