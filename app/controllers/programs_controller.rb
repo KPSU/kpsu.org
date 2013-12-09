@@ -137,10 +137,10 @@ class ProgramsController < ApplicationController
     @genres = Genre.all
     @dj = User.find(:all, :order => "dj_name ASC")
     @program = Program.find(params[:id])
-    if @program.event.starts_at == @program.event.ends_at
-      @program.event = Event.new
-      @program.event.save
-    end
+   # if @program.event.starts_at == @program.event.ends_at
+   #   @program.event = Event.new
+   #   @program.event.save
+   # end
     unless current_user.staff
       @users = User.find(:all, :conditions => ['id = ?', current_user.id])
       if current_user.programs.include?(Program.find(params[:id]))
@@ -152,6 +152,12 @@ class ProgramsController < ApplicationController
       @users = User.all
       @program = Program.find(params[:id])
     end
+
+    #if @program.event.starts_at == @program.event.ends_at
+     # @program.event = nil
+     # @program.event.save
+    #end
+
     respond_to do |format|
       format.html
       format.js { render :partial => "form"}
