@@ -103,7 +103,17 @@
 		border: 1px solid #232323;
 	}
 </style>
+
 <div id="dashboard">
+	<a onload="playlistAlert()"></a>
+	<% if current_user.downloads.last != nil %>
+		<% if current_user.downloads.last.playlist_id == nil %>
+		<script>
+			alert('Please make a playlist for your most recent podcast!');
+		</script>
+
+		<% end %>
+	<% end %>
 	<% content_for :page_headline do %>
 	<span class="blue-text">
 		Dashboard
@@ -360,3 +370,9 @@
 	hideNotice();
 		
 <% end %>
+
+<script type="text/javascript">
+	function playlistAlert(){
+		alert('Please make a playlist for your most recent podcast!');
+	}
+</script>

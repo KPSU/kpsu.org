@@ -82,18 +82,21 @@ class ProgramsController < ApplicationController
       #end
 
       @downloads = Array.new
-      @program.playlists.each do |p|
-        unless p.download.nil? 
-          p.download.each do |pd|
-            @downloads.push pd
-          end
-        end
-      end
       @program.downloads.each do |dl|
-        if dl.playlist_id.nil? && dl.created_at.to_i < 1364767979 && dl.title
-          @downloads.push dl
-        end
+        @downloads.push dl
       end
+      #@program.playlists.each do |p|
+      #  unless p.download.nil? 
+      #    p.download.each do |pd|
+      #      @downloads.push pd
+      #    end
+      #  end
+      #end
+      #@program.downloads.each do |dl|
+      #  if dl.playlist_id.nil? && dl.created_at.to_i < 1364767979 && dl.title
+      #    @downloads.push dl
+      #  end
+      #end
 
       #first loop pulls downloads with a playlist_id
       #second loop pulls downloads with no playlist_id but were created during the amnesty period
