@@ -94,7 +94,7 @@
 				<div class = "post-box">
 					<div class = "post-title-box">
 
-						<a class = "title-text"> <%= link_to(truncate(post.title,:length =>50), post, :class => "title-text") %> </a>
+						<a class = "title-text"> <%= link_to(truncate(post.title,:length =>40), post, :class => "title-text") %> </a>
 					</div>
 						<p class = "body-text">
 							<% b = strip_tags(post.body) %> 
