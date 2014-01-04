@@ -24,13 +24,13 @@ class SchedulesController < ApplicationController
     @json += @sun += @mon += @tues += @wed += @thurs += @fri += @sat
 
     @json.each do |u|
-      if(u.ends_at == u.starts_at)
+      if u.program.visible == 1
          @json.delete_at(@json.index(u))
       end
     end
 
      @start.each do |u|
-      if(u.ends_at == u.starts_at)
+      if u.program.visible == 1
          @start.delete_at(@start.index(u))
       end
     end
