@@ -237,6 +237,7 @@ class ProgramsController < ApplicationController
   def update
     @program = Program.find(params[:id])
     @program.title = params[:program][:title]
+    @program.visible = params[:program][:visible]
     puts @program.title.to_s
     @program.genre = Genre.find(params[:genre])
     @program.thumb = params[:program][:thumb]
