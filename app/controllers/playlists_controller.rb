@@ -167,6 +167,11 @@ class PlaylistsController < ApplicationController
     if @psatimelypromos != nil
       @psatimelypromos.sort!{|x,y| x.title <=> y.title}
     end
+
+    @underWriting = Promo.where(:category => 4)
+    if @underWriting != nil
+      @underWriting.sort!{|x,y| x.title <=> y.title}
+    end
  
     respond_to do |format|
       format.js { render :partial => "new" }
