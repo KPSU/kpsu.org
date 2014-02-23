@@ -265,6 +265,12 @@ class PlaylistsController < ApplicationController
       @psatimelypromo.save
     end
 
+    if params[:@underWriting] != ""
+      @underWriting = Promo.find(params[:Underwriting])
+      @underWriting.count += 1
+      @underWriting.save
+    end
+
     @i = 0
     @tmp_tracks.each do |track|
       @i += 1
