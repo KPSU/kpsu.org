@@ -265,7 +265,7 @@ class PlaylistsController < ApplicationController
       @psatimelypromo.save
     end
 
-    if params[:@underWriting] != ""
+    if params[:Underwriting] != ""
       @underWriting = Promo.find(params[:Underwriting])
       @underWriting.count += 1
       @underWriting.save
