@@ -25,4 +25,9 @@ class StaticController < ApplicationController
   def kruise
     redirect_to "http://www.portlandspirit.com"
   end
+
+  def pledge
+    redirect_to "https://www.foundation.pdx.edu/publicgift/kpsu.jsp"
+  end
+
 end
