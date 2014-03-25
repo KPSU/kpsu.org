@@ -42,20 +42,22 @@
 			}(document, 'script', 'facebook-jssdk'));</script></div>
 
 </head>
-<body>
-	<!--<div style="padding:20px 20px 20px 0px;">
+<body><!--
+	<div style="padding:20px 20px 20px 0px;">
 		<%= form_for :download, :url => archive_search_path, :method => :get, :html => {:style => "margin:0 0 0 58px;"} do |c| %>
 			<span class="bebas sixteen-pt purple-text">Program</span> <%= c.text_field :program %>
 			<span class="bebas sixteen-pt purple-text">DJ</span> <%= c.text_field :dj %>
 			<%= c.submit 'Search' %>
 		<% end %>
-	</div>-->
-
+	</div>
+	-->
 	<div class = "banner-box">
 		<div class = "control-banner-box">
-			<!--<div style = "height:125px; width:700px; position:absolute; margin-left:340px; background-color:white;">
-				come to our trivia night
-			</div>-->
+			<div  style = "height:auto; width:auto; position:absolute; margin-top:-30px; margin-left:240px; background-color:white;">
+				<a href="/ampkpsu">
+					<img src="/AMP-KPSU-Website-Banner.png">
+				</a>
+			</div>
 			<div class = "banner-content-box">
 				<a href = "/" class = "home-box"> </a>	
 			</div>
@@ -91,12 +93,14 @@
 	<div class =  "content-holder">
 		<div class = "post-holder">
 			<% @post_app.each do |post| %>
+				
 				<div class = "post-box">
 					<div class = "post-title-box">
-
+						
 						<a class = "title-text"> <%= link_to(truncate(post.title,:length =>40), post, :class => "title-text") %> </a>
 					</div>
 						<p class = "body-text">
+					
 							<% b = strip_tags(post.body) %> 
 							<% b.gsub!("&ldquo;","") if b.include? "&ldquo;" %>
 							<% b.gsub!("&rsquo;","") if b.include? "&rsquo;" %>
