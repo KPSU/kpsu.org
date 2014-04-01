@@ -27,7 +27,7 @@ class StaticController < ApplicationController
   end
 
   def pledge
-    redirect_to "https://www.foundation.pdx.edu/publicgift/kpsu.jsp"
+    redirect_to "http://www.indiegogo.com/projects/amp-kpsu/"
   end
 
 end
