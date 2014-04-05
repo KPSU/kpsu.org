@@ -142,6 +142,7 @@
 					<% end %>
 				</div>
 
+
 				<div id="on-next">
 					<% unless up_next.class == String %>
 						<%= link_to(up_next[0], program_path(up_next[1]), :class => "up-next-text") %>
@@ -157,12 +158,18 @@
 				<span class="pop-box"  href = "/twopointoh/open_in_new_window.png" onclick="window.open('/popup_player', 'asdas', 'toolbars=0,width=390,height=150,scrollbars=0,resizable=0,menubar=0directories=no,titlebar=no','status=0');" value="Open the window" style = "cursor:pointer; cursor:hand;">
 				</span>
 			</div>
-			
+	                            <!--startHere-->      <div id = "socialStream" style="margin-top: 5px; margin-left: 40px; margin-bottom: 30px;">
+                                <iframe style="border: 0 none transparent;" src="//www.ustream.tv/socialstream/11989423" height="480" width="425" frameborder="no"></iframe>
+                                <a style="padding: 5px 0px 4px; width: 425px; background: #ffffff; display: block; color: #000000; font-weight: normal; font-size: 10px; text-decoration: underline; text-align: center;" href="http://www.ustream.tv/" target="_blank">Live streaming video by Ustream</a>
+                            </div>
+		
 			<div style="padding:5px; background-color:white;  margin-left:70px; margin-bottom:30px;">
 				<a href = "/pledge">
 					<img src="Donation-Banner.png" style="margin-left:2px; margin-bottom:2px;" />
 				</a>
-			</div>
+                            </div>
+
+                            
 
 			<div class = "twitter-box">
 				<a class="twitter-timeline" href="https://twitter.com/KPSU_PDX" data-widget-id="388561410478731264">Tweets by @KPSU_PDX</a>
