@@ -188,8 +188,9 @@
 			<div class="flash-notice"><%= flash[:notice] %></div>
 			<% @users.shuffle!.each do |u| %>
 			<div class="dj-wrapper float-left" data-genre="<% u.programs.each do |p| %><%= p.genre.title rescue nil %> <% end %>">
-			<div class="<%= cycle("blue", "green", "magenta", "yellow", "orange", "red") %>" style="float:left;clear:both;width:634px;font-size:1.5em;padding:5px 0px 5px 10px;">
-				<%= link_to(u.dj_name, user_path(u), :class => "black-text bebas") %>
+                            <div class="<%= cycle("blue", "green", "magenta", "yellow", "orange", "red") %>" style="float:left;clear:both;width:634px;font-size:1.5em;padding:5px 0px 5px 10px;">
+                                <% if u.dj_name != nil 
+                                link_to(u.dj_name, user_path(u), :class => "black-text bebas") end %>
 			</div>
 			<div class="dj-square clear-left float-left rounded-heavy">
 				<%= image_tag(u.avatar.url(:square_thumb_big), :alt => "#{show_username(u, {:proper_name => true})}", :title => "#{show_username(u, {:proper_name => true})}" )%>				
