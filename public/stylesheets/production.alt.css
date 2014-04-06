@@ -20,8 +20,8 @@ html {
 }
 
 body {
-	background-image:url('/twopointoh/skyline_1.png');
-        background-repeat:no-repeat;
+	background-image: url('/twopointoh/skyline_1.png');
+        /*background-repeat:no-repeat;*/
         background-attachment:fixed;
 	/*background-image:url('/images/v3/new-background.png');*/
 }
