@@ -198,7 +198,7 @@ body {
 }
 
 .banner-link-box {
-	margin-top:10px;
+	margin-top:6px;
 	width: 980px;
 	height: 30px;
 	padding-left:60px;
@@ -208,7 +208,7 @@ body {
 .link-box {
 	margin-left:20px;
 	margin-right:20px;
-	margin-top:3px;
+	margin-top:10px;
 	margin-bottom:20px;
 }
 
@@ -228,7 +228,17 @@ body {
 	width: 1040px;
 	height:121px;
 	background-size: 1040px,121px;
-	background-image:url("/twopointoh/banner_image2.png");
+	background-image:url("/twopointoh/banner_image2_media_top_right.png");
+}
+
+.banner-content-box #facebook-link {
+	postition:absolute;
+	top:12px;
+	left:87px;
+	width:40px;
+	height:40px;
+	background-color:transparent;
+	border:1px solid red;
 }
 
 .logo-holder {
