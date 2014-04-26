@@ -76,9 +76,9 @@ body {
 .on-air-dj-dynamic {
 	width:200px;
 	font-family: Futura, "Trebuchet MS", Arial, sans-serif;;
-	font-size:.90em;
+	font-size:1em;
 	float:right;
-	margin-top:-10px;
+	margin-top:5px;
 	margin-right:0px;
 }
 .on-air-dj-text {
@@ -199,7 +199,7 @@ body {
 }
 
 .banner-link-box {
-	margin-top:10px;
+	margin-top:6px;/*changed sean debellis 4/23/14*/
 	width: 980px;
 	height: 30px;
 	padding-left:60px;
@@ -224,13 +224,58 @@ body {
 }
 
 .banner-content-box {
+        position:relative;
 	padding-top:60px;
-	margin-bottom:-10px;
+        padding-bottom:0px;
+        margin-bottom:0px;
+	/*margin-bottom:-10px;*/
 	width: 1040px;
 	height:121px;
 	background-size: 1040px,121px;
-	background-image:url("/twopointoh/banner_image2.png");
+        background-image:url("/twopointoh/banner_image2_media_top_right.png");/*changed 4/23/14 sd*/
 }
+
+/*social media links map to background image*/
+.banner-content-box #facebook-link {
+    position: absolute;
+    top: 12px;
+    left: 874px;
+    width: 40px;
+    height: 40px;
+    background-color: transparent;
+    /*border:1px solid red;*//*uncomment to see link area*/
+}
+
+.banner-content-box #twitter-link {
+    position: absolute;
+    top:12px;
+    left:983px;
+    width:40px;
+    height:40px;
+    background-color transparent;
+    /*border:1px solid yellow;*//*uncomment to see link area*/
+}
+.
+.banner-content-box #instagram-link {
+    position:absolute;
+    top:12px;
+    left:930px;
+    width:40px;
+    height:40px;
+    background-color transparent;
+    /*border:1px solid blue;*//*uncomment to see link area*/
+}
+
+/*.banner-content-box #tumblr-link {
+    position:absolute;
+    top:6px;
+    left:993px;
+    width:40px;
+    height:40px;
+    background-color transparent;
+    /*border:1px solid green;*//*uncomment to see link area
+}*/
+/*end social media links*/
 
 .logo-holder {
 	max-width:225px;
