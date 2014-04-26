@@ -230,7 +230,7 @@ body {
 	background-size: 1040px,121px;
 	background-image:url("/twopointoh/banner_image2_media_top_right.png");
 }
-
+/*
 .banner-content-box #facebook-link {
 	postition:absolute;
 	top:12px;
@@ -239,7 +239,7 @@ body {
 	height:40px;
 	background-color:transparent;
 	border:1px solid red;
-}
+}*/
 
 .logo-holder {
 	max-width:225px;
