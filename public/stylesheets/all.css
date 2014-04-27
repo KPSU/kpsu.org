@@ -232,8 +232,7 @@ body {
 	background-image:url("/twopointoh/banner_image2_media_top_right.png");
 }
 
-.banner-content-box #facebook-link {
-	position:absolute;
+.facebook-link-box {
 	top:12px;
 	left:87px;
 	width:40px;
