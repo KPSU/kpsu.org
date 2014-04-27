@@ -224,6 +224,7 @@ body {
 }
 
 .banner-content-box {
+        position:relative
         padding-top:60px;
 	margin-bottom:-10px;
 	width: 1040px;
