@@ -224,23 +224,23 @@ body {
 }
 
 .banner-content-box {
-	padding-top:60px;
+        padding-top:60px;
 	margin-bottom:-10px;
 	width: 1040px;
 	height:121px;
 	background-size: 1040px,121px;
 	background-image:url("/twopointoh/banner_image2_media_top_right.png");
 }
-/*
+
 .banner-content-box #facebook-link {
-	postition:absolute;
+	position:absolute;
 	top:12px;
 	left:87px;
 	width:40px;
 	height:40px;
 	background-color:transparent;
 	border:1px solid red;
-}*/
+}
 
 .logo-holder {
 	max-width:225px;
