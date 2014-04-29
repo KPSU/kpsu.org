@@ -240,7 +240,7 @@ body {
 	width:40px;
 	height:40px;
 	background-color:transparent;
-	border:1px solid red;/*uncomment to see link area*/
+	/*border:1px solid red;*//*uncomment to see link area*/
 }
 	
 .banner-content-box #twitter-link {
@@ -250,7 +250,7 @@ body {
 	width:40px;
 	height:40px;
 	background-color:transparent;
-	border:1px solid yellow;/*uncomment to see link area*/
+	/*border:1px solid yellow;*//*uncomment to see link area*/
 }
 .banner-content-box #instagram-link {
 	position:absolute;
@@ -259,7 +259,7 @@ body {
 	width:40px;
 	height:40px;
 	background-color:transparent;
-	border:1px solid green;/*uncomment to see link area*/
+	/*border:1px solid green;*//*uncomment to see link area*/
 }
 
 .logo-holder {
