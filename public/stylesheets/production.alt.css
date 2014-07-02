@@ -266,15 +266,15 @@ body {
     border:1px solid blue;/*uncomment to see link area*/
 }
 
-/*.banner-content-box #tumblr-link {
+.banner-content-box #tumblr-link {
     position:absolute;
-    top:6px;
-    left:993px;
+    top:12px;
+    left:820px;
     width:40px;
     height:40px;
     background-color transparent;
     /*border:1px solid green;*//*uncomment to see link area
-}*/
+}
 /*end social media links*/
 
 .logo-holder {
