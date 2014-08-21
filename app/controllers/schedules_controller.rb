@@ -21,10 +21,10 @@ class SchedulesController < ApplicationController
     @start = Event.all(:order => 'starts_at ASC')
     @end = Event.find(:last, :order => 'starts_at DESC').ends_at.hour
     @json = []
-    #@json += @sun += @mon += @tues += @wed += @thurs += @fri += @sat
-    @json = Event.all
+    @json += @sun += @mon += @tues += @wed += @thurs += @fri += @sat
+    #@json = Event.all
     @json.each do |u|
-      if u.program.visible  == 1 #or u.program.title == "Feelin' Groovy"
+      if u.program.visible == 1 #or u.program.title == "Feelin' Groovy"
          @json.delete_at(@json.index(u))
       end
     end
