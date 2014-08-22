@@ -37,7 +37,7 @@ class SchedulesController < ApplicationController
      @start.each do |u|
       if u.program.visible == 1
          #@start.delete_at(@start.index(u))
-         @json.delete(u)
+         @start.delete(u)
       end
     end
 
