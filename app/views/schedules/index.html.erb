@@ -147,9 +147,9 @@
 		tdClass = "." + tdClass
 		$(tdClass).css({'border' : 'none'});
 	});
+	 
 	
-	
-	$.getJSON('/schedules/', function(data) {
+	  $.getJSON('/schedules/', function(data) {
 	  $.each(data['events'], function(i, data){
 			console.log(data)
 			var hour = data['starts_at'].split("\:")[0]
@@ -171,7 +171,13 @@
 				$(addCellSelector).html(txt);
 			}
 		});
-	});
+        });
 	
-<% end %>
+    <% end %>
+    <!--<%= debug @json %>
+    <p>
+    <b>visible</b>
+    <%= @json.inspect %>
+    </p>-->
+        
 </div>

@@ -29,13 +29,15 @@ class SchedulesController < ApplicationController
     #@json = Event.all
     @json.each do |u|
       if u.program.visible == 1 #or u.program.title == "Feelin' Groovy"
-         @json.delete_at(@json.index(u))
+         #@json.delete_at(@json.index(u))
+         @json.delete(u)
       end
     end
 
      @start.each do |u|
       if u.program.visible == 1
-         @start.delete_at(@start.index(u))
+         #@start.delete_at(@start.index(u))
+         @json.delete(u)
       end
     end
 
