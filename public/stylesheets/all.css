@@ -20,12 +20,18 @@ html {
 }
 
 body {  
-        background-image:url('/twopointoh/skyline_1.png');
-        background-repeat:no-repeat;
-        background-attachment:fixed;
-        background-position:center;
-        background-color:#000000;
+        /*background-image:url('/twopointoh/skyline_1.png');*/
+        /*background-repeat:no-repeat;*/
+        /*background-attachment:fixed;*/
+        /*background-position:center;*/
+        /*background-color:#000000;*/
 	/*background-image:url('/images/v3/new-background.png');*/
+        background: url('/twopointoh/skyline_1.png') no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+
 }
 
 
