@@ -23,12 +23,21 @@ html {
 }
 
 body {
-	background-image:url('/twopointoh/skyline_1.png');
-        background-repeat:no-repeat;
-        background-attachment:fixed;
-        background-position:center;
-        background-color:#000000;
+	/*background-image:url('/twopointoh/skyline_1.png');*/
+        /*background-repeat:no-repeat;*/
+        /*background-attachment:fixed;*/
+        /*background-position:center;*/
+        /*background-color:#000000;*/
 	/*background-image:url('/images/v3/new-background.png');*/
+        
+        /*make background image cover screen independant
+         * of screen size 
+         */
+        background: url('/twopointoh/skyline_1.png');
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
 }
 
 
