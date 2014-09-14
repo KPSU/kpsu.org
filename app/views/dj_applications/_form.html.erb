@@ -1,0 +1,33 @@
+<% form_for @application, :url=> {:action => "create" }, :html => { :method => :post } do |f| %>
+    <%= f.label "First Name" %>
+    <%= f.text_field :first_name %>
+    
+    <%= f.label "Last Name" %>
+    <%= f.text_field :last_name %>
+    
+    <%= f.label "Email" %>
+    <%= f.text_field :email %>
+    
+    <%= f.label "Phone" %>
+    <%= f.text_field :phone_number %>
+    
+    <%= f.label "Current PSU Student"%>
+    <%= f.check_box :is_student %>
+    
+    <%= f.label "Why do you want to volunteer at KPSU?" %>
+    <%= f.text_area :reason %>
+
+    <%= f.label "Do you have any previous radio experience? If so, Please list where." %>
+    <%= f.text_area :past_radio_experience %>
+    
+    <%= f.label "Do you have any general volunteer experience?" %>
+    <%= f.text_area :past_volunteer_experience %>
+    
+    <%= f.label "If any, what are your favorite shows on KPSU?" %>
+    <%= f.text_area :favorite_kpsu_shows %>
+    
+    <%= f.label "Do you plan on having a music show or talk show?" %>
+    <%= f.text_area :show_type %>
+    
+    <%= f.submit "Submit" %>
+<% end %>
