@@ -1,0 +1,40 @@
+<%= stylesheet_link_tag "apps.css" %>
+<% form_for @applicant, :url => { :action => "create" }, :html => { :method => :post } do |f| %>
+    <div class="header-fields">
+        <div class="input-field">
+            <%= f.label "name" %>
+            <%= f.text_field :sender_name %>
+        </div>
+        <div class="input-field">
+            <%= f.label "Phone Number" %>
+            <%= f.text_field :phone %>
+        </div>
+        <div class="input-field">
+            <%= f.label "email" %>
+            <%= f.text_field :email %>
+        </div>
+    </div>
+    <div class="main-body">
+        <div class="input-area">
+            <%= f.label "Why do you want to volunteer at KPSU?" %>
+            <%= f.text_area :reason %>
+        </div>
+        <div class="input-area">
+            <%= f.label "Do you have any previous radio experience? If so, please list where: " %>
+            <%= f.text_area :previous_radio_exp %>
+        </div>
+        <div class="input-area">
+                <%= f.label "Do you have any general volunteer experience?" %>
+                <%= f.text_area :previous_volunteer_exp %>
+        </div>
+        <div class="input-area">
+            <%= f.label "If any, what are your favorite shows on KPSU?" %>
+            <%= f.text_area :favorite_show %>
+        </div>
+        <div class="input-area">
+            <%= f.label "Do you plan on having a music show or talk show?" %>
+            <%= f.text_area :show_ideas %>
+        </div>
+        <%= f.submit "Join Us", :id => "submit" %>    
+    </div>
+<% end %>
