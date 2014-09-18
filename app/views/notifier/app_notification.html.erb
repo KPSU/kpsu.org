@@ -1,0 +1,35 @@
+<%= stylesheet_link_tag 'notifier' %>
+<h1>KPSU College Radio Volunteer Application</h1><br />
+<div id="top-section">
+    <p>Name: <%= @applicant.sender_name %></p>
+    <p>Phone Number: <%= @applicant.phone %></p>
+    <p>Email: <%= @applicant.email %></p>
+    <hr>
+</div>
+<div id="bottom-section">
+    <p>Why do you want to volunteer at KPSU?<br />
+    <%= @applicant.reason %></p><br/>
+    <% if @applicant.previous_radio_exp != "" %>
+        <p>Do you have any previous radio experience? If so, please list where:<br/>
+        <%= @applicant.previous_radio_exp %></p><br />
+    <% end %>
+    <% if @applicant.previous_volunteer_exp != "" %>
+        <p>Do you have any general volunteer experience?<br />
+        <%= @applicant.previous_volunteer_exp %></p><br />
+    <% end %>
+    <% if @applicant.favorite_show != "" %>
+        <p>If any, what are your favorite shows on KPSU?<br />
+        <%= @applicant.favorite_show %></p><br />
+    <% end %>
+    <% if @applicant.show_ideas != "" %>
+        <p>Do you plan on having a music show or talk show?<br />
+        <%= @applicant.show_ideas %></p><br />
+    <% end %>
+</div>
+
+
+
+
+
+
+
