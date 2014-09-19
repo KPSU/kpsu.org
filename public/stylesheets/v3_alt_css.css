@@ -257,41 +257,51 @@ body {
 
 .banner-content-box #tumblr-link {
 	position:absolute;
-	top:12px;
-	left:820px;
-	width:40px;
-	height:40px;
+	top:13px;
+	left:998px;
+	width:33px;
+	height:33px;
 	background-color:transparent;
 	/*border:1px solid red;*//*uncomment to see link area*/
 }
 
 .banner-content-box #facebook-link {
 	position:absolute;
-	top:12px;
-	left:874px;
-	width:40px;
-	height:40px;
+	top:13px;
+	left:814px;
+	width:33px;
+	height:33px;
 	background-color:transparent;
 	/*border:1px solid red;*//*uncomment to see link area*/
 }
 	
 .banner-content-box #twitter-link {
 	position:absolute;
-	top:12px;
-	left:984px;
-	width:40px;
-	height:40px;
+	top:13px;
+	left:953px;
+	width:33px;
+	height:33px;
 	background-color:transparent;
 	/*border:1px solid yellow;*//*uncomment to see link area*/
 }
 .banner-content-box #instagram-link {
 	position:absolute;
-	top:12px;
-	left:932px;
-	width:40px;
-	height:40px;
+	top:13px;
+	left:860px;
+	width:33px;
+	height:33px;
 	background-color:transparent;
 	/*border:1px solid green;*//*uncomment to see link area*/
+}
+
+.banner-content-box #youtube-link {
+        position:absolute;
+        top:13px;
+        left:906px;
+        width:33px;
+        height:33px;
+        background-color:transparent;
+        /*border:1px solid blue;*//*uncomment to see link area */
 }
 
 .logo-holder {
