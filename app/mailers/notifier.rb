@@ -3,7 +3,7 @@ class Notifier < ActionMailer::Base
 
   def app_notification(applicant)
       @applicant = applicant
-      mail(:to => "admin@kpsu.org",
+      mail(:to => "volunteer@kpsu.org",
            :from => applicant.email,
            :subject => "New DJ APplication")
   end
