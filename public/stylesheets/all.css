@@ -26,16 +26,37 @@ body {
         /*background-position:center;*/
         /*background-color:#000000;*/
 	/*background-image:url('/images/v3/new-background.png');*/
-        background: url('/twopointoh/skyline_1.png') no-repeat center center fixed;
+        /*background: url('/twopointoh/skyline_1.png') no-repeat center center fixed;
         -webkit-background-size: cover;
         -moz-background-size: cover;
         -o-background-size: cover;
-        background-size: cover;
+        background-size: cover;*/
+        background-color:#000000;
+        
 
 }
 
 
 
+/* new dj banner */
+.new-dj-banner{
+    position:relative;
+    margin-top:23px;
+    margin-left:45px;
+    width:400px;
+    height:225px;
+    background-image:url("../twopointoh/newdjbanner.png");
+}
+
+
+.new-dj-banner #new-dj-link {
+    position:absolute;
+    top:154px;
+    left:50px;
+    width:306px;
+    height:66px;
+    /*border:1px solid yellow;*//*uncomment to see link area*/
+}
 
 /* jPlayer */
 .volume-bar {
@@ -164,7 +185,7 @@ body {
 	position:relative;
 	margin-top:23px;
 	margin-left:45px;
-	amargin-bottom:20px;
+	margin-bottom:20px;
 	background-size:400px 225px;
 	height: 225px;
 	width: 400px;
@@ -319,6 +340,7 @@ body {
 	/*background-image:url('/twopointoh/content_box_img.png'); */
 	border-radius:25px;
 	padding-top:5px;
+        /*background-color:#4a4a4a new background color*/
 }
 
 .post-holder {
@@ -1226,6 +1248,7 @@ ul.vertical,li.vertical {
 	margin-left:35px;
 	padding:20px;
 	width:604px;
+        /*width:1040px;*/
 	margin-bottom:20px;
 	float:left;
 }
