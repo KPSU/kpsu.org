@@ -3,5 +3,8 @@
 <% end %>
 <div id="application-body">
     <h1>New Dj Application</h1>
+    <% if flash[:alert] %>
+        <h3 id="error-message"><%= flash[:alert] %></h3>
+    <% end %>
     <%= render 'form' %>
 </div>

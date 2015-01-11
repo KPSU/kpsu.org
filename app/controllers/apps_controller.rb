@@ -9,7 +9,7 @@ class AppsController < ApplicationController
         if @applicant.save
             redirect_to('/', :notice => "Application was successfully sent.")
         else
-            flash[:alert] = "you must fill all fields."
+            flash[:alert] = "Application Not Submitted! Please Fill In Highlighted Fields"
             render 'new'
         end
     end
