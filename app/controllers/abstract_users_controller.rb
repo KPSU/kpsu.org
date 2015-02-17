@@ -8,15 +8,19 @@ class AbstractUsersController < ApplicationController
 
 	def get_djs
 	    @users = Event.includes(:program => [:user => [:downloads]]).collect do |e|
-	      unless RAILS_ENV == "development"
-	        if e.program.user && e.program.user.avatar.exists? && e.program.user.downloads.size >= 1
-	          e.program.user 
-	        end
-	      else
-	        if !e.program.user.avatar.exists? && e.program.user.downloads.size >= 1
-	          e.program.user 
-	        end
-	      end
+              if not e.nil?
+                  if not e.program.nil?
+                    unless RAILS_ENV == "development"
+	                if e.program.user && e.program.user.avatar.exists? && e.program.user.downloads.size >= 1
+	                    e.program.user 
+	                end
+	                else
+	                if !e.program.user.avatar.exists? && e.program.user.downloads.size >= 1
+	                    e.program.user 
+	                end
+                    end
+                end
+              end
 	    end.compact
   	end
 
