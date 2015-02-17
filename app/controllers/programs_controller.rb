@@ -214,6 +214,7 @@ class ProgramsController < ApplicationController
     @ends_at = "#{@ends_at_h}:#{@ends_at_m}"
     @event = Event.new(:starts_at => @starts_at, :ends_at => @ends_at, :day_i => @day, :name => params[:program][:title])
     @program = Program.new(params[:program])
+    @program.visible = 1 #added to initialize show to hidden so visible is never null
     @user = User.find(params[:user])
     @program.user = @user
     if @program.save

@@ -24,25 +24,51 @@ class SchedulesController < ApplicationController
 
 
     # below was commented out but I uncommented it in attempts to fix shows not going hidden problem.
-    @json += @sun += @mon += @tues += @wed += @thurs += @fri += @sat # this was commented out
+    #@json += @sun += @mon += @tues += @wed += @thurs += @fri += @sat # this was commented out
     #this wasn't commented out but I think it was the cause of the shows not going hidden
-    #@json = Event.all
+    @json = Event.all
+
+    
     @json.each do |u|
-      if u.program.visible == 1 #or u.program.title == "Feelin' Groovy"
-         #@json.delete_at(@json.index(u))
-         @json.delete(u)
-      end
+        if u.nil?
+            @json.delete(u)
+        end
+    end
+    
+    @json.each do |u|
+        if u.program.nil?
+            @json.delete(u)
+        end
     end
 
-     @start.each do |u|
+    @start.each do |u|
+        if u.nil?
+            @start.delete(u)
+        end
+    end
+
+    @start.each do |u|
+        if u.program.nil?
+            @start.delete(u)
+        end
+    end
+    
+    @json.each do |u|
+      if u.program.visible == 1 #or u.program.title == "Feelin' Groovy"
+        #@json.delete_at(@json.index(u))
+        @json.delete(u)
+      end
+    end
+    
+    @start.each do |u|
       if u.program.visible == 1
-         #@start.delete_at(@start.index(u))
-         @start.delete(u)
+        #@start.delete_at(@start.index(u))
+        @start.delete(u)
       end
     end
 
     @start = @start.first.starts_at.hour
-
+    
     respond_to do |format|
       format.html # index.html.erb
       format.json { render :partial => "schedules/events.json" }
